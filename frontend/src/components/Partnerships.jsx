@@ -23,33 +23,33 @@ const Partnerships = () => {
         >
           <a href="https://tikr.com" target="_blank" rel="noopener noreferrer" style={{ display: 'inline-flex' }}>
             <img 
-              src={`https://img.logo.dev/tikr.com?token=${LOGO_DEV_TOKEN}&format=png&size=200&greyscale=true`}
+              src={`https://img.logo.dev/tikr.com?token=${LOGO_DEV_TOKEN}&format=png&size=200`}
               alt="TIKR"
-              style={{ height: '28px', width: 'auto', opacity: 0.65 }}
+              style={{ height: '32px', width: 'auto', opacity: 0.85 }}
             />
           </a>
 
           <a href="https://adventiscg.com" target="_blank" rel="noopener noreferrer" style={{ display: 'inline-flex' }}>
             <img 
-              src={`https://img.logo.dev/adventiscg.com?token=${LOGO_DEV_TOKEN}&format=png&size=200&greyscale=true`}
+              src={`https://img.logo.dev/adventiscg.com?token=${LOGO_DEV_TOKEN}&format=png&size=200`}
               alt="Adventis CG"
-              style={{ height: '28px', width: 'auto', opacity: 0.65 }}
+              style={{ height: '32px', width: 'auto', opacity: 0.85 }}
             />
           </a>
 
           <a href="https://excelexercises.com" target="_blank" rel="noopener noreferrer" style={{ display: 'inline-flex' }}>
             <img 
-              src={`https://img.logo.dev/excelexercises.com?token=${LOGO_DEV_TOKEN}&format=png&size=200&greyscale=true`}
+              src={`https://img.logo.dev/excelexercises.com?token=${LOGO_DEV_TOKEN}&format=png&size=200`}
               alt="Excel Exercises"
-              style={{ height: '28px', width: 'auto', opacity: 0.65 }}
+              style={{ height: '32px', width: 'auto', opacity: 0.85 }}
             />
           </a>
 
           <a href="https://yis.org" target="_blank" rel="noopener noreferrer" style={{ display: 'inline-flex' }}>
             <img 
-              src={`https://img.logo.dev/yis.org?token=${LOGO_DEV_TOKEN}&format=png&size=200&greyscale=true`}
+              src={`https://img.logo.dev/yis.org?token=${LOGO_DEV_TOKEN}&format=png&size=200`}
               alt="YIS"
-              style={{ height: '28px', width: 'auto', opacity: 0.65 }}
+              style={{ height: '32px', width: 'auto', opacity: 0.85 }}
             />
           </a>
         </div>

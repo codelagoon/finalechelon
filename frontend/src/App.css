@@ -761,12 +761,13 @@ body {
 }
 
 .partnerships-section-final .partners img {
-  height: 28px !important;
+  height: 32px !important;
   width: auto !important;
-  max-width: 180px;
-  opacity: 0.65;
+  max-width: 200px;
+  opacity: 0.85;
   display: block;
   object-fit: contain;
+  transition: opacity 0.25s ease, transform 0.25s ease;
 }
 
 .partnerships-section-final .partners a:hover {
