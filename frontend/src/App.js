@@ -8,7 +8,6 @@ import Positioning from "./components/Positioning";
 import Portfolio from "./components/Portfolio";
 import AnalystWork from "./components/AnalystWork";
 import Review from "./components/Review";
-import Standards from "./components/Standards";
 import Partnerships from "./components/Partnerships";
 import Tracks from "./components/Tracks";
 import Selection from "./components/Selection";
@@ -26,7 +25,6 @@ function App() {
         <Portfolio />
         <AnalystWork />
         <Review />
-        <Standards />
         <Partnerships />
         <Tracks />
         <Selection />
