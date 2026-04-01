@@ -948,13 +948,17 @@ div[style*="emergent"] {
   min-height: calc(100vh - 200px);
 }
 
-/* Mobile: 2x2 grid for partnerships */
+/* Mobile: Keep horizontal flex layout, adjust sizing */
 @media (max-width: 768px) {
-  .partners {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 32px 40px;
-    justify-items: center;
+  .partnerships-section-final .partners {
+    gap: 40px !important;
+    margin-top: 48px !important;
+    padding: 16px 0 !important;
+  }
+  
+  .partnerships-section-final .partners img {
+    height: 40px !important;
+    max-width: 180px !important;
   }
 }
 
