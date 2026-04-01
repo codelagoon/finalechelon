@@ -2,30 +2,28 @@ import React from 'react';
 import { portfolioCompaniesData } from '../mockData';
 
 const Portfolio = () => {
-  const getConvictionClass = (conviction) => {
-    if (conviction === 'Buy') return 'conviction-buy';
-    if (conviction === 'Hold') return 'conviction-hold';
-    if (conviction === 'Neutral') return 'conviction-neutral';
-    return 'conviction-thesis';
+  const getStatusClass = (status) => {
+    if (status === 'Active') return 'status-active-final';
+    if (status === 'Monitoring') return 'status-monitoring-final';
+    return 'status-complete-final';
   };
 
-  const getStatusClass = (status) => {
-    if (status === 'Active') return 'status-active';
-    if (status === 'Watch') return 'status-watch';
-    return 'status-closed';
+  const getConvictionClass = (conviction) => {
+    if (conviction === 'Long') return 'conviction-long-final';
+    if (conviction === 'Hold') return 'conviction-hold-final';
+    if (conviction === 'Neutral') return 'conviction-neutral-final';
+    return 'conviction-validated-final';
   };
 
   return (
-    <section id="portfolio" className="portfolio-section">
-      <div className="content-container">
-        <div className="section-header">
-          <h2 className="section-title-center">Portfolio Companies</h2>
-          <p className="section-description">
-            Real analysis on public companies across six sectors. Every position backed by rigorous research.
-          </p>
-        </div>
-        <div className="portfolio-table-wrapper">
-          <table className="portfolio-table">
+    <section id="coverage" className="portfolio-section-final">
+      <div className="content-container-final">
+        <h2 className="section-title-final">Active Coverage</h2>
+        <p className="section-subtitle-final">
+          Real analysis on public companies across six sectors. Every position supported by structured, defensible research.
+        </p>
+        <div className="portfolio-table-wrapper-final">
+          <table className="portfolio-table-final">
             <thead>
               <tr>
                 <th>Ticker</th>
@@ -33,26 +31,26 @@ const Portfolio = () => {
                 <th>Sector</th>
                 <th>Status</th>
                 <th>Conviction</th>
-                <th>DCF Fair Value</th>
+                <th className="text-right">Fair Value</th>
               </tr>
             </thead>
             <tbody>
               {portfolioCompaniesData.map((company, index) => (
                 <tr key={index}>
-                  <td className="ticker-cell">{company.ticker}</td>
-                  <td className="company-cell">{company.company}</td>
-                  <td className="sector-cell">{company.sector}</td>
+                  <td className="ticker-cell-final">{company.ticker}</td>
+                  <td className="company-cell-final">{company.company}</td>
+                  <td className="sector-cell-final">{company.sector}</td>
                   <td>
-                    <span className={`status-badge ${getStatusClass(company.status)}`}>
+                    <span className={`status-badge-final ${getStatusClass(company.status)}`}>
                       {company.status}
                     </span>
                   </td>
                   <td>
-                    <span className={`conviction-badge ${getConvictionClass(company.conviction)}`}>
+                    <span className={`conviction-badge-final ${getConvictionClass(company.conviction)}`}>
                       {company.conviction}
                     </span>
                   </td>
-                  <td className="value-cell">{company.dcfValue}</td>
+                  <td className="fairvalue-cell-final text-right">{company.fairValue}</td>
                 </tr>
               ))}
             </tbody>

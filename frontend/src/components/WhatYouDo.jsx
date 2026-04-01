@@ -1,39 +1,31 @@
 import React from 'react';
-import { whatYouWillDoData } from '../mockData';
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from './ui/card';
-import { FileSpreadsheet, FileText, Presentation, CheckCircle2 } from 'lucide-react';
+import { whatYouDoData } from '../mockData';
+import { FileSpreadsheet, Calculator, FileText, TrendingUp } from 'lucide-react';
 
 const iconMap = {
   FileSpreadsheet: FileSpreadsheet,
+  Calculator: Calculator,
   FileText: FileText,
-  Presentation: Presentation,
-  CheckCircle2: CheckCircle2
+  TrendingUp: TrendingUp
 };
 
 const WhatYouDo = () => {
   return (
-    <section className="what-you-do-section">
-      <div className="content-container">
-        <div className="section-header">
-          <h2 className="section-title-center">{whatYouWillDoData.title}</h2>
-        </div>
-        <div className="activities-grid">
-          {whatYouWillDoData.activities.map((activity, index) => {
+    <section className="what-you-do-section-final">
+      <div className="content-container-final">
+        <h2 className="section-title-final">{whatYouDoData.title}</h2>
+        <p className="section-subtitle-final">{whatYouDoData.subtitle}</p>
+        <div className="activities-grid-final">
+          {whatYouDoData.activities.map((activity, index) => {
             const IconComponent = iconMap[activity.icon];
             return (
-              <Card key={index} className="activity-card">
-                <CardHeader>
-                  <div className="activity-icon-wrapper">
-                    <IconComponent className="activity-icon" />
-                  </div>
-                  <CardTitle className="activity-title">{activity.title}</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <CardDescription className="activity-description">
-                    {activity.description}
-                  </CardDescription>
-                </CardContent>
-              </Card>
+              <div key={index} className="activity-card-final">
+                <div className="activity-icon-wrapper-final">
+                  <IconComponent className="activity-icon-final" />
+                </div>
+                <h3 className="activity-title-final">{activity.title}</h3>
+                <p className="activity-description-final">{activity.description}</p>
+              </div>
             );
           })}
         </div>

@@ -15,20 +15,20 @@ const Hero = () => {
   };
 
   return (
-    <section className="hero-section">
-      <div className="hero-container">
-        <div className="hero-content">
-          <p className="hero-tagline">{heroData.tagline}</p>
-          <h1 className="hero-headline">
+    <section className="hero-section-final">
+      <div className="hero-container-final">
+        <div className="hero-content-final">
+          <p className="hero-tagline-final">{heroData.tagline}</p>
+          <h1 className="hero-headline-final">
             {heroData.headline}
           </h1>
-          <p className="hero-subheadline">
+          <p className="hero-subheadline-final">
             {heroData.subheadline}
           </p>
-          <div className="hero-cta-group">
+          <div className="hero-cta-group-final">
             <Button 
               size="lg" 
-              className="cta-primary"
+              className="cta-primary-final"
               onClick={() => setIsApplicationOpen(true)}
             >
               {heroData.ctaPrimary}
@@ -37,18 +37,18 @@ const Hero = () => {
             <Button 
               size="lg" 
               variant="outline" 
-              className="cta-secondary"
-              onClick={() => scrollToSection('portfolio')}
+              className="cta-secondary-final"
+              onClick={() => scrollToSection('coverage')}
             >
               {heroData.ctaSecondary}
             </Button>
           </div>
         </div>
-        <div className="hero-image-container">
+        <div className="hero-image-container-final">
           <img 
             src="https://images.unsplash.com/photo-1705931819853-cce7c8d69f10" 
             alt="Strategic Analysis" 
-            className="hero-image"
+            className="hero-image-final"
           />
         </div>
       </div>

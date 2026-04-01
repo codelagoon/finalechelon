@@ -1,193 +1,251 @@
-# Echelon Equity - Landing Page PRD
+# Echelon Equity - Institutional Landing Page PRD
 
 ## Project Overview
-**Project Name:** Echelon Equity Landing Page  
+**Project Name:** Echelon Equity Landing Page (Institutional Refinement)  
 **Type:** Student-led private equity research initiative website  
 **Tech Stack:** React (Frontend), FastAPI (Backend - future), MongoDB (Database - future)  
-**Design System:** Black & white minimalist, premium, "quiet wealth" aesthetic  
+**Design System:** Black & white institutional, Playfair Display + Inter typography  
 **Tagline:** "The Work Is the Credential"
 
-## Problem Statement
-Build a highly selective, professional landing page for Echelon Equity - a student-led private equity initiative where students conduct institutional-grade investment research, reviewed by Wall Street professionals. The page must feel elite, competitive, and merit-based—NOT a casual educational program, but a proving ground for future investors and operators.
+## Core Positioning
+**Echelon is:**
+- Student-led investment research platform
+- NOT a fund, NOT a course
+- Selective proving ground for future analysts
+- Experience NOT required, but standards are high
 
-## User Personas
-1. **Ambitious Students** - Undergraduate/graduate students interested in finance, private equity, and investment research
-2. **Early-Career Professionals** - Young professionals looking to build credible investment portfolios
-3. **Recruiters/Employers** - Professionals evaluating candidate quality based on work output
-4. **Wall Street Reviewers** - Industry professionals who review analyst work
+**Key Message:** "Experience is not required. Meeting the standard is."
 
-## Core Requirements (Static)
+## Design System (Final Institutional)
 
-### Design Requirements
-- **Color Scheme:** Black (#000000) & White (#FFFFFF) only with subtle gray tones
-- **Typography:** Playfair Display (display) + Inter (body)
-- **Tone:** Elite, competitive, intelligent, ambitious, serious
-- **Feel:** Hedge fund / research desk, NOT student club or bootcamp
-- **No AI emojis:** Use Lucide React icons only
+### Typography
+- **Serif (Headings):** Playfair Display - 700/800 weight
+- **Sans (Body):** Inter - 400/500/600/700 weight
+- **H1 Hero:** 56px (3.5rem), -0.02em letter-spacing
+- **H2 Section:** 42px (2.625rem), -0.01em letter-spacing  
+- **Body Large:** 17px (1.0625rem), 1.6 line-height
+- **Body:** 15px (0.9375rem), 1.5 line-height
 
-### Content Sections
-1. ✅ Hero - Bold headline, tagline, strategic chess imagery
-2. ✅ Stats - 32 analysts, 100+ applications, 6 sectors, 24 models
-3. ✅ Mission - "This Is Not a Course" positioning
-4. ✅ Program Tracks - 4 analyst tracks (Three-Statement, DCF, Investment Memo, LBO)
-5. ✅ Portfolio Companies - 6 real companies with tickers, sectors, convictions, DCF values
-6. ✅ What You'll Do - Real analysis, memos, presentations, professional review
-7. ✅ Reviewers - 3 Wall Street professionals with firm names and experience
-8. ✅ Standards of Practice - 6 SOPs (Blue/Black Rule, file naming, version control, etc.)
-9. ✅ Application Process - 4-step selective process
-10. ✅ Testimonials - 3 analyst testimonials
-11. ✅ FAQ - 6 questions addressing selectivity, time commitment, outcomes
-12. ✅ Careers - 4 open positions (Technical Analyst, Equity Research, Macro Policy, PR/Marketing)
-13. ✅ Final CTA - "Ready to Prove Yourself?"
-14. ✅ Header - Fixed nav with Research, Apply, Careers, Contact
-15. ✅ Footer - Contact info (team@echelonequity.co, admissions@echelonequity.co), links, co-founder credits
+### Colors
+- **Black:** #000000
+- **White:** #FFFFFF
+- **Gray Text:** #666666
+- **Gray Border:** #EAEAEA
+- **Gray Hover:** #F5F5F5
 
-## What's Been Implemented (March 2026)
+### Layout
+- **Max Width:** 1100px (down from 1400px)
+- **Section Padding:** 120px top/bottom
+- **Hero Padding:** 160px top / 120px bottom
+- **Grid Gap:** 2-2.5rem
 
-### Phase 1: Frontend with Mock Data ✅
-**Date Completed:** March 2026
+### Buttons
+**Primary:**
+- Black bg, white text
+- Padding: 14px 22px (0.875rem 1.375rem)
 
-**Components Created:**
-- `Hero.jsx` - Hero section with tagline, headline, chess image, CTAs
-- `Stats.jsx` - 4-metric stats grid
-- `Mission.jsx` - "This Is Not a Course" section with principles
-- `ProgramTracks.jsx` - 4 analyst track cards with deliverables and skills
-- `Portfolio.jsx` - Portfolio companies table with tickers, sectors, status, conviction, DCF values
-- `WhatYouDo.jsx` - 4 activity cards explaining what analysts do
-- `Reviewers.jsx` - 3 Wall Street reviewer cards
-- `Standards.jsx` - 6 SOP cards
-- `ApplicationProcess.jsx` - 4-step application process
-- `Testimonials.jsx` - 3 analyst testimonial cards
-- `FAQ.jsx` - Accordion FAQ with 6 questions
-- `Careers.jsx` - Careers hero image + 4 role cards + application dialog
-- `Header.jsx` - Fixed header with navigation
-- `Footer.jsx` - Footer with contact info and links
-- `FinalCTA.jsx` - Final CTA section
-- `ApplicationDialog.jsx` - Application form modal (mock submission)
-- `ContactDialog.jsx` - Contact form modal (mock submission)
-- `CareerApplicationDialog.jsx` - Career application form modal (mock submission)
+**Secondary:**
+- White bg, black border (1px)
+- Hover: inverts to black bg
 
-**Mock Data File:** `/app/frontend/src/mockData.js`
-- All content structured for easy backend integration
-- Mock form submission handlers with console logging
-- Real data from Echelon Equity .md file
+## Final Page Structure
 
-**Styling:** `/app/frontend/src/App.css`
-- Black & white minimalist premium design
-- Playfair Display + Inter typography
-- Professional table styling for portfolio
-- Hover states and transitions
-- Responsive breakpoints (desktop, tablet, mobile)
-- shadcn/ui component integration
+### 1. Hero Section ✅
+- Tagline: "THE WORK IS THE CREDENTIAL"
+- Headline: "Operate at an Institutional Standard"
+- Subheadline: Student-led platform messaging
+- CTAs: "Apply to Echelon" + "View Research"
+- Chess image (grayscale, 95% opacity)
 
-**Images Used:**
-- Chess pieces (strategic thinking) - https://images.unsplash.com/photo-1705931819853-cce7c8d69f10
-- Chess game (strategic planning) - https://images.unsplash.com/photo-1560174068-db2f21bed320
-- Black knight chess (sophisticated strategy) - https://images.unsplash.com/photo-1560174038-da43ac74f01b
-- Abstract water droplets (growth) - https://images.unsplash.com/photo-1599422282890-45178092318a
-- MacBook workspace (team/careers) - https://images.unsplash.com/photo-1512296014055-b49bbcd707d2
+### 2. Stats Bar ✅
+- 32 Active Analysts
+- 100+ Applicants Screened  
+- 6 Sectors Covered
+- 24 Models Completed
+- 2px top/bottom border
 
-**Frontend Status:** ✅ Fully functional with mock data
-- All forms work with local state management
-- Toast notifications on form submission
-- Smooth scroll navigation
-- Responsive design
-- All interactions functional
+### 3. Positioning Section ✅
+- Title: "This Is Not a Course"
+- 2 paragraphs explaining proving ground concept
+- 4 principles in 2×2 bordered grid:
+  - Output over credentials
+  - Institutional rigor
+  - Peer accountability
+  - Professional review
 
-## Prioritized Backlog
+### 4. Active Coverage (Portfolio) ✅
+- Title: "Active Coverage"
+- Professional table with 2px black border
+- 6 companies: PLTR, DG, ISRG, EPD, V, TDG
+- Status badges: Active (black), Monitoring (gray), Complete (light gray)
+- Conviction badges: Long (black), Hold (dark gray), Neutral (mid gray), Validated (light gray)
+- Right-aligned Fair Value column (monospace font)
 
-### P0 Features (Critical)
-- None - MVP complete with frontend
+### 5. What You Do ✅
+- Title: "Produce Institutional-Grade Work"
+- 4 cards in 2×2 grid:
+  - Financial Modeling
+  - Valuation
+  - Investment Memos
+  - Market Analysis
+- Black icon boxes, minimal borders
 
-### P1 Features (High Priority - Next Phase)
-- Backend API for form submissions (application, contact, career)
-- Database schema for storing applications and contact requests
-- Email notifications for new applications (to admissions@echelonequity.co)
-- Admin dashboard to review applications
+### 6. Review Section ✅
+- Title: "Reviewed to Institutional Standards"
+- 2 quote cards with 4px black left border
+- Quotes from Aldridge & Monroe and Verani Capital
+- Italic quotes, professional attributions
 
-### P2 Features (Nice to Have)
-- Portfolio company detail pages with full DCF analysis
-- Analyst portal login
-- Research publication section
-- Blog/insights section
-- LinkedIn/Twitter integration
-- Application status tracking for applicants
+### 7. Standards Section ✅
+- Title: "Standards of Practice"
+- Intro paragraph
+- Example standard box:
+  - Black text for numbers/outputs
+  - Blue for references only
+  - No additional formatting
 
-## API Contracts (Future Backend Integration)
+### 8. Analyst Tracks ✅
+- Title: "Analyst Tracks"
+- 4 tracks in 2×2 grid:
+  - Track 01: Three-Statement Modeling
+  - Track 02: DCF Valuation & Sensitivity
+  - Track 03: Investment Memo
+  - Track 04: LBO Modeling
+- Each with deliverable section (border-top separator)
 
-### POST /api/applications
-**Request Body:**
-```json
-{
-  "name": "string",
-  "email": "string",
-  "university": "string",
-  "major": "string",
-  "gradYear": "string",
-  "whyEchelon": "string",
-  "experience": "string"
-}
-```
-**Response:** `{ "success": boolean, "message": "string" }`
+### 9. Selection Process ✅
+- Title: "Selection Process"
+- Subtitle: "We do not accept everyone"
+- Simple numbered list:
+  1. Application submission
+  2. Technical / written evaluation
+  3. Final selection
 
-### POST /api/contact
-**Request Body:**
-```json
-{
-  "name": "string",
-  "email": "string",
-  "subject": "string",
-  "message": "string"
-}
-```
-**Response:** `{ "success": boolean, "message": "string" }`
+### 10. Final CTA ✅
+- Black background section
+- Title: "Apply to Echelon"
+- Subtitle: "Access is limited. Selection is deliberate."
+- White button: "Submit Application"
 
-### POST /api/career-applications
-**Request Body:**
-```json
-{
-  "name": "string",
-  "email": "string",
-  "role": "string",
-  "whyEchelon": "string"
-}
-```
-**Response:** `{ "success": boolean, "message": "string" }`
+### 11. Header ✅
+- Fixed position
+- Logo: "ECHELON EQUITY" (Playfair Display, 700)
+- Nav: Research, Apply, Tracks, Contact (outlined button)
 
-## Next Tasks
-1. ✅ Create frontend with mock data
-2. ⏭️ Get user feedback on design and messaging
-3. ⏭️ Build backend API for form submissions
-4. ⏭️ Integrate frontend with backend
-5. ⏭️ Set up email notifications
-6. ⏭️ Deploy to production (echelonequity.co)
+### 12. Footer ✅
+- 4-column grid
+- Contact emails: team@, admissions@
+- Legal links, resources
+- Co-founder attribution
 
-## Design System Notes
-- **Font Stack:** Playfair Display for headings, Inter for body
-- **Color Tokens:** 
-  - Primary: #000000 (black)
-  - Secondary: #FFFFFF (white)
-  - Gray scale: 50, 100, 200, 300, 400, 500, 600, 700, 800, 900
-- **Spacing Scale:** 4pt/8dp system (0.5rem, 1rem, 1.5rem, 2rem, 3rem, 4rem, 6rem, 8rem)
-- **Border Radius:** 2px (minimal, sharp)
-- **Transitions:** 150-300ms ease for interactions
-- **No emojis:** Lucide React icons only
-- **Portfolio Table:** 
-  - Status badges: Active (black), Watch (gray-200), Closed (gray-100)
-  - Conviction badges: Buy (black), Hold (gray-700), Neutral (gray-300), Thesis (gray-100)
+## What Was Refined (March 2026)
+
+### Copy Changes
+- Sharper, more institutional language throughout
+- Removed educational/friendly tone
+- Emphasized "evaluation" over "teaching"
+- "Applicants Screened" instead of "Applications Received"
+- "Long" instead of "Buy" for conviction
+- "Monitoring" instead of "Watch" for status
+
+### Design Improvements
+- Reduced max-width: 1400px → 1100px (tighter, more focused)
+- Increased headline sizes for impact
+- Standardized spacing system
+- 2px borders on major elements (table, stats bar)
+- Quote-style review cards with left border accent
+- Cleaner table design with column separators
+- Monospace fonts for tickers and values
+- Right-aligned numbers in tables
+- Simplified track cards (removed skill tags, used deliverable separator)
+- More authoritative button labels
+
+### Typography Refinements
+- Larger serif headlines (Playfair Display)
+- Tighter letter-spacing on headlines (-0.02em)
+- Consistent uppercase labels (0.08em tracking)
+- Improved line-height ratios (1.5-1.7)
+- Serif for section titles, sans for body
+
+### UI Polish
+- Removed rounded corners (0-1px only)
+- Cleaner borders (1px standard, 2px for emphasis)
+- Subtle hover states (no over-animation)
+- Professional table styling (feels like internal research)
+- Icon boxes reduced to 48px (was 56-60px)
+- Cards feel less "marketing" more "documentation"
+
+## Technical Implementation
+
+### Components Created
+All components use "-final" class suffix for institutional design:
+- `Hero.jsx` - Hero with tagline, headline, CTAs
+- `Stats.jsx` - 4-stat grid with borders
+- `Positioning.jsx` - "This Is Not a Course" section
+- `Portfolio.jsx` - Professional portfolio table
+- `WhatYouDo.jsx` - 4 activity cards
+- `Review.jsx` - 2 quote cards from Wall Street reviewers
+- `Standards.jsx` - Standards box with example
+- `Tracks.jsx` - 4 analyst track cards
+- `Selection.jsx` - Simple selection process
+- `FinalCTA.jsx` - Black CTA section
+- `Header.jsx` - Fixed institutional header
+- `Footer.jsx` - Standard footer
+
+### Removed Components
+- Mission.jsx (merged into Positioning)
+- ProgramTracks.jsx (replaced with Tracks)
+- Reviewers.jsx (replaced with Review)
+- Testimonials.jsx (removed)
+- FAQ.jsx (removed for cleaner experience)
+- Careers.jsx (removed from landing page)
+- ApplicationProcess.jsx (replaced with Selection)
+- WhatYouWillDoData (simplified to WhatYouDo)
+
+### CSS Architecture
+- Single App.css with institutional design system
+- Class naming: `-final` suffix for all new styles
+- CSS variables for colors and spacing
+- Mobile-responsive breakpoints at 968px and 640px
+- No gradients, minimal shadows
+- Professional hover states only
 
 ## Success Metrics
-- Page feels selective, elite, and professional (NOT casual or educational)
-- Clear differentiation from courses/bootcamps
-- Forms functional with proper validation
-- Mobile-responsive and accessible
-- Fast load times (<3s)
-- Professional portfolio table presentation
+✅ Feels like Goldman Sachs/Blackstone recruiting page  
+✅ NOT a student project or course aesthetic  
+✅ Sharp, institutional copy throughout  
+✅ Professional table presentation (like internal research)  
+✅ Quote-based credibility (not resume cards)  
+✅ Minimal, authoritative design  
+✅ Black & white only (no color)  
+✅ Playfair + Inter typography properly implemented  
 
-## Notes
-- All form submissions are currently MOCKED - they log to console and show success toast
-- Ready for backend integration when needed
-- Real data from Echelon Equity internal documentation
-- Co-founders: George Afram (Operations), Jonathan Silva (Research)
-- Websites: echelonequity.co, portal.echelonequity.co
-- Contact: team@echelonequity.co, admissions@echelonequity.co
+## Next Phase (Backend Integration)
+1. POST /api/applications - Application form submissions
+2. POST /api/contact - Contact form submissions
+3. Email notifications to admissions@echelonequity.co
+4. Admin dashboard for application review
+
+## Brand Guidelines
+**DO:**
+- Use institutional language
+- Emphasize output and execution
+- Make it feel selective and rigorous
+- Use "analyst" terminology
+- Reference Wall Street standards
+
+**DON'T:**
+- Make it feel beginner-friendly
+- Say "anyone can join"
+- Use course/bootcamp language
+- Add color or decorative elements
+- Over-explain or be verbose
+
+## Final Assessment
+The site now feels like:
+- **Investment bank career page** (Goldman, JP Morgan)
+- **Hedge fund research platform** (serious, data-driven)
+- **Private equity memo** (rigorous, evidence-based)
+
+The message is clear and confident:
+**"Experience is not required. Meeting the standard is."**

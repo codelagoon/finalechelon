@@ -1,27 +1,22 @@
 import React, { useState } from 'react';
 import { Button } from './ui/button';
-import { ArrowRight } from 'lucide-react';
+import { finalCTAData } from '../mockData';
 import ApplicationDialog from './ApplicationDialog';
 
 const FinalCTA = () => {
   const [isApplicationOpen, setIsApplicationOpen] = useState(false);
 
   return (
-    <section className="final-cta-section">
-      <div className="final-cta-container">
-        <h2 className="final-cta-title">
-          Ready to Prove Yourself?
-        </h2>
-        <p className="final-cta-description">
-          The work is the credential. Join Echelon and build a portfolio that speaks for itself.
-        </p>
+    <section className="final-cta-section-final">
+      <div className="final-cta-container-final">
+        <h2 className="final-cta-title-final">{finalCTAData.title}</h2>
+        <p className="final-cta-subtitle-final">{finalCTAData.subtitle}</p>
         <Button 
           size="lg" 
-          className="final-cta-button"
+          className="final-cta-button-final"
           onClick={() => setIsApplicationOpen(true)}
         >
-          Apply to Echelon
-          <ArrowRight className="ml-2 h-5 w-5" />
+          {finalCTAData.cta}
         </Button>
       </div>
       <ApplicationDialog 

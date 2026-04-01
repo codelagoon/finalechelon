@@ -14,26 +14,26 @@ const Header = () => {
 
   return (
     <>
-      <header className="site-header">
-        <div className="header-container">
-          <div className="header-logo">
-            <span className="logo-text">ECHELON EQUITY</span>
+      <header className="site-header-final">
+        <div className="header-container-final">
+          <div className="header-logo-final">
+            <span className="logo-text-final">ECHELON EQUITY</span>
           </div>
-          <nav className="header-nav">
-            <button onClick={() => scrollToSection('portfolio')} className="nav-link">
+          <nav className="header-nav-final">
+            <button onClick={() => scrollToSection('coverage')} className="nav-link-final">
               Research
             </button>
-            <button onClick={() => scrollToSection('application')} className="nav-link">
+            <button onClick={() => window.location.href = '#apply'} className="nav-link-final">
               Apply
             </button>
-            <button onClick={() => scrollToSection('careers')} className="nav-link">
-              Careers
+            <button onClick={() => scrollToSection('tracks')} className="nav-link-final">
+              Tracks
             </button>
             <Button 
               variant="outline" 
               size="sm"
               onClick={() => setIsContactOpen(true)}
-              className="header-contact-btn"
+              className="header-contact-btn-final"
             >
               Contact
             </Button>

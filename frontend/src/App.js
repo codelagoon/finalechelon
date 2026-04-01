@@ -4,16 +4,13 @@ import { Toaster } from "./components/ui/sonner";
 import Header from "./components/Header";
 import Hero from "./components/Hero";
 import Stats from "./components/Stats";
-import Mission from "./components/Mission";
-import ProgramTracks from "./components/ProgramTracks";
+import Positioning from "./components/Positioning";
 import Portfolio from "./components/Portfolio";
 import WhatYouDo from "./components/WhatYouDo";
-import Reviewers from "./components/Reviewers";
+import Review from "./components/Review";
 import Standards from "./components/Standards";
-import ApplicationProcess from "./components/ApplicationProcess";
-import Testimonials from "./components/Testimonials";
-import FAQ from "./components/FAQ";
-import Careers from "./components/Careers";
+import Tracks from "./components/Tracks";
+import Selection from "./components/Selection";
 import FinalCTA from "./components/FinalCTA";
 import Footer from "./components/Footer";
 
@@ -24,20 +21,13 @@ function App() {
       <main>
         <Hero />
         <Stats />
-        <Mission />
-        <div id="tracks">
-          <ProgramTracks />
-        </div>
+        <Positioning />
         <Portfolio />
         <WhatYouDo />
-        <Reviewers />
+        <Review />
         <Standards />
-        <ApplicationProcess />
-        <Testimonials />
-        <FAQ />
-        <div id="careers">
-          <Careers />
-        </div>
+        <Tracks />
+        <Selection />
         <FinalCTA />
       </main>
       <Footer />

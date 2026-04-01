@@ -1,26 +1,19 @@
 import React from 'react';
 import { standardsData } from '../mockData';
-import { Card, CardContent } from './ui/card';
 
 const Standards = () => {
   return (
-    <section className="standards-section">
-      <div className="content-container">
-        <div className="section-header">
-          <h2 className="section-title-center">{standardsData.title}</h2>
-          <p className="section-description">
-            {standardsData.description}
-          </p>
-        </div>
-        <div className="standards-grid">
-          {standardsData.sops.map((sop, index) => (
-            <Card key={index} className="standard-card">
-              <CardContent className="standard-content">
-                <h3 className="standard-rule">{sop.rule}</h3>
-                <p className="standard-description">{sop.description}</p>
-              </CardContent>
-            </Card>
-          ))}
+    <section className="standards-section-final">
+      <div className="content-container-final">
+        <h2 className="section-title-final">{standardsData.title}</h2>
+        <p className="standards-intro-final">{standardsData.intro}</p>
+        <div className="standard-example-final">
+          <p className="standard-example-title-final">{standardsData.exampleStandard.title}</p>
+          <ul className="standard-rules-final">
+            {standardsData.exampleStandard.rules.map((rule, index) => (
+              <li key={index}>{rule}</li>
+            ))}
+          </ul>
         </div>
       </div>
     </section>
