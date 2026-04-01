@@ -17,7 +17,7 @@ const Header = () => {
       <header className="site-header-final">
         <div className="header-container-final">
           <div className="header-logo-final">
-            <span className="logo-text-final">ECHELON EQUITY</span>
+            <span className="logo-text-final">Echelon.</span>
           </div>
           <nav className="header-nav-final">
             <button onClick={() => scrollToSection('coverage')} className="nav-link-final">

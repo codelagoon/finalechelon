@@ -249,3 +249,100 @@ The site now feels like:
 
 The message is clear and confident:
 **"Experience is not required. Meeting the standard is."**
+
+## Latest Updates (Elite-But-Accessible Refinement)
+
+### Header Update
+- Changed logo from "ECHELON EQUITY" to **"Echelon."** (with period)
+- More refined, editorial brand presentation
+
+### Finnhub API Integration ✅
+**Implementation:**
+- Created `finnhubService.js` with real-time stock data fetching
+- API Key: `d6meb3pr01qi0ajltsp0d6meb3pr01qi0ajltspg`
+- Fetches live quotes for all 6 portfolio companies
+- Auto-refreshes every 60 seconds
+- Added "Current Price" column alongside "Target Price"
+
+**Portfolio Table Now Shows:**
+- Ticker, Company, Sector, Status, Conviction
+- **Current Price** (live from Finnhub)
+- **Target Price** (DCF fair value)
+- Market data attribution note
+
+**Real-Time Data:**
+- PLTR: $146.28
+- DG: $118.73
+- ISRG: $460.99
+- EPD: $37.84
+- V: $302.24
+- TDG: $1,158.96
+
+### Application Form Refinement ✅
+**Strategy: Elite but accessible**
+- Open to high school AND university applicants
+- "Prior experience not a prerequisite" (not "not required")
+- Maintains selective, rigorous positioning
+
+**New Fields:**
+1. **Full Name** - Standard text input
+2. **Email Address** - Standard email input
+3. **School / University** - Works for both audiences
+4. **Academic Level** - NEW dropdown:
+   - High School
+   - Undergraduate
+   - Other
+5. **Graduation Year** - e.g., 2026
+6. **Field of Study / Academic Focus** - Better for high school students
+7. **Track of Interest** - Dropdown:
+   - Technical Analysis
+   - Equity Research
+   - Macro Policy
+   - PR / Marketing
+8. **Why Echelon** - "What draws you to Echelon? What do you intend to demonstrate through your work?"
+9. **Relevant Experience (Optional)** - Includes high school-friendly examples:
+   - "coursework, personal projects, competitions, research, or internships"
+   - States: "Prior experience is not required"
+10. **Resume / CV Upload (Optional)** - PDF, with note "You may apply without one"
+11. **Work Sample (Optional, Highly Recommended)** - For models, analyses, writing samples
+
+**Footer Note:**
+"Echelon is open to both high school and university-level applicants. Prior experience is not a prerequisite. Selection is based on demonstrated potential and ability to meet the standard."
+
+### Key Positioning Language
+**What We Say:**
+- "Not a prerequisite"
+- "Evaluated on execution"
+- "Standard remains high"
+- "Demonstrated potential"
+- "Ability to meet the standard"
+
+**What We Never Say:**
+- "For beginners"
+- "Learn finance"
+- "No experience needed 😊"
+- "Anyone can join"
+
+### Result
+Now positioned as:
+- **Accessible** → anyone with potential can apply
+- **Selective** → not everyone gets in
+- **Serious** → work defines you, not background
+
+Perfect for elite pipelines that widen access while maintaining rigor.
+
+## Technical Stack
+**Frontend:**
+- React 19.0.0
+- Tailwind CSS + shadcn/ui components
+- Playfair Display + Inter typography
+- Finnhub API integration for real-time market data
+
+**External Services:**
+- Finnhub Stock API (real-time quotes)
+
+**Future Backend:**
+- FastAPI (Python)
+- MongoDB (database)
+- File upload handling for resumes/work samples
+- Email notifications via SendGrid or similar

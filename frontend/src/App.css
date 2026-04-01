@@ -370,10 +370,32 @@ body {
   color: var(--color-gray-text);
 }
 
+.price-cell-final {
+  font-family: 'SF Mono', 'Monaco', 'Consolas', monospace;
+  font-weight: 600;
+  color: var(--color-black);
+}
+
 .fairvalue-cell-final {
   font-family: 'SF Mono', 'Monaco', 'Consolas', monospace;
   font-weight: 600;
   color: var(--color-black);
+}
+
+.loading-text-final {
+  font-size: 0.875rem;
+  color: var(--color-gray-text);
+  text-align: center;
+  margin: 1rem 0;
+  font-style: italic;
+}
+
+.market-data-note-final {
+  font-size: 0.8125rem;
+  color: var(--color-gray-text);
+  text-align: center;
+  margin-top: 1rem;
+  font-style: italic;
 }
 
 .status-badge-final,
@@ -814,11 +836,35 @@ body {
 }
 
 /* Forms */
-.application-dialog,
+.application-dialog-final,
 .contact-dialog {
-  max-width: 600px;
+  max-width: 650px;
   max-height: 90vh;
   overflow-y: auto;
+}
+
+.application-form-final {
+  margin-top: 1.5rem;
+}
+
+.form-helper-text {
+  font-size: 0.8125rem;
+  color: var(--color-gray-text);
+  margin-top: 0.5rem;
+  line-height: 1.5;
+}
+
+.application-footer-note {
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--color-gray-border);
+}
+
+.application-footer-note p {
+  font-size: 0.875rem;
+  color: var(--color-gray-text);
+  line-height: 1.7;
+  text-align: center;
 }
 
 .dialog-title {

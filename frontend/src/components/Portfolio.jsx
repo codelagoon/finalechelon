@@ -1,7 +1,25 @@
-import React from 'react';
-import { portfolioCompaniesData } from '../mockData';
+import React, { useState, useEffect } from 'react';
+import { portfolioCompaniesConfig, fetchPortfolioData } from '../services/finnhubService';
 
 const Portfolio = () => {
+  const [portfolioData, setPortfolioData] = useState(portfolioCompaniesConfig);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const loadPortfolioData = async () => {
+      setIsLoading(true);
+      const data = await fetchPortfolioData();
+      setPortfolioData(data);
+      setIsLoading(false);
+    };
+    
+    loadPortfolioData();
+    
+    // Refresh every 60 seconds
+    const interval = setInterval(loadPortfolioData, 60000);
+    return () => clearInterval(interval);
+  }, []);
+
   const getStatusClass = (status) => {
     if (status === 'Active') return 'status-active-final';
     if (status === 'Monitoring') return 'status-monitoring-final';
@@ -15,6 +33,11 @@ const Portfolio = () => {
     return 'conviction-validated-final';
   };
 
+  const formatPrice = (price) => {
+    if (!price) return '—';
+    return `$${price.toFixed(2)}`;
+  };
+
   return (
     <section id="coverage" className="portfolio-section-final">
       <div className="content-container-final">
@@ -22,6 +45,9 @@ const Portfolio = () => {
         <p className="section-subtitle-final">
           Real analysis on public companies across six sectors. Every position supported by structured, defensible research.
         </p>
+        {isLoading && (
+          <p className="loading-text-final">Loading live market data...</p>
+        )}
         <div className="portfolio-table-wrapper-final">
           <table className="portfolio-table-final">
             <thead>
@@ -31,11 +57,12 @@ const Portfolio = () => {
                 <th>Sector</th>
                 <th>Status</th>
                 <th>Conviction</th>
-                <th className="text-right">Fair Value</th>
+                <th className="text-right">Current Price</th>
+                <th className="text-right">Target Price</th>
               </tr>
             </thead>
             <tbody>
-              {portfolioCompaniesData.map((company, index) => (
+              {portfolioData.map((company, index) => (
                 <tr key={index}>
                   <td className="ticker-cell-final">{company.ticker}</td>
                   <td className="company-cell-final">{company.company}</td>
@@ -50,12 +77,20 @@ const Portfolio = () => {
                       {company.conviction}
                     </span>
                   </td>
-                  <td className="fairvalue-cell-final text-right">{company.fairValue}</td>
+                  <td className="price-cell-final text-right">
+                    {formatPrice(company.currentPrice)}
+                  </td>
+                  <td className="fairvalue-cell-final text-right">
+                    {formatPrice(company.targetPrice)}
+                  </td>
                 </tr>
               ))}
             </tbody>
           </table>
         </div>
+        <p className="market-data-note-final">
+          Market data provided by Finnhub. Prices updated in real-time.
+        </p>
       </div>
     </section>
   );
