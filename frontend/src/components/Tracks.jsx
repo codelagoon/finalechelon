@@ -1,5 +1,40 @@
 import React from 'react';
-import { tracksData } from '../mockData';
+
+const tracksData = {
+  title: "Analyst Tracks",
+  subtitle: "Analysts operate within structured tracks aligned to institutional workflows.",
+  positioning: "Analysts enter with varying levels of experience, but are held to the same standard of output.",
+  tracks: [
+    {
+      id: 1,
+      number: "01",
+      name: "Three-Statement Modeling",
+      description: "Build fully integrated financial statements from 10-K filings.",
+      deliverable: "Integrated IS / BS / CF model"
+    },
+    {
+      id: 2,
+      number: "02",
+      name: "DCF Valuation & Sensitivity",
+      description: "Develop discounted cash flow models with dynamic assumptions.",
+      deliverable: "DCF with sensitivity tables"
+    },
+    {
+      id: 3,
+      number: "03",
+      name: "Investment Memo",
+      description: "Write formal investment theses reviewed against professional standards.",
+      deliverable: "Full investment memo"
+    },
+    {
+      id: 4,
+      number: "04",
+      name: "LBO Modeling",
+      description: "Construct leveraged buyout models with return analysis.",
+      deliverable: "LBO model with IRR outputs"
+    }
+  ]
+};
 
 const Tracks = () => {
   return (
@@ -7,6 +42,7 @@ const Tracks = () => {
       <div className="content-container-final">
         <h2 className="section-title-final">{tracksData.title}</h2>
         <p className="section-subtitle-final">{tracksData.subtitle}</p>
+        <p className="tracks-positioning-final">{tracksData.positioning}</p>
         <div className="tracks-grid-final">
           {tracksData.tracks.map((track) => (
             <div key={track.id} className="track-card-final">

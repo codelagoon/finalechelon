@@ -9,13 +9,14 @@
   
   --color-black: #000000;
   --color-white: #FFFFFF;
-  --color-gray-text: #666666;
+  --color-gray-text: #5a5a5a;
   --color-gray-border: #EAEAEA;
   --color-gray-hover: #F5F5F5;
   
   --max-width: 1100px;
-  --section-padding: 120px;
-  --section-padding-hero: 160px;
+  --section-padding: 140px;
+  --section-padding-hero: 180px;
+  --border-radius: 1px;
 }
 
 * {
@@ -148,7 +149,7 @@ body {
   line-height: 1.1;
   color: var(--color-black);
   margin-bottom: 1.5rem;
-  letter-spacing: -0.02em;
+  letter-spacing: -0.025em;
 }
 
 .hero-subheadline-final {
@@ -196,6 +197,7 @@ body {
   height: 520px;
   overflow: hidden;
   border: 1px solid var(--color-gray-border);
+  border-radius: var(--border-radius);
 }
 
 .hero-image-final {
@@ -257,7 +259,7 @@ body {
   color: var(--color-black);
   margin-bottom: 2rem;
   text-align: center;
-  letter-spacing: -0.01em;
+  letter-spacing: -0.015em;
 }
 
 .positioning-content-final {
@@ -341,7 +343,7 @@ body {
 }
 
 .portfolio-table-final td {
-  padding: 1.25rem 1.5rem;
+  padding: 1rem 1.5rem;
   border-bottom: 1px solid var(--color-gray-border);
   font-size: 0.9375rem;
   border-right: 1px solid var(--color-gray-border);
@@ -357,7 +359,7 @@ body {
 
 .ticker-cell-final {
   font-family: 'SF Mono', 'Monaco', 'Consolas', monospace;
-  font-weight: 700;
+  font-weight: 800;
   color: var(--color-black);
 }
 
@@ -462,6 +464,7 @@ body {
   background-color: var(--color-white);
   padding: 2rem;
   transition: border-color 0.2s ease;
+  border-radius: var(--border-radius);
 }
 
 .activity-card-final:hover {
@@ -475,7 +478,7 @@ body {
   align-items: center;
   justify-content: center;
   background-color: var(--color-black);
-  border-radius: 0;
+  border-radius: var(--border-radius);
   margin-bottom: 1.5rem;
 }
 
@@ -607,10 +610,20 @@ body {
   background-color: var(--color-white);
   padding: 2.5rem;
   transition: border-color 0.2s ease;
+  border-radius: var(--border-radius);
 }
 
 .track-card-final:hover {
   border-color: var(--color-black);
+}
+
+.tracks-positioning-final {
+  font-size: 1rem;
+  color: var(--color-gray-text);
+  text-align: center;
+  margin-top: -1rem;
+  margin-bottom: 3rem;
+  font-style: italic;
 }
 
 .track-number-final {
@@ -690,6 +703,7 @@ body {
   background-color: var(--color-white);
   padding: 2rem;
   transition: border-color 0.2s ease;
+  border-radius: var(--border-radius);
 }
 
 .work-sample-card-final:hover {
@@ -720,39 +734,43 @@ body {
 
 /* Partnerships Section */
 .partnerships-section-final {
-  padding: 100px 0;
+  padding: var(--section-padding) 0;
   background-color: var(--color-white);
 }
 
-.partnerships-logos-final {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 3rem;
+.partnerships-logos-grid-final {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 4rem;
   max-width: 900px;
   margin: 3rem auto 0;
-  align-items: center;
+  flex-wrap: wrap;
 }
 
-.partner-logo-final {
+.partner-logo-link-final {
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 60px;
+  height: 32px;
   opacity: 0.65;
-  transition: opacity 0.2s ease;
+  transition: opacity 0.25s ease;
+  text-decoration: none;
 }
 
-.partner-logo-final:hover {
+.partner-logo-link-final:hover {
   opacity: 1;
 }
 
-.partner-name-final {
-  font-size: 1.125rem;
-  font-weight: 700;
-  color: var(--color-black);
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  font-family: var(--font-sans);
+.partner-logo-image-final {
+  height: 28px;
+  width: auto;
+  filter: grayscale(100%);
+  transition: filter 0.25s ease, opacity 0.25s ease;
+}
+
+.partner-logo-link-final:hover .partner-logo-image-final {
+  filter: grayscale(0%);
 }
 
 /* Selectivity Note */

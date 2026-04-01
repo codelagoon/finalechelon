@@ -1,5 +1,15 @@
 import React from 'react';
-import { selectionData } from '../mockData';
+
+const selectionData = {
+  title: "Selection Process",
+  subtitle: "Admission is selective. Applicants are evaluated on clarity of thinking, attention to detail, and ability to execute.",
+  selectivityNote: "Not all applicants are admitted.",
+  steps: [
+    "Application submission",
+    "Technical / written evaluation",
+    "Final selection"
+  ]
+};
 
 const Selection = () => {
   return (

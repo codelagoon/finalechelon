@@ -11,7 +11,7 @@ const Footer = () => {
             <h3 className="footer-brand">ECHELON EQUITY</h3>
             <p className="footer-tagline">
               The Work Is the Credential.<br />
-              Student-led private equity initiative. NYC, 2025.
+              Student-led investment research platform. NYC, 2025.
             </p>
             <div className="footer-contact-info">
               <p className="footer-email">team@echelonequity.co</p>
