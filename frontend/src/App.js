@@ -6,7 +6,6 @@ import Hero from "./components/Hero";
 import Stats from "./components/Stats";
 import Positioning from "./components/Positioning";
 import Portfolio from "./components/Portfolio";
-import WhatYouDo from "./components/WhatYouDo";
 import AnalystWork from "./components/AnalystWork";
 import Review from "./components/Review";
 import Standards from "./components/Standards";
@@ -25,7 +24,6 @@ function App() {
         <Stats />
         <Positioning />
         <Portfolio />
-        <WhatYouDo />
         <AnalystWork />
         <Review />
         <Standards />
