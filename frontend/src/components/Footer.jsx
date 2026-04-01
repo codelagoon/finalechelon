@@ -23,29 +23,28 @@ const Footer = () => {
             <h4 className="footer-heading">Program</h4>
             <ul className="footer-links">
               <li><a href="#application">Apply</a></li>
-              <li><a href="#portfolio">Research</a></li>
+              <li><a href="#coverage">Research</a></li>
               <li><a href="#tracks">Analyst Tracks</a></li>
-              <li><a href="#standards">Standards</a></li>
+              <li><a href="#selection">Selection</a></li>
             </ul>
           </div>
 
           <div className="footer-section">
             <h4 className="footer-heading">Resources</h4>
             <ul className="footer-links">
-              <li><a href="#about">About Echelon</a></li>
-              <li><a href="#reviewers">Reviewers</a></li>
-              <li><a href="#faq">FAQ</a></li>
-              <li><a href="#careers">Careers</a></li>
+              <li><a href="https://echelonequity.co" target="_blank" rel="noopener noreferrer">Website</a></li>
+              <li><a href="https://portal.echelonequity.co" target="_blank" rel="noopener noreferrer">Portal</a></li>
+              <li><a href="#partnerships">Partnerships</a></li>
+              <li><a href="#contact">Contact</a></li>
             </ul>
           </div>
 
           <div className="footer-section">
             <h4 className="footer-heading">Connect</h4>
             <ul className="footer-links">
-              <li><a href="https://echelonequity.co" target="_blank" rel="noopener noreferrer">Website</a></li>
-              <li><a href="https://portal.echelonequity.co" target="_blank" rel="noopener noreferrer">Portal</a></li>
-              <li><a href="#linkedin">LinkedIn</a></li>
-              <li><a href="#twitter">Twitter</a></li>
+              <li><a href="https://www.linkedin.com/company/echelon-equity" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
+              <li><a href="https://www.instagram.com/echelonequity" target="_blank" rel="noopener noreferrer">Instagram</a></li>
+              <li><a href="https://www.tiktok.com/@echelonequity" target="_blank" rel="noopener noreferrer">TikTok</a></li>
             </ul>
           </div>
         </div>
