@@ -921,6 +921,17 @@ body {
 }
 
 
+
+/* Hide Emergent Branding */
+[class*="emergent"],
+[id*="emergent"],
+a[href*="emergent"],
+div[style*="emergent"] {
+  display: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+}
+
 /* Mobile: 2x2 grid for partnerships */
 @media (max-width: 768px) {
   .partners {
