@@ -761,9 +761,9 @@ body {
 }
 
 .partnerships-section-final .partners img {
-  height: 32px !important;
+  height: 44px !important;
   width: auto !important;
-  max-width: 200px;
+  max-width: 220px;
   opacity: 0.85;
   display: block;
   object-fit: contain;

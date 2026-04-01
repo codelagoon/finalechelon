@@ -25,7 +25,7 @@ const Partnerships = () => {
             <img 
               src={`https://img.logo.dev/tikr.com?token=${LOGO_DEV_TOKEN}&format=png&size=200`}
               alt="TIKR"
-              style={{ height: '32px', width: 'auto', opacity: 0.85 }}
+              style={{ height: '44px', width: 'auto', opacity: 0.85 }}
             />
           </a>
 
@@ -33,7 +33,7 @@ const Partnerships = () => {
             <img 
               src={`https://img.logo.dev/adventiscg.com?token=${LOGO_DEV_TOKEN}&format=png&size=200`}
               alt="Adventis CG"
-              style={{ height: '32px', width: 'auto', opacity: 0.85 }}
+              style={{ height: '44px', width: 'auto', opacity: 0.85 }}
             />
           </a>
 
@@ -41,7 +41,7 @@ const Partnerships = () => {
             <img 
               src={`https://img.logo.dev/excelexercises.com?token=${LOGO_DEV_TOKEN}&format=png&size=200`}
               alt="Excel Exercises"
-              style={{ height: '32px', width: 'auto', opacity: 0.85 }}
+              style={{ height: '44px', width: 'auto', opacity: 0.85 }}
             />
           </a>
 
@@ -49,7 +49,7 @@ const Partnerships = () => {
             <img 
               src={`https://img.logo.dev/yis.org?token=${LOGO_DEV_TOKEN}&format=png&size=200`}
               alt="YIS"
-              style={{ height: '32px', width: 'auto', opacity: 0.85 }}
+              style={{ height: '44px', width: 'auto', opacity: 0.85 }}
             />
           </a>
         </div>
