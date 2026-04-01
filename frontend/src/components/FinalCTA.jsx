@@ -11,6 +11,7 @@ const FinalCTA = () => {
       <div className="final-cta-container-final">
         <h2 className="final-cta-title-final">{finalCTAData.title}</h2>
         <p className="final-cta-subtitle-final">{finalCTAData.subtitle}</p>
+        <p className="final-cta-selectivity-final">{finalCTAData.selectivityNote}</p>
         <Button 
           size="lg" 
           className="final-cta-button-final"

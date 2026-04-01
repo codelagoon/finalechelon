@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { portfolioCompaniesConfig, fetchPortfolioData } from '../services/finnhubService';
+import { coverageData } from '../mockData';
 
 const Portfolio = () => {
   const [portfolioData, setPortfolioData] = useState(portfolioCompaniesConfig);
@@ -15,8 +16,8 @@ const Portfolio = () => {
     
     loadPortfolioData();
     
-    // Refresh every 60 seconds
-    const interval = setInterval(loadPortfolioData, 60000);
+    // Refresh every 5 minutes (less aggressive)
+    const interval = setInterval(loadPortfolioData, 300000);
     return () => clearInterval(interval);
   }, []);
 
@@ -41,13 +42,10 @@ const Portfolio = () => {
   return (
     <section id="coverage" className="portfolio-section-final">
       <div className="content-container-final">
-        <h2 className="section-title-final">Active Coverage</h2>
+        <h2 className="section-title-final">{coverageData.title}</h2>
         <p className="section-subtitle-final">
-          Real analysis on public companies across six sectors. Every position supported by structured, defensible research.
+          {coverageData.subtitle}
         </p>
-        {isLoading && (
-          <p className="loading-text-final">Loading live market data...</p>
-        )}
         <div className="portfolio-table-wrapper-final">
           <table className="portfolio-table-final">
             <thead>
@@ -89,7 +87,7 @@ const Portfolio = () => {
           </table>
         </div>
         <p className="market-data-note-final">
-          Market data provided by Finnhub. Prices updated in real-time.
+          {coverageData.attribution}
         </p>
       </div>
     </section>

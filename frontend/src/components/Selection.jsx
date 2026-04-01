@@ -15,6 +15,7 @@ const Selection = () => {
             ))}
           </ol>
         </div>
+        <p className="selectivity-note-final">{selectionData.selectivityNote}</p>
       </div>
     </section>
   );

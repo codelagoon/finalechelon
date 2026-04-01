@@ -671,6 +671,106 @@ body {
   color: var(--color-gray-text);
   max-width: 720px;
   margin: 0 auto 3rem;
+
+/* Analyst Work Section */
+.analyst-work-section-final {
+  padding: var(--section-padding) 0;
+  background-color: var(--color-white);
+}
+
+.analyst-work-grid-final {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+  margin-top: 3rem;
+}
+
+.work-sample-card-final {
+  border: 1px solid var(--color-gray-border);
+  background-color: var(--color-white);
+  padding: 2rem;
+  transition: border-color 0.2s ease;
+}
+
+.work-sample-card-final:hover {
+  border-color: var(--color-black);
+}
+
+.work-sample-title-final {
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: var(--color-black);
+  margin-bottom: 0.75rem;
+  font-family: var(--font-sans);
+}
+
+.work-sample-description-final {
+  font-size: 0.9375rem;
+  color: var(--color-gray-text);
+  line-height: 1.6;
+}
+
+.analyst-work-footer-final {
+  font-size: 0.875rem;
+  color: var(--color-gray-text);
+  text-align: center;
+  margin-top: 2rem;
+  font-style: italic;
+}
+
+/* Partnerships Section */
+.partnerships-section-final {
+  padding: 100px 0;
+  background-color: var(--color-white);
+}
+
+.partnerships-logos-final {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 3rem;
+  max-width: 900px;
+  margin: 3rem auto 0;
+  align-items: center;
+}
+
+.partner-logo-final {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 60px;
+  opacity: 0.65;
+  transition: opacity 0.2s ease;
+}
+
+.partner-logo-final:hover {
+  opacity: 1;
+}
+
+.partner-name-final {
+  font-size: 1.125rem;
+  font-weight: 700;
+  color: var(--color-black);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-family: var(--font-sans);
+}
+
+/* Selectivity Note */
+.selectivity-note-final {
+  font-size: 0.9375rem;
+  color: var(--color-gray-text);
+  text-align: center;
+  margin-top: 2rem;
+  font-weight: 500;
+}
+
+.final-cta-selectivity-final {
+  font-size: 0.9375rem;
+  color: #CCCCCC;
+  margin-bottom: 2rem;
+  font-weight: 500;
+}
+
   text-align: center;
 }
 

@@ -31,6 +31,7 @@ const ApplicationDialog = ({ isOpen, onClose }) => {
     trackOfInterest: '',
     whyEchelon: '',
     relevantExperience: '',
+    analyticalResponse: '',
     resume: null,
     workSample: null
   });
@@ -64,7 +65,6 @@ const ApplicationDialog = ({ isOpen, onClose }) => {
     e.preventDefault();
     setIsSubmitting(true);
     
-    // Mock submission
     setTimeout(() => {
       const result = handleApplicationSubmit(formData);
       if (result.success) {
@@ -79,6 +79,7 @@ const ApplicationDialog = ({ isOpen, onClose }) => {
           trackOfInterest: '',
           whyEchelon: '',
           relevantExperience: '',
+          analyticalResponse: '',
           resume: null,
           workSample: null
         });
@@ -224,6 +225,22 @@ const ApplicationDialog = ({ isOpen, onClose }) => {
               required
               className="form-textarea"
               rows={5}
+            />
+          </div>
+
+          {/* Analytical Question (NEW) */}
+          <div className="form-group">
+            <Label htmlFor="analyticalResponse" className="form-label">
+              Short Response (Optional)
+            </Label>
+            <Textarea
+              id="analyticalResponse"
+              name="analyticalResponse"
+              placeholder="Describe a company, trend, or idea you find interesting and why."
+              value={formData.analyticalResponse}
+              onChange={handleChange}
+              className="form-textarea"
+              rows={4}
             />
           </div>
 
