@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Button } from './ui/button';
 import { finalCTAData } from '../mockData';
-import ApplicationDialog from './ApplicationDialog';
 
 const FinalCTA = () => {
-  const [isApplicationOpen, setIsApplicationOpen] = useState(false);
+  const navigate = useNavigate();
 
   return (
     <section className="final-cta-section-final">
@@ -15,15 +15,11 @@ const FinalCTA = () => {
         <Button 
           size="lg" 
           className="final-cta-button-final"
-          onClick={() => setIsApplicationOpen(true)}
+          onClick={() => navigate('/apply')}
         >
           {finalCTAData.cta}
         </Button>
       </div>
-      <ApplicationDialog 
-        isOpen={isApplicationOpen} 
-        onClose={() => setIsApplicationOpen(false)} 
-      />
     </section>
   );
 };

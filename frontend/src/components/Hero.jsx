@@ -1,18 +1,11 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Button } from './ui/button';
 import { ArrowRight } from 'lucide-react';
 import { heroData } from '../mockData';
-import ApplicationDialog from './ApplicationDialog';
 
 const Hero = () => {
-  const [isApplicationOpen, setIsApplicationOpen] = useState(false);
-
-  const scrollToSection = (id) => {
-    const element = document.getElementById(id);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
+  const navigate = useNavigate();
 
   return (
     <section className="hero-section-final">
@@ -29,7 +22,7 @@ const Hero = () => {
             <Button 
               size="lg" 
               className="cta-primary-final"
-              onClick={() => setIsApplicationOpen(true)}
+              onClick={() => navigate('/apply')}
             >
               {heroData.ctaPrimary}
               <ArrowRight className="ml-2 h-5 w-5" />
@@ -38,7 +31,7 @@ const Hero = () => {
               size="lg" 
               variant="outline" 
               className="cta-secondary-final"
-              onClick={() => scrollToSection('coverage')}
+              onClick={() => navigate('/portfolio')}
             >
               {heroData.ctaSecondary}
             </Button>
@@ -52,10 +45,6 @@ const Hero = () => {
           />
         </div>
       </div>
-      <ApplicationDialog 
-        isOpen={isApplicationOpen} 
-        onClose={() => setIsApplicationOpen(false)} 
-      />
     </section>
   );
 };

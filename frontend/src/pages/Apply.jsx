@@ -1,26 +1,21 @@
 import React, { useState } from 'react';
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-} from './ui/dialog';
-import { Button } from './ui/button';
-import { Input } from './ui/input';
-import { Label } from './ui/label';
-import { Textarea } from './ui/textarea';
+import { useNavigate } from 'react-router-dom';
+import { Button } from '../components/ui/button';
+import { Input } from '../components/ui/input';
+import { Label } from '../components/ui/label';
+import { Textarea } from '../components/ui/textarea';
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from './ui/select';
+} from '../components/ui/select';
 import { handleApplicationSubmit } from '../mockData';
 import { toast } from 'sonner';
 
-const ApplicationDialog = ({ isOpen, onClose }) => {
+const Apply = () => {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     fullName: '',
     email: '',
@@ -83,21 +78,23 @@ const ApplicationDialog = ({ isOpen, onClose }) => {
           resume: null,
           workSample: null
         });
-        onClose();
+        // Redirect to home after successful submission
+        setTimeout(() => navigate('/'), 2000);
       }
       setIsSubmitting(false);
     }, 800);
   };
 
   return (
-    <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="application-dialog-final">
-        <DialogHeader>
-          <DialogTitle className="dialog-title">Apply to Echelon</DialogTitle>
-          <DialogDescription className="dialog-description">
+    <div className="apply-page" style={{ paddingTop: '80px', paddingBottom: '80px' }}>
+      <div className="content-container-final" style={{ maxWidth: '700px' }}>
+        <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
+          <h1 className="section-title-final">Apply to Echelon</h1>
+          <p className="section-subtitle-final">
             Acceptance is earned. Applications are evaluated on clarity of thinking, attention to detail, and ability to execute.
-          </DialogDescription>
-        </DialogHeader>
+          </p>
+        </div>
+        
         <form onSubmit={handleSubmit} className="application-form-final">
           {/* Full Name */}
           <div className="form-group">
@@ -228,7 +225,7 @@ const ApplicationDialog = ({ isOpen, onClose }) => {
             />
           </div>
 
-          {/* Analytical Question (NEW) */}
+          {/* Analytical Question */}
           <div className="form-group">
             <Label htmlFor="analyticalResponse" className="form-label">
               Short Response (Optional)
@@ -244,7 +241,7 @@ const ApplicationDialog = ({ isOpen, onClose }) => {
             />
           </div>
 
-          {/* Relevant Experience (Optional) */}
+          {/* Relevant Experience */}
           <div className="form-group">
             <Label htmlFor="relevantExperience" className="form-label">
               Relevant Experience (Optional)
@@ -312,9 +309,9 @@ const ApplicationDialog = ({ isOpen, onClose }) => {
             </p>
           </div>
         </form>
-      </DialogContent>
-    </Dialog>
+      </div>
+    </div>
   );
 };
 
-export default ApplicationDialog;
+export default Apply;

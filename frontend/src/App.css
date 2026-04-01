@@ -930,6 +930,20 @@ div[style*="emergent"] {
   display: none !important;
   visibility: hidden !important;
   opacity: 0 !important;
+
+
+/* Navigation Active State */
+.nav-active {
+  color: var(--color-black) !important;
+  font-weight: 600;
+}
+
+/* Apply Page Styles */
+.apply-page {
+  background-color: var(--color-white);
+  min-height: calc(100vh - 200px);
+}
+
 }
 
 /* Mobile: 2x2 grid for partnerships */
