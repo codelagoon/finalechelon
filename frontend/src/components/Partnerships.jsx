@@ -10,46 +10,32 @@ const Partnerships = () => {
         <p className="section-subtitle-final">
           Built with tools and resources used in professional investment workflows.
         </p>
-        <div 
-          className="partners" 
-          style={{ 
-            display: 'flex', 
-            flexDirection: 'row', 
-            justifyContent: 'center', 
-            alignItems: 'center', 
-            gap: '56px',
-            flexWrap: 'wrap'
-          }}
-        >
-          <a href="https://tikr.com" target="_blank" rel="noopener noreferrer" style={{ display: 'inline-flex' }}>
+        <div className="partners">
+          <a href="https://tikr.com" target="_blank" rel="noopener noreferrer">
             <img 
-              src={`https://img.logo.dev/tikr.com?token=${LOGO_DEV_TOKEN}&format=png&size=200`}
+              src={`https://img.logo.dev/tikr.com?token=${LOGO_DEV_TOKEN}&format=png&size=240`}
               alt="TIKR"
-              style={{ height: '44px', width: 'auto', opacity: 0.85 }}
             />
           </a>
 
-          <a href="https://adventiscg.com" target="_blank" rel="noopener noreferrer" style={{ display: 'inline-flex' }}>
+          <a href="https://adventiscg.com" target="_blank" rel="noopener noreferrer">
             <img 
-              src={`https://img.logo.dev/adventiscg.com?token=${LOGO_DEV_TOKEN}&format=png&size=200`}
+              src={`https://img.logo.dev/adventiscg.com?token=${LOGO_DEV_TOKEN}&format=png&size=240`}
               alt="Adventis CG"
-              style={{ height: '44px', width: 'auto', opacity: 0.85 }}
             />
           </a>
 
-          <a href="https://excelexercises.com" target="_blank" rel="noopener noreferrer" style={{ display: 'inline-flex' }}>
+          <a href="https://excelexercises.com" target="_blank" rel="noopener noreferrer">
             <img 
-              src={`https://img.logo.dev/excelexercises.com?token=${LOGO_DEV_TOKEN}&format=png&size=200`}
+              src={`https://img.logo.dev/excelexercises.com?token=${LOGO_DEV_TOKEN}&format=png&size=240`}
               alt="Excel Exercises"
-              style={{ height: '44px', width: 'auto', opacity: 0.85 }}
             />
           </a>
 
-          <a href="https://yis.org" target="_blank" rel="noopener noreferrer" style={{ display: 'inline-flex' }}>
+          <a href="https://yis.org" target="_blank" rel="noopener noreferrer">
             <img 
-              src={`https://img.logo.dev/yis.org?token=${LOGO_DEV_TOKEN}&format=png&size=200`}
+              src={`https://img.logo.dev/yis.org?token=${LOGO_DEV_TOKEN}&format=png&size=240`}
               alt="YIS"
-              style={{ height: '44px', width: 'auto', opacity: 0.85 }}
             />
           </a>
         </div>

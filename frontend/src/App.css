@@ -684,6 +684,7 @@ body {
   color: var(--color-gray-text);
   max-width: 720px;
   margin: 0 auto 3rem;
+}
 
 /* Analyst Work Section */
 .analyst-work-section-final {
@@ -735,6 +736,7 @@ body {
 /* Partnerships Section - Luxury Brand Treatment */
 .partnerships-section-final {
   padding: var(--section-padding) 0;
+  padding-bottom: 160px;
   background-color: var(--color-white);
 }
 
@@ -743,8 +745,9 @@ body {
   flex-direction: row !important;
   justify-content: center;
   align-items: center;
-  gap: 56px;
-  margin-top: 48px;
+  gap: 64px;
+  margin-top: 64px;
+  padding: 24px 0;
   flex-wrap: wrap;
   max-width: 1000px;
   margin-left: auto;
@@ -758,15 +761,17 @@ body {
   text-decoration: none;
   transition: opacity 0.25s ease, transform 0.25s ease;
   flex-shrink: 0;
+  min-height: 56px;
 }
 
 .partnerships-section-final .partners img {
-  height: 44px !important;
+  height: 48px !important;
   width: auto !important;
-  max-width: 220px;
+  max-width: 240px;
   opacity: 0.85;
   display: block;
   object-fit: contain;
+  object-position: center;
   transition: opacity 0.25s ease, transform 0.25s ease;
 }
 
@@ -791,10 +796,9 @@ body {
 .final-cta-selectivity-final {
   font-size: 0.9375rem;
   color: #CCCCCC;
-  margin-bottom: 2rem;
+  margin-bottom: 2.5rem;
+  margin-top: 0.5rem;
   font-weight: 500;
-}
-
   text-align: center;
 }
 
@@ -826,7 +830,7 @@ body {
 
 /* Final CTA Section */
 .final-cta-section-final {
-  padding: 5rem 0;
+  padding: 6rem 0;
   background-color: var(--color-black);
   color: var(--color-white);
 }
@@ -842,13 +846,13 @@ body {
   font-family: var(--font-serif);
   font-size: 3rem;
   font-weight: 700;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1.75rem;
   letter-spacing: -0.01em;
 }
 
 .final-cta-subtitle-final {
   font-size: 1.0625rem;
-  margin-bottom: 2.5rem;
+  margin-bottom: 0.75rem;
   color: #CCCCCC;
   line-height: 1.6;
 }
@@ -930,7 +934,7 @@ div[style*="emergent"] {
   display: none !important;
   visibility: hidden !important;
   opacity: 0 !important;
-
+}
 
 /* Navigation Active State */
 .nav-active {
@@ -942,8 +946,6 @@ div[style*="emergent"] {
 .apply-page {
   background-color: var(--color-white);
   min-height: calc(100vh - 200px);
-}
-
 }
 
 /* Mobile: 2x2 grid for partnerships */
