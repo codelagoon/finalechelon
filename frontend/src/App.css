@@ -732,45 +732,48 @@ body {
   font-style: italic;
 }
 
-/* Partnerships Section */
+/* Partnerships Section - Luxury Brand Treatment */
 .partnerships-section-final {
   padding: var(--section-padding) 0;
   background-color: var(--color-white);
 }
 
-.partnerships-logos-grid-final {
+.partners {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 4rem;
-  max-width: 900px;
-  margin: 3rem auto 0;
+  gap: 56px;
+  margin-top: 48px;
   flex-wrap: wrap;
+  max-width: 1000px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
-.partner-logo-link-final {
-  display: flex;
+.partners a {
+  display: inline-flex;
   align-items: center;
   justify-content: center;
-  height: 32px;
-  opacity: 0.65;
-  transition: opacity 0.25s ease;
   text-decoration: none;
+  transition: opacity 0.25s ease, transform 0.25s ease;
 }
 
-.partner-logo-link-final:hover {
-  opacity: 1;
-}
-
-.partner-logo-image-final {
+.partners img {
   height: 28px;
   width: auto;
-  filter: grayscale(100%);
-  transition: filter 0.25s ease, opacity 0.25s ease;
+  max-width: 180px;
+  opacity: 0.65;
+  display: block;
+  object-fit: contain;
 }
 
-.partner-logo-link-final:hover .partner-logo-image-final {
-  filter: grayscale(0%);
+.partners a:hover {
+  opacity: 1;
+  transform: translateY(-1px);
+}
+
+.partners a:hover img {
+  opacity: 1;
 }
 
 /* Selectivity Note */
@@ -912,6 +915,17 @@ body {
   letter-spacing: 0.1em;
   color: var(--color-black);
   margin-bottom: 1rem;
+}
+
+
+/* Mobile: 2x2 grid for partnerships */
+@media (max-width: 768px) {
+  .partners {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 32px 40px;
+    justify-items: center;
+  }
 }
 
 .footer-links {
