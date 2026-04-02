@@ -4,11 +4,16 @@ import logging
 import uuid
 from datetime import datetime, timezone
 from typing import Optional
+from pathlib import Path
+from dotenv import load_dotenv
 from fastapi import APIRouter, HTTPException, UploadFile, File, Form
 from pydantic import BaseModel, EmailStr, Field
-from motor.motor_asyncio import AsyncIOMotorDatabase
 import resend
 from supabase import create_client, Client
+
+# Load environment variables
+ROOT_DIR = Path(__file__).parent.parent
+load_dotenv(ROOT_DIR / '.env')
 
 logger = logging.getLogger(__name__)
 
@@ -22,7 +27,18 @@ SUPABASE_URL = os.environ.get("SUPABASE_URL")
 SUPABASE_KEY = os.environ.get("SUPABASE_KEY")
 SUPABASE_BUCKET = os.environ.get("SUPABASE_BUCKET", "applications")
 
-supabase: Client = create_client(SUPABASE_URL, SUPABASE_KEY) if SUPABASE_URL and SUPABASE_KEY else None
+logger.info(f"Supabase URL configured: {bool(SUPABASE_URL)}")
+logger.info(f"Supabase Key configured: {bool(SUPABASE_KEY)}")
+
+supabase: Client = None
+if SUPABASE_URL and SUPABASE_KEY:
+    try:
+        supabase = create_client(SUPABASE_URL, SUPABASE_KEY)
+        logger.info("Supabase client initialized successfully")
+    except Exception as e:
+        logger.error(f"Failed to initialize Supabase: {e}")
+else:
+    logger.warning("Supabase credentials not found in environment")
 
 router = APIRouter(prefix="/applications", tags=["applications"])
 
@@ -173,8 +189,13 @@ async def send_application_email(application: Application):
         logger.info(f"Email sent successfully: {email_response.get('id')}")
         
     except Exception as e:
-        logger.error(f"Email sending failed: {str(e)}")
-        # Don't raise exception - application is still saved
+        # Log but don't fail - Resend testing mode requires domain verification
+        error_msg = str(e)
+        if "testing emails" in error_msg.lower() or "verify a domain" in error_msg.lower():
+            logger.warning(f"Email not sent (Resend requires domain verification for production): {error_msg}")
+        else:
+            logger.error(f"Email sending failed: {error_msg}")
+        # Don't raise exception - application is still saved successfully
 
 
 # Routes
@@ -191,8 +212,7 @@ async def submit_application(
     relevant_experience: Optional[str] = Form(None),
     analytical_response: Optional[str] = Form(None),
     resume: Optional[UploadFile] = File(None),
-    work_sample: Optional[UploadFile] = File(None),
-    db: AsyncIOMotorDatabase = None
+    work_sample: Optional[UploadFile] = File(None)
 ):
     """
     Submit application with file uploads to Supabase Storage
