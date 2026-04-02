@@ -20,7 +20,10 @@ logger = logging.getLogger(__name__)
 # Initialize Resend
 resend.api_key = os.environ.get("RESEND_API_KEY")
 SENDER_EMAIL = os.environ.get("SENDER_EMAIL", "onboarding@resend.dev")
+# Use TEST_EMAIL for testing (verified email), fallback to ADMISSIONS_EMAIL for production
+TEST_EMAIL = os.environ.get("TEST_EMAIL")  # Set this to your verified email for testing
 ADMISSIONS_EMAIL = os.environ.get("ADMISSIONS_EMAIL", "admissions@echelonequity.co")
+RECIPIENT_EMAIL = TEST_EMAIL if TEST_EMAIL else ADMISSIONS_EMAIL
 
 # Initialize Supabase
 SUPABASE_URL = os.environ.get("SUPABASE_URL")
@@ -180,22 +183,22 @@ async def send_application_email(application: Application):
         # Send email using Resend (async)
         params = {
             "from": SENDER_EMAIL,
-            "to": [ADMISSIONS_EMAIL],
+            "to": [RECIPIENT_EMAIL],
             "subject": f"New Application: {application.full_name} - {application.track_of_interest}",
             "html": html_content
         }
         
         email_response = await asyncio.to_thread(resend.Emails.send, params)
-        logger.info(f"Email sent successfully: {email_response.get('id')}")
+        logger.info(f"Email sent successfully to {RECIPIENT_EMAIL}: {email_response.get('id')}")
         
     except Exception as e:
-        # Log but don't fail - Resend testing mode requires domain verification
+        # Log but don't fail - email is not critical for application submission
         error_msg = str(e)
-        if "testing emails" in error_msg.lower() or "verify a domain" in error_msg.lower():
-            logger.warning(f"Email not sent (Resend requires domain verification for production): {error_msg}")
+        if "testing emails" in error_msg.lower() or "verify a domain" in error_msg.lower() or "403" in error_msg:
+            logger.warning(f"Email not sent - Resend domain verification required. Set TEST_EMAIL env var to a verified email for testing. Error: {error_msg}")
         else:
             logger.error(f"Email sending failed: {error_msg}")
-        # Don't raise exception - application is still saved successfully
+        # Application still saved successfully - don't raise exception
 
 
 # Routes
