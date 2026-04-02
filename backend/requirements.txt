@@ -9,8 +9,8 @@ pydantic_core==2.41.5
 python-multipart==0.0.22
 
 # Database - MongoDB
-motor==3.3.1
-pymongo==4.5.0
+motor==3.7.1
+pymongo==4.13.2
 dnspython==2.8.0
 
 # Supabase Storage

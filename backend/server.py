@@ -4,6 +4,7 @@ from starlette.middleware.cors import CORSMiddleware
 from motor.motor_asyncio import AsyncIOMotorClient
 import os
 import logging
+import certifi
 from pathlib import Path
 from pydantic import BaseModel, Field, ConfigDict
 from typing import List
@@ -24,7 +25,11 @@ db_name = os.environ.get('DB_NAME')
 if not db_name:
     raise ValueError("DB_NAME environment variable is required")
 
-client = AsyncIOMotorClient(mongo_url)
+client = AsyncIOMotorClient(
+    mongo_url,
+    tls=True,
+    tlsCAFile=certifi.where(),
+)
 db = client[db_name]
 
 # Create the main app without a prefix
