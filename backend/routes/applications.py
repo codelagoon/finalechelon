@@ -257,7 +257,7 @@ async def submit_application(
         # Save to MongoDB (get db from dependency injection)
         from server import db as database
         await database.applications.insert_one(
-            {**application.model_dump(), "_id": 0},
+            application.model_dump()
         )
         
         # Send email notification (async, don't wait)

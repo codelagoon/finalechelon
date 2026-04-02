@@ -11,8 +11,9 @@ import {
   SelectTrigger,
   SelectValue,
 } from '../components/ui/select';
-import { handleApplicationSubmit } from '../mockData';
 import { toast } from 'sonner';
+
+const API_URL = process.env.REACT_APP_BACKEND_URL;
 
 const Apply = () => {
   const navigate = useNavigate();
@@ -49,6 +50,18 @@ const Apply = () => {
   const handleFileChange = (e) => {
     const { name, files } = e.target;
     if (files && files[0]) {
+      // Validate file size (10MB limit)
+      if (files[0].size > 10 * 1024 * 1024) {
+        toast.error(`${files[0].name} exceeds 10MB limit`);
+        return;
+      }
+      
+      // Validate resume is PDF
+      if (name === 'resume' && files[0].type !== 'application/pdf') {
+        toast.error('Resume must be a PDF file');
+        return;
+      }
+      
       setFormData({
         ...formData,
         [name]: files[0]
@@ -56,14 +69,53 @@ const Apply = () => {
     }
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
     
-    setTimeout(() => {
-      const result = handleApplicationSubmit(formData);
-      if (result.success) {
-        toast.success(result.message);
+    try {
+      // Create FormData for multipart upload
+      const submitData = new FormData();
+      
+      // Add form fields (matching backend parameter names)
+      submitData.append('full_name', formData.fullName);
+      submitData.append('email', formData.email);
+      submitData.append('institution', formData.institution);
+      submitData.append('academic_level', formData.academicLevel);
+      submitData.append('graduation_year', formData.graduationYear);
+      submitData.append('field_of_study', formData.fieldOfStudy);
+      submitData.append('track_of_interest', formData.trackOfInterest);
+      submitData.append('why_echelon', formData.whyEchelon);
+      
+      // Add optional fields only if they have values
+      if (formData.relevantExperience) {
+        submitData.append('relevant_experience', formData.relevantExperience);
+      }
+      if (formData.analyticalResponse) {
+        submitData.append('analytical_response', formData.analyticalResponse);
+      }
+      
+      // Add files
+      if (formData.resume) {
+        submitData.append('resume', formData.resume);
+      }
+      if (formData.workSample) {
+        submitData.append('work_sample', formData.workSample);
+      }
+      
+      // Submit to backend
+      const response = await fetch(`${API_URL}/api/applications/submit`, {
+        method: 'POST',
+        body: submitData,
+        // Don't set Content-Type - browser will set it with boundary
+      });
+      
+      const result = await response.json();
+      
+      if (response.ok && result.success) {
+        toast.success('Application submitted successfully! We will review your application and be in touch.');
+        
+        // Reset form
         setFormData({
           fullName: '',
           email: '',
@@ -78,11 +130,23 @@ const Apply = () => {
           resume: null,
           workSample: null
         });
-        // Redirect to home after successful submission
+        
+        // Reset file inputs
+        const fileInputs = document.querySelectorAll('input[type="file"]');
+        fileInputs.forEach(input => input.value = '');
+        
+        // Redirect to home after 2 seconds
         setTimeout(() => navigate('/'), 2000);
+      } else {
+        toast.error(result.detail || 'Application submission failed. Please try again.');
       }
+      
+    } catch (error) {
+      console.error('Submission error:', error);
+      toast.error('Network error. Please check your connection and try again.');
+    } finally {
       setIsSubmitting(false);
-    }, 800);
+    }
   };
 
   return (
@@ -268,6 +332,11 @@ const Apply = () => {
               onChange={handleFileChange}
               className="form-input"
             />
+            {formData.resume && (
+              <p className="form-helper-text" style={{ color: '#000', marginTop: '0.5rem' }}>
+                ✓ {formData.resume.name}
+              </p>
+            )}
             <p className="form-helper-text">
               Upload a PDF if available. You may apply without one.
             </p>
@@ -286,6 +355,11 @@ const Apply = () => {
               onChange={handleFileChange}
               className="form-input"
             />
+            {formData.workSample && (
+              <p className="form-helper-text" style={{ color: '#000', marginTop: '0.5rem' }}>
+                ✓ {formData.workSample.name}
+              </p>
+            )}
             <p className="form-helper-text">
               Submit any model, analysis, writing sample, or project that reflects your thinking.
             </p>
