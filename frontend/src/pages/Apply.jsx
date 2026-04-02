@@ -13,7 +13,7 @@ import {
 } from '../components/ui/select';
 import { toast } from 'sonner';
 
-const API_URL = process.env.REACT_APP_BACKEND_URL;
+const API_URL = (process.env.REACT_APP_BACKEND_URL || "").replace(/\/+$/, "");
 
 const Apply = () => {
   const navigate = useNavigate();
