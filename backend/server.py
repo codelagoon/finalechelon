@@ -25,11 +25,18 @@ db_name = os.environ.get('DB_NAME')
 if not db_name:
     raise ValueError("DB_NAME environment variable is required")
 
-client = AsyncIOMotorClient(
-    mongo_url,
-    tls=True,
-    tlsCAFile=certifi.where(),
-)
+# Configure MongoDB client with TLS for Atlas connections
+if mongo_url.startswith('mongodb+srv://') or 'mongodb.net' in mongo_url:
+    # MongoDB Atlas - use TLS
+    client = AsyncIOMotorClient(
+        mongo_url,
+        tls=True,
+        tlsCAFile=certifi.where(),
+    )
+else:
+    # Local MongoDB - no TLS
+    client = AsyncIOMotorClient(mongo_url)
+
 db = client[db_name]
 
 # Create the main app without a prefix
