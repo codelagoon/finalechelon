@@ -1,5 +1,4 @@
 import React, { useEffect } from 'react';
-import { getFallbackImage } from '../services/memberDataService';
 
 const MemberDetailModal = ({ member, onClose }) => {
   // Prevent body scroll when modal is open
@@ -30,12 +29,12 @@ const MemberDetailModal = ({ member, onClose }) => {
   const hasEmail = member.email && member.email.trim() !== '';
   const hasInstitution = member.institution && member.institution.trim() !== '';
   const hasTrack = member.track && member.track.trim() !== '';
-  const displayImage = member.image || getFallbackImage();
+  const hasImage = member.image && member.image.trim() !== '';
 
   return (
     <div className="member-modal-overlay" onClick={onClose}>
       <div 
-        className="member-modal-container" 
+        className={`member-modal-container ${!hasImage ? 'member-modal-no-image' : ''}`}
         onClick={(e) => e.stopPropagation()}
         role="dialog"
         aria-modal="true"
@@ -50,20 +49,25 @@ const MemberDetailModal = ({ member, onClose }) => {
         </button>
 
         <div className="member-modal-content">
-          <div className="member-modal-header">
-            <div className="member-modal-image-wrapper">
-              <img
-                src={displayImage}
-                alt={`${member.name} - ${member.role}`}
-                className="member-modal-image"
-                onError={(e) => {
-                  // Fallback if image fails to load
-                  if (e.target.src !== getFallbackImage()) {
-                    e.target.src = getFallbackImage();
-                  }
-                }}
-              />
-            </div>
+          <div className={`member-modal-header ${!hasImage ? 'member-modal-header-no-image' : ''}`}>
+            {hasImage && (
+              <div className="member-modal-image-wrapper">
+                <img
+                  src={member.image}
+                  alt={`${member.name} - ${member.role}`}
+                  className="member-modal-image"
+                  onError={(e) => {
+                    // If image fails to load, hide the image section entirely
+                    const wrapper = e.target.closest('.member-modal-image-wrapper');
+                    if (wrapper) {
+                      wrapper.style.display = 'none';
+                      e.target.closest('.member-modal-header')?.classList.add('member-modal-header-no-image');
+                      e.target.closest('.member-modal-container')?.classList.add('member-modal-no-image');
+                    }
+                  }}
+                />
+              </div>
+            )}
             
             <div className="member-modal-header-info">
               <h2 id="member-modal-title" className="member-modal-name">

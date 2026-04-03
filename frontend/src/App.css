@@ -1364,6 +1364,11 @@ html {
   outline-offset: 2px;
 }
 
+/* No-image card variant */
+.member-card-no-image .member-card-content {
+  padding-top: 2rem;
+}
+
 .member-card-image-wrapper {
   width: 100%;
   aspect-ratio: 1 / 1;
@@ -1597,6 +1602,15 @@ html {
   gap: 3rem;
   margin-bottom: 3.5rem;
   align-items: flex-start;
+}
+
+/* No-image modal variant */
+.member-modal-header-no-image {
+  display: block;
+}
+
+.member-modal-header-no-image .member-modal-header-info {
+  max-width: 100%;
 }
 
 .member-modal-image-wrapper {

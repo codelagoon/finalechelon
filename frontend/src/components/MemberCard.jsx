@@ -1,5 +1,4 @@
 import React from 'react';
-import { getFallbackImage } from '../services/memberDataService';
 
 const MemberCard = ({ member, onClick }) => {
   // Defensive checks for required fields
@@ -10,12 +9,12 @@ const MemberCard = ({ member, onClick }) => {
   // Handle optional fields safely
   const displayPreview = member.preview || member.bio?.substring(0, 100) || '';
   const displayTrack = member.track || 'General';
-  const displayImage = member.image || getFallbackImage();
+  const hasImage = member.image && member.image.trim() !== '';
   
   return (
     <div
       onClick={() => onClick(member)}
-      className="member-card-container"
+      className={`member-card-container ${!hasImage ? 'member-card-no-image' : ''}`}
       role="button"
       tabIndex={0}
       onKeyPress={(e) => {
@@ -25,20 +24,24 @@ const MemberCard = ({ member, onClick }) => {
       }}
       aria-label={`View ${member.name}'s profile`}
     >
-      <div className="member-card-image-wrapper">
-        <img
-          src={displayImage}
-          alt={`${member.name} - ${member.role}`}
-          className="member-card-image"
-          loading="lazy"
-          onError={(e) => {
-            // Fallback if image fails to load
-            if (e.target.src !== getFallbackImage()) {
-              e.target.src = getFallbackImage();
-            }
-          }}
-        />
-      </div>
+      {hasImage && (
+        <div className="member-card-image-wrapper">
+          <img
+            src={member.image}
+            alt={`${member.name} - ${member.role}`}
+            className="member-card-image"
+            loading="lazy"
+            onError={(e) => {
+              // If image fails to load, hide the image section entirely
+              const wrapper = e.target.closest('.member-card-image-wrapper');
+              if (wrapper) {
+                wrapper.style.display = 'none';
+                e.target.closest('.member-card-container')?.classList.add('member-card-no-image');
+              }
+            }}
+          />
+        </div>
+      )}
       
       <div className="member-card-content">
         <h3 className="member-card-name">{member.name}</h3>

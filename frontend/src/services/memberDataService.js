@@ -23,10 +23,6 @@ const GOOGLE_SHEET_CSV_URL = process.env.REACT_APP_MEMBERS_SHEET_URL || '';
 // Production mode: If sheet URL is configured, we're in production
 const IS_PRODUCTION = Boolean(GOOGLE_SHEET_CSV_URL && GOOGLE_SHEET_CSV_URL.trim() !== '');
 
-// Professional fallback image for members without photos
-// Clean, neutral professional headshot placeholder
-const FALLBACK_PROFILE_IMAGE = 'https://images.unsplash.com/photo-1511367461989-f85a21fda167?w=400&h=400&fit=crop&q=80';
-
 /**
  * Normalize a field value - trim whitespace and convert empty strings to null
  */
@@ -104,44 +100,75 @@ const parseCSV = (csvText) => {
 
 /**
  * Transform CSV row into normalized member object
- * Handles messy real-world form submissions
+ * Maps exact Google Form column names to member data structure
+ * 
+ * Required fields: Full Name, Role
+ * Visibility control: Show my profile on the website?
  */
 const transformMember = (row, index) => {
-  // Required fields - must have at minimum
-  const name = normalizeField(row.name || row.Name || row.NAME);
-  const role = normalizeField(row.role || row.Role || row.title || row.Title);
+  // Required fields from live form
+  const name = normalizeField(row['Full Name'] || row['full name'] || row['name']);
+  const role = normalizeField(row['Role'] || row['role']);
   
-  // Skip if missing required fields
+  // Visibility control - only show approved members
+  const showOnWebsite = normalizeField(
+    row['Show my profile on the website?'] || 
+    row['show my profile on the website?'] ||
+    row['Show Profile'] ||
+    row['show profile']
+  );
+  
+  // Check if member opted in to be displayed
+  const isApprovedForDisplay = showOnWebsite && 
+    (showOnWebsite.toLowerCase() === 'yes' || 
+     showOnWebsite.toLowerCase() === 'true' || 
+     showOnWebsite.toLowerCase() === 'y' ||
+     showOnWebsite === '1');
+  
+  // Skip if missing required fields OR not approved for display
   if (!name || !role) {
-    console.warn(`Skipping member at row ${index + 2}: missing required fields (name: "${name}", role: "${role}")`);
+    console.warn(`Skipping member at row ${index + 2}: missing required fields (Full Name: "${name}", Role: "${role}")`);
     return null;
   }
   
-  // Optional fields with normalization and multiple field name attempts
-  const track = normalizeField(row.track || row.Track || row.category || row.Category) || 'General';
-  const bioRaw = normalizeField(row.bio || row.Bio || row.description || row.Description);
-  const previewRaw = normalizeField(row.preview || row.Preview || row.short_bio);
+  if (!isApprovedForDisplay) {
+    console.log(`Skipping member at row ${index + 2}: profile not approved for public display (Full Name: "${name}")`);
+    return null;
+  }
   
-  const preview = previewRaw || (bioRaw ? bioRaw.substring(0, 120) + '...' : '');
-  const bio = bioRaw || preview;
+  // Optional fields from live form
+  const shortBio = normalizeField(row['Short Bio'] || row['short bio'] || row['preview']);
+  const fullBio = normalizeField(row['Full Bio'] || row['full bio'] || row['bio']);
   
-  const email = normalizeField(row.email || row.Email || row.EMAIL);
-  const linkedin = normalizeUrl(row.linkedin || row.LinkedIn || row.linkedin_url);
+  // Use Short Bio for preview, Full Bio for expanded view
+  // If only one exists, use it for both
+  const preview = shortBio || (fullBio ? fullBio.substring(0, 150) + '...' : '');
+  const bio = fullBio || shortBio || '';
   
-  // Image handling with fallback
-  const imageRaw = normalizeUrl(row.image || row.Image || row.photo || row.Photo || row.profile_image);
-  const image = imageRaw || FALLBACK_PROFILE_IMAGE;
+  const email = normalizeField(row['Email'] || row['email']);
+  const linkedin = normalizeUrl(row['LinkedIn URL'] || row['linkedin url'] || row['linkedin']);
   
-  const institution = normalizeField(row.institution || row.Institution || row.school || row.university);
+  // Headshot - if missing, will be null (no fallback image)
+  const headshot = normalizeUrl(row['Headshot'] || row['headshot'] || row['image'] || row['photo']);
   
-  // Parse skills (comma-separated or semicolon-separated)
-  const skillsRaw = normalizeField(row.skills || row.Skills || row.expertise);
+  const school = normalizeField(row['school'] || row['School'] || row['institution']);
+  
+  // Skills / Sectors of Interest - parse comma or semicolon separated
+  const skillsRaw = normalizeField(
+    row['Skills / Sectors of Interest'] || 
+    row['skills / sectors of interest'] ||
+    row['Skills'] ||
+    row['skills']
+  );
   const skills = skillsRaw 
     ? skillsRaw.split(/[,;]/).map(s => s.trim()).filter(s => s.length > 0)
     : [];
   
+  // Track is not in the form, default to General
+  const track = normalizeField(row['Track'] || row['track']) || 'General';
+  
   return {
-    id: `member-${index + 1}-${Date.now()}`, // Unique ID to handle duplicates
+    id: `member-${index + 1}-${Date.now()}`, // Unique ID
     name,
     role,
     track,
@@ -149,10 +176,10 @@ const transformMember = (row, index) => {
     bio,
     email,
     linkedin,
-    image,
+    image: headshot, // null if not provided (no fallback)
     skills,
-    institution,
-    academicLevel: normalizeField(row.academicLevel || row.academic_level) || 'Undergraduate',
+    institution: school,
+    academicLevel: 'Student', // Default for all members
   };
 };
 
@@ -318,8 +345,3 @@ export const clearMembersCache = () => {
  * Get production mode status
  */
 export const isProductionMode = () => IS_PRODUCTION;
-
-/**
- * Get fallback profile image URL
- */
-export const getFallbackImage = () => FALLBACK_PROFILE_IMAGE;
