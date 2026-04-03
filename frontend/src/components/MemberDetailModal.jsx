@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { getFallbackImage } from '../services/memberDataService';
 
 const MemberDetailModal = ({ member, onClose }) => {
   // Prevent body scroll when modal is open
@@ -29,6 +30,7 @@ const MemberDetailModal = ({ member, onClose }) => {
   const hasEmail = member.email && member.email.trim() !== '';
   const hasInstitution = member.institution && member.institution.trim() !== '';
   const hasTrack = member.track && member.track.trim() !== '';
+  const displayImage = member.image || getFallbackImage();
 
   return (
     <div className="member-modal-overlay" onClick={onClose}>
@@ -50,36 +52,17 @@ const MemberDetailModal = ({ member, onClose }) => {
         <div className="member-modal-content">
           <div className="member-modal-header">
             <div className="member-modal-image-wrapper">
-              {member.image ? (
-                <img
-                  src={member.image}
-                  alt={`${member.name} - ${member.role}`}
-                  className="member-modal-image"
-                  onError={(e) => {
-                    // Fallback if image fails to load
-                    e.target.style.display = 'none';
-                    e.target.parentElement.innerHTML = `
-                      <div style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; font-size: 4rem; font-weight: 300; color: #5a5a5a; background-color: #F5F5F5;">
-                        ${member.name.charAt(0)}
-                      </div>
-                    `;
-                  }}
-                />
-              ) : (
-                <div style={{
-                  width: '100%',
-                  height: '100%',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  fontSize: '4rem',
-                  fontWeight: '300',
-                  color: '#5a5a5a',
-                  backgroundColor: '#F5F5F5'
-                }}>
-                  {member.name.charAt(0)}
-                </div>
-              )}
+              <img
+                src={displayImage}
+                alt={`${member.name} - ${member.role}`}
+                className="member-modal-image"
+                onError={(e) => {
+                  // Fallback if image fails to load
+                  if (e.target.src !== getFallbackImage()) {
+                    e.target.src = getFallbackImage();
+                  }
+                }}
+              />
             </div>
             
             <div className="member-modal-header-info">

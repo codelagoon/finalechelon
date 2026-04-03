@@ -3,7 +3,7 @@ import { Helmet } from 'react-helmet-async';
 import MemberCard from '../components/MemberCard';
 import MemberDetailModal from '../components/MemberDetailModal';
 import { trackFilters } from '../data/membersData';
-import { getMembers } from '../services/memberDataService';
+import { getMembers, isProductionMode } from '../services/memberDataService';
 
 const Members = () => {
   const [searchQuery, setSearchQuery] = useState('');
@@ -12,25 +12,36 @@ const Members = () => {
   const [members, setMembers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [productionMode] = useState(isProductionMode());
 
   // Fetch members on component mount
   useEffect(() => {
     const loadMembers = async () => {
       try {
         setLoading(true);
-        const data = await getMembers();
-        setMembers(data);
         setError(null);
+        const data = await getMembers();
+        
+        if (productionMode && data.length === 0) {
+          // Production mode with no data - show error
+          setError('Unable to load member data from Google Sheets. Please check your connection or contact support.');
+        } else {
+          setMembers(data);
+        }
       } catch (err) {
         console.error('Error loading members:', err);
-        setError('Failed to load member data. Please try again later.');
+        if (productionMode) {
+          setError('Failed to load member data. Please try again later.');
+        } else {
+          setError('Failed to load member data. Using development fallback.');
+        }
       } finally {
         setLoading(false);
       }
     };
 
     loadMembers();
-  }, []);
+  }, [productionMode]);
 
   // Filter and search logic with defensive handling
   const filteredMembers = useMemo(() => {

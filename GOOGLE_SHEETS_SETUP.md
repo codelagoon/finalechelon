@@ -1,6 +1,22 @@
 # Google Sheets Setup Guide for Echelon Equity Members
 
-This guide explains how to set up and manage the Members section using Google Sheets as your data source.
+This guide explains how to set up and manage the Members section using Google Sheets as your **live production data source**.
+
+## ⚠️ Important: Production vs Development Mode
+
+**Production Mode (Live Google Sheets):**
+- Activated when `REACT_APP_MEMBERS_SHEET_URL` is configured in `.env`
+- Members page shows **ONLY** real data from your Google Sheet
+- No sample/demo data is displayed
+- Cache duration: 2 hours (for live form updates)
+- If sheet fails to load, shows error message (not fallback data)
+
+**Development Mode (Local Fallback):**
+- Activated when `REACT_APP_MEMBERS_SHEET_URL` is **not** configured
+- Uses local sample data from `membersData.js`
+- Useful for testing and development
+
+---
 
 ## Quick Start
 
@@ -8,7 +24,8 @@ This guide explains how to set up and manage the Members section using Google Sh
 2. **Set up columns** in the exact order specified below
 3. **Publish the sheet** to the web (File → Share → Publish to web)
 4. **Add the URL** to your environment variables
-5. **Done!** The Members page will automatically fetch data from your sheet
+5. **Restart frontend** and verify production mode is active
+6. **Done!** The Members page will automatically fetch live data from your sheet
 
 ---
 
@@ -18,8 +35,10 @@ This guide explains how to set up and manage the Members section using Google Sh
 
 | Column Name | Description | Example |
 |------------|-------------|---------|
-| `name` | Full name of the member | "Alexander Chen" |
-| `role` | Job title or position | "Director of Research" |
+| `name` | Full name of the member (REQUIRED) | "Alexander Chen" |
+| `role` | Job title or position (REQUIRED) | "Director of Research" |
+
+**Note:** Members missing `name` or `role` will be skipped and not displayed.
 
 ### Optional Columns (can be empty):
 
@@ -194,8 +213,9 @@ https://www.linkedin.com/in/username
 
 1. **First Load**: Fetches data from Google Sheets → Caches in browser
 2. **Subsequent Loads**: Uses cached data (instant loading)
-3. **Cache Expiry**: After 6 hours, fetches fresh data automatically
-4. **Offline Mode**: Falls back to local data if sheet is unreachable
+3. **Cache Expiry**: After **2 hours**, fetches fresh data automatically (optimized for live form updates)
+4. **Production Mode**: If sheet fails, shows error message (no fallback to sample data)
+5. **Development Mode**: Uses local sample data as fallback
 
 ### Cache Management:
 

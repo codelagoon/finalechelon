@@ -1,4 +1,5 @@
 import React from 'react';
+import { getFallbackImage } from '../services/memberDataService';
 
 const MemberCard = ({ member, onClick }) => {
   // Defensive checks for required fields
@@ -9,6 +10,7 @@ const MemberCard = ({ member, onClick }) => {
   // Handle optional fields safely
   const displayPreview = member.preview || member.bio?.substring(0, 100) || '';
   const displayTrack = member.track || 'General';
+  const displayImage = member.image || getFallbackImage();
   
   return (
     <div
@@ -24,23 +26,18 @@ const MemberCard = ({ member, onClick }) => {
       aria-label={`View ${member.name}'s profile`}
     >
       <div className="member-card-image-wrapper">
-        {member.image ? (
-          <img
-            src={member.image}
-            alt={`${member.name} - ${member.role}`}
-            className="member-card-image"
-            loading="lazy"
-            onError={(e) => {
-              // Fallback if image fails to load
-              e.target.style.display = 'none';
-              e.target.parentElement.innerHTML = `<div class="member-card-image-fallback">${member.name.charAt(0)}</div>`;
-            }}
-          />
-        ) : (
-          <div className="member-card-image-fallback">
-            {member.name.charAt(0)}
-          </div>
-        )}
+        <img
+          src={displayImage}
+          alt={`${member.name} - ${member.role}`}
+          className="member-card-image"
+          loading="lazy"
+          onError={(e) => {
+            // Fallback if image fails to load
+            if (e.target.src !== getFallbackImage()) {
+              e.target.src = getFallbackImage();
+            }
+          }}
+        />
       </div>
       
       <div className="member-card-content">

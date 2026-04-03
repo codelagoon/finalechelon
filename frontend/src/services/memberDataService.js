@@ -4,17 +4,28 @@
  * Fetches member data from a published Google Sheets CSV feed,
  * normalizes the data, handles missing fields gracefully,
  * and caches the result in localStorage.
+ * 
+ * PRODUCTION MODE: When REACT_APP_MEMBERS_SHEET_URL is configured,
+ * this service treats the Google Sheet as the live source of truth
+ * and does NOT mix with sample/fallback data.
  */
 
 import { membersData as fallbackData } from '../data/membersData';
 
 // Configuration
 const CACHE_KEY = 'echelon_members_cache';
-const CACHE_DURATION = 6 * 60 * 60 * 1000; // 6 hours in milliseconds
+const CACHE_DURATION = 2 * 60 * 60 * 1000; // 2 hours (for live form updates)
 
 // Google Sheets CSV URL - Replace with actual published sheet URL
 // Format: https://docs.google.com/spreadsheets/d/e/{SHEET_ID}/pub?output=csv
 const GOOGLE_SHEET_CSV_URL = process.env.REACT_APP_MEMBERS_SHEET_URL || '';
+
+// Production mode: If sheet URL is configured, we're in production
+const IS_PRODUCTION = Boolean(GOOGLE_SHEET_CSV_URL && GOOGLE_SHEET_CSV_URL.trim() !== '');
+
+// Professional fallback image for members without photos
+// Clean, neutral professional headshot placeholder
+const FALLBACK_PROFILE_IMAGE = 'https://images.unsplash.com/photo-1511367461989-f85a21fda167?w=400&h=400&fit=crop&q=80';
 
 /**
  * Normalize a field value - trim whitespace and convert empty strings to null
@@ -44,20 +55,45 @@ const normalizeUrl = (url) => {
 
 /**
  * Parse CSV text into array of objects
+ * Handles quoted fields and commas within fields (real-world form data)
  */
 const parseCSV = (csvText) => {
   const lines = csvText.split('\n').filter(line => line.trim());
   if (lines.length < 2) return []; // Need at least header + 1 data row
   
-  const headers = lines[0].split(',').map(h => h.trim());
+  // Parse CSV line handling quotes and commas
+  const parseLine = (line) => {
+    const result = [];
+    let current = '';
+    let inQuotes = false;
+    
+    for (let i = 0; i < line.length; i++) {
+      const char = line[i];
+      
+      if (char === '"') {
+        inQuotes = !inQuotes;
+      } else if (char === ',' && !inQuotes) {
+        result.push(current.trim());
+        current = '';
+      } else {
+        current += char;
+      }
+    }
+    result.push(current.trim());
+    return result;
+  };
+  
+  const headers = parseLine(lines[0]).map(h => h.replace(/^"|"$/g, '').trim());
   const rows = [];
   
   for (let i = 1; i < lines.length; i++) {
-    const values = lines[i].split(',');
+    const values = parseLine(lines[i]);
     const row = {};
     
     headers.forEach((header, index) => {
-      row[header] = values[index] ? values[index].trim() : '';
+      // Remove surrounding quotes and trim
+      const value = values[index] ? values[index].replace(/^"|"$/g, '').trim() : '';
+      row[header] = value;
     });
     
     rows.push(row);
@@ -68,35 +104,44 @@ const parseCSV = (csvText) => {
 
 /**
  * Transform CSV row into normalized member object
+ * Handles messy real-world form submissions
  */
 const transformMember = (row, index) => {
-  // Required fields
-  const name = normalizeField(row.name);
-  const role = normalizeField(row.role);
+  // Required fields - must have at minimum
+  const name = normalizeField(row.name || row.Name || row.NAME);
+  const role = normalizeField(row.role || row.Role || row.title || row.Title);
   
   // Skip if missing required fields
   if (!name || !role) {
-    console.warn(`Skipping member at row ${index + 2}: missing required field (name or role)`);
+    console.warn(`Skipping member at row ${index + 2}: missing required fields (name: "${name}", role: "${role}")`);
     return null;
   }
   
-  // Optional fields with normalization
-  const track = normalizeField(row.track) || 'General';
-  const preview = normalizeField(row.preview) || normalizeField(row.bio)?.substring(0, 100) || '';
-  const bio = normalizeField(row.bio) || preview;
-  const email = normalizeField(row.email);
-  const linkedin = normalizeUrl(row.linkedin);
-  const image = normalizeUrl(row.image);
-  const institution = normalizeField(row.institution);
+  // Optional fields with normalization and multiple field name attempts
+  const track = normalizeField(row.track || row.Track || row.category || row.Category) || 'General';
+  const bioRaw = normalizeField(row.bio || row.Bio || row.description || row.Description);
+  const previewRaw = normalizeField(row.preview || row.Preview || row.short_bio);
   
-  // Parse skills (comma-separated)
-  const skillsRaw = normalizeField(row.skills);
+  const preview = previewRaw || (bioRaw ? bioRaw.substring(0, 120) + '...' : '');
+  const bio = bioRaw || preview;
+  
+  const email = normalizeField(row.email || row.Email || row.EMAIL);
+  const linkedin = normalizeUrl(row.linkedin || row.LinkedIn || row.linkedin_url);
+  
+  // Image handling with fallback
+  const imageRaw = normalizeUrl(row.image || row.Image || row.photo || row.Photo || row.profile_image);
+  const image = imageRaw || FALLBACK_PROFILE_IMAGE;
+  
+  const institution = normalizeField(row.institution || row.Institution || row.school || row.university);
+  
+  // Parse skills (comma-separated or semicolon-separated)
+  const skillsRaw = normalizeField(row.skills || row.Skills || row.expertise);
   const skills = skillsRaw 
-    ? skillsRaw.split(',').map(s => s.trim()).filter(s => s.length > 0)
+    ? skillsRaw.split(/[,;]/).map(s => s.trim()).filter(s => s.length > 0)
     : [];
   
   return {
-    id: index + 1,
+    id: `member-${index + 1}-${Date.now()}`, // Unique ID to handle duplicates
     name,
     role,
     track,
@@ -107,8 +152,7 @@ const transformMember = (row, index) => {
     image,
     skills,
     institution,
-    // Keep for backward compatibility
-    academicLevel: normalizeField(row.academicLevel) || 'Undergraduate',
+    academicLevel: normalizeField(row.academicLevel || row.academic_level) || 'Undergraduate',
   };
 };
 
@@ -200,12 +244,30 @@ const setCachedMembers = (data) => {
 /**
  * Main function to get members data
  * 
- * Priority:
- * 1. Cached data (if valid)
+ * PRODUCTION MODE (when REACT_APP_MEMBERS_SHEET_URL is configured):
+ * - Only returns Google Sheets data (live source of truth)
+ * - Does NOT fallback to sample data
+ * - Returns empty array if sheet fails (shows proper error state)
+ * 
+ * DEVELOPMENT MODE (when REACT_APP_MEMBERS_SHEET_URL is not configured):
+ * - Uses local fallback data
+ * 
+ * Priority in Production:
+ * 1. Cached data (if valid and fresh)
  * 2. Fresh data from Google Sheets
- * 3. Fallback to local membersData.js
+ * 3. Empty array (triggers error state, not sample data)
  */
 export const getMembers = async () => {
+  // Development mode - use fallback data
+  if (!IS_PRODUCTION) {
+    console.log('📋 Development mode: Using local fallback member data');
+    console.log('💡 To enable production mode, set REACT_APP_MEMBERS_SHEET_URL in .env');
+    return fallbackData;
+  }
+  
+  // Production mode - Google Sheets only
+  console.log('🚀 Production mode: Fetching from Google Sheets');
+  
   // Try cache first
   const cached = getCachedMembers();
   if (cached) {
@@ -219,9 +281,11 @@ export const getMembers = async () => {
     return sheetMembers;
   }
   
-  // Fallback to local data
-  console.log('📋 Using fallback local member data');
-  return fallbackData;
+  // In production, return empty array instead of fallback data
+  // This will trigger the error state in the UI
+  console.error('❌ Production mode: Failed to load Google Sheets data. Showing error state.');
+  console.error('💡 Members page will show error message. Check sheet URL and publication settings.');
+  return [];
 };
 
 /**
@@ -249,3 +313,13 @@ export const clearMembersCache = () => {
     console.error('Error clearing cache:', error);
   }
 };
+
+/**
+ * Get production mode status
+ */
+export const isProductionMode = () => IS_PRODUCTION;
+
+/**
+ * Get fallback profile image URL
+ */
+export const getFallbackImage = () => FALLBACK_PROFILE_IMAGE;
