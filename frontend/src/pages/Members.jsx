@@ -1,29 +1,66 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import { Helmet } from 'react-helmet-async';
 import MemberCard from '../components/MemberCard';
 import MemberDetailModal from '../components/MemberDetailModal';
-import { membersData, trackFilters } from '../data/membersData';
+import { trackFilters } from '../data/membersData';
+import { getMembers } from '../services/memberDataService';
 
 const Members = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedTrack, setSelectedTrack] = useState('All Tracks');
   const [selectedMember, setSelectedMember] = useState(null);
+  const [members, setMembers] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-  // Filter and search logic
+  // Fetch members on component mount
+  useEffect(() => {
+    const loadMembers = async () => {
+      try {
+        setLoading(true);
+        const data = await getMembers();
+        setMembers(data);
+        setError(null);
+      } catch (err) {
+        console.error('Error loading members:', err);
+        setError('Failed to load member data. Please try again later.');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadMembers();
+  }, []);
+
+  // Filter and search logic with defensive handling
   const filteredMembers = useMemo(() => {
-    return membersData.filter(member => {
-      const matchesSearch = 
-        member.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        member.role.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        member.preview.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        member.skills.some(skill => skill.toLowerCase().includes(searchQuery.toLowerCase()));
+    return members.filter(member => {
+      // Ensure member has required fields
+      if (!member?.name || !member?.role) return false;
 
-      const matchesTrack = 
-        selectedTrack === 'All Tracks' || member.track === selectedTrack;
+      // Safe field access with fallbacks
+      const name = (member.name || '').toLowerCase();
+      const role = (member.role || '').toLowerCase();
+      const preview = (member.preview || '').toLowerCase();
+      const bio = (member.bio || '').toLowerCase();
+      const skills = Array.isArray(member.skills) ? member.skills : [];
+      const track = member.track || 'General';
+
+      // Search matching
+      const query = searchQuery.toLowerCase();
+      const matchesSearch = !query || 
+        name.includes(query) ||
+        role.includes(query) ||
+        preview.includes(query) ||
+        bio.includes(query) ||
+        skills.some(skill => (skill || '').toLowerCase().includes(query));
+
+      // Track filter matching
+      const matchesTrack = selectedTrack === 'All Tracks' || track === selectedTrack;
 
       return matchesSearch && matchesTrack;
     });
-  }, [searchQuery, selectedTrack]);
+  }, [members, searchQuery, selectedTrack]);
 
   // Schema.org JSON-LD structured data
   const organizationSchema = {
@@ -37,7 +74,7 @@ const Members = () => {
       "https://www.instagram.com/echelonequity",
       "https://www.tiktok.com/@echelonequity"
     ],
-    "member": membersData.map(member => ({
+    "member": filteredMembers.map(member => ({
       "@type": "Person",
       "name": member.name,
       "jobTitle": member.role,
@@ -45,9 +82,9 @@ const Members = () => {
         "@type": "Organization",
         "name": "Echelon Equity"
       },
-      "alumniOf": member.institution,
-      "email": member.email,
-      "sameAs": member.linkedin
+      ...(member.institution && { "alumniOf": member.institution }),
+      ...(member.email && { "email": member.email }),
+      ...(member.linkedin && { "sameAs": member.linkedin })
     }))
   };
 
@@ -138,7 +175,15 @@ const Members = () => {
         {/* Members Grid */}
         <section className="members-grid-section">
           <div className="members-grid-container">
-            {filteredMembers.length > 0 ? (
+            {loading ? (
+              <div className="members-empty-state">
+                <p className="members-empty-text">Loading member data...</p>
+              </div>
+            ) : error ? (
+              <div className="members-empty-state">
+                <p className="members-empty-text">{error}</p>
+              </div>
+            ) : filteredMembers.length > 0 ? (
               <div className="members-grid">
                 {filteredMembers.map((member) => (
                   <MemberCard
