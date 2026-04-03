@@ -1236,6 +1236,17 @@ html {
   max-width: 900px;
 }
 
+.members-disclaimer {
+  font-size: 0.875rem;
+  line-height: 1.6;
+  color: var(--color-gray-text);
+  max-width: 900px;
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--color-gray-border);
+  font-style: italic;
+}
+
 /* Search and Filter Controls */
 .members-controls {
   padding: 3.5rem 0;

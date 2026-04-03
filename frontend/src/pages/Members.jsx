@@ -135,15 +135,19 @@ const Members = () => {
           <div className="members-hero-container">
             <h1 className="members-hero-title">Our Team</h1>
             <p className="members-hero-subtitle">
-              Echelon Equity brings together exceptional undergraduate analysts from the world's leading universities. 
-              Our team produces institutional-grade investment research across equity analysis, technical trading, 
-              macroeconomic policy, and strategic marketing. Each member has been rigorously selected for analytical 
-              excellence, intellectual curiosity, and commitment to professional standards.
+              Echelon Equity brings together outstanding student analysts from top high schools and universities 
+              across the United States. Our team produces thoughtful research across equity analysis, technical 
+              strategy, macroeconomic policy, and strategic marketing, with each member selected for analytical 
+              ability, curiosity, and commitment to excellence.
             </p>
             <p className="members-hero-text">
-              Our analysts specialize in diverse sectors including technology, healthcare, financial services, 
-              consumer goods, energy, and industrials. They apply sophisticated valuation frameworks, quantitative 
-              methods, and fundamental research techniques typically found in top-tier investment banks and hedge funds.
+              Across sectors such as technology, healthcare, financial services, consumer, energy, and industrials, 
+              our members develop and communicate research using disciplined analysis, valuation thinking, and market 
+              awareness shaped by high professional standards.
+            </p>
+            <p className="members-disclaimer">
+              Please note: not every Echelon Equity member is featured on this page. Some members chose not to be 
+              displayed on the website.
             </p>
           </div>
         </section>
