@@ -32,6 +32,12 @@ const Header = () => {
               Program
             </Link>
             <Link 
+              to="/members" 
+              className={`nav-link-final ${isActive('/members') ? 'nav-active' : ''}`}
+            >
+              Team
+            </Link>
+            <Link 
               to="/apply" 
               className={`nav-link-final ${isActive('/apply') ? 'nav-active' : ''}`}
             >
