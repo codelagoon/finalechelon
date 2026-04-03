@@ -54,7 +54,7 @@ const Footer = () => {
             © {currentYear} Echelon Equity. All rights reserved.
           </p>
           <p className="footer-tagline-bottom">
-            Co-Founders: George Afram (Operations) · Jonathan Silva (Research)
+            Co-Founders: George Tetteh (Operations) · Jonathan Silva (Research)
           </p>
         </div>
       </div>
