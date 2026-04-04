@@ -15,6 +15,18 @@ import { toast } from 'sonner';
 
 const API_URL = (process.env.REACT_APP_BACKEND_URL || "").replace(/\/+$/, "");
 
+function formatApiErrorDetail(detail) {
+  if (detail == null) return null;
+  if (typeof detail === "string") return detail;
+  if (Array.isArray(detail)) {
+    return detail
+      .map((item) => (item && typeof item === "object" && item.msg ? item.msg : JSON.stringify(item)))
+      .join("; ");
+  }
+  if (typeof detail === "object") return JSON.stringify(detail);
+  return String(detail);
+}
+
 const Apply = () => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
@@ -109,9 +121,16 @@ const Apply = () => {
         body: submitData,
         // Don't set Content-Type - browser will set it with boundary
       });
-      
-      const result = await response.json();
-      
+
+      const responseText = await response.text();
+      let result;
+      try {
+        result = JSON.parse(responseText);
+      } catch {
+        toast.error("Invalid server response. Please try again.");
+        return;
+      }
+
       if (response.ok && result.success) {
         toast.success('Application submitted successfully! We will review your application and be in touch.');
         
@@ -138,7 +157,9 @@ const Apply = () => {
         // Redirect to home after 2 seconds
         setTimeout(() => navigate('/'), 2000);
       } else {
-        toast.error(result.detail || 'Application submission failed. Please try again.');
+        toast.error(
+          formatApiErrorDetail(result.detail) || "Application submission failed. Please try again."
+        );
       }
       
     } catch (error) {
