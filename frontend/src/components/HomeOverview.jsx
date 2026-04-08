@@ -52,7 +52,8 @@ const HomeOverview = () => {
           analysts build real output across research, modeling, valuation, and
           communication. The platform is designed to be selective, structured,
           and credible for people who want to operate with institutional rigor
-          early.
+          early, and members have included students from schools such as NYU,
+          Colgate, and the University of Maryland.
         </p>
 
         <div className="overview-grid-final">

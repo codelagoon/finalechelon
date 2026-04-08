@@ -16,6 +16,8 @@ const Team = () => {
                 and universities across the United States. Our team produces investment research across
                 equity analysis, technical strategy, macroeconomic policy, and strategic marketing,
                 with each member selected for analytical ability, curiosity, and commitment to institutional standards.
+                The broader member base has included students from institutions such as NYU,
+                Colgate, and the University of Maryland.
               </p>
               <p className="positioning-paragraph-final">
                 Across sectors such as technology, healthcare, financial services, consumer, energy,
