@@ -19,26 +19,32 @@ const Header = () => {
             </Link>
           </div>
           <nav className="header-nav-final">
-            <Link 
-              to="/portfolio" 
+            <Link
+              to="/portfolio"
               className={`nav-link-final ${isActive('/portfolio') ? 'nav-active' : ''}`}
             >
               Research
             </Link>
-            <Link 
-              to="/program" 
+            <Link
+              to="/team"
+              className={`nav-link-final ${isActive('/team') ? 'nav-active' : ''}`}
+            >
+              Team
+            </Link>
+            <Link
+              to="/program"
               className={`nav-link-final ${isActive('/program') ? 'nav-active' : ''}`}
             >
               Program
             </Link>
-            <Link 
-              to="/apply" 
+            <Link
+              to="/apply"
               className={`nav-link-final ${isActive('/apply') ? 'nav-active' : ''}`}
             >
               Apply
             </Link>
-            <Button 
-              variant="outline" 
+            <Button
+              variant="outline"
               size="sm"
               onClick={() => setIsContactOpen(true)}
               className="header-contact-btn-final"

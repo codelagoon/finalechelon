@@ -8,6 +8,7 @@ import Home from "./pages/Home";
 import Program from "./pages/Program";
 import PortfolioPage from "./pages/PortfolioPage";
 import Apply from "./pages/Apply";
+import Team from "./pages/Team";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/program" element={<Program />} />
             <Route path="/portfolio" element={<PortfolioPage />} />
+            <Route path="/team" element={<Team />} />
             <Route path="/apply" element={<Apply />} />
           </Routes>
         </main>

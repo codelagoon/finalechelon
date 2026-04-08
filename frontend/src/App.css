@@ -1187,3 +1187,571 @@ html {
   background-color: var(--color-black);
   color: var(--color-white);
 }
+
+/* ============================================
+   TEAM PAGE STYLES
+   ============================================ */
+
+/* Team Page Container */
+.team-page {
+  min-height: calc(100vh - 200px);
+  background-color: var(--color-white);
+}
+
+/* Team Header Section */
+.team-header-section {
+  padding: var(--section-padding) 0;
+  padding-bottom: 60px;
+  background-color: var(--color-white);
+}
+
+.team-header-section .section-title-final {
+  margin-bottom: 2.5rem;
+}
+
+.team-description {
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.team-description .positioning-paragraph-final {
+  font-size: 1.0625rem;
+  line-height: 1.7;
+  color: var(--color-gray-text);
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.team-disclaimer {
+  font-size: 0.8125rem;
+  color: #888888;
+  text-align: center;
+  margin-top: 2.5rem;
+  font-style: italic;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Team Members Section */
+.team-members-section {
+  padding: 0 0 var(--section-padding);
+  background-color: var(--color-white);
+}
+
+/* Filters */
+.team-filters {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.team-search-wrapper {
+  position: relative;
+  flex: 1;
+  min-width: 250px;
+  max-width: 400px;
+}
+
+.team-search-icon {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--color-gray-text);
+  pointer-events: none;
+}
+
+.team-search-input {
+  width: 100%;
+  padding: 0.75rem 1rem 0.75rem 2.5rem !important;
+  font-size: 0.9375rem !important;
+  border: 1px solid var(--color-gray-border) !important;
+  background-color: var(--color-white) !important;
+  color: var(--color-black) !important;
+  border-radius: var(--border-radius) !important;
+}
+
+.team-search-input:focus {
+  border-color: var(--color-black) !important;
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+.team-skill-filter {
+  flex-shrink: 0;
+}
+
+.team-skill-select {
+  padding: 0.75rem 2.5rem 0.75rem 1rem;
+  font-size: 0.9375rem;
+  border: 1px solid var(--color-gray-border);
+  background-color: var(--color-white);
+  color: var(--color-black);
+  border-radius: var(--border-radius);
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%235a5a5a' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 10px center;
+  min-width: 160px;
+}
+
+.team-skill-select:focus {
+  border-color: var(--color-black);
+  outline: none;
+}
+
+/* Results Count */
+.team-results-count {
+  margin-bottom: 1.5rem;
+}
+
+.team-results-count p {
+  font-size: 0.875rem;
+  color: var(--color-gray-text);
+  font-weight: 500;
+}
+
+/* Team Grid */
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  gap: 1.5rem;
+}
+
+@media (min-width: 640px) {
+  .team-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 968px) {
+  .team-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+  }
+}
+
+@media (min-width: 1200px) {
+  .team-grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+  }
+}
+
+/* Team Card */
+.team-card {
+  border: 1px solid var(--color-gray-border);
+  background-color: var(--color-white);
+  cursor: pointer;
+  transition: border-color 0.2s ease, transform 0.2s ease;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  border-radius: var(--border-radius);
+}
+
+.team-card:hover {
+  border-color: var(--color-black);
+  transform: translateY(-2px);
+}
+
+.team-card:focus-visible {
+  outline: 2px solid var(--color-black);
+  outline-offset: 2px;
+}
+
+/* Card Image */
+.team-card-image-wrapper {
+  width: 100%;
+  height: 200px;
+  overflow: hidden;
+  background-color: var(--color-gray-hover);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.team-card-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+}
+
+/* Card Content */
+.team-card-content {
+  padding: 1.5rem;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.team-card-content-full {
+  padding-top: 2rem;
+}
+
+.team-card-name {
+  font-family: var(--font-serif);
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--color-black);
+  margin-bottom: 0.25rem;
+  line-height: 1.3;
+}
+
+.team-card-role {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--color-gray-text);
+  margin-bottom: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.team-card-school {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.8125rem;
+  color: var(--color-gray-text);
+  margin-bottom: 0.75rem;
+}
+
+.team-card-bio {
+  font-size: 0.9375rem;
+  color: var(--color-gray-text);
+  line-height: 1.6;
+  margin-bottom: 1rem;
+  flex: 1;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Skills */
+.team-card-skills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.team-skill-badge {
+  font-size: 0.6875rem !important;
+  font-weight: 600 !important;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 0.25rem 0.625rem !important;
+  border-color: var(--color-gray-border) !important;
+  color: var(--color-gray-text) !important;
+  background-color: transparent !important;
+  border-radius: 1px !important;
+}
+
+.team-skill-more {
+  background-color: var(--color-gray-hover) !important;
+  border-color: var(--color-gray-border) !important;
+}
+
+/* Card Links */
+.team-card-links {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--color-gray-border);
+  margin-top: auto;
+}
+
+.team-card-link-icon {
+  color: var(--color-gray-text);
+}
+
+.team-card-chevron {
+  margin-left: auto;
+  color: var(--color-gray-text);
+  transition: transform 0.2s ease;
+}
+
+.team-card:hover .team-card-chevron {
+  transform: translateX(4px);
+  color: var(--color-black);
+}
+
+/* Loading & Error States */
+.team-loading-state,
+.team-error-state,
+.team-empty-state {
+  text-align: center;
+  padding: 4rem 2rem;
+}
+
+.team-loading-state p,
+.team-empty-state p {
+  font-size: 1rem;
+  color: var(--color-gray-text);
+}
+
+.team-error-state h3 {
+  font-family: var(--font-serif);
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--color-black);
+  margin-bottom: 0.75rem;
+}
+
+.team-error-state p {
+  font-size: 0.9375rem;
+  color: var(--color-gray-text);
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+/* ============================================
+   MEMBER DETAIL MODAL STYLES
+   ============================================ */
+
+.member-detail-dialog {
+  max-width: 600px !important;
+  max-height: 90vh;
+  overflow-y: auto;
+  padding: 0 !important;
+  border-radius: var(--border-radius) !important;
+}
+
+.member-detail-close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+  color: var(--color-gray-text);
+  transition: color 0.2s ease;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.member-detail-close:hover {
+  color: var(--color-black);
+}
+
+.member-detail-content {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Modal Image */
+.member-detail-image-wrapper {
+  width: 100%;
+  height: 280px;
+  overflow: hidden;
+  background-color: var(--color-gray-hover);
+}
+
+.member-detail-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+}
+
+/* Modal Info */
+.member-detail-info {
+  padding: 2rem;
+}
+
+.member-detail-info-full {
+  padding-top: 2.5rem;
+}
+
+.member-detail-name {
+  font-family: var(--font-serif) !important;
+  font-size: 1.75rem !important;
+  font-weight: 700 !important;
+  color: var(--color-black) !important;
+  margin-bottom: 0.5rem !important;
+  line-height: 1.2 !important;
+}
+
+.member-detail-role {
+  font-size: 0.9375rem !important;
+  font-weight: 600 !important;
+  color: var(--color-gray-text) !important;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 1rem !important;
+}
+
+.member-detail-school {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9375rem;
+  color: var(--color-gray-text);
+  margin-bottom: 1.5rem;
+}
+
+/* Section Label */
+.member-detail-section-label {
+  font-size: 0.6875rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--color-black);
+  margin-bottom: 0.75rem;
+}
+
+/* Bio */
+.member-detail-bio {
+  margin-bottom: 1.5rem;
+}
+
+.member-detail-bio p {
+  font-size: 0.9375rem;
+  line-height: 1.7;
+  color: var(--color-gray-text);
+}
+
+/* Skills in Modal */
+.member-detail-skills {
+  margin-bottom: 1.5rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid var(--color-gray-border);
+}
+
+.member-detail-skills-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.member-detail-skill-badge {
+  font-size: 0.75rem !important;
+  font-weight: 500 !important;
+  padding: 0.375rem 0.75rem !important;
+  border-color: var(--color-gray-border) !important;
+  color: var(--color-gray-text) !important;
+  background-color: transparent !important;
+  border-radius: 1px !important;
+}
+
+/* Contact Links */
+.member-detail-contact {
+  margin-top: 0.5rem;
+}
+
+.member-detail-links {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.member-detail-link {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  color: var(--color-black);
+  text-decoration: none;
+  padding: 0.625rem 1rem;
+  border: 1px solid var(--color-gray-border);
+  transition: border-color 0.2s ease, background-color 0.2s ease;
+  border-radius: var(--border-radius);
+}
+
+.member-detail-link:hover {
+  border-color: var(--color-black);
+  background-color: var(--color-gray-hover);
+}
+
+.member-detail-linkedin:hover {
+  background-color: #f0f7ff;
+  border-color: #0077b5;
+  color: #0077b5;
+}
+
+.member-detail-email:hover {
+  background-color: var(--color-gray-hover);
+}
+
+/* Responsive Modal */
+@media (max-width: 640px) {
+  .member-detail-dialog {
+    max-width: 100% !important;
+    margin: 1rem;
+  }
+  
+  .member-detail-image-wrapper {
+    height: 220px;
+  }
+  
+  .member-detail-info {
+    padding: 1.5rem;
+  }
+  
+  .member-detail-name {
+    font-size: 1.5rem !important;
+  }
+  
+  .member-detail-links {
+    flex-direction: column;
+  }
+  
+  .member-detail-link {
+    justify-content: center;
+  }
+}
+
+/* Responsive Team Page */
+@media (max-width: 968px) {
+  .team-header-section {
+    padding: 80px 0 40px;
+  }
+  
+  .team-filters {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .team-search-wrapper {
+    max-width: 100%;
+  }
+  
+  .team-skill-select {
+    width: 100%;
+  }
+}
+
+@media (max-width: 640px) {
+  .team-description .positioning-paragraph-final {
+    font-size: 1rem;
+    text-align: left;
+  }
+  
+  .team-disclaimer {
+    font-size: 0.75rem;
+    text-align: left;
+  }
+  
+  .team-card-content {
+    padding: 1.25rem;
+  }
+  
+  .team-card-name {
+    font-size: 1.125rem;
+  }
+  
+  .team-card-image-wrapper {
+    height: 160px;
+  }
+}
