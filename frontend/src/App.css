@@ -280,6 +280,75 @@ body {
   opacity: 0.95;
 }
 
+/* Partner Trust Strip */
+.partner-trust-strip-final {
+  padding: 1.5rem 0;
+  border-top: 1px solid var(--color-gray-border);
+  border-bottom: 1px solid var(--color-gray-border);
+  background-color: #fbfaf7;
+}
+
+.partner-trust-container-final {
+  display: grid;
+  grid-template-columns: minmax(220px, 280px) minmax(0, 1fr);
+  gap: 1.5rem 2rem;
+  align-items: center;
+}
+
+.partner-trust-copy-final {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.partner-trust-eyebrow-final {
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-gray-text);
+}
+
+.partner-trust-title-final {
+  font-family: var(--font-serif);
+  font-size: 1.35rem;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+}
+
+.partner-trust-logos-final {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 0.75rem;
+  align-items: stretch;
+}
+
+.partner-trust-link-final {
+  min-height: 82px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.9rem 1rem;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  background-color: var(--color-white);
+  text-decoration: none;
+  transition: border-color 0.2s ease, transform 0.2s ease, background-color 0.2s ease;
+}
+
+.partner-trust-link-final:hover {
+  border-color: var(--color-black);
+  transform: translateY(-1px);
+}
+
+.partner-trust-logo-final {
+  width: auto;
+  max-width: 100%;
+  max-height: 34px;
+  display: block;
+  object-fit: contain;
+  object-position: center;
+}
+
 /* Stats Section */
 .stats-section-final {
   padding: 4rem 0;
@@ -1465,6 +1534,15 @@ div[style*="emergent"] {
     gap: 2.75rem;
   }
 
+  .partner-trust-container-final {
+    grid-template-columns: 1fr;
+    gap: 1.25rem;
+  }
+
+  .partner-trust-logos-final {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
   .hero-content-final {
     max-width: none;
   }
@@ -1605,6 +1683,28 @@ div[style*="emergent"] {
   
   .header-nav-final {
     display: none;
+  }
+
+  .partner-trust-strip-final {
+    padding: 1.25rem 0;
+  }
+
+  .partner-trust-title-final {
+    font-size: 1.15rem;
+  }
+
+  .partner-trust-logos-final {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.6rem;
+  }
+
+  .partner-trust-link-final {
+    min-height: 72px;
+    padding: 0.8rem;
+  }
+
+  .partner-trust-logo-final {
+    max-height: 30px;
   }
 
   .header-container-final {

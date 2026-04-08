@@ -1,5 +1,6 @@
 import React from 'react';
 import Hero from '../components/Hero';
+import PartnerTrustStrip from '../components/PartnerTrustStrip';
 import Stats from '../components/Stats';
 import HomeOverview from '../components/HomeOverview';
 import Positioning from '../components/Positioning';
@@ -14,6 +15,7 @@ const Home = () => {
   return (
     <>
       <Hero />
+      <PartnerTrustStrip />
       <Stats />
       <HomeOverview />
       <Positioning />

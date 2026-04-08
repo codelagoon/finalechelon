@@ -120,6 +120,7 @@ export const analystWorkData = {
 
 export const partnershipsData = {
   eyebrow: "Selected Partners",
+  trustStripTitle: "Trusted by Partners and Platforms",
   title: "The Research Workflow Is Backed by Real Tools",
   subtitle: "Echelon Equity works with platforms, resources, and organizations that support serious analyst development.",
   intro: "This section highlights a small set of partners that strengthen the research environment around Echelon Equity. The goal is simple: use credible tools, better training resources, and stronger communities to raise the quality of the work.",
