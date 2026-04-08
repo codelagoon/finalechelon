@@ -21,7 +21,7 @@ const Team = () => {
   }, []);
 
   return (
-    <div className="team-page" style={{ paddingTop: '80px' }}>
+    <div className="team-page page-shell-final">
         {/* Page Header */}
         <div className="team-header-section">
           <div className="content-container-final">

@@ -1,42 +1,25 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import Portfolio from '../components/Portfolio';
 
 const PortfolioPage = () => {
   return (
-    <div style={{ paddingTop: '80px' }}>
+    <div className="page-shell-final">
       <Portfolio />
-      <div className="portfolio-cta-section">
-        <div className="content-container-final" style={{ textAlign: 'center', padding: '80px 2rem', backgroundColor: '#000', color: '#fff' }}>
-          <h2 style={{ 
-            fontFamily: 'Playfair Display, serif', 
-            fontSize: '2.5rem', 
-            fontWeight: 700, 
-            marginBottom: '1rem',
-            color: '#fff'
-          }}>
+      <div className="portfolio-cta-section page-cta-section-final">
+        <div className="content-container-final page-cta-panel-final page-cta-panel-dark-final">
+          <h2 className="page-cta-title-final page-cta-title-dark-final">
             Want to Contribute Research?
           </h2>
-          <p style={{ 
-            fontSize: '1.125rem', 
-            marginBottom: '2rem',
-            color: '#ccc'
-          }}>
+          <p className="page-cta-subtitle-final page-cta-subtitle-dark-final">
             Join our analyst program and build institutional-grade coverage.
           </p>
-          <a 
-            href="/apply"
-            style={{
-              display: 'inline-block',
-              backgroundColor: '#fff',
-              color: '#000',
-              padding: '1rem 2.5rem',
-              textDecoration: 'none',
-              fontWeight: 600,
-              fontSize: '1rem'
-            }}
+          <Link
+            to="/apply"
+            className="page-cta-button-final page-cta-button-light-final"
           >
             Apply to Echelon
-          </a>
+          </Link>
         </div>
       </div>
     </div>

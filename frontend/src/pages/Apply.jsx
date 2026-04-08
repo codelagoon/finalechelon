@@ -171,9 +171,9 @@ const Apply = () => {
   };
 
   return (
-    <div className="apply-page" style={{ paddingTop: '80px', paddingBottom: '80px' }}>
-      <div className="content-container-final" style={{ maxWidth: '700px' }}>
-        <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
+    <div className="apply-page page-shell-final page-shell-padded-final">
+      <div className="content-container-final page-shell-narrow-final">
+        <div className="page-heading-final">
           <h1 className="section-title-final">Apply to Echelon</h1>
           <p className="section-subtitle-final">
             Acceptance is earned. Applications are evaluated on clarity of thinking, attention to detail, and ability to execute.
