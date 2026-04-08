@@ -89,6 +89,38 @@ def normalize_member_key(value: Optional[str]) -> Optional[str]:
     return re.sub(r'\s+', ' ', text).strip().lower()
 
 
+def normalize_public_role(value: Optional[str]) -> Optional[str]:
+    """Normalize common role variants to consistent public-facing titles."""
+    text = normalize_text(value)
+    if not text:
+        return None
+
+    normalized_role = re.sub(r'[^a-z0-9]+', ' ', text.lower()).strip()
+    role_map = {
+        'macro policy': "Investment Team: Macro Policy Analyst",
+        'macro policy analyst': "Investment Team: Macro Policy Analyst",
+        'investment team macro policy analyst': "Investment Team: Macro Policy Analyst",
+        'technical analysis': "Investment Team: Technical Analyst",
+        'technical analyst': "Investment Team: Technical Analyst",
+        'investment team technical analyst': "Investment Team: Technical Analyst",
+        'equity research': "Investment Team: Equity Research Analyst",
+        'equity research analyst': "Investment Team: Equity Research Analyst",
+        'investment team equity research analyst': "Investment Team: Equity Research Analyst",
+        'pr marketing': "Marketing / Content",
+        'marketing': "Marketing / Content",
+        'content': "Marketing / Content",
+        'marketing content': "Marketing / Content",
+        'marketing and content': "Marketing / Content",
+        'content marketing': "Marketing / Content",
+        'leadership': "Leadership",
+        'leadership team': "Leadership",
+        'fundraising': "Fundraising",
+        'fundraising partnerships': "Fundraising",
+    }
+
+    return role_map.get(normalized_role, text)
+
+
 def parse_sheet_timestamp(value: Any) -> Optional[datetime]:
     """Parse Google Form timestamp strings when available."""
     text = normalize_text(value)
@@ -238,7 +270,7 @@ def process_sheet_row(row: dict, column_map: dict, row_index: int) -> Optional[T
     role_col = column_map.get('role', 'Role')
     
     full_name = normalize_text(row.get(full_name_col))
-    role = normalize_text(row.get(role_col))
+    role = normalize_public_role(row.get(role_col))
     
     if not full_name:
         logger.debug(f"Row {row_index}: Missing required field (name)")

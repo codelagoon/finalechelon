@@ -11,10 +11,10 @@ const routeMetadata = {
     schemaType: "WebPage",
   },
   "/apply": {
-    title: "Apply | Echelon Equity Investment Research Program",
+    title: "Apply | Echelon Equity Investment and Operating Roles",
     description:
-      "Apply to Echelon Equity's student-led investment research program for analysts who want to build real work under institutional standards.",
-    pageTitle: "Apply to the Echelon Equity Investment Research Program",
+      "Apply to Echelon Equity for investment team, leadership, fundraising, and marketing / content roles held to a selective standard.",
+    pageTitle: "Apply to Echelon Equity",
     canonical: absoluteUrl("/apply"),
     ogType: "website",
     schemaType: "WebPage",
@@ -29,10 +29,10 @@ const routeMetadata = {
     schemaType: "CollectionPage",
   },
   "/program": {
-    title: "Program | Echelon Equity Investment Research Tracks",
+    title: "Program | Echelon Equity Roles and Selection Process",
     description:
-      "See how Echelon Equity's student-led investment research program works, including analyst tracks, review standards, and the selection process.",
-    pageTitle: "Student-Led Investment Research Program",
+      "See Echelon Equity's public role outlines across the investment team, leadership, fundraising, and marketing / content, plus standards and selection.",
+    pageTitle: "Echelon Equity Roles and Selection Process",
     canonical: absoluteUrl("/program"),
     ogType: "website",
     schemaType: "WebPage",

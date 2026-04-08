@@ -164,8 +164,8 @@ export const partnershipsData = {
 };
 
 export const standardsData = {
-  title: "Research Standards and Methodology",
-  intro: "Echelon Equity operates with standards designed to make student-led investment research clearer, more defensible, and more professional. Every model, memo, and presentation follows structured protocols so the work can stand up to review.",
+  title: "Investment Team Standards and Methodology",
+  intro: "Within the investment team, Echelon Equity uses standards designed to make student-led investment research clearer, more defensible, and more professional. Every model, memo, and presentation follows structured protocols so the work can stand up to review.",
   exampleStandard: {
     title: "Example Standard:",
     rules: [
@@ -177,47 +177,80 @@ export const standardsData = {
 };
 
 export const tracksData = {
-  title: "Analyst Tracks",
-  subtitle: "Analysts operate within structured tracks aligned to institutional workflows.",
+  title: "Open Roles at Echelon Equity",
+  subtitle: "Applications are open across the investment team and a small set of operating roles. Each role is selective, clearly scoped, and expected to contribute real work.",
+  positioning: "Public role summaries are intentionally concise. We care less about polished credentials than about judgment, communication, and reliable execution.",
   tracks: [
     {
       id: 1,
       number: "01",
-      name: "Three-Statement Modeling",
-      description: "Build fully integrated financial statements from 10-K filings.",
-      deliverable: "Integrated IS / BS / CF model"
+      name: "Investment Team: Equity Research Analyst",
+      highlights: [
+        "Build company research, valuation work, and formal investment memos under review.",
+        "Work through filings, earnings calls, competitive positioning, and thesis support.",
+        "Best suited to applicants who are detail-oriented and comfortable defending a view."
+      ]
     },
     {
       id: 2,
       number: "02",
-      name: "DCF Valuation & Sensitivity",
-      description: "Develop discounted cash flow models with dynamic assumptions.",
-      deliverable: "DCF with sensitivity tables"
+      name: "Investment Team: Technical Analyst",
+      highlights: [
+        "Track price action, structure, momentum, and technical setups across names under coverage.",
+        "Translate charts into disciplined trade framing and risk-aware market commentary.",
+        "Best suited to applicants who can communicate pattern-based views with precision."
+      ]
     },
     {
       id: 3,
       number: "03",
-      name: "Investment Memo",
-      description: "Write formal investment theses reviewed against professional standards.",
-      deliverable: "Full investment memo"
+      name: "Investment Team: Macro Policy Analyst",
+      highlights: [
+        "Monitor macro developments, central bank policy, and regulation that affect markets.",
+        "Write concise views that connect policy change to sectors, risk, and positioning.",
+        "Best suited to applicants who follow economics closely and synthesize quickly."
+      ]
     },
     {
       id: 4,
       number: "04",
-      name: "LBO Modeling",
-      description: "Construct leveraged buyout models with return analysis.",
-      deliverable: "LBO model with IRR outputs"
+      name: "Leadership",
+      highlights: [
+        "Help drive standards, accountability, recruiting, and cross-functional execution.",
+        "Own decisions that affect member experience and organizational quality.",
+        "Best suited to applicants with maturity, follow-through, and strong judgment."
+      ]
+    },
+    {
+      id: 5,
+      number: "05",
+      name: "Fundraising",
+      highlights: [
+        "Support sponsorship, donor, and partnership efforts that expand the platform's reach.",
+        "Build organized outreach, track conversations, and help position the organization professionally.",
+        "Best suited to applicants who are persistent, polished, and comfortable representing the brand."
+      ]
+    },
+    {
+      id: 6,
+      number: "06",
+      name: "Marketing / Content",
+      highlights: [
+        "Shape Echelon Equity's outward-facing presence across written content, social, and brand materials.",
+        "Turn research, team updates, and events into clear public communication.",
+        "Best suited to applicants with editorial judgment, consistency, and strong taste."
+      ]
     }
   ]
 };
 
 export const selectionData = {
-  title: "Selection Process",
-  subtitle: "We do not accept everyone. Applicants are evaluated based on clarity of thinking, attention to detail, and ability to execute.",
-  selectivityNote: "Not all applicants are admitted.",
+  title: "How Selection Works",
+  subtitle: "Each application is reviewed against the role selected. We evaluate judgment, communication, follow-through, and the ability to contribute at a high standard.",
+  selectivityNote: "We keep the bar high and do not advance every applicant.",
   steps: [
     "Application submission",
-    "Technical / written evaluation",
+    "Role-specific review",
     "Final selection"
   ]
 };

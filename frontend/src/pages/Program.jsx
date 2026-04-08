@@ -10,13 +10,13 @@ const Program = () => {
   return (
     <div className="page-shell-final">
       <PageIntro
-        eyebrow="Investment research program"
-        title="Student-Led Investment Research Program"
-        lead="The Echelon Equity program is built for analysts who want to learn by producing investment research under review, not by staying theoretical. Members move through structured tracks, receive feedback, and improve through repetition."
-        supportingText="From financial modeling and valuation to memo writing and market analysis, the program is designed to develop research analysts who can think clearly, communicate well, and work to institutional standards."
+        eyebrow="Roles at Echelon Equity"
+        title="Open Roles Across Echelon Equity"
+        lead="Echelon Equity recruits across the investment team and a small set of operating roles. Whether you are applying for research, leadership, fundraising, or marketing / content, the standard is the same: sound judgment, strong communication, and reliable execution."
+        supportingText="The role outlines below are intentionally concise. We look for people who can contribute meaningfully, respond well to feedback, and help raise the quality of the organization."
         links={[
-          { to: "/apply", label: "Apply to the research program" },
-          { to: "/portfolio", label: "See investment research coverage" },
+          { to: "/apply", label: "Apply to Echelon Equity" },
+          { to: "/team", label: "Meet current members" },
         ]}
       />
       <Tracks />
@@ -27,7 +27,7 @@ const Program = () => {
         <div className="content-container-final page-cta-panel-final">
           <h2 className="page-cta-title-final">Ready to Apply?</h2>
           <p className="page-cta-subtitle-final">
-            Analysts are selected based on demonstrated potential and ability to meet the standard.
+            Applicants are selected based on role fit, judgment, and ability to meet the standard.
           </p>
           <Link
             to="/apply"

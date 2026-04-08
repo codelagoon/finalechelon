@@ -1,15 +1,5 @@
 import React from 'react';
-
-const selectionData = {
-  title: "How the Echelon Equity Program Works",
-  subtitle: "Admission is selective. Applicants are evaluated on clarity of thinking, attention to detail, and ability to execute before joining the investment research platform.",
-  selectivityNote: "Not all applicants are admitted.",
-  steps: [
-    "Application submission",
-    "Technical / written evaluation",
-    "Final selection"
-  ]
-};
+import { selectionData } from '../mockData';
 
 const Selection = () => {
   return (

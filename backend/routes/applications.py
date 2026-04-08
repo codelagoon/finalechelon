@@ -142,7 +142,7 @@ async def send_application_email(application: Application):
                             <td style="padding: 8px;">{application.field_of_study}</td>
                         </tr>
                         <tr>
-                            <td style="padding: 8px; font-weight: bold;">Track of Interest:</td>
+                            <td style="padding: 8px; font-weight: bold;">Role of Interest:</td>
                             <td style="padding: 8px;">{application.track_of_interest}</td>
                         </tr>
                     </table>

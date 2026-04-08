@@ -15,6 +15,15 @@ import { toast } from 'sonner';
 
 const API_URL = (process.env.REACT_APP_BACKEND_URL || "").replace(/\/+$/, "");
 
+const roleOptions = [
+  "Investment Team: Equity Research Analyst",
+  "Investment Team: Technical Analyst",
+  "Investment Team: Macro Policy Analyst",
+  "Leadership",
+  "Fundraising",
+  "Marketing / Content",
+];
+
 function formatApiErrorDetail(detail) {
   if (detail == null) return null;
   if (typeof detail === "string") return detail;
@@ -174,9 +183,9 @@ const Apply = () => {
     <div className="apply-page page-shell-final page-shell-padded-final">
       <div className="content-container-final page-shell-narrow-final">
         <div className="page-heading-final">
-          <h1 className="section-title-final">Apply to the Investment Research Program</h1>
+          <h1 className="section-title-final">Apply to Echelon Equity</h1>
           <p className="section-subtitle-final">
-            Apply to Echelon Equity's student-led investment research program. Acceptance is earned through clarity of thinking, attention to detail, and ability to execute.
+            We recruit across the investment team, leadership, fundraising, and marketing / content. Acceptance is earned through judgment, communication, and ability to execute at a high standard.
           </p>
         </div>
         
@@ -275,22 +284,23 @@ const Apply = () => {
             />
           </div>
 
-          {/* Track of Interest */}
+          {/* Role of Interest */}
           <div className="form-group">
-            <Label htmlFor="trackOfInterest" className="form-label">Track of Interest</Label>
+            <Label htmlFor="trackOfInterest" className="form-label">Role of Interest</Label>
             <Select 
               onValueChange={(value) => handleSelectChange('trackOfInterest', value)}
               value={formData.trackOfInterest}
               required
             >
               <SelectTrigger className="form-select">
-                <SelectValue placeholder="Select a track" />
+                <SelectValue placeholder="Select the role you are applying for" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="technical-analysis">Technical Analysis</SelectItem>
-                <SelectItem value="equity-research">Equity Research</SelectItem>
-                <SelectItem value="macro-policy">Macro Policy</SelectItem>
-                <SelectItem value="pr-marketing">PR / Marketing</SelectItem>
+                {roleOptions.map((role) => (
+                  <SelectItem key={role} value={role}>
+                    {role}
+                  </SelectItem>
+                ))}
               </SelectContent>
             </Select>
           </div>
@@ -398,9 +408,9 @@ const Apply = () => {
           {/* Footer Note */}
           <div className="application-footer-note">
             <p>
-              Echelon is open to both high school and university-level applicants.
+              Echelon reviews applicants across research and operating roles.
               Prior experience is not a prerequisite.
-              Selection is based on demonstrated potential and ability to meet the standard.
+              Selection is based on judgment, communication, and ability to meet the standard.
             </p>
           </div>
         </form>
