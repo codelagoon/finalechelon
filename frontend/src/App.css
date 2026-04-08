@@ -805,55 +805,125 @@ body {
   font-style: italic;
 }
 
-/* Partnerships Section - Luxury Brand Treatment */
+/* Partnerships Section */
 .partnerships-section-final {
   padding: var(--section-padding) 0;
   padding-bottom: 160px;
   background-color: var(--color-white);
 }
 
-.partnerships-section-final .partners {
-  display: flex !important;
-  flex-direction: row !important;
-  justify-content: center;
-  align-items: center;
-  gap: 64px;
-  margin-top: 64px;
-  padding: 24px 0;
-  flex-wrap: wrap;
-  max-width: 1000px;
-  margin-left: auto;
-  margin-right: auto;
+.partnerships-header-final {
+  max-width: 760px;
+  margin: 0 auto;
+  text-align: center;
 }
 
-.partnerships-section-final .partners a {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
+.section-eyebrow-final {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--color-gray-text);
+  margin-bottom: 1rem;
+}
+
+.partnerships-intro-final {
+  font-size: 1rem;
+  line-height: 1.75;
+  color: var(--color-gray-text);
+  max-width: 680px;
+  margin: -1rem auto 0;
+}
+
+.partnerships-grid-final {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.25rem;
+  margin-top: 3rem;
+}
+
+.partnership-card-final {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1.5rem;
+  border: 1px solid var(--color-gray-border);
+  border-radius: var(--border-radius);
+  background-color: #fbfaf7;
   text-decoration: none;
-  transition: opacity 0.25s ease, transform 0.25s ease;
-  flex-shrink: 0;
-  min-height: 56px;
+  color: inherit;
+  transition: border-color 0.2s ease, transform 0.2s ease, background-color 0.2s ease;
 }
 
-.partnerships-section-final .partners img {
-  height: 48px !important;
-  width: auto !important;
-  max-width: 240px;
-  opacity: 0.85;
+.partnership-card-final:hover {
+  border-color: var(--color-black);
+  transform: translateY(-2px);
+  background-color: var(--color-white);
+}
+
+.partnership-label-final {
+  align-self: flex-start;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--color-gray-text);
+}
+
+.partnership-logo-frame-final {
+  min-height: 92px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  background-color: var(--color-white);
+}
+
+.partnership-logo-frame-final img {
+  width: auto;
+  max-width: 100%;
+  max-height: 46px;
   display: block;
   object-fit: contain;
   object-position: center;
-  transition: opacity 0.25s ease, transform 0.25s ease;
 }
 
-.partnerships-section-final .partners a:hover {
-  opacity: 1;
-  transform: translateY(-1px);
+.partnership-meta-final {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
 }
 
-.partnerships-section-final .partners a:hover img {
-  opacity: 1;
+.partnership-name-final {
+  font-family: var(--font-serif);
+  font-size: 1.2rem;
+  line-height: 1.2;
+}
+
+.partnership-domain-final {
+  font-size: 0.875rem;
+  color: var(--color-gray-text);
+  overflow-wrap: anywhere;
+}
+
+.partnership-cta-final {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-top: auto;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--color-black);
+}
+
+.partnerships-note-final {
+  max-width: 720px;
+  margin: 1.5rem auto 0;
+  font-size: 0.875rem;
+  line-height: 1.7;
+  text-align: center;
+  color: var(--color-gray-text);
 }
 
 /* Selectivity Note */
@@ -1212,17 +1282,9 @@ div[style*="emergent"] {
   min-height: calc(100vh - 200px);
 }
 
-/* Mobile: Keep horizontal flex layout, adjust sizing */
 @media (max-width: 768px) {
-  .partnerships-section-final .partners {
-    gap: 40px !important;
-    margin-top: 48px !important;
-    padding: 16px 0 !important;
-  }
-  
-  .partnerships-section-final .partners img {
-    height: 40px !important;
-    max-width: 180px !important;
+  .partnerships-grid-final {
+    grid-template-columns: 1fr;
   }
 }
 
@@ -1442,6 +1504,10 @@ div[style*="emergent"] {
   .overview-grid-final,
   .content-grid-final {
     grid-template-columns: 1fr;
+  }
+
+  .partnerships-grid-final {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .section-title-final {
@@ -1739,14 +1805,21 @@ div[style*="emergent"] {
     padding-bottom: 96px;
   }
 
-  .partnerships-section-final .partners {
-    gap: 28px !important;
-    justify-content: center;
+  .partnership-card-final {
+    padding: 1.25rem;
   }
 
-  .partnerships-section-final .partners img {
-    height: 34px !important;
-    max-width: 150px !important;
+  .partnerships-intro-final {
+    font-size: 0.98rem;
+    margin-top: -0.5rem;
+  }
+
+  .partnership-logo-frame-final {
+    min-height: 84px;
+  }
+
+  .partnership-logo-frame-final img {
+    max-height: 38px;
   }
 
   .final-cta-section-final {

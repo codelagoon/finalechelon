@@ -119,13 +119,46 @@ export const analystWorkData = {
 };
 
 export const partnershipsData = {
-  title: "Platform & Industry Partnerships",
-  subtitle: "Built with tools and resources used in professional investment workflows.",
+  eyebrow: "Selected Partners",
+  title: "The Research Workflow Is Backed by Real Tools",
+  subtitle: "Echelon Equity works with platforms, resources, and organizations that support serious analyst development.",
+  intro: "This section highlights a small set of partners that strengthen the research environment around Echelon Equity. The goal is simple: use credible tools, better training resources, and stronger communities to raise the quality of the work.",
   partners: [
-    { name: "TIKR", logo: "tikr" },
-    { name: "Adventis CG", logo: "adventis" },
-    { name: "Excel Exercises", logo: "excel-exercises" },
-    { name: "YIS.org", logo: "yis" }
+    {
+      name: "TIKR",
+      logo: "tikr",
+      href: "https://tikr.com",
+      domain: "tikr.com",
+      label: "Platform"
+    },
+    {
+      name: "Adventis CG",
+      logo: "adventis",
+      href: "https://adventiscg.com",
+      domain: "adventiscg.com",
+      label: "Partner"
+    },
+    {
+      name: "Excel Exercises",
+      logo: "excel-exercises",
+      href: "https://excelexercises.com",
+      domain: "excelexercises.com",
+      label: "Resource"
+    },
+    {
+      name: "Breaking Into Wall Street",
+      logo: "breaking-into-wall-street",
+      href: "https://breakingintowallstreet.com",
+      domain: "breakingintowallstreet.com",
+      label: "Training"
+    },
+    {
+      name: "YIS.org",
+      logo: "yis",
+      href: "https://yis.org",
+      domain: "yis.org",
+      label: "Community"
+    }
   ]
 };
 
