@@ -7,10 +7,11 @@ import io
 import json
 import os
 import logging
+from datetime import datetime
 from pathlib import Path
 import re
 import ssl
-from typing import Any, List, Optional
+from typing import Any, Dict, List, Optional, Tuple
 from urllib.error import HTTPError, URLError
 from urllib.request import urlopen
 import certifi
@@ -52,6 +53,12 @@ class MembersResponse(BaseModel):
     source: str  # 'sheet' or 'unavailable'
 
 
+TIMESTAMP_FORMATS = (
+    "%m/%d/%Y %H:%M:%S",
+    "%m/%d/%Y %H:%M",
+)
+
+
 def get_members_sheet_reference() -> Optional[str]:
     """Read the configured Google Sheet reference from the environment."""
     return normalize_text(os.environ.get("MEMBERS_SHEET_ID"))
@@ -72,6 +79,29 @@ def normalize_text(value: Any) -> Optional[str]:
         return None
     text = str(value).strip()
     return text if text else None
+
+
+def normalize_member_key(value: Optional[str]) -> Optional[str]:
+    """Create a stable comparison key for deduplicating member submissions."""
+    text = normalize_text(value)
+    if not text:
+        return None
+    return re.sub(r'\s+', ' ', text).strip().lower()
+
+
+def parse_sheet_timestamp(value: Any) -> Optional[datetime]:
+    """Parse Google Form timestamp strings when available."""
+    text = normalize_text(value)
+    if not text:
+        return None
+
+    for timestamp_format in TIMESTAMP_FORMATS:
+        try:
+            return datetime.strptime(text, timestamp_format)
+        except ValueError:
+            continue
+
+    return None
 
 
 def normalize_url(url: Optional[str]) -> Optional[str]:
@@ -277,6 +307,7 @@ def build_column_map(headers: List[str]) -> dict:
         'full_bio': ['full bio', 'long bio', 'bio', 'biography', 'description'],
         'linkedin': ['linkedin url', 'linkedin', 'linked in', 'li url'],
         'skills': ['skills / sectors of interest', 'skills', 'sectors', 'interests', 'tags'],
+        'timestamp': ['timestamp', 'submitted at', 'submission time', 'created at'],
         'show_profile': ['show my profile on the website?', 'show profile', 'visible', 'display', 'show on website']
     }
     
@@ -289,6 +320,51 @@ def build_column_map(headers: List[str]) -> dict:
     return column_map
 
 
+def dedupe_members(members_with_meta: List[Tuple[TeamMember, Optional[datetime], int]]) -> List[TeamMember]:
+    """
+    Keep only the latest submission per member.
+    Dedupes primarily by normalized full name because the form may contain blank
+    or changed emails across resubmissions.
+    """
+    latest_by_key: Dict[str, Tuple[TeamMember, Optional[datetime], int]] = {}
+
+    for member, timestamp, row_index in members_with_meta:
+        dedupe_key = normalize_member_key(member.full_name)
+        if not dedupe_key:
+            continue
+
+        existing = latest_by_key.get(dedupe_key)
+        if not existing:
+            latest_by_key[dedupe_key] = (member, timestamp, row_index)
+            continue
+
+        _, existing_timestamp, existing_row_index = existing
+
+        should_replace = False
+        if timestamp and existing_timestamp:
+            should_replace = timestamp >= existing_timestamp
+        elif timestamp and not existing_timestamp:
+            should_replace = True
+        elif not timestamp and not existing_timestamp:
+            should_replace = row_index >= existing_row_index
+        else:
+            should_replace = row_index >= existing_row_index
+
+        if should_replace:
+            latest_by_key[dedupe_key] = (member, timestamp, row_index)
+
+    deduped_members = [
+        item[0]
+        for item in sorted(latest_by_key.values(), key=lambda value: value[2])
+    ]
+
+    duplicates_removed = len(members_with_meta) - len(deduped_members)
+    if duplicates_removed > 0:
+        logger.info("Removed %s duplicate member submissions", duplicates_removed)
+
+    return deduped_members
+
+
 def process_records(headers: List[str], all_records: List[dict]) -> List[TeamMember]:
     """Build the public team list from raw sheet headers and row data."""
     if not all_records:
@@ -298,17 +374,23 @@ def process_records(headers: List[str], all_records: List[dict]) -> List[TeamMem
     column_map = build_column_map(headers)
     logger.info("Processing %s rows from sheet", len(all_records))
 
-    members = []
+    timestamp_col = column_map.get('timestamp', 'Timestamp')
+    members_with_meta = []
     for i, row in enumerate(all_records, start=2):  # start=2 because row 1 is headers
         try:
             member = process_sheet_row(row, column_map, i)
             if member:
-                members.append(member)
+                members_with_meta.append((
+                    member,
+                    parse_sheet_timestamp(row.get(timestamp_col)),
+                    i,
+                ))
                 logger.debug("Row %s: Added member %s", i, member.full_name)
         except Exception as e:
             logger.warning("Row %s: Error processing row: %s", i, e)
             continue
 
+    members = dedupe_members(members_with_meta)
     logger.info("Successfully processed %s approved members", len(members))
     return members
 

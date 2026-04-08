@@ -1,13 +1,33 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import { Menu } from 'lucide-react';
 import { Button } from './ui/button';
 import ContactDialog from './ContactDialog';
+import {
+  Sheet,
+  SheetClose,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from './ui/sheet';
 
 const Header = () => {
   const [isContactOpen, setIsContactOpen] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const location = useLocation();
 
   const isActive = (path) => location.pathname === path;
+  const navItems = [
+    { to: '/portfolio', label: 'Research' },
+    { to: '/team', label: 'Team' },
+    { to: '/program', label: 'Program' },
+    { to: '/apply', label: 'Apply' },
+  ];
+
+  useEffect(() => {
+    setIsMobileMenuOpen(false);
+  }, [location.pathname]);
 
   return (
     <>
@@ -19,30 +39,15 @@ const Header = () => {
             </Link>
           </div>
           <nav className="header-nav-final">
-            <Link
-              to="/portfolio"
-              className={`nav-link-final ${isActive('/portfolio') ? 'nav-active' : ''}`}
-            >
-              Research
-            </Link>
-            <Link
-              to="/team"
-              className={`nav-link-final ${isActive('/team') ? 'nav-active' : ''}`}
-            >
-              Team
-            </Link>
-            <Link
-              to="/program"
-              className={`nav-link-final ${isActive('/program') ? 'nav-active' : ''}`}
-            >
-              Program
-            </Link>
-            <Link
-              to="/apply"
-              className={`nav-link-final ${isActive('/apply') ? 'nav-active' : ''}`}
-            >
-              Apply
-            </Link>
+            {navItems.map((item) => (
+              <Link
+                key={item.to}
+                to={item.to}
+                className={`nav-link-final ${isActive(item.to) ? 'nav-active' : ''}`}
+              >
+                {item.label}
+              </Link>
+            ))}
             <Button
               variant="outline"
               size="sm"
@@ -52,6 +57,48 @@ const Header = () => {
               Contact
             </Button>
           </nav>
+
+          <Sheet open={isMobileMenuOpen} onOpenChange={setIsMobileMenuOpen}>
+            <SheetTrigger asChild>
+              <Button
+                variant="ghost"
+                size="icon"
+                className="header-menu-toggle-final"
+                aria-label="Open navigation menu"
+              >
+                <Menu size={22} />
+              </Button>
+            </SheetTrigger>
+            <SheetContent side="right" className="mobile-nav-sheet-final">
+              <SheetHeader className="mobile-nav-header-final">
+                <SheetTitle className="mobile-nav-title-final">Navigate</SheetTitle>
+              </SheetHeader>
+
+              <nav className="mobile-nav-final" aria-label="Mobile navigation">
+                {navItems.map((item) => (
+                  <SheetClose asChild key={item.to}>
+                    <Link
+                      to={item.to}
+                      className={`mobile-nav-link-final ${isActive(item.to) ? 'nav-active' : ''}`}
+                    >
+                      {item.label}
+                    </Link>
+                  </SheetClose>
+                ))}
+
+                <Button
+                  variant="outline"
+                  onClick={() => {
+                    setIsMobileMenuOpen(false);
+                    setIsContactOpen(true);
+                  }}
+                  className="mobile-contact-btn-final"
+                >
+                  Contact
+                </Button>
+              </nav>
+            </SheetContent>
+          </Sheet>
         </div>
       </header>
       <ContactDialog 
