@@ -34,6 +34,10 @@ const MemberDetail = ({ member, isOpen, onClose }) => {
                 src={member.headshot_url}
                 alt={`${member.full_name} headshot`}
                 className="member-detail-image"
+                loading="lazy"
+                decoding="async"
+                width="800"
+                height="600"
                 onError={(e) => {
                   // Hide image on error
                   e.target.style.display = 'none';

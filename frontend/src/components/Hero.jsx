@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from './ui/button';
 import { ArrowRight } from 'lucide-react';
@@ -39,9 +39,15 @@ const Hero = () => {
         </div>
         <div className="hero-image-container-final">
           <img 
-            src="https://images.unsplash.com/photo-1705931819853-cce7c8d69f10" 
-            alt="Strategic Analysis" 
+            src="https://images.unsplash.com/photo-1705931819853-cce7c8d69f10?auto=format&fit=crop&w=1400&q=80"
+            alt="Echelon Equity student-led investment research analysts reviewing financial models"
             className="hero-image-final"
+            width="1400"
+            height="1100"
+            loading="eager"
+            fetchPriority="high"
+            decoding="async"
+            sizes="(max-width: 968px) 100vw, 50vw"
           />
         </div>
       </div>

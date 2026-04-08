@@ -27,8 +27,8 @@ const AnalystWork = () => {
   return (
     <section className="analyst-work-section-final">
       <div className="content-container-final">
-        <h2 className="section-title-final">Recent Analyst Work</h2>
-        <p className="section-subtitle-final">Selected excerpts from current analyst output.</p>
+        <h2 className="section-title-final">Recent Investment Research Output</h2>
+        <p className="section-subtitle-final">Selected excerpts from current analyst output across modeling, valuation, and memo writing.</p>
         <div className="analyst-work-grid-final">
           {analystWorkSamples.map((sample) => (
             <div key={sample.id} className="work-sample-card-final">

@@ -1,0 +1,22 @@
+# Echelon Equity
+
+> Student-led investment research platform focused on analyst development, institutional standards, and real work product.
+
+## Canonical Site
+- https://echelonequity.co/
+
+## Primary Pages
+- Home: https://echelonequity.co/
+- Apply: https://echelonequity.co/apply
+- Portfolio: https://echelonequity.co/portfolio
+- Program: https://echelonequity.co/program
+- Team: https://echelonequity.co/team
+
+## Summary
+Echelon Equity is a student-run investment research platform where analysts build investment research, financial models, valuation work, and memos under institutional standards.
+
+The site explains the analyst program, research coverage, team, and application flow. It is intended for students interested in serious investment research and analyst development.
+
+## Contact
+- team@echelonequity.co
+- admissions@echelonequity.co

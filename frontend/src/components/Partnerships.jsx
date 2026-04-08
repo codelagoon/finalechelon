@@ -15,6 +15,8 @@ const Partnerships = () => {
             <img 
               src={`https://img.logo.dev/tikr.com?token=${LOGO_DEV_TOKEN}&format=png&size=240`}
               alt="TIKR"
+              loading="lazy"
+              decoding="async"
             />
           </a>
 
@@ -22,6 +24,8 @@ const Partnerships = () => {
             <img 
               src={`https://img.logo.dev/adventiscg.com?token=${LOGO_DEV_TOKEN}&format=png&size=240`}
               alt="Adventis CG"
+              loading="lazy"
+              decoding="async"
             />
           </a>
 
@@ -29,6 +33,8 @@ const Partnerships = () => {
             <img 
               src={`https://img.logo.dev/excelexercises.com?token=${LOGO_DEV_TOKEN}&format=png&size=240`}
               alt="Excel Exercises"
+              loading="lazy"
+              decoding="async"
             />
           </a>
 
@@ -36,6 +42,8 @@ const Partnerships = () => {
             <img 
               src={`https://img.logo.dev/yis.org?token=${LOGO_DEV_TOKEN}&format=png&size=240`}
               alt="YIS"
+              loading="lazy"
+              decoding="async"
             />
           </a>
         </div>

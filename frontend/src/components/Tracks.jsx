@@ -1,9 +1,9 @@
 import React from 'react';
 
 const tracksData = {
-  title: "Analyst Tracks",
-  subtitle: "Analysts operate within structured tracks aligned to institutional workflows.",
-  positioning: "Analysts enter with varying levels of experience, but are held to the same standard of output.",
+  title: "Investment Research Program Tracks",
+  subtitle: "Analysts operate within structured tracks aligned to institutional investment research workflows.",
+  positioning: "Analysts enter with different levels of experience, but are held to the same standard of output, process, and presentation.",
   tracks: [
     {
       id: 1,

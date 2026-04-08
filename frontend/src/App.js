@@ -1,28 +1,42 @@
-import React from "react";
+import React, { Suspense, lazy } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./App.css";
 import { Toaster } from "./components/ui/sonner";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
+import RouteManager from "./components/RouteManager";
+
 import Home from "./pages/Home";
-import Program from "./pages/Program";
-import PortfolioPage from "./pages/PortfolioPage";
-import Apply from "./pages/Apply";
-import Team from "./pages/Team";
+
+const Program = lazy(() => import("./pages/Program"));
+const PortfolioPage = lazy(() => import("./pages/PortfolioPage"));
+const Apply = lazy(() => import("./pages/Apply"));
+const Team = lazy(() => import("./pages/Team"));
 
 function App() {
   return (
     <BrowserRouter>
+      <RouteManager />
       <div className="App">
         <Header />
-        <main>
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/program" element={<Program />} />
-            <Route path="/portfolio" element={<PortfolioPage />} />
-            <Route path="/team" element={<Team />} />
-            <Route path="/apply" element={<Apply />} />
-          </Routes>
+        <main id="main-content">
+          <Suspense
+            fallback={
+              <div className="route-loading-final">
+                <div className="content-container-final">
+                  <p>Loading page...</p>
+                </div>
+              </div>
+            }
+          >
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/program" element={<Program />} />
+              <Route path="/portfolio" element={<PortfolioPage />} />
+              <Route path="/team" element={<Team />} />
+              <Route path="/apply" element={<Apply />} />
+            </Routes>
+          </Suspense>
         </main>
         <Footer />
         <Toaster />

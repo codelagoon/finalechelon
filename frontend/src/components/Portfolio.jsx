@@ -4,21 +4,43 @@ import { coverageData } from '../mockData';
 
 const Portfolio = () => {
   const [portfolioData, setPortfolioData] = useState(portfolioCompaniesConfig);
-  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
+    let timeoutId;
+    let idleId;
+    let isCancelled = false;
+
     const loadPortfolioData = async () => {
-      setIsLoading(true);
       const data = await fetchPortfolioData();
-      setPortfolioData(data);
-      setIsLoading(false);
+      if (!isCancelled) {
+        setPortfolioData(data);
+      }
     };
-    
-    loadPortfolioData();
-    
-    // Refresh every 5 minutes (less aggressive)
+
+    const scheduleInitialFetch = () => {
+      if ("requestIdleCallback" in window) {
+        idleId = window.requestIdleCallback(() => {
+          loadPortfolioData();
+        });
+      } else {
+        timeoutId = window.setTimeout(loadPortfolioData, 1200);
+      }
+    };
+
+    scheduleInitialFetch();
+
     const interval = setInterval(loadPortfolioData, 300000);
-    return () => clearInterval(interval);
+
+    return () => {
+      isCancelled = true;
+      clearInterval(interval);
+      if (timeoutId) {
+        clearTimeout(timeoutId);
+      }
+      if (idleId && "cancelIdleCallback" in window) {
+        window.cancelIdleCallback(idleId);
+      }
+    };
   }, []);
 
   const getStatusClass = (status) => {
@@ -47,7 +69,7 @@ const Portfolio = () => {
           {coverageData.subtitle}
         </p>
         <div className="portfolio-table-wrapper-final">
-          <table className="portfolio-table-final">
+          <table className="portfolio-table-final" aria-label="Echelon Equity investment research coverage table">
             <thead>
               <tr>
                 <th>Ticker</th>

@@ -192,6 +192,10 @@ const TeamMembers = () => {
                       src={member.headshot_url}
                       alt={`${member.full_name} headshot`}
                       className="team-card-image"
+                      loading="lazy"
+                      decoding="async"
+                      width="600"
+                      height="400"
                       onError={(e) => {
                         // Hide image on error - don't show placeholder
                         e.target.style.display = 'none';

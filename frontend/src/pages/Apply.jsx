@@ -174,9 +174,9 @@ const Apply = () => {
     <div className="apply-page page-shell-final page-shell-padded-final">
       <div className="content-container-final page-shell-narrow-final">
         <div className="page-heading-final">
-          <h1 className="section-title-final">Apply to Echelon</h1>
+          <h1 className="section-title-final">Apply to the Investment Research Program</h1>
           <p className="section-subtitle-final">
-            Acceptance is earned. Applications are evaluated on clarity of thinking, attention to detail, and ability to execute.
+            Apply to Echelon Equity's student-led investment research program. Acceptance is earned through clarity of thinking, attention to detail, and ability to execute.
           </p>
         </div>
         

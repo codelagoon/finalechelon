@@ -1,43 +1,29 @@
-import React, { useEffect } from 'react';
+import React from 'react';
+import { Link } from 'react-router-dom';
 import TeamMembers from '../components/TeamMembers';
 
 const Team = () => {
-  // Scroll to top on mount and update document title
-  useEffect(() => {
-    window.scrollTo(0, 0);
-    document.title = "Team | Echelon Equity";
-    
-    // Update meta description
-    const metaDesc = document.querySelector('meta[name="description"]');
-    if (metaDesc) {
-      metaDesc.setAttribute('content', 
-        "Meet the outstanding student analysts from top high schools and universities across the United States producing institutional-grade investment research at Echelon Equity."
-      );
-    }
-    
-    return () => {
-      document.title = "Echelon Equity";
-    };
-  }, []);
-
   return (
     <div className="team-page page-shell-final">
         {/* Page Header */}
         <div className="team-header-section">
           <div className="content-container-final">
-            <h1 className="section-title-final">Our Team</h1>
+            <h1 className="section-title-final">Echelon Equity Research Analysts</h1>
             
             <div className="team-description">
               <p className="positioning-paragraph-final">
-                Echelon Equity brings together outstanding student analysts from top high schools 
-                and universities across the United States. Our team produces thoughtful research across 
-                equity analysis, technical strategy, macroeconomic policy, and strategic marketing, 
-                with each member selected for analytical ability, curiosity, and commitment to excellence.
+                Echelon Equity brings together student analysts from top high schools
+                and universities across the United States. Our team produces investment research across
+                equity analysis, technical strategy, macroeconomic policy, and strategic marketing,
+                with each member selected for analytical ability, curiosity, and commitment to institutional standards.
               </p>
               <p className="positioning-paragraph-final">
-                Across sectors such as technology, healthcare, financial services, consumer, energy, 
-                and industrials, our members develop and communicate research using disciplined analysis, 
-                valuation thinking, and market awareness shaped by high professional standards.
+                Across sectors such as technology, healthcare, financial services, consumer, energy,
+                and industrials, our research analysts develop and communicate investment research using disciplined analysis,
+                valuation thinking, and market awareness shaped by high professional standards. To understand how the platform works, visit the{" "}
+                <Link to="/program" className="inline-link-final">investment research program</Link>{" "}
+                or{" "}
+                <Link to="/apply" className="inline-link-final">start an application</Link>.
               </p>
             </div>
             

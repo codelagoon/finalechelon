@@ -1,0 +1,38 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="630" fill="#F6F4EF"/>
+  <rect x="48" y="48" width="1104" height="534" stroke="#111111" stroke-width="2"/>
+  <path d="M48 168H1152" stroke="#D6D0C3" stroke-width="2"/>
+  <path d="M48 462H1152" stroke="#D6D0C3" stroke-width="2"/>
+  <path d="M820 48V582" stroke="#D6D0C3" stroke-width="2"/>
+  <text x="92" y="132" fill="#111111" font-family="'Georgia', 'Times New Roman', serif" font-size="28" letter-spacing="6">ECHELON EQUITY</text>
+  <text x="92" y="258" fill="#111111" font-family="'Georgia', 'Times New Roman', serif" font-size="74" font-weight="700">
+    Student-Led
+  </text>
+  <text x="92" y="338" fill="#111111" font-family="'Georgia', 'Times New Roman', serif" font-size="74" font-weight="700">
+    Investment Research
+  </text>
+  <text x="92" y="420" fill="#3F3A32" font-family="'Arial', sans-serif" font-size="28">
+    Institutional standards. Real analyst work. Serious development.
+  </text>
+  <text x="92" y="520" fill="#111111" font-family="'Arial', sans-serif" font-size="22" letter-spacing="2">
+    ECHELONEQUITY.CO
+  </text>
+  <text x="862" y="152" fill="#111111" font-family="'Arial', sans-serif" font-size="20" letter-spacing="2">
+    PLATFORM
+  </text>
+  <text x="862" y="214" fill="#3F3A32" font-family="'Arial', sans-serif" font-size="28">
+    Analyst tracks
+  </text>
+  <text x="862" y="264" fill="#3F3A32" font-family="'Arial', sans-serif" font-size="28">
+    Research coverage
+  </text>
+  <text x="862" y="314" fill="#3F3A32" font-family="'Arial', sans-serif" font-size="28">
+    Review standards
+  </text>
+  <text x="862" y="364" fill="#3F3A32" font-family="'Arial', sans-serif" font-size="28">
+    Selective admissions
+  </text>
+  <text x="862" y="520" fill="#111111" font-family="'Georgia', 'Times New Roman', serif" font-size="26">
+    The Work Is the Credential.
+  </text>
+</svg>

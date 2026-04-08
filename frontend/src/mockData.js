@@ -1,9 +1,10 @@
 // Echelon Equity - Final Institutional-Grade Copy
 
 export const heroData = {
-  tagline: "THE WORK IS THE CREDENTIAL.",
-  headline: "Operate at an Institutional Standard",
-  subheadline: "Student-led investment research platform. Institutional-grade analysis. Reviewed by experienced Wall Street professionals.",
+  tagline: "STUDENT-LED INVESTMENT RESEARCH",
+  headline: "Echelon Equity Operates at Institutional Standards",
+  subheadline:
+    "Echelon Equity is a student-run investment research platform where analysts build models, write investment memos, and develop under institutional standards.",
   ctaPrimary: "Apply to Echelon",
   ctaSecondary: "View Research"
 };
@@ -28,10 +29,10 @@ export const statsData = [
 ];
 
 export const positioningData = {
-  title: "This Is Not a Course",
+  title: "Why Echelon Equity Is Different",
   paragraphs: [
-    "Echelon is a proving ground for future investors and operators. We do not teach finance — we evaluate execution.",
-    "Analysts produce DCF models, three-statement analyses, LBO models, and formal investment memos. All work is reviewed against institutional standards."
+    "Echelon Equity is a student-led investment research platform built for analysts who want to produce real work, not just consume finance content.",
+    "Members contribute investment research, valuation work, and formal memos that are reviewed against institutional standards and sharpened through structured feedback."
   ],
   principles: [
     "Output over credentials",
@@ -42,14 +43,14 @@ export const positioningData = {
 };
 
 export const coverageData = {
-  title: "Coverage Universe",
-  subtitle: "Active research coverage across public equities. Each position is supported by structured analysis and updated market context.",
+  title: "Investment Research Coverage",
+  subtitle: "Active research coverage across public equities. Each position is supported by structured investment research, updated market context, and analyst review.",
   attribution: "Market data sourced from Finnhub. Updated periodically."
 };
 
 export const whatYouDoData = {
-  title: "Produce Institutional-Grade Work",
-  subtitle: "Analysts are expected to operate within structured investment workflows.",
+  title: "What Research Analysts Do",
+  subtitle: "Members contribute investment research through structured workflows that mirror institutional expectations.",
   activities: [
     {
       title: "Financial Modeling",
@@ -75,8 +76,8 @@ export const whatYouDoData = {
 };
 
 export const reviewData = {
-  title: "Reviewed to Institutional Standards",
-  subtitle: "Every deliverable is evaluated by experienced analysts working at top firms.",
+  title: "Research Reviewed Against Institutional Standards",
+  subtitle: "Every deliverable is evaluated for clarity, structure, and valuation discipline against serious professional expectations.",
   reviews: [
     {
       quote: "Work produced here meets expectations for junior analysts.",
@@ -129,8 +130,8 @@ export const partnershipsData = {
 };
 
 export const standardsData = {
-  title: "Standards of Practice",
-  intro: "We operate using the same frameworks applied at institutional firms. Every model, memo, and presentation follows strict protocols. No shortcuts. No exceptions.",
+  title: "Research Standards and Methodology",
+  intro: "Echelon Equity operates with standards designed to make student-led investment research clearer, more defensible, and more professional. Every model, memo, and presentation follows structured protocols so the work can stand up to review.",
   exampleStandard: {
     title: "Example Standard:",
     rules: [
@@ -188,9 +189,9 @@ export const selectionData = {
 };
 
 export const finalCTAData = {
-  title: "Apply to Echelon",
-  subtitle: "Access is limited. Selection is deliberate.",
-  selectivityNote: "Selection is limited.",
+  title: "Apply to the Echelon Equity Research Program",
+  subtitle: "Join a student-led investment research platform built around output, review, and institutional standards.",
+  selectivityNote: "Selection is deliberate and based on execution.",
   cta: "Submit Application"
 };
 

@@ -1,50 +1,67 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+import { siteConfig } from '../seo/siteConfig';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
+  const socialLinks = [
+    { label: 'LinkedIn', href: siteConfig.social.linkedin },
+    { label: 'Instagram', href: siteConfig.social.instagram },
+    { label: 'TikTok', href: siteConfig.social.tiktok },
+    { label: 'Facebook', href: siteConfig.social.facebook },
+    { label: 'X', href: siteConfig.social.x },
+    { label: 'YouTube', href: siteConfig.social.youtube },
+  ].filter((link) => link.href);
 
   return (
     <footer className="site-footer">
       <div className="footer-container">
         <div className="footer-grid">
           <div className="footer-section">
-            <h3 className="footer-brand">ECHELON EQUITY</h3>
+            <h2 className="footer-brand">ECHELON EQUITY</h2>
             <p className="footer-tagline">
-              The Work Is the Credential.<br />
-              Student-led investment research platform. NYC, 2025.
+              {siteConfig.slogan}<br />
+              Student-led investment research platform focused on analyst development, institutional standards, and real work.
             </p>
             <div className="footer-contact-info">
-              <p className="footer-email">team@echelonequity.co</p>
-              <p className="footer-email">admissions@echelonequity.co</p>
+              <p className="footer-email">
+                <a href={`mailto:${siteConfig.emails.general}`}>{siteConfig.emails.general}</a>
+              </p>
+              <p className="footer-email">
+                <a href={`mailto:${siteConfig.emails.admissions}`}>{siteConfig.emails.admissions}</a>
+              </p>
             </div>
           </div>
           
           <div className="footer-section">
             <h4 className="footer-heading">Program</h4>
             <ul className="footer-links">
-              <li><a href="#application">Apply</a></li>
-              <li><a href="#coverage">Research</a></li>
-              <li><a href="#tracks">Analyst Tracks</a></li>
-              <li><a href="#selection">Selection</a></li>
+              <li><Link to="/program">Investment Research Program</Link></li>
+              <li><Link to="/apply">Apply to Echelon</Link></li>
+              <li><Link to="/team">Research Analyst Team</Link></li>
             </ul>
           </div>
 
           <div className="footer-section">
             <h4 className="footer-heading">Resources</h4>
             <ul className="footer-links">
-              <li><a href="https://echelonequity.co" target="_blank" rel="noopener noreferrer">Website</a></li>
-              <li><a href="https://portal.echelonequity.co" target="_blank" rel="noopener noreferrer">Portal</a></li>
-              <li><a href="#partnerships">Partnerships</a></li>
-              <li><a href="#contact">Contact</a></li>
+              <li><Link to="/portfolio">Investment Research Coverage</Link></li>
+              <li><Link to="/program">Analyst Tracks and Standards</Link></li>
+              <li><Link to="/team">Meet Echelon Equity</Link></li>
+              <li><a href="https://portal.echelonequity.co" target="_blank" rel="noopener noreferrer">Member Portal</a></li>
             </ul>
           </div>
 
           <div className="footer-section">
             <h4 className="footer-heading">Connect</h4>
             <ul className="footer-links">
-              <li><a href="https://www.linkedin.com/company/echelon-equity" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
-              <li><a href="https://www.instagram.com/echelonequity" target="_blank" rel="noopener noreferrer">Instagram</a></li>
-              <li><a href="https://www.tiktok.com/@echelonequity" target="_blank" rel="noopener noreferrer">TikTok</a></li>
+              {socialLinks.map((link) => (
+                <li key={link.label}>
+                  <a href={link.href} target="_blank" rel="noopener noreferrer">
+                    {link.label}
+                  </a>
+                </li>
+              ))}
             </ul>
           </div>
         </div>
