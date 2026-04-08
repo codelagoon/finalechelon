@@ -145,29 +145,38 @@ def convert_google_drive_link(url: Optional[str]) -> Optional[str]:
     Supports:
     - https://drive.google.com/file/d/{FILE_ID}/view
     - https://drive.google.com/open?id={FILE_ID}
-    Returns direct link format for images or None if conversion fails.
+    Returns a stable direct image URL or None if conversion fails.
     """
     if not url:
         return None
     
     url = url.strip()
+
+    def build_direct_drive_image_url(file_id: str) -> str:
+        return f"https://drive.usercontent.google.com/download?id={file_id}&export=view"
     
     # Pattern 1: /file/d/{FILE_ID}/view
     file_pattern = r'https://drive\.google\.com/file/d/([a-zA-Z0-9_-]+)'
     match = re.search(file_pattern, url)
     if match:
         file_id = match.group(1)
-        return f"https://drive.google.com/uc?export=view&id={file_id}"
+        return build_direct_drive_image_url(file_id)
     
     # Pattern 2: ?id={FILE_ID}
     open_pattern = r'[?&]id=([a-zA-Z0-9_-]+)'
     match = re.search(open_pattern, url)
     if match:
         file_id = match.group(1)
-        return f"https://drive.google.com/uc?export=view&id={file_id}"
+        return build_direct_drive_image_url(file_id)
     
-    # If it's already a direct-ish URL, return as-is
+    # Support existing Google Drive direct URLs and normalize them to the final content host.
     if 'drive.google.com' in url and 'uc?export=view' in url:
+        match = re.search(open_pattern, url)
+        if match:
+            return build_direct_drive_image_url(match.group(1))
+        return url
+
+    if 'drive.usercontent.google.com' in url:
         return url
     
     # If it looks like a regular image URL, return it
