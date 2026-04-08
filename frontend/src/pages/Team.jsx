@@ -42,8 +42,9 @@ const Team = () => {
             </div>
             
             <p className="team-disclaimer">
-              Please note: not every Echelon Equity member is featured on this page. 
+              Please note: not every Echelon Equity member is featured on this page.
               Some members chose not to be displayed on the website.
+              This page is populated directly from our internal member form submissions and updates automatically as new profiles are added.
             </p>
           </div>
         </div>

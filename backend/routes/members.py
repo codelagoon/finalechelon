@@ -1,6 +1,6 @@
 """
 Echelon Equity - Member API Route
-Fetches approved members from Google Sheets for public Team page
+Fetches team members from Google Sheets for the public Team page
 """
 import csv
 import io
@@ -72,17 +72,6 @@ def normalize_text(value: Any) -> Optional[str]:
         return None
     text = str(value).strip()
     return text if text else None
-
-
-def is_approved_visibility(value: Any) -> bool:
-    """
-    Check if visibility value indicates approved for display.
-    Treats: yes, Yes, YES, true, TRUE, y, 1 as approved.
-    """
-    if value is None:
-        return False
-    text = str(value).strip().lower()
-    return text in ('yes', 'true', 'y', '1')
 
 
 def normalize_url(url: Optional[str]) -> Optional[str]:
@@ -212,15 +201,8 @@ def parse_skills(skills_value: Any) -> List[str]:
 def process_sheet_row(row: dict, column_map: dict, row_index: int) -> Optional[TeamMember]:
     """
     Process a single sheet row into a TeamMember object.
-    Returns None if row should not be displayed.
+    Returns None only when a row is missing the minimum data needed to render.
     """
-    # Get visibility field
-    visibility_col = column_map.get('show_profile', 'Show my profile on the website?')
-    visibility_value = row.get(visibility_col)
-    
-    if not is_approved_visibility(visibility_value):
-        return None
-    
     # Required fields
     full_name_col = column_map.get('full_name', 'Full Name')
     role_col = column_map.get('role', 'Role')
@@ -228,9 +210,12 @@ def process_sheet_row(row: dict, column_map: dict, row_index: int) -> Optional[T
     full_name = normalize_text(row.get(full_name_col))
     role = normalize_text(row.get(role_col))
     
-    if not full_name or not role:
-        logger.debug(f"Row {row_index}: Missing required fields (name or role)")
+    if not full_name:
+        logger.debug(f"Row {row_index}: Missing required field (name)")
         return None
+
+    if not role:
+        role = "Team Member"
     
     # Optional fields
     short_bio_col = column_map.get('short_bio', 'Short Bio')
@@ -390,7 +375,7 @@ def fetch_published_sheet_records(published_sheet_id: str) -> List[TeamMember]:
 async def fetch_members_from_sheet() -> tuple[List[TeamMember], str]:
     """
     Fetch and process members from Google Sheets.
-    Returns list of approved TeamMember objects.
+    Returns list of TeamMember objects.
     """
     sheet_reference = get_members_sheet_reference()
     if not sheet_reference:
@@ -426,8 +411,7 @@ async def fetch_members_from_sheet() -> tuple[List[TeamMember], str]:
 @router.get("/", response_model=MembersResponse)
 async def get_members():
     """
-    Get all approved team members from Google Sheets.
-    Returns only members with approved visibility setting.
+    Get all team members from Google Sheets.
     """
     try:
         members, source = await fetch_members_from_sheet()
