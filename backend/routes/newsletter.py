@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 import json
 import logging
 import os
@@ -14,23 +13,12 @@ from fastapi.responses import JSONResponse
 from pydantic import BaseModel, EmailStr, StringConstraints
 from pymongo.errors import DuplicateKeyError
 from typing_extensions import Annotated
-=======
-"""
-Newsletter Signup API Route
-Handles newsletter subscriptions and adds contacts to Resend
-"""
-import os
-import logging
-from fastapi import APIRouter, HTTPException, Request
-from pydantic import BaseModel, EmailStr
->>>>>>> copilot/fix-269082112-1199003721-b731d060-2da0-479a-a355-db783d2cabf2
 import resend
 
 logger = logging.getLogger(__name__)
 
 router = APIRouter(prefix="/newsletter", tags=["newsletter"])
 
-<<<<<<< HEAD
 SourceField = Annotated[str, StringConstraints(strip_whitespace=True, min_length=1, max_length=100)]
 SegmentField = Annotated[Optional[str], StringConstraints(strip_whitespace=True, max_length=80)]
 EventNameField = Annotated[str, StringConstraints(strip_whitespace=True, min_length=3, max_length=80)]
@@ -151,7 +139,7 @@ class NewsletterProviderGateway:
                     f"<p><strong>Segment:</strong> {subscriber.get('segment') or 'none'}</p>"
                     f"<p><strong>Subscriber ID:</strong> {subscriber['id']}</p>"
                 ),
-                **({"reply_to": reply_to} if reply_to else {}),
+                **{"reply_to": reply_to} if reply_to else {},
             }
         )
 
@@ -159,13 +147,13 @@ class NewsletterProviderGateway:
             {
                 "from": NEWSLETTER_FROM_EMAIL,
                 "to": [subscriber["email"]],
-                "subject": "You’re subscribed to Echelon Equity newsletter",
+                "subject": "You're subscribed to Echelon Equity newsletter",
                 "html": (
                     "<p>Thanks for subscribing to Echelon Equity market notes.</p>"
-                    "<p>You’ll receive student-led equity research, memo highlights, and market context.</p>"
+                    "<p>You'll receive student-led equity research, memo highlights, and market context.</p>"
                     "<p>If this was not you, you can ignore this email.</p>"
                 ),
-                **({"reply_to": reply_to} if reply_to else {}),
+                **{"reply_to": reply_to} if reply_to else {},
             }
         )
 
@@ -362,40 +350,3 @@ async def subscribe_newsletter(payload: NewsletterSubscribeRequest, request: Req
                 "request_id": request_id,
             },
         )
-=======
-# Initialize Resend
-resend.api_key = os.environ.get("RESEND_API_KEY")
-
-class NewsletterSignup(BaseModel):
-    email: EmailStr
-    source: str = "unknown"
-    segment: str = None
-
-@router.post("/subscribe")
-async def subscribe(signup: NewsletterSignup, request: Request):
-    # Rate limiting and validation can be added here if needed
-    try:
-        # Add contact to Resend
-        contact_params = {
-            "email": signup.email,
-            "unsubscribed": False,
-            "audiences": [],  # Optionally specify audience IDs
-            "user_supplied_id": None,
-            "first_name": None,
-            "last_name": None,
-            "custom_fields": {
-                "source": signup.source,
-                "segment": signup.segment,
-                "ip": request.client.host
-            }
-        }
-        contact = resend.Contacts.create(contact_params)
-        logger.info(f"Newsletter contact created: {contact}")
-        return {"success": True, "message": "You are subscribed to Echelon market notes."}
-    except resend.errors.ResendAPIError as e:
-        logger.error(f"Resend API error: {e}")
-        raise HTTPException(status_code=400, detail="Failed to subscribe. Please try again later.")
-    except Exception as e:
-        logger.error(f"Newsletter signup error: {e}")
-        raise HTTPException(status_code=500, detail="Internal server error.")
->>>>>>> copilot/fix-269082112-1199003721-b731d060-2da0-479a-a355-db783d2cabf2
