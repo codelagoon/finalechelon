@@ -139,7 +139,7 @@ class NewsletterProviderGateway:
                     f"<p><strong>Segment:</strong> {subscriber.get('segment') or 'none'}</p>"
                     f"<p><strong>Subscriber ID:</strong> {subscriber['id']}</p>"
                 ),
-                **{"reply_to": reply_to} if reply_to else {},
+                **({"reply_to": reply_to} if reply_to else {}),
             }
         )
 
@@ -153,7 +153,7 @@ class NewsletterProviderGateway:
                     "<p>You'll receive student-led equity research, memo highlights, and market context.</p>"
                     "<p>If this was not you, you can ignore this email.</p>"
                 ),
-                **{"reply_to": reply_to} if reply_to else {},
+                **({"reply_to": reply_to} if reply_to else {}),
             }
         )
 
