@@ -111,48 +111,131 @@ export async function fetchAllIssues() {
 }
 
 export async function createIssue(adminToken, payload) {
-  const response = await fetch(`${API_URL}/api/newsletter/issues/`, {
-    method: "POST",
-    headers: buildHeaders(adminToken),
-    body: JSON.stringify(payload),
-  });
+  const url = `${API_URL}/api/newsletter/issues/`;
+  
+  try {
+    console.log("[Newsletter Admin] Creating issue:", {
+      url,
+      payload,
+      tokenLength: adminToken ? adminToken.length : 0,
+    });
 
-  const result = await parseResponse(response);
+    const response = await fetch(url, {
+      method: "POST",
+      headers: buildHeaders(adminToken),
+      body: JSON.stringify(payload),
+    });
 
-  return {
-    ok: response.ok,
-    status: response.status,
-    data: result,
-  };
+    const result = await parseResponse(response);
+
+    console.log("[Newsletter Admin] Create response:", {
+      status: response.status,
+      ok: response.ok,
+      result,
+    });
+
+    return {
+      ok: response.ok,
+      status: response.status,
+      data: result,
+    };
+  } catch (error) {
+    console.error("[Newsletter Admin] Create error:", {
+      url,
+      message: error.message,
+      error,
+    });
+    
+    return {
+      ok: false,
+      status: 0,
+      data: { detail: `Network error: ${error.message}` },
+    };
+  }
 }
 
 export async function updateIssue(adminToken, issueId, payload) {
-  const response = await fetch(`${API_URL}/api/newsletter/issues/${issueId}`, {
-    method: "PATCH",
-    headers: buildHeaders(adminToken),
-    body: JSON.stringify(payload),
-  });
+  const url = `${API_URL}/api/newsletter/issues/${issueId}`;
 
-  const result = await parseResponse(response);
+  try {
+    console.log("[Newsletter Admin] Updating issue:", {
+      url,
+      payload,
+      tokenLength: adminToken ? adminToken.length : 0,
+    });
 
-  return {
-    ok: response.ok,
-    status: response.status,
-    data: result,
-  };
+    const response = await fetch(url, {
+      method: "PATCH",
+      headers: buildHeaders(adminToken),
+      body: JSON.stringify(payload),
+    });
+
+    const result = await parseResponse(response);
+
+    console.log("[Newsletter Admin] Update response:", {
+      status: response.status,
+      ok: response.ok,
+      result,
+    });
+
+    return {
+      ok: response.ok,
+      status: response.status,
+      data: result,
+    };
+  } catch (error) {
+    console.error("[Newsletter Admin] Update error:", {
+      url,
+      message: error.message,
+      error,
+    });
+
+    return {
+      ok: false,
+      status: 0,
+      data: { detail: `Network error: ${error.message}` },
+    };
+  }
 }
 
 export async function deleteIssue(adminToken, issueId) {
-  const response = await fetch(`${API_URL}/api/newsletter/issues/${issueId}`, {
-    method: "DELETE",
-    headers: buildHeaders(adminToken),
-  });
+  const url = `${API_URL}/api/newsletter/issues/${issueId}`;
 
-  const result = await parseResponse(response);
+  try {
+    console.log("[Newsletter Admin] Deleting issue:", {
+      url,
+      tokenLength: adminToken ? adminToken.length : 0,
+    });
 
-  return {
-    ok: response.ok,
-    status: response.status,
-    data: result,
-  };
+    const response = await fetch(url, {
+      method: "DELETE",
+      headers: buildHeaders(adminToken),
+    });
+
+    const result = await parseResponse(response);
+
+    console.log("[Newsletter Admin] Delete response:", {
+      status: response.status,
+      ok: response.ok,
+      result,
+    });
+
+    return {
+      ok: response.ok,
+      status: response.status,
+      data: result,
+    };
+  } catch (error) {
+    console.error("[Newsletter Admin] Delete error:", {
+      url,
+      message: error.message,
+      error,
+    });
+
+    return {
+      ok: false,
+      status: 0,
+      data: { detail: `Network error: ${error.message}` },
+    };
+  }
 }
