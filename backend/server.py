@@ -12,6 +12,7 @@ import uuid
 from datetime import datetime, timezone
 from routes.applications import router as applications_router
 from routes.members import router as members_router
+from routes.newsletter import router as newsletter_router
 
 
 ROOT_DIR = Path(__file__).parent
@@ -85,6 +86,7 @@ async def get_status_checks():
 app.include_router(api_router)
 app.include_router(applications_router, prefix="/api")
 app.include_router(members_router, prefix="/api")
+app.include_router(newsletter_router, prefix="/api")
 
 app.add_middleware(
     CORSMiddleware,
