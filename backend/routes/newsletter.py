@@ -1,6 +1,7 @@
 import json
 import logging
 import os
+import asyncio
 import uuid
 from collections import defaultdict, deque
 from datetime import datetime, timezone
@@ -12,6 +13,7 @@ from fastapi.responses import JSONResponse
 from pydantic import BaseModel, EmailStr, StringConstraints
 from pymongo.errors import DuplicateKeyError
 from typing_extensions import Annotated
+import resend
 
 logger = logging.getLogger(__name__)
 
@@ -28,6 +30,17 @@ EMAIL_RATE_LIMIT = int(os.environ.get("NEWSLETTER_EMAIL_RATE_LIMIT", "5"))
 
 _ip_hits: Dict[str, Deque[float]] = defaultdict(deque)
 _email_hits: Dict[str, Deque[float]] = defaultdict(deque)
+
+
+def get_resend_settings() -> Dict[str, Optional[str]]:
+    return {
+        "api_key": os.environ.get("RESEND_API_KEY"),
+        "from_email": os.environ.get("NEWSLETTER_FROM_EMAIL", os.environ.get("SENDER_EMAIL", "onboarding@resend.dev")),
+        "team_email": os.environ.get("NEWSLETTER_TEAM_EMAIL", os.environ.get("ADMISSIONS_EMAIL", "admissions@echelonequity.co")),
+        "reply_to": os.environ.get("NEWSLETTER_REPLY_TO"),
+        "contact_segment_id": os.environ.get("NEWSLETTER_CONTACT_SEGMENT_ID"),
+        "audience_id": os.environ.get("NEWSLETTER_AUDIENCE_ID"),
+    }
 
 
 def is_rate_limited(bucket: Dict[str, Deque[float]], key: str, window_seconds: int, max_requests: int) -> bool:
@@ -74,11 +87,132 @@ class AnalyticsHook:
 
 
 class NewsletterProviderGateway:
+    async def _add_contact_to_segment(self, email: str, segment_id: str) -> Optional[str]:
+        settings = get_resend_settings()
+        resend.api_key = settings["api_key"]
+        if not resend.api_key:
+            return None
+
+        try:
+            response = await asyncio.to_thread(
+                resend.Contacts.Segments.add,
+                {"email": email, "segment_id": segment_id},
+            )
+            return response.get("id") if isinstance(response, dict) else None
+        except Exception as exc:
+            logger.warning(
+                "newsletter_contact_segment_add_failed email=%s segment_id=%s error=%s",
+                email,
+                segment_id,
+                str(exc),
+            )
+            return None
+
+    async def _create_contact(self, subscriber: Dict[str, Any]) -> Optional[str]:
+        settings = get_resend_settings()
+        resend.api_key = settings["api_key"]
+        if not resend.api_key:
+            return None
+
+        params: Dict[str, Any] = {
+            "email": subscriber["email"],
+            "unsubscribed": False,
+            "properties": {
+                "source": subscriber.get("source") or "unknown",
+                "segment": subscriber.get("segment") or "none",
+            },
+        }
+
+        try:
+            response = await asyncio.to_thread(resend.Contacts.create, params)
+            return response.get("id") if isinstance(response, dict) else None
+        except Exception as exc:
+            error_message = str(exc).lower()
+            if "already exists" in error_message or "409" in error_message:
+                logger.info("newsletter_contact_exists email=%s attempting_update=true", subscriber["email"])
+                try:
+                    update_params: Dict[str, Any] = {
+                        "email": subscriber["email"],
+                        "unsubscribed": False,
+                    }
+                    update_params["properties"] = params.get("properties", {})
+
+                    update_response = await asyncio.to_thread(resend.Contacts.update, update_params)
+                    return update_response.get("id") if isinstance(update_response, dict) else None
+                except Exception as update_exc:
+                    logger.warning("newsletter_contact_update_failed error=%s", str(update_exc))
+                    return None
+            logger.warning("newsletter_contact_create_failed error=%s", str(exc))
+            return None
+
+    async def _send_email(self, params: Dict[str, Any]) -> Optional[str]:
+        settings = get_resend_settings()
+        resend.api_key = settings["api_key"]
+        if not resend.api_key:
+            logger.info("newsletter_resend_skipped reason=missing_api_key")
+            return None
+
+        try:
+            response = await asyncio.to_thread(resend.Emails.send, params)
+            message_id = response.get("id") if isinstance(response, dict) else None
+            return message_id
+        except Exception as exc:
+            logger.warning("newsletter_resend_failed error=%s", str(exc))
+            return None
+
     async def on_subscriber_created(self, subscriber: Dict[str, Any]) -> None:
-        # Integration hook for future provider sync (e.g., Resend/Audience API).
+        settings = get_resend_settings()
+        contact_id = await self._create_contact(subscriber)
+        audience_membership_id = None
+        segment_membership_id = None
+        if settings["audience_id"]:
+            audience_membership_id = await self._add_contact_to_segment(
+                subscriber["email"], settings["audience_id"]
+            )
+        if settings["contact_segment_id"]:
+            segment_membership_id = await self._add_contact_to_segment(
+                subscriber["email"], settings["contact_segment_id"]
+            )
+
+        reply_to = [settings["reply_to"]] if settings["reply_to"] else None
+        team_email_id = await self._send_email(
+            {
+                "from": settings["from_email"],
+                "to": [settings["team_email"]],
+                "subject": f"New newsletter subscriber: {subscriber['email']}",
+                "html": (
+                    f"<p>A new newsletter subscription was captured.</p>"
+                    f"<p><strong>Email:</strong> {subscriber['email']}</p>"
+                    f"<p><strong>Source:</strong> {subscriber.get('source') or 'unknown'}</p>"
+                    f"<p><strong>Segment:</strong> {subscriber.get('segment') or 'none'}</p>"
+                    f"<p><strong>Subscriber ID:</strong> {subscriber['id']}</p>"
+                ),
+                **({"reply_to": reply_to} if reply_to else {}),
+            }
+        )
+
+        welcome_email_id = await self._send_email(
+            {
+                "from": settings["from_email"],
+                "to": [subscriber["email"]],
+                "subject": "You’re subscribed to Echelon Equity newsletter",
+                "html": (
+                    "<p>Thanks for subscribing to Echelon Equity market notes.</p>"
+                    "<p>You’ll receive student-led equity research, memo highlights, and market context.</p>"
+                    "<p>If this was not you, you can ignore this email.</p>"
+                ),
+                **({"reply_to": reply_to} if reply_to else {}),
+            }
+        )
+
         logger.info(
-            "newsletter_provider_hook event=subscriber_created subscriber_id=%s",
+            "newsletter_provider_hook event=subscriber_created subscriber_id=%s contact_id=%s audience_membership_id=%s segment_membership_id=%s team_email_id=%s welcome_email_id=%s",
             subscriber["id"],
+            contact_id,
+            audience_membership_id,
+            segment_membership_id,
+            team_email_id,
+            welcome_email_id,
         )
 
 
