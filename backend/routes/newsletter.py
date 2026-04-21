@@ -34,7 +34,6 @@ NEWSLETTER_TEAM_EMAIL = os.environ.get(
 )
 NEWSLETTER_REPLY_TO = os.environ.get("NEWSLETTER_REPLY_TO")
 NEWSLETTER_CONTACT_SEGMENT_ID = os.environ.get("NEWSLETTER_CONTACT_SEGMENT_ID")
-NEWSLETTER_AUDIENCE_ID = os.environ.get("NEWSLETTER_AUDIENCE_ID")
 
 resend.api_key = os.environ.get("RESEND_API_KEY")
 
@@ -86,22 +85,6 @@ class AnalyticsHook:
 
 
 class NewsletterProviderGateway:
-    async def _add_contact_to_segment(self, email: str, segment_id: str) -> Optional[str]:
-        try:
-            response = await asyncio.to_thread(
-                resend.Contacts.Segments.add,
-                {"email": email, "segment_id": segment_id},
-            )
-            return response.get("id") if isinstance(response, dict) else None
-        except Exception as exc:
-            logger.warning(
-                "newsletter_contact_segment_add_failed email=%s segment_id=%s error=%s",
-                email,
-                segment_id,
-                str(exc),
-            )
-            return None
-
     async def _create_contact(self, subscriber: Dict[str, Any]) -> Optional[str]:
         if not resend.api_key:
             return None
@@ -114,6 +97,8 @@ class NewsletterProviderGateway:
                 "segment": subscriber.get("segment") or "none",
             },
         }
+        if NEWSLETTER_CONTACT_SEGMENT_ID:
+            params["segments"] = [{"id": NEWSLETTER_CONTACT_SEGMENT_ID}]
 
         try:
             response = await asyncio.to_thread(resend.Contacts.create, params)
@@ -121,19 +106,8 @@ class NewsletterProviderGateway:
         except Exception as exc:
             error_message = str(exc).lower()
             if "already exists" in error_message or "409" in error_message:
-                logger.info("newsletter_contact_exists email=%s attempting_update=true", subscriber["email"])
-                try:
-                    update_params: Dict[str, Any] = {
-                        "email": subscriber["email"],
-                        "unsubscribed": False,
-                    }
-                    update_params["properties"] = params.get("properties", {})
-
-                    update_response = await asyncio.to_thread(resend.Contacts.update, update_params)
-                    return update_response.get("id") if isinstance(update_response, dict) else None
-                except Exception as update_exc:
-                    logger.warning("newsletter_contact_update_failed error=%s", str(update_exc))
-                    return None
+                logger.info("newsletter_contact_exists email=%s", subscriber["email"])
+                return None
             logger.warning("newsletter_contact_create_failed error=%s", str(exc))
             return None
 
@@ -152,17 +126,6 @@ class NewsletterProviderGateway:
 
     async def on_subscriber_created(self, subscriber: Dict[str, Any]) -> None:
         contact_id = await self._create_contact(subscriber)
-        audience_membership_id = None
-        segment_membership_id = None
-        if NEWSLETTER_AUDIENCE_ID:
-            audience_membership_id = await self._add_contact_to_segment(
-                subscriber["email"], NEWSLETTER_AUDIENCE_ID
-            )
-        if NEWSLETTER_CONTACT_SEGMENT_ID:
-            segment_membership_id = await self._add_contact_to_segment(
-                subscriber["email"], NEWSLETTER_CONTACT_SEGMENT_ID
-            )
-
         reply_to = [NEWSLETTER_REPLY_TO] if NEWSLETTER_REPLY_TO else None
         team_email_id = await self._send_email(
             {
@@ -195,11 +158,9 @@ class NewsletterProviderGateway:
         )
 
         logger.info(
-            "newsletter_provider_hook event=subscriber_created subscriber_id=%s contact_id=%s audience_membership_id=%s segment_membership_id=%s team_email_id=%s welcome_email_id=%s",
+            "newsletter_provider_hook event=subscriber_created subscriber_id=%s contact_id=%s team_email_id=%s welcome_email_id=%s",
             subscriber["id"],
             contact_id,
-            audience_membership_id,
-            segment_membership_id,
             team_email_id,
             welcome_email_id,
         )
