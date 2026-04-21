@@ -3,11 +3,15 @@ import logging
 import os
 import uuid
 from datetime import datetime, timezone
+from pathlib import Path
 from typing import Any, Dict, List, Optional
 
+from dotenv import load_dotenv
 from fastapi import APIRouter, Depends, Header, HTTPException
 from pydantic import BaseModel, StringConstraints
 from typing_extensions import Annotated
+
+load_dotenv(Path(__file__).resolve().parents[1] / ".env")
 
 logger = logging.getLogger(__name__)
 

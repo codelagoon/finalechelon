@@ -47,7 +47,7 @@ const Newsletter = () => {
       </section>
 
       <NewsletterBenefits />
-      <NewsletterLatestIssueCard issue={latestIssue || undefined} />
+      <NewsletterLatestIssueCard issue={latestIssue} />
       <NewsletterArchiveTeaser />
       <NewsletterDisclaimer />
     </div>

@@ -1,0 +1,8 @@
+Supabase credentials not found in environment
+Traceback (most recent call last):
+  File "/workspaces/finalechelon/backend/server.py", line 15, in <module>
+    from routes.newsletter import router as newsletter_router
+  File "/workspaces/finalechelon/backend/routes/newsletter.py", line 26
+    >>>>>>> copilot/fix-269082112-1199003721-b731d060-2da0-479a-a355-db783d2cabf2
+                                                      ^
+SyntaxError: invalid decimal literal

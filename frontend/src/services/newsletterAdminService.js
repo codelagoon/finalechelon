@@ -1,5 +1,9 @@
 const API_URL = (process.env.REACT_APP_BACKEND_URL || "").replace(/\/+$/, "");
 
+if (!API_URL) {
+  console.warn("[Newsletter Admin] REACT_APP_BACKEND_URL is not set. API calls will fail.");
+}
+
 function buildHeaders(adminToken) {
   const headers = {
     Accept: "application/json",
@@ -66,28 +70,44 @@ async function parseResponse(response) {
 }
 
 export async function fetchAllIssues() {
-  const response = await fetch(`${API_URL}/api/newsletter/issues?limit=500`, {
-    method: "GET",
-    headers: {
-      Accept: "application/json",
-    },
-  });
+  const url = `${API_URL}/api/newsletter/issues?limit=500`;
+  
+  try {
+    const response = await fetch(url, {
+      method: "GET",
+      headers: {
+        Accept: "application/json",
+      },
+    });
 
-  const result = await parseResponse(response);
+    const result = await parseResponse(response);
 
-  if (!response.ok) {
+    if (!response.ok) {
+      return {
+        success: false,
+        error: result.detail || `Server error: ${response.status}`,
+        issues: [],
+      };
+    }
+
+    return {
+      success: true,
+      issues: Array.isArray(result.issues) ? result.issues : [],
+      count: typeof result.count === "number" ? result.count : 0,
+    };
+  } catch (error) {
+    console.error("[Newsletter Admin] Fetch error:", {
+      url,
+      message: error.message,
+      error,
+    });
+    
     return {
       success: false,
-      error: result.detail || "Failed to load issues",
+      error: `Network error: ${error.message}. Check that REACT_APP_BACKEND_URL is set and the backend is running.`,
       issues: [],
     };
   }
-
-  return {
-    success: true,
-    issues: Array.isArray(result.issues) ? result.issues : [],
-    count: typeof result.count === "number" ? result.count : 0,
-  };
 }
 
 export async function createIssue(adminToken, payload) {

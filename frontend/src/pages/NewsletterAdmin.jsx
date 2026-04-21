@@ -22,7 +22,7 @@ const initialCreateForm = {
   title: "",
   summary: "",
   body: "",
-  status: "draft",
+  status: "published",
   highlightsText: "",
 };
 
@@ -352,7 +352,9 @@ const NewsletterAdmin = () => {
           <form className="application-form-final" onSubmit={handleCreateIssue}>
             <div className="page-heading-final" style={{ marginBottom: 0 }}>
               <h2 className="section-title-final" style={{ fontSize: "1.25rem" }}>Create new issue</h2>
-              <p className="section-subtitle-final" style={{ marginBottom: 0 }}>Status defaults to draft. Add one highlight per line.</p>
+              <p className="section-subtitle-final" style={{ marginBottom: 0 }}>
+                Status defaults to published so it appears on the public newsletter pages immediately.
+              </p>
             </div>
 
             <div className="form-group">

@@ -1,42 +1,5 @@
 const API_URL = (process.env.REACT_APP_BACKEND_URL || "").replace(/\/+$/, "");
 
-const FALLBACK_ISSUES = [
-  {
-    id: "fallback-vol-09",
-    volume: "Vol. 09",
-    date: "April 2026",
-    title: "Semiconductor Cash Cycles, AI Capex, and Variant Paths",
-    summary:
-      "A focused read on pricing power durability, inventory normalization, and where downside scenarios still hide in plain sight.",
-    highlights: [
-      "Earnings-quality checklist for margin resilience",
-      "Three market signals we track before adding exposure",
-      "Memo excerpt: base case vs. variant case assumptions",
-    ],
-    status: "published",
-  },
-  {
-    id: "fallback-vol-08",
-    volume: "Vol. 08",
-    date: "March 2026",
-    title: "Margin Compression Watchlist and Quality Screens",
-    summary:
-      "How we separate temporary pressure from structural deterioration in operating margins.",
-    highlights: [],
-    status: "published",
-  },
-  {
-    id: "fallback-vol-07",
-    volume: "Vol. 07",
-    date: "February 2026",
-    title: "Banks, Duration, and Credit Re-Pricing",
-    summary:
-      "A memo-driven walkthrough of where sensitivity hides in regional balance sheets.",
-    highlights: [],
-    status: "published",
-  },
-];
-
 function normalizeHighlights(highlights) {
   if (!Array.isArray(highlights)) return [];
 
@@ -73,8 +36,8 @@ export async function fetchPublishedIssues(limit = 100) {
     if (!response.ok) {
       return {
         success: false,
-        issues: FALLBACK_ISSUES,
-        fallbackUsed: true,
+        issues: [],
+        fallbackUsed: false,
         error: "Failed to load newsletter issues",
       };
     }
@@ -84,8 +47,8 @@ export async function fetchPublishedIssues(limit = 100) {
     if (!result?.success || !Array.isArray(result?.issues)) {
       return {
         success: false,
-        issues: FALLBACK_ISSUES,
-        fallbackUsed: true,
+        issues: [],
+        fallbackUsed: false,
         error: "Invalid newsletter issues response",
       };
     }
@@ -95,8 +58,8 @@ export async function fetchPublishedIssues(limit = 100) {
     if (!normalized.length) {
       return {
         success: true,
-        issues: FALLBACK_ISSUES,
-        fallbackUsed: true,
+        issues: [],
+        fallbackUsed: false,
         error: null,
       };
     }
@@ -110,8 +73,8 @@ export async function fetchPublishedIssues(limit = 100) {
   } catch {
     return {
       success: false,
-      issues: FALLBACK_ISSUES,
-      fallbackUsed: true,
+      issues: [],
+      fallbackUsed: false,
       error: "Network error while loading newsletter issues",
     };
   }
