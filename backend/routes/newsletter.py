@@ -94,13 +94,11 @@ class NewsletterProviderGateway:
         params: Dict[str, Any] = {
             "email": subscriber["email"],
             "unsubscribed": False,
-            "properties": {
-                "source": subscriber.get("source") or "unknown",
-                "segment": subscriber.get("segment") or "none",
-            },
+            "first_name": subscriber.get("first_name") or None,
+            "last_name": subscriber.get("last_name") or None,
         }
         if NEWSLETTER_CONTACT_SEGMENT_ID:
-            params["segments"] = [{"id": NEWSLETTER_CONTACT_SEGMENT_ID}]
+            params["audience_id"] = NEWSLETTER_CONTACT_SEGMENT_ID
 
         try:
             async with httpx.AsyncClient() as client:
