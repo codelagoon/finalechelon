@@ -12,6 +12,8 @@ const Program = lazy(() => import("./pages/Program"));
 const PortfolioPage = lazy(() => import("./pages/PortfolioPage"));
 const Apply = lazy(() => import("./pages/Apply"));
 const Team = lazy(() => import("./pages/Team"));
+const Newsletter = lazy(() => import("./pages/Newsletter"));
+const NewsletterArchive = lazy(() => import("./pages/NewsletterArchive"));
 
 function App() {
   return (
@@ -35,6 +37,8 @@ function App() {
               <Route path="/portfolio" element={<PortfolioPage />} />
               <Route path="/team" element={<Team />} />
               <Route path="/apply" element={<Apply />} />
+              <Route path="/newsletter" element={<Newsletter />} />
+              <Route path="/newsletter/archive" element={<NewsletterArchive />} />
             </Routes>
           </Suspense>
         </main>

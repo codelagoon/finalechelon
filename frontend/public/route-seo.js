@@ -44,6 +44,20 @@
       pageTitle: "Echelon Equity Research Analysts",
       schemaType: "AboutPage",
     },
+    "/newsletter": {
+      title: "Newsletter | Echelon Equity Research, Not Noise",
+      description:
+        "Subscribe to the Echelon Equity newsletter for student-led equity research, market notes, and memo highlights with educational context.",
+      pageTitle: "Echelon Equity Newsletter",
+      schemaType: "CollectionPage",
+    },
+    "/newsletter/archive": {
+      title: "Newsletter Archive | Echelon Equity Past Issues",
+      description:
+        "Browse past Echelon Equity newsletter issues featuring market notes and memo highlights from the student-led research team.",
+      pageTitle: "Echelon Equity Newsletter Archive",
+      schemaType: "CollectionPage",
+    },
   };
 
   function normalizePathname(pathname) {

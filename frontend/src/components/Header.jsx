@@ -21,6 +21,7 @@ const Header = () => {
   const isActive = (path) => location.pathname === path;
   const navItems = [
     { to: '/portfolio', label: 'Research' },
+    { to: '/newsletter', label: 'Newsletter' },
     { to: '/team', label: 'Team' },
     { to: '/program', label: 'Program' },
     { to: '/apply', label: 'Apply' },
