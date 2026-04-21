@@ -12,6 +12,8 @@ import uuid
 from datetime import datetime, timezone
 from routes.applications import router as applications_router
 from routes.members import router as members_router
+from routes.newsletter import router as newsletter_router
+from routes.issues import router as issues_router
 
 
 ROOT_DIR = Path(__file__).parent
@@ -85,6 +87,8 @@ async def get_status_checks():
 app.include_router(api_router)
 app.include_router(applications_router, prefix="/api")
 app.include_router(members_router, prefix="/api")
+app.include_router(newsletter_router, prefix="/api")
+app.include_router(issues_router, prefix="/api/newsletter")
 
 app.add_middleware(
     CORSMiddleware,
@@ -100,6 +104,15 @@ logging.basicConfig(
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
 )
 logger = logging.getLogger(__name__)
+
+
+@app.on_event("startup")
+async def ensure_indexes():
+    await db.newsletter_subscribers.create_index("email_normalized", unique=True)
+    await db.newsletter_subscribers.create_index("subscribed_at")
+    await db.newsletter_issues.create_index("created_at")
+    await db.newsletter_issues.create_index("status")
+    logger.info("Newsletter indexes ensured")
 
 @app.on_event("shutdown")
 async def shutdown_db_client():

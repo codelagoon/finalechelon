@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { siteConfig } from '../seo/siteConfig';
+import NewsletterSignupForm from './newsletter/NewsletterSignupForm';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -63,6 +64,25 @@ const Footer = () => {
                 </li>
               ))}
             </ul>
+          </div>
+        </div>
+
+        <div className="footer-newsletter-panel-final">
+          <div className="footer-newsletter-copy-final">
+            <p className="footer-newsletter-eyebrow-final">Newsletter</p>
+            <h3 className="footer-newsletter-title-final">Read the research before you apply</h3>
+            <p className="footer-newsletter-description-final">
+              A compact weekly letter for readers tracking Echelon's work, standards, and market notes.
+            </p>
+          </div>
+          <div className="footer-newsletter-form-final">
+            <NewsletterSignupForm
+              source="footer"
+              segment="homepage-footer"
+              buttonLabel="Join"
+              helperText=""
+              compact
+            />
           </div>
         </div>
 

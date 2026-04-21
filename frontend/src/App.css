@@ -1109,6 +1109,60 @@ body {
   background-color: var(--color-gray-hover) !important;
 }
 
+/* Newsletter CTA Bands */
+.newsletter-cta-section-final {
+  padding: 3rem 0;
+  background-color: var(--color-white);
+}
+
+.home-hero-newsletter-cta-final {
+  padding-top: 4.5rem;
+}
+
+.newsletter-cta-panel-final {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 0.9fr);
+  gap: 2rem;
+  align-items: center;
+  padding: 2rem;
+  border: 1px solid var(--color-gray-border);
+  background: linear-gradient(180deg, #ffffff 0%, #fafafa 100%);
+}
+
+.newsletter-cta-panel-compact-final {
+  padding: 1.5rem 1.25rem;
+}
+
+.newsletter-cta-eyebrow-final {
+  font-size: 0.6875rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--color-gray-text);
+  margin-bottom: 0.85rem;
+}
+
+.newsletter-cta-title-final {
+  font-family: var(--font-serif);
+  font-size: 2rem;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+  margin-bottom: 0.85rem;
+}
+
+.newsletter-cta-description-final {
+  font-size: 0.975rem;
+  line-height: 1.7;
+  color: var(--color-gray-text);
+  max-width: 62ch;
+}
+
+.newsletter-cta-form-final {
+  max-width: 520px;
+  justify-self: end;
+  width: 100%;
+}
+
 /* Footer */
 .site-footer {
   background-color: var(--color-white);
@@ -1161,6 +1215,38 @@ body {
 
 .footer-email a:hover {
   color: var(--color-black);
+}
+
+.footer-newsletter-panel-final {
+  margin-top: 2rem;
+  padding: 1.25rem;
+  border: 1px solid var(--color-gray-border);
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  gap: 1rem;
+  align-items: center;
+}
+
+.footer-newsletter-eyebrow-final {
+  font-size: 0.6875rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: var(--color-gray-text);
+  margin-bottom: 0.55rem;
+}
+
+.footer-newsletter-title-final {
+  font-family: var(--font-serif);
+  font-size: 1.25rem;
+  line-height: 1.2;
+  margin-bottom: 0.45rem;
+}
+
+.footer-newsletter-description-final {
+  font-size: 0.875rem;
+  line-height: 1.6;
+  color: var(--color-gray-text);
 }
 
 .footer-heading {
@@ -1683,6 +1769,16 @@ div[style*="emergent"] {
   .final-cta-title-final {
     font-size: 2.5rem;
   }
+
+  .newsletter-cta-panel-final,
+  .footer-newsletter-panel-final {
+    grid-template-columns: 1fr;
+  }
+
+  .newsletter-cta-form-final {
+    justify-self: stretch;
+    max-width: none;
+  }
   
   .footer-grid {
     grid-template-columns: 1fr 1fr;
@@ -1972,6 +2068,26 @@ div[style*="emergent"] {
     grid-template-columns: 1fr;
     gap: 1.5rem;
     margin-bottom: 2rem;
+  }
+
+  .newsletter-cta-section-final {
+    padding: 2.25rem 0;
+  }
+
+  .home-hero-newsletter-cta-final {
+    padding-top: 3rem;
+  }
+
+  .newsletter-cta-panel-final {
+    padding: 1.25rem;
+  }
+
+  .newsletter-cta-title-final {
+    font-size: 1.6rem;
+  }
+
+  .footer-newsletter-panel-final {
+    padding: 1rem;
   }
   
   .footer-bottom {
@@ -2606,5 +2722,365 @@ html {
 
   .team-card-links {
     gap: 0.625rem;
+  }
+}
+
+/* Newsletter Page */
+.newsletter-page-final {
+  background-color: var(--color-white);
+}
+
+.newsletter-hero-section-final {
+  padding: 7rem 0 4.5rem;
+  border-bottom: 1px solid var(--color-gray-border);
+  background: linear-gradient(180deg, #ffffff 0%, #fafafa 100%);
+}
+
+.newsletter-hero-grid-final {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+  gap: 2rem;
+  align-items: end;
+}
+
+.newsletter-hero-copy-final {
+  max-width: 680px;
+}
+
+.newsletter-hero-title-final {
+  font-family: var(--font-serif);
+  font-size: 4rem;
+  font-weight: 700;
+  line-height: 1.02;
+  letter-spacing: -0.03em;
+  margin-bottom: 1.25rem;
+}
+
+.newsletter-hero-subheadline-final {
+  font-size: 1.1rem;
+  line-height: 1.75;
+  color: var(--color-gray-text);
+}
+
+.newsletter-signup-panel-final {
+  padding: 2rem;
+  border: 1px solid var(--color-black);
+  background-color: var(--color-white);
+}
+
+.newsletter-signup-title-final {
+  font-family: var(--font-serif);
+  font-size: 1.7rem;
+  line-height: 1.2;
+  margin-bottom: 0.75rem;
+}
+
+.newsletter-signup-copy-final {
+  color: var(--color-gray-text);
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin-bottom: 1.25rem;
+}
+
+.newsletter-signup-form-final {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+.newsletter-signup-form-compact-final {
+  gap: 0.45rem;
+}
+
+.newsletter-signup-label-final {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.newsletter-signup-row-final {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 0.625rem;
+}
+
+.newsletter-email-input-final {
+  min-height: 46px;
+}
+
+.newsletter-submit-btn-final {
+  min-height: 46px;
+  min-width: 132px;
+  padding: 0 1.25rem !important;
+  background-color: var(--color-black) !important;
+  color: var(--color-white) !important;
+  border: 1px solid var(--color-black) !important;
+  font-size: 0.9rem !important;
+  font-weight: 600 !important;
+}
+
+.newsletter-submit-btn-final:hover {
+  opacity: 0.92;
+}
+
+.newsletter-signup-meta-final {
+  margin-top: 0.2rem;
+  font-size: 0.8125rem;
+  color: var(--color-gray-text);
+}
+
+.newsletter-signup-form-compact-final .newsletter-signup-meta-final {
+  font-size: 0.75rem;
+}
+
+.newsletter-benefits-section-final {
+  padding: 5rem 0;
+}
+
+.newsletter-section-heading-final {
+  max-width: 680px;
+  margin-bottom: 2rem;
+}
+
+.newsletter-section-title-final {
+  font-family: var(--font-serif);
+  font-size: 2.35rem;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+
+.newsletter-benefits-grid-final {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.newsletter-benefit-card-final {
+  border: 1px solid var(--color-gray-border);
+  background-color: var(--color-white);
+  padding: 1.6rem;
+}
+
+.newsletter-card-title-final {
+  font-family: var(--font-serif);
+  font-size: 1.35rem;
+  line-height: 1.2;
+  margin-bottom: 0.7rem;
+}
+
+.newsletter-card-title-issue-final {
+  margin-top: 0.65rem;
+}
+
+.newsletter-card-copy-final {
+  color: var(--color-gray-text);
+  font-size: 0.97rem;
+  line-height: 1.7;
+}
+
+.newsletter-latest-section-final {
+  padding: 0 0 5rem;
+}
+
+.newsletter-issue-card-final {
+  border: 1px solid var(--color-black);
+  background: linear-gradient(145deg, #ffffff 0%, #f7f7f7 100%);
+  padding: 2rem;
+}
+
+.newsletter-issue-meta-final {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--color-gray-text);
+}
+
+.newsletter-issue-title-final {
+  font-family: var(--font-serif);
+  font-size: 2rem;
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+  margin: 0.9rem 0 0.45rem;
+}
+
+.newsletter-issue-summary-final {
+  max-width: 760px;
+}
+
+.newsletter-highlight-list-final {
+  list-style: none;
+  margin-top: 1.15rem;
+  display: grid;
+  gap: 0.6rem;
+}
+
+.newsletter-highlight-item-final {
+  position: relative;
+  padding-left: 1.1rem;
+  color: var(--color-black);
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+.newsletter-highlight-item-final::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.64em;
+  width: 0.35rem;
+  height: 0.35rem;
+  background-color: var(--color-black);
+}
+
+.newsletter-archive-section-final {
+  padding: 0 0 4.5rem;
+}
+
+.newsletter-archive-panel-final {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 1.25rem;
+  align-items: center;
+  padding-top: 2rem;
+  border-top: 1px solid var(--color-gray-border);
+}
+
+.newsletter-archive-eyebrow-final {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--color-gray-text);
+  margin-bottom: 0.7rem;
+}
+
+.newsletter-disclaimer-section-final {
+  padding: 0 0 4rem;
+}
+
+.newsletter-disclaimer-final {
+  padding: 1.1rem 1.25rem;
+  border: 1px solid var(--color-gray-border);
+  font-size: 0.83rem;
+  line-height: 1.65;
+  color: var(--color-gray-text);
+}
+
+.newsletter-archive-page-final {
+  background-color: var(--color-white);
+}
+
+.newsletter-archive-list-section-final {
+  padding: 0 0 2rem;
+}
+
+.newsletter-archive-list-final {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.newsletter-archive-card-cta-row-final {
+  margin-top: 1rem;
+}
+
+.newsletter-archive-card-cta-final {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--color-black);
+  text-decoration: underline;
+  text-decoration-color: rgba(0, 0, 0, 0.25);
+  text-underline-offset: 0.18em;
+  transition: text-decoration-color 0.2s ease;
+}
+
+.newsletter-archive-card-cta-final:hover {
+  text-decoration-color: var(--color-black);
+}
+
+@media (max-width: 968px) {
+  .newsletter-hero-section-final {
+    padding: 6rem 0 4rem;
+  }
+
+  .newsletter-hero-grid-final,
+  .newsletter-archive-panel-final {
+    grid-template-columns: 1fr;
+  }
+
+  .newsletter-hero-title-final {
+    font-size: 3.1rem;
+  }
+
+  .newsletter-section-title-final {
+    font-size: 2rem;
+  }
+
+  .newsletter-benefits-grid-final,
+  .newsletter-archive-list-final {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .newsletter-issue-title-final {
+    font-size: 1.75rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .newsletter-hero-section-final {
+    padding: 5rem 0 3rem;
+  }
+
+  .newsletter-hero-title-final {
+    font-size: 2.3rem;
+    line-height: 1.05;
+  }
+
+  .newsletter-hero-subheadline-final {
+    font-size: 1rem;
+  }
+
+  .newsletter-signup-panel-final,
+  .newsletter-issue-card-final,
+  .newsletter-benefit-card-final {
+    padding: 1.25rem;
+  }
+
+  .newsletter-signup-row-final {
+    grid-template-columns: 1fr;
+  }
+
+  .newsletter-submit-btn-final {
+    width: 100%;
+  }
+
+  .newsletter-benefits-grid-final,
+  .newsletter-archive-list-final {
+    grid-template-columns: 1fr;
+  }
+
+  .newsletter-section-title-final {
+    font-size: 1.7rem;
+  }
+
+  .newsletter-card-title-final {
+    font-size: 1.2rem;
+  }
+
+  .newsletter-issue-title-final {
+    font-size: 1.5rem;
+  }
+
+  .newsletter-disclaimer-final {
+    font-size: 0.8rem;
+    padding: 1rem;
   }
 }
