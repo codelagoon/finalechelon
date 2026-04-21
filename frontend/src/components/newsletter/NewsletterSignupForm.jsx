@@ -57,8 +57,9 @@ const NewsletterSignupForm = ({
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    const normalizedEmail = email.trim();
 
-    if (!EMAIL_REGEX.test(email)) {
+    if (!EMAIL_REGEX.test(normalizedEmail)) {
       toast.error("Enter a valid email address.");
       trackNewsletterEvent({
         event: "newsletter_submit_error",
@@ -84,7 +85,7 @@ const NewsletterSignupForm = ({
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          email,
+          email: normalizedEmail,
           source,
           segment,
         }),
@@ -177,6 +178,7 @@ const NewsletterSignupForm = ({
           className="newsletter-email-input-final form-input"
           value={email}
           onChange={(event) => setEmail(event.target.value)}
+          onBlur={(event) => setEmail(event.target.value.trim())}
           onFocus={handleFirstInteraction}
           placeholder={placeholder}
           required
