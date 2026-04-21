@@ -64,6 +64,15 @@ const routeMetadata = {
     ogType: "website",
     schemaType: "CollectionPage",
   },
+  "/newsletter/admin": {
+    title: "Newsletter Admin | Echelon Equity",
+    description:
+      "Create, update, and delete Echelon Equity newsletter issues from the browser using the protected admin token.",
+    pageTitle: "Echelon Equity Newsletter Admin",
+    canonical: absoluteUrl("/newsletter/admin"),
+    ogType: "website",
+    schemaType: "WebPage",
+  },
 };
 
 function normalizePathname(pathname = "/") {

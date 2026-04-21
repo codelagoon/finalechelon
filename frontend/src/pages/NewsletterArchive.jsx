@@ -1,28 +1,26 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-
-const archivedIssues = [
-  {
-    id: "Vol. 07",
-    date: "March 2026",
-    title: "Margin Compression Watchlist and Quality Screens",
-    summary: "How we separate temporary pressure from structural deterioration in operating margins.",
-  },
-  {
-    id: "Vol. 06",
-    date: "February 2026",
-    title: "Banks, Duration, and Credit Re-Pricing",
-    summary: "A memo-driven walkthrough of where sensitivity hides in regional balance sheets.",
-  },
-  {
-    id: "Vol. 05",
-    date: "January 2026",
-    title: "Consumer Softening and Pricing Power Tests",
-    summary: "Signals we use to validate demand durability before updating position sizing.",
-  },
-];
+import { fetchPublishedIssues } from "../services/newsletterIssueService";
 
 const NewsletterArchive = () => {
+  const [archivedIssues, setArchivedIssues] = useState([]);
+
+  useEffect(() => {
+    let isMounted = true;
+
+    const loadIssues = async () => {
+      const result = await fetchPublishedIssues();
+      if (!isMounted) return;
+      setArchivedIssues(result.issues);
+    };
+
+    loadIssues();
+
+    return () => {
+      isMounted = false;
+    };
+  }, []);
+
   return (
     <div className="page-shell-final page-shell-padded-final newsletter-archive-page-final">
       <section className="page-intro-section-final">
@@ -36,16 +34,25 @@ const NewsletterArchive = () => {
             <Link to="/newsletter" className="page-intro-link-final">
               Return to Newsletter Landing
             </Link>
+            <Link to="/newsletter/admin" className="page-intro-link-final">
+              Open Admin Tools
+            </Link>
           </div>
         </div>
       </section>
 
       <section className="newsletter-archive-list-section-final">
         <div className="content-container-final newsletter-archive-list-final">
+          {!archivedIssues.length ? (
+            <article className="newsletter-benefit-card-final">
+              <h2 className="newsletter-card-title-final">No published issues yet</h2>
+              <p className="newsletter-card-copy-final">Check back soon for new research letters.</p>
+            </article>
+          ) : null}
           {archivedIssues.map((issue) => (
             <article key={issue.id} className="newsletter-benefit-card-final">
               <p className="newsletter-issue-meta-final">
-                <span>{issue.id}</span>
+                <span>{issue.volume || "Issue"}</span>
                 <span aria-hidden="true">|</span>
                 <span>{issue.date}</span>
               </p>

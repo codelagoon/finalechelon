@@ -14,6 +14,8 @@ const NewsletterLatestIssueCard = ({
     ],
   },
 }) => {
+  const highlights = Array.isArray(issue.highlights) ? issue.highlights : [];
+
   return (
     <section className="newsletter-latest-section-final">
       <div className="content-container-final">
@@ -26,13 +28,15 @@ const NewsletterLatestIssueCard = ({
           <h2 className="newsletter-issue-title-final">Latest Issue Preview</h2>
           <h3 className="newsletter-card-title-final newsletter-card-title-issue-final">{issue.title}</h3>
           <p className="newsletter-card-copy-final newsletter-issue-summary-final">{issue.summary}</p>
-          <ul className="newsletter-highlight-list-final" aria-label="Latest issue highlights">
-            {issue.highlights.map((highlight) => (
-              <li key={highlight} className="newsletter-highlight-item-final">
-                {highlight}
-              </li>
-            ))}
-          </ul>
+          {highlights.length ? (
+            <ul className="newsletter-highlight-list-final" aria-label="Latest issue highlights">
+              {highlights.map((highlight, index) => (
+                <li key={`${highlight}-${index}`} className="newsletter-highlight-item-final">
+                  {highlight}
+                </li>
+              ))}
+            </ul>
+          ) : null}
         </article>
       </div>
     </section>

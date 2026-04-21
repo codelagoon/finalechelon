@@ -14,6 +14,7 @@ const Apply = lazy(() => import("./pages/Apply"));
 const Team = lazy(() => import("./pages/Team"));
 const Newsletter = lazy(() => import("./pages/Newsletter"));
 const NewsletterArchive = lazy(() => import("./pages/NewsletterArchive"));
+const NewsletterAdmin = lazy(() => import("./pages/NewsletterAdmin"));
 
 function App() {
   return (
@@ -39,6 +40,7 @@ function App() {
               <Route path="/apply" element={<Apply />} />
               <Route path="/newsletter" element={<Newsletter />} />
               <Route path="/newsletter/archive" element={<NewsletterArchive />} />
+              <Route path="/newsletter/admin" element={<NewsletterAdmin />} />
             </Routes>
           </Suspense>
         </main>

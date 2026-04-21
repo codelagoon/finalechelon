@@ -1,11 +1,30 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import NewsletterSignupForm from "../components/newsletter/NewsletterSignupForm";
 import NewsletterBenefits from "../components/newsletter/NewsletterBenefits";
 import NewsletterLatestIssueCard from "../components/newsletter/NewsletterLatestIssueCard";
 import NewsletterArchiveTeaser from "../components/newsletter/NewsletterArchiveTeaser";
 import NewsletterDisclaimer from "../components/newsletter/NewsletterDisclaimer";
+import { fetchPublishedIssues } from "../services/newsletterIssueService";
 
 const Newsletter = () => {
+  const [latestIssue, setLatestIssue] = useState(null);
+
+  useEffect(() => {
+    let isMounted = true;
+
+    const loadIssues = async () => {
+      const result = await fetchPublishedIssues();
+      if (!isMounted) return;
+      setLatestIssue(result.issues[0] || null);
+    };
+
+    loadIssues();
+
+    return () => {
+      isMounted = false;
+    };
+  }, []);
+
   return (
     <div className="page-shell-final newsletter-page-final">
       <section className="newsletter-hero-section-final">
@@ -28,7 +47,7 @@ const Newsletter = () => {
       </section>
 
       <NewsletterBenefits />
-      <NewsletterLatestIssueCard />
+      <NewsletterLatestIssueCard issue={latestIssue || undefined} />
       <NewsletterArchiveTeaser />
       <NewsletterDisclaimer />
     </div>
