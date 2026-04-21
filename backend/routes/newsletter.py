@@ -8,6 +8,8 @@ from datetime import datetime, timezone
 from time import monotonic
 from typing import Any, Deque, Dict, Optional
 
+import httpx
+
 from fastapi import APIRouter, Request
 from fastapi.responses import JSONResponse
 from pydantic import BaseModel, EmailStr, StringConstraints
@@ -101,13 +103,39 @@ class NewsletterProviderGateway:
             params["segments"] = [{"id": NEWSLETTER_CONTACT_SEGMENT_ID}]
 
         try:
-            response = await asyncio.to_thread(resend.Contacts.create, params)
-            return response.get("id") if isinstance(response, dict) else None
-        except Exception as exc:
-            error_message = str(exc).lower()
-            if "already exists" in error_message or "409" in error_message:
+            async with httpx.AsyncClient() as client:
+                response = await client.post(
+                    "https://api.resend.com/contacts",
+                    headers={
+                        "Authorization": f"Bearer {resend.api_key}",
+                        "Content-Type": "application/json",
+                    },
+                    json=params,
+                    timeout=10.0,
+                )
+
+            if response.status_code == 409:
                 logger.info("newsletter_contact_exists email=%s", subscriber["email"])
                 return None
+
+            if response.status_code not in (200, 201):
+                logger.warning(
+                    "newsletter_contact_create_failed email=%s status=%s body=%s",
+                    subscriber["email"],
+                    response.status_code,
+                    response.text,
+                )
+                return None
+
+            data = response.json()
+            contact_id = data.get("id") if isinstance(data, dict) else None
+            logger.info(
+                "newsletter_contact_created email=%s contact_id=%s",
+                subscriber["email"],
+                contact_id,
+            )
+            return contact_id
+        except Exception as exc:
             logger.warning("newsletter_contact_create_failed error=%s", str(exc))
             return None
 
