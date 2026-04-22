@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import NewsletterArticlePrompt from "../components/newsletter/NewsletterArticlePrompt";
 import { fetchPublishedIssues } from "../services/newsletterIssueService";
 
 const NewsletterArchive = () => {
@@ -51,6 +52,7 @@ const NewsletterArchive = () => {
           ) : null}
           {archivedIssues.map((issue) => (
             <article key={issue.id} className="newsletter-benefit-card-final">
+              <NewsletterArticlePrompt type="top" />
               <p className="newsletter-issue-meta-final">
                 <span>{issue.volume || "Issue"}</span>
                 <span aria-hidden="true">|</span>
@@ -58,6 +60,9 @@ const NewsletterArchive = () => {
               </p>
               <h2 className="newsletter-card-title-final">{issue.title}</h2>
               <p className="newsletter-card-copy-final">{issue.summary}</p>
+              <NewsletterArticlePrompt type="mid" />
+              <NewsletterArticlePrompt type="social" />
+              <NewsletterArticlePrompt type="end" />
               <div className="newsletter-archive-card-cta-row-final">
                 <Link to="/newsletter" className="newsletter-archive-card-cta-final">
                   Read Issue Highlights

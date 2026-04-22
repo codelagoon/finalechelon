@@ -1,4 +1,5 @@
 import React from "react";
+import NewsletterArticlePrompt from "./NewsletterArticlePrompt";
 
 const NewsletterLatestIssueCard = ({ issue = null }) => {
   if (!issue) {
@@ -23,6 +24,7 @@ const NewsletterLatestIssueCard = ({ issue = null }) => {
     <section className="newsletter-latest-section-final">
       <div className="content-container-final">
         <article className="newsletter-issue-card-final">
+          <NewsletterArticlePrompt type="top" />
           <div className="newsletter-issue-meta-final">
             <span>{issue.volume}</span>
             <span aria-hidden="true">|</span>
@@ -31,6 +33,7 @@ const NewsletterLatestIssueCard = ({ issue = null }) => {
           <h2 className="newsletter-issue-title-final">Latest Issue Preview</h2>
           <h3 className="newsletter-card-title-final newsletter-card-title-issue-final">{issue.title}</h3>
           <p className="newsletter-card-copy-final newsletter-issue-summary-final">{issue.summary}</p>
+          <NewsletterArticlePrompt type="mid" />
           {highlights.length ? (
             <ul className="newsletter-highlight-list-final" aria-label="Latest issue highlights">
               {highlights.map((highlight, index) => (
@@ -40,6 +43,8 @@ const NewsletterLatestIssueCard = ({ issue = null }) => {
               ))}
             </ul>
           ) : null}
+          <NewsletterArticlePrompt type="social" />
+          <NewsletterArticlePrompt type="end" />
         </article>
       </div>
     </section>
