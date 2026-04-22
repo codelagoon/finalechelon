@@ -55,6 +55,25 @@ class IssuesListResponse(BaseModel):
     issues: List[IssueResponse]
 
 
+def build_issue_document(payload: IssueCreateRequest) -> Dict[str, Any]:
+    issue = {
+        "id": str(uuid.uuid4()),
+        "volume": payload.volume,
+        "date": payload.date,
+        "title": payload.title,
+        "summary": payload.summary,
+        "highlights": [h.model_dump() for h in payload.highlights],
+        "status": (payload.status or "draft").strip() or "draft",
+        "created_at": datetime.now(timezone.utc).isoformat(),
+        "updated_at": datetime.now(timezone.utc).isoformat(),
+    }
+
+    if payload.body is not None:
+        issue["body"] = payload.body
+
+    return issue
+
+
 def require_admin_token(x_admin_token: Optional[str] = Header(default=None)) -> None:
     admin_api_token = os.environ.get("ADMIN_API_TOKEN")
 
@@ -73,18 +92,7 @@ async def create_issue(
     """Create a new newsletter issue."""
     from server import db as database
 
-    issue = {
-        "id": str(uuid.uuid4()),
-        "volume": payload.volume,
-        "date": payload.date,
-        "title": payload.title,
-        "summary": payload.summary,
-        "highlights": [h.model_dump() for h in payload.highlights],
-        "body": payload.body,
-        "status": payload.status,
-        "created_at": datetime.now(timezone.utc).isoformat(),
-        "updated_at": datetime.now(timezone.utc).isoformat(),
-    }
+    issue = build_issue_document(payload)
 
     try:
         result = await database.newsletter_issues.insert_one(issue)
