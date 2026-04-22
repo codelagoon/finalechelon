@@ -28,7 +28,7 @@ const PartnerTrustStrip = () => {
                 src={`https://img.logo.dev/${partner.domain}?token=${LOGO_DEV_TOKEN}&format=png&size=200`}
                 alt={partner.name}
                 className="partner-trust-logo-final"
-                loading="lazy"
+                loading="eager"
                 decoding="async"
                 width="200"
                 height="56"

@@ -30,7 +30,7 @@ const Partnerships = () => {
                 <img
                   src={`https://img.logo.dev/${partner.domain}?token=${LOGO_DEV_TOKEN}&format=png&size=240`}
                   alt={partner.name}
-                  loading="lazy"
+                  loading="eager"
                   decoding="async"
                   width="240"
                   height="72"

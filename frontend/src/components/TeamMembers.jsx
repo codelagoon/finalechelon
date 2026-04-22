@@ -192,7 +192,7 @@ const TeamMembers = () => {
                       src={member.headshot_url}
                       alt={`${member.full_name} headshot`}
                       className="team-card-image"
-                      loading="lazy"
+                      loading="eager"
                       decoding="async"
                       width="600"
                       height="400"

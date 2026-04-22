@@ -1,7 +1,8 @@
-import React, { Suspense, lazy, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu } from 'lucide-react';
 import { Button } from './ui/button';
+import ContactDialog from './ContactDialog';
 import {
   Sheet,
   SheetClose,
@@ -10,8 +11,6 @@ import {
   SheetTitle,
   SheetTrigger,
 } from './ui/sheet';
-
-const ContactDialog = lazy(() => import('./ContactDialog'));
 
 const Header = () => {
   const [isContactOpen, setIsContactOpen] = useState(false);
@@ -104,12 +103,10 @@ const Header = () => {
         </div>
       </header>
       {isContactOpen ? (
-        <Suspense fallback={null}>
-          <ContactDialog
-            isOpen={isContactOpen}
-            onClose={() => setIsContactOpen(false)}
-          />
-        </Suspense>
+        <ContactDialog
+          isOpen={isContactOpen}
+          onClose={() => setIsContactOpen(false)}
+        />
       ) : null}
     </>
   );
