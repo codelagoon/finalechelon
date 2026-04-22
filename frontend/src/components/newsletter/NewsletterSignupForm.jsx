@@ -2,9 +2,10 @@ import React, { useEffect, useRef, useState } from "react";
 import { Button } from "../ui/button";
 import { Input } from "../ui/input";
 import { toast } from "sonner";
+import { API_BASE_URL } from "../../services/apiBaseUrl";
 import { trackNewsletterEvent } from "../../services/newsletterAnalytics";
 
-const API_URL = (process.env.REACT_APP_BACKEND_URL || "").replace(/\/+$/, "");
+const API_URL = API_BASE_URL;
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
 function formatErrorDetail(detail) {

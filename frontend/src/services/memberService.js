@@ -3,7 +3,9 @@
  * Fetches approved team members from the backend API
  */
 
-const API_URL = (process.env.REACT_APP_BACKEND_URL || "").replace(/\/+$/, "");
+import { API_BASE_URL } from "./apiBaseUrl";
+
+const API_URL = API_BASE_URL;
 
 const IS_PRODUCTION = process.env.NODE_ENV === 'production';
 

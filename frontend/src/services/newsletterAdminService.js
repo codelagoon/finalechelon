@@ -1,4 +1,6 @@
-const API_URL = (process.env.REACT_APP_BACKEND_URL || "").replace(/\/+$/, "");
+import { API_BASE_URL } from "./apiBaseUrl";
+
+const API_URL = API_BASE_URL;
 
 if (!API_URL) {
   console.warn("[Newsletter Admin] REACT_APP_BACKEND_URL is not set. API calls will fail.");

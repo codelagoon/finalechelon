@@ -84,6 +84,7 @@ def require_admin_token(x_admin_token: Optional[str] = Header(default=None)) -> 
         raise HTTPException(status_code=403, detail="Forbidden")
 
 
+@router.post("", response_model=IssueResponse, status_code=201)
 @router.post("/", response_model=IssueResponse, status_code=201)
 async def create_issue(
     payload: IssueCreateRequest,
@@ -103,6 +104,7 @@ async def create_issue(
         raise HTTPException(status_code=500, detail=f"Failed to create issue: {str(exc)}")
 
 
+@router.get("", response_model=IssuesListResponse)
 @router.get("/", response_model=IssuesListResponse)
 async def list_issues(status: Optional[str] = None, limit: int = 100):
     """List all issues, optionally filtered by status."""

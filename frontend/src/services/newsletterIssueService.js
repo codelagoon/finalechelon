@@ -1,4 +1,6 @@
-const API_URL = (process.env.REACT_APP_BACKEND_URL || "").replace(/\/+$/, "");
+import { API_BASE_URL } from "./apiBaseUrl";
+
+const API_URL = API_BASE_URL;
 
 function normalizeHighlights(highlights) {
   if (!Array.isArray(highlights)) return [];
