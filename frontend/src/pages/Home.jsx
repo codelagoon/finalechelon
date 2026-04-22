@@ -1,16 +1,17 @@
-import React from 'react';
+import React, { Suspense, lazy } from 'react';
 import Hero from '../components/Hero';
-import PartnerTrustStrip from '../components/PartnerTrustStrip';
-import Stats from '../components/Stats';
-import HomeOverview from '../components/HomeOverview';
-import Positioning from '../components/Positioning';
-import WhatYouDo from '../components/WhatYouDo';
-import Standards from '../components/Standards';
-import AnalystWork from '../components/AnalystWork';
-import Review from '../components/Review';
-import Partnerships from '../components/Partnerships';
-import FinalCTA from '../components/FinalCTA';
 import NewsletterSignupCta from '../components/newsletter/NewsletterSignupCta';
+
+const PartnerTrustStrip = lazy(() => import('../components/PartnerTrustStrip'));
+const Stats = lazy(() => import('../components/Stats'));
+const HomeOverview = lazy(() => import('../components/HomeOverview'));
+const Positioning = lazy(() => import('../components/Positioning'));
+const WhatYouDo = lazy(() => import('../components/WhatYouDo'));
+const Standards = lazy(() => import('../components/Standards'));
+const AnalystWork = lazy(() => import('../components/AnalystWork'));
+const Review = lazy(() => import('../components/Review'));
+const Partnerships = lazy(() => import('../components/Partnerships'));
+const FinalCTA = lazy(() => import('../components/FinalCTA'));
 
 const Home = () => {
   return (
@@ -26,25 +27,27 @@ const Home = () => {
         buttonLabel="Subscribe to Notes"
         helperText="Built for readers. Unsubscribable anytime."
       />
-      <PartnerTrustStrip />
-      <Stats />
-      <HomeOverview />
-      <Positioning />
-      <WhatYouDo />
-      <Standards />
-      <AnalystWork />
-      <NewsletterSignupCta
-        eyebrow="Before you apply"
-        title="Stay close to the work"
-        description="Follow the research cadence, observe the standards, and see whether the program is a fit before you submit an application."
-        source="homepage-analyst-work"
-        segment="homepage-pre-apply"
-        buttonLabel="Join the Newsletter"
-        helperText="Low-friction, high-signal updates from the research team."
-      />
-      <Review />
-      <Partnerships />
-      <FinalCTA />
+      <Suspense fallback={null}>
+        <PartnerTrustStrip />
+        <Stats />
+        <HomeOverview />
+        <Positioning />
+        <WhatYouDo />
+        <Standards />
+        <AnalystWork />
+        <NewsletterSignupCta
+          eyebrow="Before you apply"
+          title="Stay close to the work"
+          description="Follow the research cadence, observe the standards, and see whether the program is a fit before you submit an application."
+          source="homepage-analyst-work"
+          segment="homepage-pre-apply"
+          buttonLabel="Join the Newsletter"
+          helperText="Low-friction, high-signal updates from the research team."
+        />
+        <Review />
+        <Partnerships />
+        <FinalCTA />
+      </Suspense>
     </>
   );
 };
