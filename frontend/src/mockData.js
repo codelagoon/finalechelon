@@ -15,7 +15,7 @@ export const statsData = [
     label: "Active Analysts"
   },
   {
-    value: "100+",
+    value: "250+",
     label: "Applicants Screened"
   },
   {
