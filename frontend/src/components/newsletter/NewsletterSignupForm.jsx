@@ -31,6 +31,7 @@ const NewsletterSignupForm = ({
   helperText = "Weekly notes. No spam. Unsubscribe anytime.",
   className = "",
   compact = false,
+  onSuccess = null,
 }) => {
   const [email, setEmail] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -113,6 +114,9 @@ const NewsletterSignupForm = ({
         });
         setEmail("");
         hasStartedRef.current = false;
+        if (typeof onSuccess === "function") {
+          onSuccess(normalizedEmail);
+        }
         return;
       }
 

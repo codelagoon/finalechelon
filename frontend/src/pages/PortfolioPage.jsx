@@ -2,10 +2,12 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import PageIntro from '../components/PageIntro';
 import Portfolio from '../components/Portfolio';
+import HalDealCTA from '../components/HalDealCTA';
 
 const PortfolioPage = () => {
   return (
     <div className="page-shell-final">
+      <HalDealCTA />
       <PageIntro
         eyebrow="Coverage and research"
         title="Investment Research Portfolio and Coverage"

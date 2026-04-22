@@ -21,6 +21,7 @@ function normalizeIssue(issue, index) {
     date: issue?.date || "",
     title: issue?.title || "Untitled issue",
     summary: issue?.summary || "",
+    body: issue?.body || "",
     highlights: normalizeHighlights(issue?.highlights),
     status: issue?.status || "published",
   };

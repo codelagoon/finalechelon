@@ -1,6 +1,7 @@
 import React, { Suspense, lazy } from 'react';
 import Hero from '../components/Hero';
 import NewsletterSignupCta from '../components/newsletter/NewsletterSignupCta';
+import HalDealCTA from '../components/HalDealCTA';
 
 const PartnerTrustStrip = lazy(() => import('../components/PartnerTrustStrip'));
 const Stats = lazy(() => import('../components/Stats'));
@@ -27,6 +28,7 @@ const Home = () => {
         buttonLabel="Subscribe to Notes"
         helperText="Built for readers. Unsubscribable anytime."
       />
+      <HalDealCTA />
       <Suspense fallback={null}>
         <PartnerTrustStrip />
         <Stats />
