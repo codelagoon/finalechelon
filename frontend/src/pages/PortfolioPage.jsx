@@ -9,16 +9,41 @@ const PortfolioPage = () => {
     <div className="page-shell-final">
       <HalDealCTA />
       <PageIntro
-        eyebrow="Coverage and research"
-        title="Investment Research Portfolio and Coverage"
-        lead="Echelon Equity publishes and maintains investment research coverage across public equities with emphasis on valuation discipline, market context, and clear written reasoning."
-        supportingText="The portfolio is designed to show how student-led investment research can be structured with institutional standards, repeatable process, and real analyst accountability across sectors."
+        eyebrow="Equity research archive"
+        title="Echelon Equity Research Portfolio"
+        lead="This portfolio serves as the research and coverage hub for Echelon Equity, with analyst-driven work across public equities, valuation frameworks, and sector monitoring."
+        supportingText="Each coverage stream is maintained with a repeatable process so thesis updates, risk discussion, and valuation changes remain traceable over time."
         links={[
-          { to: "/program", label: "Learn how the research program works" },
-          { to: "/team", label: "Meet the analyst team" },
+          { to: "/program", label: "How the analyst program develops coverage" },
+          { to: "/apply", label: "Apply to contribute research" },
         ]}
       />
       <Portfolio />
+      <section className="content-section-final">
+        <div className="content-container-final">
+          <h2 className="section-title-final">Coverage Areas</h2>
+          <div className="content-grid-final">
+            <article className="content-card-final">
+              <h3 className="content-card-title-final">Core sector coverage</h3>
+              <p className="content-card-copy-final">
+                Analysts maintain ongoing company and sector coverage across technology, healthcare, financials, consumer, and other high-relevance public equity segments.
+              </p>
+            </article>
+            <article className="content-card-final">
+              <h3 className="content-card-title-final">Valuation-first analysis</h3>
+              <p className="content-card-copy-final">
+                Coverage is built around valuation assumptions and scenario framing, not short-term commentary disconnected from financial drivers.
+              </p>
+            </article>
+            <article className="content-card-final">
+              <h3 className="content-card-title-final">Published research workflow</h3>
+              <p className="content-card-copy-final">
+                Work moves from analyst draft to reviewed publication through documented review standards maintained by the investment team.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
       <section className="content-section-final">
         <div className="content-container-final">
           <h2 className="section-title-final">How Echelon Equity Builds Research</h2>
@@ -48,6 +73,9 @@ const PortfolioPage = () => {
               </p>
             </article>
           </div>
+          <p className="positioning-paragraph-final" style={{ maxWidth: '860px', margin: '1.5rem auto 0' }}>
+            To understand the analysts behind this coverage, review the <Link to="/team" className="inline-link-final">Echelon Equity team page</Link>. If you want to help build future coverage, <Link to="/apply" className="inline-link-final">apply to the program</Link>.
+          </p>
         </div>
       </section>
       <div className="portfolio-cta-section page-cta-section-final">

@@ -49,8 +49,9 @@ function upsertJsonLd(id, payload) {
 
 function buildPageSchemas(metadata) {
   const pageUrl = metadata.canonical;
+  const isHome = metadata.pathname === "/";
   const breadcrumbItems =
-    metadata.pathname === "/"
+    isHome
       ? []
       : [
           {
@@ -135,9 +136,9 @@ function buildPageSchemas(metadata) {
       : null;
 
   return {
-    organizationSchema,
-    websiteSchema,
-    brandSchema,
+    organizationSchema: isHome ? organizationSchema : null,
+    websiteSchema: isHome ? websiteSchema : null,
+    brandSchema: isHome ? brandSchema : null,
     pageSchema,
     breadcrumbSchema,
   };
@@ -160,24 +161,41 @@ const SEOHead = () => {
 
     upsertMeta('meta[name="description"]', { name: "description" }, metadata.description);
     upsertMeta('meta[name="robots"]', { name: "robots" }, "index, follow, max-image-preview:large");
-    upsertMeta('meta[property="og:title"]', { property: "og:title" }, metadata.title);
-    upsertMeta('meta[property="og:description"]', { property: "og:description" }, metadata.description);
+    upsertMeta('meta[property="og:title"]', { property: "og:title" }, metadata.ogTitle);
+    upsertMeta('meta[property="og:description"]', { property: "og:description" }, metadata.ogDescription);
     upsertMeta('meta[property="og:url"]', { property: "og:url" }, metadata.canonical);
     upsertMeta('meta[property="og:type"]', { property: "og:type" }, metadata.ogType);
     upsertMeta('meta[property="og:site_name"]', { property: "og:site_name" }, siteConfig.name);
     upsertMeta('meta[property="og:image"]', { property: "og:image" }, metadata.image);
     upsertMeta('meta[property="og:image:alt"]', { property: "og:image:alt" }, `${siteConfig.name} social share image`);
     upsertMeta('meta[name="twitter:card"]', { name: "twitter:card" }, "summary_large_image");
-    upsertMeta('meta[name="twitter:title"]', { name: "twitter:title" }, metadata.title);
-    upsertMeta('meta[name="twitter:description"]', { name: "twitter:description" }, metadata.description);
+    upsertMeta('meta[name="twitter:title"]', { name: "twitter:title" }, metadata.twitterTitle);
+    upsertMeta('meta[name="twitter:description"]', { name: "twitter:description" }, metadata.twitterDescription);
     upsertMeta('meta[name="twitter:image"]', { name: "twitter:image" }, metadata.image);
     upsertMeta('meta[name="twitter:image:alt"]', { name: "twitter:image:alt" }, `${siteConfig.name} social share image`);
 
     upsertLink("canonical", metadata.canonical);
 
-    upsertJsonLd("schema-organization", organizationSchema);
-    upsertJsonLd("schema-website", websiteSchema);
-    upsertJsonLd("schema-brand", brandSchema);
+    if (organizationSchema) {
+      upsertJsonLd("schema-organization", organizationSchema);
+    } else {
+      const organizationScript = document.head.querySelector("#schema-organization");
+      if (organizationScript) organizationScript.remove();
+    }
+
+    if (websiteSchema) {
+      upsertJsonLd("schema-website", websiteSchema);
+    } else {
+      const websiteScript = document.head.querySelector("#schema-website");
+      if (websiteScript) websiteScript.remove();
+    }
+
+    if (brandSchema) {
+      upsertJsonLd("schema-brand", brandSchema);
+    } else {
+      const brandScript = document.head.querySelector("#schema-brand");
+      if (brandScript) brandScript.remove();
+    }
     upsertJsonLd("schema-page", pageSchema);
 
     if (breadcrumbSchema) {

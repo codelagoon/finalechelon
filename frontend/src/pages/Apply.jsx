@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Button } from '../components/ui/button';
 import { Input } from '../components/ui/input';
 import { Label } from '../components/ui/label';
@@ -185,9 +185,36 @@ const Apply = () => {
         <div className="page-heading-final">
           <h1 className="section-title-final">Apply to Echelon Equity</h1>
           <p className="section-subtitle-final">
-            We recruit across the investment team, leadership, fundraising, and marketing / content. Acceptance is earned through judgment, communication, and ability to execute at a high standard.
+            Applications are open for investment research and selected operating roles. Selection is based on judgment, communication quality, and reliable execution.
           </p>
         </div>
+
+        <section className="content-section-final" style={{ paddingTop: 0 }}>
+          <h2 className="section-title-final" style={{ fontSize: '1.55rem', marginBottom: '1rem' }}>Application Process</h2>
+          <div className="content-grid-final">
+            <article className="content-card-final">
+              <h3 className="content-card-title-final">1. Submit your materials</h3>
+              <p className="content-card-copy-final">
+                Complete the form with concise, specific responses. Resume upload is required for full review.
+              </p>
+            </article>
+            <article className="content-card-final">
+              <h3 className="content-card-title-final">2. Role-fit review</h3>
+              <p className="content-card-copy-final">
+                Applications are screened for role fit, analytical maturity, writing clarity, and commitment to standards.
+              </p>
+            </article>
+            <article className="content-card-final">
+              <h3 className="content-card-title-final">3. Team decision</h3>
+              <p className="content-card-copy-final">
+                Final decisions prioritize candidates who can produce high-signal work consistently in a feedback-driven environment.
+              </p>
+            </article>
+          </div>
+          <p className="positioning-paragraph-final" style={{ marginTop: '1rem' }}>
+            Before applying, review the <Link to="/program" className="inline-link-final">investment research program</Link> and <Link to="/portfolio" className="inline-link-final">research portfolio</Link> to understand role expectations.
+          </p>
+        </section>
         
         <form onSubmit={handleSubmit} className="application-form-final">
           {/* Full Name */}

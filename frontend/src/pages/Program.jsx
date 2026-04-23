@@ -10,19 +10,55 @@ const Program = () => {
   return (
     <div className="page-shell-final">
       <PageIntro
-        eyebrow="Roles at Echelon Equity"
-        title="Open Roles Across Echelon Equity"
-        lead="Echelon Equity recruits across the investment team and a small set of operating roles. Whether you are applying for research, leadership, fundraising, or marketing / content, the standard is the same: sound judgment, strong communication, and reliable execution."
-        supportingText="The role outlines below are intentionally concise. We look for people who can contribute meaningfully, respond well to feedback, and help raise the quality of the organization."
+        eyebrow="Investment research program"
+        title="Echelon Equity Investment Research Program"
+        lead="Echelon Equity trains student analysts through structured equity research workflows, practical review cycles, and measurable standards for communication, valuation, and judgment."
+        supportingText="Applications are open across research and selected operating roles, but every role is tied to accountable output and professional expectations."
         links={[
-          { to: "/apply", label: "Apply to Echelon Equity" },
-          { to: "/team", label: "Meet current members" },
+          { to: "/apply", label: "Apply to the analyst program" },
+          { to: "/portfolio", label: "Review published research coverage" },
         ]}
       />
+      <section className="content-section-final">
+        <div className="content-container-final">
+          <h2 className="section-title-final">Program Overview</h2>
+          <div className="content-grid-final">
+            <article className="content-card-final">
+              <h3 className="content-card-title-final">What analysts learn</h3>
+              <p className="content-card-copy-final">
+                Analysts learn to turn raw filings, earnings commentary, and market context into written investment views backed by explicit assumptions.
+              </p>
+            </article>
+            <article className="content-card-final">
+              <h3 className="content-card-title-final">How work is reviewed</h3>
+              <p className="content-card-copy-final">
+                Draft models and memos are reviewed for structure, valuation discipline, and clarity before analysts move work into a publishable state.
+              </p>
+            </article>
+            <article className="content-card-final">
+              <h3 className="content-card-title-final">Who should apply</h3>
+              <p className="content-card-copy-final">
+                The strongest candidates are curious, coachable, and consistent under deadlines, not just fluent in finance vocabulary.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
       <Tracks />
       <Standards />
       <Selection />
       <AnalystWork />
+      <section className="content-section-final">
+        <div className="content-container-final">
+          <h2 className="section-title-final">From Training to Published Coverage</h2>
+          <p className="positioning-paragraph-final" style={{ maxWidth: '860px', margin: '0 auto 1.25rem' }}>
+            Program outcomes are visible in the research portfolio. As analysts progress, they are expected to communicate a clearer thesis, tighter risk framing, and stronger valuation support.
+          </p>
+          <p className="positioning-paragraph-final" style={{ maxWidth: '860px', margin: '0 auto' }}>
+            Before applying, review the <Link to="/portfolio" className="inline-link-final">equity research portfolio</Link> and the <Link to="/team" className="inline-link-final">analyst team profiles</Link> to understand the expected standard.
+          </p>
+        </div>
+      </section>
       <div className="program-cta-section page-cta-section-final">
         <div className="content-container-final page-cta-panel-final">
           <h2 className="page-cta-title-final">Ready to Apply?</h2>

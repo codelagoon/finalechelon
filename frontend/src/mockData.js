@@ -1,10 +1,10 @@
 // Echelon Equity - Final Institutional-Grade Copy
 
 export const heroData = {
-  tagline: "STUDENT-LED INVESTMENT RESEARCH",
-  headline: "Echelon Equity Operates at Institutional Standards",
+  tagline: "STUDENT-LED EQUITY RESEARCH PLATFORM",
+  headline: "Student Analysts Building Institutional-Grade Investment Research",
   subheadline:
-    "Echelon Equity is a student-run investment research platform where analysts build models, write investment memos, and develop under institutional standards.",
+    "Echelon Equity is a student-led equity research platform where analysts build valuation models, publish investment memos, and train through rigorous review standards.",
   ctaPrimary: "Apply to Echelon",
   ctaSecondary: "View Research"
 };
