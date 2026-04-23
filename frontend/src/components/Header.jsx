@@ -3,6 +3,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { Menu } from 'lucide-react';
 import { Button } from './ui/button';
 import ContactDialog from './ContactDialog';
+import ResourcesDropdown from './ResourcesDropdown';
 import {
   Sheet,
   SheetClose,
@@ -49,6 +50,7 @@ const Header = () => {
                 {item.label}
               </Link>
             ))}
+            <ResourcesDropdown isMobile={false} />
             <Button
               variant="outline"
               size="sm"
@@ -86,6 +88,7 @@ const Header = () => {
                     </Link>
                   </SheetClose>
                 ))}
+                <ResourcesDropdown isMobile={true} />
 
                 <Button
                   variant="outline"

@@ -103,6 +103,66 @@ const routeMetadata = {
     ogType: "website",
     schemaType: "WebPage",
   },
+  "/standards": {
+    title: "Standards & Quality Scorecard | Echelon Equity Research",
+    description:
+      "Review Echelon Equity's publication standards, editorial process, analyst expectations, and operating metrics. Transparency in research quality and accountability.",
+    ogTitle: "Echelon Equity Standards | Editorial Quality & Rigor",
+    ogDescription:
+      "See how Echelon Equity maintains publication standards, conducts editorial review, and measures research quality.",
+    twitterTitle: "Echelon Equity Standards",
+    twitterDescription:
+      "Publication standards, editorial process, and operating metrics for quality student-led research.",
+    pageTitle: "Echelon Equity Research Standards & Scorecard",
+    canonical: absoluteUrl("/standards"),
+    ogType: "website",
+    schemaType: "WebPage",
+  },
+  "/toolkit": {
+    title: "Student Investor Toolkit | Echelon Equity Templates & Resources",
+    description:
+      "Downloadable templates and checklists for financial modeling, investment memos, DCF analysis, and research process. Learn alongside Echelon Equity standards.",
+    ogTitle: "Investor Toolkit | Echelon Equity Resources",
+    ogDescription:
+      "Free templates, learning guides, and interactive tools for building financial models and investment research.",
+    twitterTitle: "Echelon Equity Investor Toolkit",
+    twitterDescription:
+      "Templates, checklists, and resources for financial modeling and equity research.",
+    pageTitle: "Echelon Equity Student Investor Toolkit",
+    canonical: absoluteUrl("/toolkit"),
+    ogType: "website",
+    schemaType: "CollectionPage",
+  },
+  "/why-student-finance-work-is-weak": {
+    title: "Why Most Student Finance Work Is Weak | Echelon Equity",
+    description:
+      "A sharp critique of common pitfalls in student financial analysis and how Echelon Equity's process and standards make research publishable.",
+    ogTitle: "Why Research Discipline Matters | Echelon Equity Positioning",
+    ogDescription:
+      "Understand the gap between student research and publishable work—and how institutional process closes it.",
+    twitterTitle: "Why Student Research Falls Short",
+    twitterDescription:
+      "A positioning essay on research quality, process, and institutional accountability.",
+    pageTitle: "Why Most Student Finance Work Is Weak",
+    canonical: absoluteUrl("/why-student-finance-work-is-weak"),
+    ogType: "website",
+    schemaType: "BlogPosting",
+  },
+  "/toolkit/dcf-builder": {
+    title: "Interactive DCF Builder | Echelon Equity",
+    description:
+      "Step-by-step DCF valuation tool designed for learning. See how assumptions flow from revenue through free cash flow to equity value per share.",
+    ogTitle: "Build a DCF | Echelon Equity Educational Tool",
+    ogDescription:
+      "Interactive DCF builder with presets, formulas, and validation to teach valuation modeling.",
+    twitterTitle: "Interactive DCF Builder",
+    twitterDescription:
+      "Educational DCF tool showing how assumptions drive valuation output.",
+    pageTitle: "Build a DCF - Echelon Equity Interactive Tool",
+    canonical: absoluteUrl("/toolkit/dcf-builder"),
+    ogType: "website",
+    schemaType: "WebPage",
+  },
 };
 
 function normalizePathname(pathname = "/") {
