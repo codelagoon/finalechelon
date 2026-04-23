@@ -11,7 +11,6 @@ import Review from '../components/Review';
 import Partnerships from '../components/Partnerships';
 import FinalCTA from '../components/FinalCTA';
 import NewsletterSignupCta from '../components/newsletter/NewsletterSignupCta';
-import HalDealCTA from '../components/HalDealCTA';
 
 const Home = () => {
   return (
@@ -27,7 +26,6 @@ const Home = () => {
         buttonLabel="Subscribe to Notes"
         helperText="Built for readers. Unsubscribable anytime."
       />
-      <HalDealCTA />
       <PartnerTrustStrip />
       <Stats />
       <HomeOverview />

@@ -167,6 +167,7 @@ android-sdk/-e
 # Environment files
 *.env
 *.env.*
+!frontend/.env.example
 
 # Local git config (do not commit)
 .gitconfig

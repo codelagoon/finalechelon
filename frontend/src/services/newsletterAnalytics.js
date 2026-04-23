@@ -1,4 +1,5 @@
 import { API_BASE_URL } from "./apiBaseUrl";
+import { trackAmplitudeEvent } from "./amplitudeClient";
 
 const API_URL = API_BASE_URL;
 
@@ -18,6 +19,13 @@ export async function trackNewsletterEvent({
     status,
     request_id: requestId,
   };
+
+  trackAmplitudeEvent(event, {
+    source,
+    segment,
+    status,
+    request_id: requestId,
+  });
 
   try {
     await fetch(`${API_URL}/api/newsletter/analytics`, {
