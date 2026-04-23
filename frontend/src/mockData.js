@@ -133,6 +133,13 @@ export const partnershipsData = {
       label: "Platform"
     },
     {
+      name: "Wisesheets",
+      logo: "wisesheets",
+      href: "https://wisesheets.io",
+      domain: "wisesheets.io",
+      label: "partner"
+    },
+    {
       name: "Adventis CG",
       logo: "adventis",
       href: "https://adventiscg.com",
