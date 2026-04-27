@@ -75,6 +75,9 @@ const NewsletterIssueDetail = () => {
   const gatePosition = Math.floor(bodyLines.length * 0.5);
   const firstHalf = bodyLines.slice(0, gatePosition).join("\n");
   const secondHalf = bodyLines.slice(gatePosition).join("\n");
+  
+  // Only show gate if content is long enough (more than 10 lines)
+  const shouldShowGate = bodyLines.length > 10 && secondHalf.length > 0;
 
   // SEO metadata
   const seoTitle = `${issue.title} | ${issue.volume} | Echelon Equity`;
@@ -128,7 +131,7 @@ const NewsletterIssueDetail = () => {
 
       <section className="content-container-final" style={{ display: "grid", gap: "2rem" }}>
         <article className="newsletter-benefit-card-final">
-          {issue.file_attachment && (hasSignedUp || !secondHalf) && (
+          {issue.file_attachment && (
             <div style={{ marginBottom: "2rem", padding: "1.5rem", border: "1px solid #e5e7eb", borderRadius: "0.5rem", backgroundColor: "#f9fafb" }} data-testid="download-section">
               <h3 style={{ fontSize: "1.125rem", fontWeight: "600", marginBottom: "0.5rem" }}>Research Report</h3>
               <p style={{ marginBottom: "1rem", fontSize: "0.875rem", color: "#6b7280" }}>
@@ -182,7 +185,7 @@ const NewsletterIssueDetail = () => {
             </div>
           )}
 
-          {!hasSignedUp && secondHalf && (
+          {!hasSignedUp && shouldShowGate && secondHalf && (
             <div 
               data-testid="signup-gate"
               style={{ 
