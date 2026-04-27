@@ -114,7 +114,7 @@ const NewsletterLatestIssueCard = ({ issue = null }) => {
           <div style={{ display: "flex", alignItems: "center", gap: "1rem", justifyContent: "space-between" }}>
             <h3 className="newsletter-card-title-final newsletter-card-title-issue-final" style={{ margin: 0 }}>{issue.title}</h3>
             <Link to={`/newsletter/${issue.id}`} className="newsletter-read-full-page-btn-final">
-              <Button type="button" variant="outline" size="sm">
+              <Button type="button" size="sm">
                 Read Full Issue →
               </Button>
             </Link>
