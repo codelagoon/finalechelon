@@ -2,7 +2,7 @@
 
 export const heroData = {
   tagline: "STUDENT INVESTMENT NETWORK",
-  headline: "A Student-Led Equity Research Network Helping Ambitious Students Build Real Investing Experience",
+  headline: "Building the Next Generation of Investment Talent Through Real Market Work",
   subheadline:
     "Echelon Equity is a student-led equity research network where analysts build valuation models, publish investment memos, and train through rigorous review standards.",
   ctaPrimary: "Apply as Analyst",
