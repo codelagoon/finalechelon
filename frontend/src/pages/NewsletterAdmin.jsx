@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState, useCallback, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "../components/ui/button";
 import { Input } from "../components/ui/input";
@@ -15,6 +15,7 @@ import {
 } from "../services/newsletterAdminService";
 
 const STORAGE_KEY = "echelon_newsletter_admin_token";
+const DRAFT_STORAGE_KEY = "echelon_newsletter_draft";
 
 const initialCreateForm = {
   volume: "",
@@ -24,6 +25,7 @@ const initialCreateForm = {
   body: "",
   status: "published",
   highlightsText: "",
+  fileAttachment: null,
 };
 
 function getStoredToken() {
@@ -67,6 +69,11 @@ function IssueEditorCard({ issue, adminToken, onSaved, onDeleted }) {
   const [form, setForm] = useState(issueToForm(issue));
   const [isSaving, setIsSaving] = useState(false);
   const [isDeleting, setIsDeleting] = useState(false);
+  const [autoSaveStatus, setAutoSaveStatus] = useState(null);
+  const [showPreview, setShowPreview] = useState(false);
+  const [validationErrors, setValidationErrors] = useState({});
+  const autoSaveTimeoutRef = useRef(null);
+  const lastSavedFormRef = useRef(null);
 
   useEffect(() => {
     setForm(issueToForm(issue));
@@ -75,7 +82,107 @@ function IssueEditorCard({ issue, adminToken, onSaved, onDeleted }) {
   const handleChange = (event) => {
     const { name, value } = event.target;
     setForm((current) => ({ ...current, [name]: value }));
+    setAutoSaveStatus("unsaved");
+    
+    // Real-time validation
+    const errors = { ...validationErrors };
+    
+    if (name === "volume" && !value.trim()) {
+      errors.volume = "Volume is required";
+    } else if (name === "volume") {
+      delete errors.volume;
+    }
+    
+    if (name === "date" && !value.trim()) {
+      errors.date = "Date is required";
+    } else if (name === "date") {
+      delete errors.date;
+    }
+    
+    if (name === "title" && !value.trim()) {
+      errors.title = "Title is required";
+    } else if (name === "title" && value.trim().length < 3) {
+      errors.title = "Title must be at least 3 characters";
+    } else if (name === "title") {
+      delete errors.title;
+    }
+    
+    if (name === "summary" && !value.trim()) {
+      errors.summary = "Summary is required";
+    } else if (name === "summary" && value.trim().length < 10) {
+      errors.summary = "Summary must be at least 10 characters";
+    } else if (name === "summary") {
+      delete errors.summary;
+    }
+    
+    setValidationErrors(errors);
   };
+
+  const autoSave = useCallback(async () => {
+    if (!adminToken || isSaving) return;
+    
+    // Check if form has meaningful changes
+    if (!form.volume.trim() || !form.date.trim() || !form.title.trim() || !form.summary.trim()) {
+      setAutoSaveStatus("validation-error");
+      return;
+    }
+
+    setIsSaving(true);
+    setAutoSaveStatus("saving");
+
+    try {
+      const payload = formToPayload(form);
+      const result = await updateIssue(adminToken, issue.id, payload);
+
+      if (result.ok) {
+        setAutoSaveStatus("saved");
+        lastSavedFormRef.current = form;
+        onSaved(result.data);
+      } else {
+        setAutoSaveStatus("error");
+      }
+    } catch (error) {
+      setAutoSaveStatus("error");
+    } finally {
+      setIsSaving(false);
+    }
+  }, [adminToken, form, issue.id, isSaving, onSaved]);
+
+  // Auto-save after 30 seconds of inactivity
+  useEffect(() => {
+    if (autoSaveTimeoutRef.current) {
+      clearTimeout(autoSaveTimeoutRef.current);
+    }
+
+    if (autoSaveStatus === "unsaved" && !isSaving) {
+      autoSaveTimeoutRef.current = setTimeout(() => {
+        autoSave();
+      }, 30000); // 30 seconds
+    }
+
+    return () => {
+      if (autoSaveTimeoutRef.current) {
+        clearTimeout(autoSaveTimeoutRef.current);
+      }
+    };
+  }, [autoSaveStatus, isSaving, autoSave]);
+
+  // Keyboard shortcuts
+  useEffect(() => {
+    const handleKeyDown = (event) => {
+      if ((event.ctrlKey || event.metaKey) && event.key === "s") {
+        event.preventDefault();
+        handleSave(event);
+      }
+      if ((event.ctrlKey || event.metaKey) && event.key === "p") {
+        event.preventDefault();
+        setShowPreview((prev) => !prev);
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [form]);
 
   const handleSave = async (event) => {
     event.preventDefault();
@@ -140,36 +247,86 @@ function IssueEditorCard({ issue, adminToken, onSaved, onDeleted }) {
     }
   };
 
+  const getAutoSaveStatusText = () => {
+    switch (autoSaveStatus) {
+      case "saving":
+        return "Saving...";
+      case "saved":
+        return "Saved";
+      case "error":
+        return "Save failed";
+      case "validation-error":
+        return "Fill required fields to save";
+      case "unsaved":
+        return "Unsaved changes";
+      default:
+        return "";
+    }
+  };
+
+  const getAutoSaveStatusColor = () => {
+    switch (autoSaveStatus) {
+      case "saved":
+        return "#16a34a";
+      case "error":
+      case "validation-error":
+        return "#dc2626";
+      case "saving":
+        return "#2563eb";
+      case "unsaved":
+        return "#ca8a04";
+      default:
+        return "#6b7280";
+    }
+  };
+
   return (
     <article className="newsletter-benefit-card-final">
       <form className="application-form-final" onSubmit={handleSave}>
         <div className="page-heading-final" style={{ marginBottom: 0 }}>
-          <h2 className="section-title-final" style={{ fontSize: "1.25rem" }}>
-            {issue.volume || "Untitled issue"}
-          </h2>
-          <p className="section-subtitle-final" style={{ marginBottom: 0 }}>
-            {issue.date || "No date set"} · {issue.status || "draft"}
-          </p>
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "flex-start" }}>
+            <div>
+              <h2 className="section-title-final" style={{ fontSize: "1.25rem" }}>
+                {issue.volume || "Untitled issue"}
+              </h2>
+              <p className="section-subtitle-final" style={{ marginBottom: 0 }}>
+                {issue.date || "No date set"} · {issue.status || "draft"}
+              </p>
+            </div>
+            {autoSaveStatus && (
+              <div style={{ 
+                fontSize: "0.875rem", 
+                color: getAutoSaveStatusColor(),
+                fontWeight: "500"
+              }}>
+                {getAutoSaveStatusText()}
+              </div>
+            )}
+          </div>
         </div>
 
         <div className="form-group">
           <Label htmlFor={`volume-${issue.id}`} className="form-label">Volume</Label>
-          <Input id={`volume-${issue.id}`} name="volume" value={form.volume} onChange={handleChange} className="form-input" required />
+          <Input id={`volume-${issue.id}`} name="volume" value={form.volume} onChange={handleChange} className="form-input" required style={{ borderColor: validationErrors.volume ? "#dc2626" : undefined }} />
+          {validationErrors.volume && <p className="form-helper-text" style={{ color: "#dc2626" }}>{validationErrors.volume}</p>}
         </div>
 
         <div className="form-group">
           <Label htmlFor={`date-${issue.id}`} className="form-label">Date</Label>
-          <Input id={`date-${issue.id}`} name="date" value={form.date} onChange={handleChange} className="form-input" required />
+          <Input id={`date-${issue.id}`} name="date" value={form.date} onChange={handleChange} className="form-input" required style={{ borderColor: validationErrors.date ? "#dc2626" : undefined }} />
+          {validationErrors.date && <p className="form-helper-text" style={{ color: "#dc2626" }}>{validationErrors.date}</p>}
         </div>
 
         <div className="form-group">
           <Label htmlFor={`title-${issue.id}`} className="form-label">Title</Label>
-          <Input id={`title-${issue.id}`} name="title" value={form.title} onChange={handleChange} className="form-input" required />
+          <Input id={`title-${issue.id}`} name="title" value={form.title} onChange={handleChange} className="form-input" required style={{ borderColor: validationErrors.title ? "#dc2626" : undefined }} />
+          {validationErrors.title && <p className="form-helper-text" style={{ color: "#dc2626" }}>{validationErrors.title}</p>}
         </div>
 
         <div className="form-group">
           <Label htmlFor={`summary-${issue.id}`} className="form-label">Summary</Label>
-          <Textarea id={`summary-${issue.id}`} name="summary" value={form.summary} onChange={handleChange} className="form-textarea" rows={3} required />
+          <Textarea id={`summary-${issue.id}`} name="summary" value={form.summary} onChange={handleChange} className="form-textarea" rows={3} required style={{ borderColor: validationErrors.summary ? "#dc2626" : undefined }} />
+          {validationErrors.summary && <p className="form-helper-text" style={{ color: "#dc2626" }}>{validationErrors.summary}</p>}
         </div>
 
         <div className="form-group">
@@ -199,14 +356,95 @@ function IssueEditorCard({ issue, adminToken, onSaved, onDeleted }) {
           </select>
         </div>
 
+        <div className="form-group">
+          <Label htmlFor={`file-url-${issue.id}`} className="form-label">Research Report URL (Optional)</Label>
+          <Input 
+            id={`file-url-${issue.id}`} 
+            name="fileUrl" 
+            value={form.fileAttachment?.url || ""} 
+            onChange={(e) => {
+              const url = e.target.value;
+              setForm(prev => ({
+                ...prev,
+                fileAttachment: url ? {
+                  name: url.split('/').pop() || "research-report",
+                  type: "pdf",
+                  size: 0,
+                  url: url,
+                  upload_date: new Date().toISOString()
+                } : null
+              }));
+            }} 
+            className="form-input" 
+            placeholder="https://example.com/report.pdf"
+          />
+          <p className="form-helper-text">Enter a URL for the research report PDF or document</p>
+        </div>
+
         <div style={{ display: "flex", gap: "0.75rem", flexWrap: "wrap" }}>
           <Button type="submit" className="form-submit-btn" disabled={isSaving}>
             {isSaving ? "Saving..." : "Save Issue"}
+          </Button>
+          <Button type="button" variant="outline" className="form-submit-btn" onClick={() => setShowPreview(!showPreview)}>
+            {showPreview ? "Hide Preview" : "Preview"}
           </Button>
           <Button type="button" variant="outline" className="form-submit-btn" onClick={handleDelete} disabled={isDeleting}>
             {isDeleting ? "Deleting..." : "Delete Issue"}
           </Button>
         </div>
+
+        {showPreview && (
+          <div style={{ 
+            marginTop: "1.5rem", 
+            padding: "1.5rem", 
+            border: "1px solid #e5e7eb", 
+            borderRadius: "0.5rem",
+            backgroundColor: "#f9fafb"
+          }}>
+            <h3 style={{ fontSize: "1.25rem", fontWeight: "600", marginBottom: "1rem" }}>Preview</h3>
+            <div style={{ marginBottom: "0.5rem" }}>
+              <strong>Volume:</strong> {form.volume || "Not set"}
+            </div>
+            <div style={{ marginBottom: "0.5rem" }}>
+              <strong>Date:</strong> {form.date || "Not set"}
+            </div>
+            <div style={{ marginBottom: "0.5rem" }}>
+              <strong>Title:</strong> {form.title || "Not set"}
+            </div>
+            <div style={{ marginBottom: "1rem" }}>
+              <strong>Summary:</strong> {form.summary || "Not set"}
+            </div>
+            {form.highlightsText && (
+              <div style={{ marginBottom: "1rem" }}>
+                <strong>Highlights:</strong>
+                <ul style={{ marginTop: "0.5rem", paddingLeft: "1.5rem" }}>
+                  {form.highlightsText.split("\n").filter(Boolean).map((highlight, idx) => (
+                    <li key={idx}>{highlight}</li>
+                  ))}
+                </ul>
+              </div>
+            )}
+            {form.body && (
+              <div style={{ marginBottom: "1rem" }}>
+                <strong>Body:</strong>
+                <div style={{ marginTop: "0.5rem", whiteSpace: "pre-wrap" }}>{form.body}</div>
+              </div>
+            )}
+            {form.fileAttachment && (
+              <div style={{ marginBottom: "1rem" }}>
+                <strong>Research Report:</strong>
+                <div style={{ marginTop: "0.5rem" }}>
+                  <a href={form.fileAttachment.url} target="_blank" rel="noopener noreferrer" style={{ color: "#2563eb" }}>
+                    {form.fileAttachment.name}
+                  </a>
+                </div>
+              </div>
+            )}
+            <div>
+              <strong>Status:</strong> {form.status || "draft"}
+            </div>
+          </div>
+        )}
       </form>
     </article>
   );
@@ -253,6 +491,18 @@ const NewsletterAdmin = () => {
   const handleCreateChange = (event) => {
     const { name, value } = event.target;
     setCreateForm((current) => ({ ...current, [name]: value }));
+  };
+
+  const handleCopyFromIssue = (issueToCopy) => {
+    const copiedForm = issueToForm(issueToCopy);
+    setCreateForm({
+      ...copiedForm,
+      volume: "",
+      date: "",
+      title: "",
+      status: "draft",
+    });
+    toast.success(`Copied from ${issueToCopy.volume} (${issueToCopy.date})`);
   };
 
   const handleTokenChange = (event) => {
@@ -403,6 +653,31 @@ const NewsletterAdmin = () => {
               </select>
             </div>
 
+            <div className="form-group">
+              <Label htmlFor="create-file-url" className="form-label">Research Report URL (Optional)</Label>
+              <Input 
+                id="create-file-url" 
+                name="fileUrl" 
+                value={createForm.fileAttachment?.url || ""} 
+                onChange={(e) => {
+                  const url = e.target.value;
+                  setCreateForm(prev => ({
+                    ...prev,
+                    fileAttachment: url ? {
+                      name: url.split('/').pop() || "research-report",
+                      type: "pdf",
+                      size: 0,
+                      url: url,
+                      upload_date: new Date().toISOString()
+                    } : null
+                  }));
+                }} 
+                className="form-input" 
+                placeholder="https://example.com/report.pdf"
+              />
+              <p className="form-helper-text">Enter a URL for the research report PDF or document</p>
+            </div>
+
             <Button type="submit" className="form-submit-btn" disabled={isCreating}>
               {isCreating ? "Creating..." : "Create Issue"}
             </Button>
@@ -411,8 +686,33 @@ const NewsletterAdmin = () => {
 
         <div className="newsletter-benefit-card-final">
           <div className="page-heading-final" style={{ marginBottom: "1rem" }}>
-            <h2 className="section-title-final" style={{ fontSize: "1.25rem" }}>Existing issues</h2>
-            <p className="section-subtitle-final" style={{ marginBottom: 0 }}>{issueCountLabel}</p>
+            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+              <div>
+                <h2 className="section-title-final" style={{ fontSize: "1.25rem" }}>Existing issues</h2>
+                <p className="section-subtitle-final" style={{ marginBottom: 0 }}>{issueCountLabel}</p>
+              </div>
+              {issues.length > 0 && (
+                <select 
+                  className="form-input" 
+                  style={{ width: "auto", minWidth: "200px" }}
+                  onChange={(e) => {
+                    if (e.target.value) {
+                      const selectedIssue = issues.find(i => i.id === e.target.value);
+                      if (selectedIssue) handleCopyFromIssue(selectedIssue);
+                      e.target.value = "";
+                    }
+                  }}
+                  defaultValue=""
+                >
+                  <option value="">Copy from existing issue...</option>
+                  {issues.map((issue) => (
+                    <option key={issue.id} value={issue.id}>
+                      {issue.volume} ({issue.date})
+                    </option>
+                  ))}
+                </select>
+              )}
+            </div>
           </div>
 
           {message ? (

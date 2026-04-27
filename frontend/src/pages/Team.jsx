@@ -16,7 +16,7 @@ const Team = () => {
                 Colgate, and the University of Maryland.
               </p>
               <p className="positioning-paragraph-final">
-                Across technology, healthcare, financial services, consumer, energy, and industrial names, analysts are expected to communicate clear theses and defensible valuation logic. To review published work, visit the <Link to="/portfolio" className="inline-link-final">research portfolio</Link>. To understand training, review the <Link to="/program" className="inline-link-final">investment research program</Link>.
+                Across technology, healthcare, financial services, consumer, energy, and industrial names, analysts are expected to communicate clear theses and defensible valuation logic. To review published work, visit the <Link to="/newsletter" className="inline-link-final">newsletter</Link>. To understand training, review the <Link to="/program" className="inline-link-final">investment research program</Link>.
               </p>
             </div>
             

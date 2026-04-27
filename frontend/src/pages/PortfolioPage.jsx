@@ -3,11 +3,11 @@ import { Link } from 'react-router-dom';
 import PageIntro from '../components/PageIntro';
 import Portfolio from '../components/Portfolio';
 import HalDealCTA from '../components/HalDealCTA';
+import NewsletterSignupCta from '../components/newsletter/NewsletterSignupCta';
 
 const PortfolioPage = () => {
   return (
     <div className="page-shell-final">
-      <HalDealCTA />
       <PageIntro
         eyebrow="Equity research archive"
         title="Echelon Equity Research Portfolio"
@@ -18,11 +18,24 @@ const PortfolioPage = () => {
           { to: "/apply", label: "Apply to contribute research" },
         ]}
       />
+
+      <NewsletterSignupCta
+        eyebrow="Stay updated on research"
+        title="Get Echelon's latest analysis"
+        description="Subscribe to receive new research, market notes, and valuation work directly in your inbox."
+        source="research-page"
+        segment="research-reader"
+        buttonLabel="Subscribe to Research"
+        helperText="Unsubscribe anytime. Low-friction, high-signal updates."
+      />
+
+      <HalDealCTA />
+
       <Portfolio />
       <section className="content-section-final">
         <div className="content-container-final">
           <h2 className="section-title-final">Coverage Areas</h2>
-          <div className="content-grid-final">
+          <div className="content-grid-final coverage-areas-grid-final">
             <article className="content-card-final">
               <h3 className="content-card-title-final">Core sector coverage</h3>
               <p className="content-card-copy-final">
@@ -35,10 +48,10 @@ const PortfolioPage = () => {
                 Coverage is built around valuation assumptions and scenario framing, not short-term commentary disconnected from financial drivers.
               </p>
             </article>
-            <article className="content-card-final">
+            <article className="content-card-final coverage-areas-centered-final">
               <h3 className="content-card-title-final">Published research workflow</h3>
               <p className="content-card-copy-final">
-                Work moves from analyst draft to reviewed publication through documented review standards maintained by the investment team.
+                Each coverage stream follows a structured workflow from initial thesis to published memo, with review checkpoints and version control.
               </p>
             </article>
           </div>
@@ -47,7 +60,7 @@ const PortfolioPage = () => {
       <section className="content-section-final">
         <div className="content-container-final">
           <h2 className="section-title-final">How Echelon Equity Builds Research</h2>
-          <div className="content-grid-final">
+          <div className="content-grid-final research-builds-grid-final">
             <article className="content-card-final">
               <h3 className="content-card-title-final">Coverage discipline</h3>
               <p className="content-card-copy-final">
@@ -64,7 +77,7 @@ const PortfolioPage = () => {
                 documented process instead of vague conviction.
               </p>
             </article>
-            <article className="content-card-final">
+            <article className="content-card-final research-builds-centered-final">
               <h3 className="content-card-title-final">Institutional review</h3>
               <p className="content-card-copy-final">
                 The goal is not just to publish coverage, but to produce

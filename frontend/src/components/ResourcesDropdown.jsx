@@ -5,6 +5,7 @@ import { ChevronDown, ChevronRight } from 'lucide-react';
 const ResourcesDropdown = ({ isMobile = false }) => {
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef(null);
+  const timeoutRef = useRef(null);
   const location = useLocation();
 
   const resources = [
@@ -15,6 +16,20 @@ const ResourcesDropdown = ({ isMobile = false }) => {
   ];
 
   const isResourceActive = resources.some(r => location.pathname === r.to);
+
+  const handleMouseEnter = () => {
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
+      timeoutRef.current = null;
+    }
+    setIsOpen(true);
+  };
+
+  const handleMouseLeave = () => {
+    timeoutRef.current = setTimeout(() => {
+      setIsOpen(false);
+    }, 300);
+  };
 
   // Close dropdown when clicking outside
   useEffect(() => {
@@ -29,6 +44,15 @@ const ResourcesDropdown = ({ isMobile = false }) => {
       return () => document.removeEventListener('mousedown', handleClickOutside);
     }
   }, [isOpen, isMobile]);
+
+  // Cleanup timeout on unmount
+  useEffect(() => {
+    return () => {
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current);
+      }
+    };
+  }, []);
 
   if (isMobile) {
     return (
@@ -64,8 +88,8 @@ const ResourcesDropdown = ({ isMobile = false }) => {
     <div
       ref={dropdownRef}
       className={`dropdown-desktop ${isOpen ? 'open' : ''} ${isResourceActive ? 'active' : ''}`}
-      onMouseEnter={() => setIsOpen(true)}
-      onMouseLeave={() => setIsOpen(false)}
+      onMouseEnter={handleMouseEnter}
+      onMouseLeave={handleMouseLeave}
     >
       <button
         className={`dropdown-desktop-trigger nav-link-final ${isResourceActive ? 'nav-active' : ''}`}

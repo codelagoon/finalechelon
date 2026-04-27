@@ -20,11 +20,11 @@ const Header = () => {
 
   const isActive = (path) => location.pathname === path;
   const navItems = [
-    { to: '/portfolio', label: 'Research' },
+    { to: '/', label: 'Home' },
+    { to: '/about', label: 'About' },
+    { to: '/analysts', label: 'Analysts' },
     { to: '/newsletter', label: 'Newsletter' },
-    { to: '/team', label: 'Team' },
-    { to: '/program', label: 'Program' },
-    { to: '/apply', label: 'Apply' },
+    { to: '/apply', label: 'Apply', isPrimary: true },
   ];
 
   useEffect(() => {
@@ -42,13 +42,24 @@ const Header = () => {
           </div>
           <nav className="header-nav-final">
             {navItems.map((item) => (
-              <Link
-                key={item.to}
-                to={item.to}
-                className={`nav-link-final ${isActive(item.to) ? 'nav-active' : ''}`}
-              >
-                {item.label}
-              </Link>
+              item.isPrimary ? (
+                <Button
+                  key={item.to}
+                  size="sm"
+                  onClick={() => (window.location.href = item.to)}
+                  className="header-apply-btn-final"
+                >
+                  {item.label}
+                </Button>
+              ) : (
+                <Link
+                  key={item.to}
+                  to={item.to}
+                  className={`nav-link-final ${isActive(item.to) ? 'nav-active' : ''}`}
+                >
+                  {item.label}
+                </Link>
+              )
             ))}
             <ResourcesDropdown isMobile={false} />
             <Button
@@ -79,14 +90,27 @@ const Header = () => {
 
               <nav className="mobile-nav-final" aria-label="Mobile navigation">
                 {navItems.map((item) => (
-                  <SheetClose asChild key={item.to}>
-                    <Link
-                      to={item.to}
-                      className={`mobile-nav-link-final ${isActive(item.to) ? 'nav-active' : ''}`}
+                  item.isPrimary ? (
+                    <Button
+                      key={item.to}
+                      onClick={() => {
+                        setIsMobileMenuOpen(false);
+                        window.location.href = item.to;
+                      }}
+                      className="mobile-apply-btn-final"
                     >
                       {item.label}
-                    </Link>
-                  </SheetClose>
+                    </Button>
+                  ) : (
+                    <SheetClose asChild key={item.to}>
+                      <Link
+                        to={item.to}
+                        className={`mobile-nav-link-final ${isActive(item.to) ? 'nav-active' : ''}`}
+                      >
+                        {item.label}
+                      </Link>
+                    </SheetClose>
+                  )
                 ))}
                 <ResourcesDropdown isMobile={true} />
 

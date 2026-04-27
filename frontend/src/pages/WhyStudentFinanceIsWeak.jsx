@@ -198,7 +198,7 @@ const WhyStudentFinanceIsWeak = () => {
               <Link to="/standards" className="comparison-link">
                 Review Publication Standards →
               </Link>
-              <Link to="/portfolio" className="comparison-link">
+              <Link to="/newsletter" className="comparison-link">
                 Browse Research Portfolio →
               </Link>
               <Link to="/team" className="comparison-link">

@@ -7,39 +7,45 @@ const Toolkit = () => {
   const resources = [
     {
       title: "Stock Pitch Template",
-      description: "A structured 1-page template for communicating a core investment thesis with key valuation outputs and risk factors.",
+      description: "A structured template for communicating a core investment thesis with company overview, investment thesis, key catalysts, valuation summary, risks, and final recommendation.",
       category: "FrameworkTemplate",
-      downloadInfo: "PDF template"
+      downloadInfo: "PDF template",
+      file: "/downloads/investor-toolkit/stock-pitch-template.html"
     },
     {
-      title: "Investment Memo Framework",
-      description: "Full memo structure including sections for company overview, valuation analysis, bull/bear cases, and risk summary.",
+      title: "Equity Research Report Template",
+      description: "Full research report structure including executive summary, company description, industry overview, business model, financial analysis, valuation, risks, and appendix.",
       category: "FrameworkTemplate",
-      downloadInfo: "Word document"
+      downloadInfo: "PDF template",
+      file: "/downloads/investor-toolkit/equity-research-report-template.html"
     },
     {
-      title: "DCF Model Checklist",
-      description: "Step-by-step checklist for building a defensible DCF model: revenue build, margin assumptions, discount rate, terminal value.",
+      title: "DCF Model Template",
+      description: "Excel-compatible template with tabs for assumptions, income statement forecast, free cash flow, WACC, terminal value, and valuation summary with sensitivity analysis.",
+      category: "ModelTemplate",
+      downloadInfo: "Excel template",
+      file: "/downloads/investor-toolkit/dcf-model-template.csv"
+    },
+    {
+      title: "Comparable Companies Template",
+      description: "Excel template for analyzing peer companies with columns for market cap, revenue, EBITDA, net income, and key multiples (EV/Revenue, EV/EBITDA, P/E).",
+      category: "ModelTemplate",
+      downloadInfo: "Excel template",
+      file: "/downloads/investor-toolkit/comparable-companies-template.csv"
+    },
+    {
+      title: "Financial Statement Guide",
+      description: "Beginner-friendly guide explaining income statement, balance sheet, cash flow statement, MD&A, and common ratios including P/E, debt-to-equity, operating margin, and working capital.",
+      category: "Guide",
+      downloadInfo: "PDF guide",
+      file: "/downloads/investor-toolkit/financial-statement-guide.html"
+    },
+    {
+      title: "SEC EDGAR Research Checklist",
+      description: "Comprehensive checklist for SEC filings research: how to find 10-K and 10-Q filings, what sections to read first (risk factors, MD&A, financial statements), and red flags to watch for.",
       category: "Checklist",
-      downloadInfo: "Downloadable checklist"
-    },
-    {
-      title: "Comparable Companies Checklist",
-      description: "Framework for selecting, analyzing, and using comparable companies to validate valuation multiples and identify outliers.",
-      category: "Checklist",
-      downloadInfo: "Downloadable checklist"
-    },
-    {
-      title: "Earnings Note Template",
-      description: "Quick reference template for post-earnings analysis: key metrics, management guidance, analyst estimates, and verdict.",
-      category: "FrameworkTemplate",
-      downloadInfo: "Google Docs template"
-    },
-    {
-      title: "Research Process Checklist",
-      description: "End-to-end checklist covering prep work, primary research, financial modeling, memo drafting, and submission readiness.",
-      category: "Checklist",
-      downloadInfo: "Interactive checklist"
+      downloadInfo: "PDF checklist",
+      file: "/downloads/investor-toolkit/sec-edgar-research-checklist.html"
     },
   ];
 
@@ -105,9 +111,9 @@ const Toolkit = () => {
                 <p className="resource-description">{resource.description}</p>
                 <div className="resource-footer">
                   <span className="resource-category">{resource.downloadInfo}</span>
-                  <button className="resource-download-btn">
+                  <a href={resource.file} download className="resource-download-btn">
                     Download
-                  </button>
+                  </a>
                 </div>
               </div>
             ))}
@@ -160,7 +166,7 @@ const Toolkit = () => {
               <p className="content-card-copy-final">
                 Directory of free and paid tools used by institutional investors for financial modeling, data analysis, and research workflow.
               </p>
-              <p style={{ marginTop: '1rem' }} className="content-card-copy-final" style={{ fontSize: '0.9rem', color: 'var(--color-gray-text)' }}>
+              <p style={{ marginTop: '1rem', fontSize: '0.9rem', color: 'var(--color-gray-text)' }} className="content-card-copy-final">
                 Coming soon
               </p>
             </article>
@@ -169,7 +175,7 @@ const Toolkit = () => {
               <p className="content-card-copy-final">
                 Quick reference for key valuation terms, formulas, and concepts: WACC, terminal value, multiples, implied returns.
               </p>
-              <p style={{ marginTop: '1rem' }} className="content-card-copy-final" style={{ fontSize: '0.9rem', color: 'var(--color-gray-text)' }}>
+              <p style={{ marginTop: '1rem', fontSize: '0.9rem', color: 'var(--color-gray-text)' }} className="content-card-copy-final">
                 Coming soon
               </p>
             </article>
@@ -205,21 +211,14 @@ const Toolkit = () => {
 
       <div className="page-cta-section-final">
         <div className="content-container-final page-cta-panel-final">
-          <h2 className="page-cta-title-final">Build Your Research Skills</h2>
+          <h2 className="page-cta-title-final">Apply to Become an Echelon Analyst</h2>
           <p className="page-cta-subtitle-final">
-            Download templates, work through learning sequences, and experiment with the DCF builder to strengthen your analysis.
+            Download templates, work through learning sequences, and apply your skills to produce institutional-quality research.
           </p>
           <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center' }}>
             <Link
-              to="/toolkit/dcf-builder"
-              className="page-cta-button-final page-cta-button-dark-final"
-            >
-              Try the DCF Builder
-            </Link>
-            <Link
               to="/apply"
-              className="page-cta-button-final"
-              style={{ backgroundColor: 'transparent', color: 'var(--color-black)', border: '1px solid var(--color-black)' }}
+              className="page-cta-button-final page-cta-button-dark-final"
             >
               Apply to Echelon Equity
             </Link>

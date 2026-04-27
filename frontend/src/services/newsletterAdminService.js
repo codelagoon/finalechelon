@@ -40,6 +40,7 @@ export function issueToForm(issue = {}) {
     body: issue.body || "",
     status: issue.status || "draft",
     highlightsText: normalizeHighlights(issue.highlights).join("\n"),
+    fileAttachment: issue.file_attachment || null,
   };
 }
 
@@ -58,6 +59,7 @@ export function formToPayload(form) {
     body: String(form.body || "").trim() || null,
     status: String(form.status || "draft").trim() || "draft",
     highlights,
+    file_attachment: form.fileAttachment || null,
   };
 }
 

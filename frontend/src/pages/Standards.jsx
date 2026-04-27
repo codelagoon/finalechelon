@@ -11,7 +11,7 @@ const Standards = () => {
         lead="Echelon Equity operates with transparent standards for editorial rigor, analyst accountability, and research quality. This page documents our process, principles, and measurable output metrics."
         supportingText="Strong research begins with clear expectations. We publish our standards so analysts understand the bar, readers trust our work, and external observers can evaluate our credibility."
         links={[
-          { to: "/portfolio", label: "Review published research" },
+          { to: "/newsletter", label: "Review published research" },
           { to: "/apply", label: "Join the research team" },
         ]}
       />
@@ -19,7 +19,7 @@ const Standards = () => {
       <section className="content-section-final">
         <div className="content-container-final">
           <h2 className="section-title-final">Publication Standards</h2>
-          <div className="content-grid-final">
+          <div className="content-grid-final standards-grid-final">
             <article className="content-card-final">
               <h3 className="content-card-title-final">Valuation rigor</h3>
               <p className="content-card-copy-final">
@@ -32,7 +32,7 @@ const Standards = () => {
                 Research memos articulate a core investment view (bullish, bearish, hold) with risk factors clearly stated. Readers should understand the primary thesis within the first two pages.
               </p>
             </article>
-            <article className="content-card-final">
+            <article className="content-card-final standards-centered-final">
               <h3 className="content-card-title-final">Data transparency</h3>
               <p className="content-card-copy-final">
                 Sources are cited for financial data, company guidance, and market context. Model reconciliation to public filings is included or explicitly noted as out-of-scope.
@@ -88,7 +88,7 @@ const Standards = () => {
       <section className="content-section-final">
         <div className="content-container-final">
           <h2 className="section-title-final">Analyst Expectations</h2>
-          <div className="content-grid-final">
+          <div className="content-grid-final standards-expectations-grid-final">
             <article className="content-card-final">
               <h3 className="content-card-title-final">Communication</h3>
               <p className="content-card-copy-final">
@@ -101,43 +101,12 @@ const Standards = () => {
                 Deadlines are binding. Models are documented. Reputational risk is taken seriously. We do not publish work we would not defend to external stakeholders.
               </p>
             </article>
-            <article className="content-card-final">
+            <article className="content-card-final standards-expectations-centered-final">
               <h3 className="content-card-title-final">Coachability</h3>
               <p className="content-card-copy-final">
                 Feedback is frequent and direct. The expectation is to incorporate critique, improve output, and ask questions when the bar is unclear.
               </p>
             </article>
-          </div>
-        </div>
-      </section>
-
-      <section className="content-section-final">
-        <div className="content-container-final">
-          <h2 className="section-title-final">Operating Metrics & Scorecard</h2>
-          <p className="positioning-paragraph-final" style={{ marginBottom: '2rem' }}>
-            These metrics are tracked quarterly to measure output quality and organizational health.
-          </p>
-          <div className="metrics-grid">
-            <div className="metric-card">
-              <div className="metric-label">Published Memos</div>
-              <div className="metric-value">45+</div>
-              <p className="metric-context">Student-authored, review-approved equity research</p>
-            </div>
-            <div className="metric-card">
-              <div className="metric-label">Sectors Covered</div>
-              <div className="metric-value">8</div>
-              <p className="metric-context">Technology, healthcare, financials, consumer, industrials, energy, materials, real estate</p>
-            </div>
-            <div className="metric-card">
-              <div className="metric-label">Active Analysts</div>
-              <div className="metric-value">20+</div>
-              <p className="metric-context">Regular contributors with published work</p>
-            </div>
-            <div className="metric-card">
-              <div className="metric-label">Avg Review Turnaround</div>
-              <div className="metric-value">5-7 days</div>
-              <p className="metric-context">From draft submission to feedback or publication</p>
-            </div>
           </div>
         </div>
       </section>

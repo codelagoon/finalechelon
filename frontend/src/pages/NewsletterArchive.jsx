@@ -64,8 +64,8 @@ const NewsletterArchive = () => {
               <NewsletterArticlePrompt type="social" />
               <NewsletterArticlePrompt type="end" />
               <div className="newsletter-archive-card-cta-row-final">
-                <Link to="/newsletter" className="newsletter-archive-card-cta-final">
-                  Read Issue Highlights
+                <Link to={`/newsletter/${issue.id}`} className="newsletter-archive-card-cta-final">
+                  Read Full Issue
                 </Link>
               </div>
             </article>

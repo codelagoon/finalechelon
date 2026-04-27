@@ -9,16 +9,18 @@ import RouteManager from "./components/RouteManager";
 import Home from "./pages/Home";
 
 const Program = lazy(() => import("./pages/Program"));
-const PortfolioPage = lazy(() => import("./pages/PortfolioPage"));
 const Apply = lazy(() => import("./pages/Apply"));
 const Team = lazy(() => import("./pages/Team"));
 const Newsletter = lazy(() => import("./pages/Newsletter"));
 const NewsletterArchive = lazy(() => import("./pages/NewsletterArchive"));
+const NewsletterIssueDetail = lazy(() => import("./pages/NewsletterIssueDetail"));
 const NewsletterAdmin = lazy(() => import("./pages/NewsletterAdmin"));
 const Standards = lazy(() => import("./pages/Standards"));
 const Toolkit = lazy(() => import("./pages/Toolkit"));
 const WhyStudentFinanceIsWeak = lazy(() => import("./pages/WhyStudentFinanceIsWeak"));
 const DCFBuilder = lazy(() => import("./pages/DCFBuilder"));
+const About = lazy(() => import("./pages/About"));
+const Analysts = lazy(() => import("./pages/Analysts"));
 
 function App() {
   return (
@@ -38,12 +40,14 @@ function App() {
           >
             <Routes>
               <Route path="/" element={<Home />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/analysts" element={<Analysts />} />
               <Route path="/program" element={<Program />} />
-              <Route path="/portfolio" element={<PortfolioPage />} />
               <Route path="/team" element={<Team />} />
               <Route path="/apply" element={<Apply />} />
               <Route path="/newsletter" element={<Newsletter />} />
               <Route path="/newsletter/archive" element={<NewsletterArchive />} />
+              <Route path="/newsletter/:issueId" element={<NewsletterIssueDetail />} />
               <Route path="/newsletter/admin" element={<NewsletterAdmin />} />
               <Route path="/standards" element={<Standards />} />
               <Route path="/toolkit" element={<Toolkit />} />

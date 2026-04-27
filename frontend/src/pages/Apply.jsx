@@ -191,7 +191,7 @@ const Apply = () => {
 
         <section className="content-section-final" style={{ paddingTop: 0 }}>
           <h2 className="section-title-final" style={{ fontSize: '1.55rem', marginBottom: '1rem' }}>Application Process</h2>
-          <div className="content-grid-final">
+          <div className="content-grid-final application-process-grid-final">
             <article className="content-card-final">
               <h3 className="content-card-title-final">1. Submit your materials</h3>
               <p className="content-card-copy-final">
@@ -212,7 +212,7 @@ const Apply = () => {
             </article>
           </div>
           <p className="positioning-paragraph-final" style={{ marginTop: '1rem' }}>
-            Before applying, review the <Link to="/program" className="inline-link-final">investment research program</Link> and <Link to="/portfolio" className="inline-link-final">research portfolio</Link> to understand role expectations.
+            Before applying, review the <Link to="/program" className="inline-link-final">investment research program</Link> and <Link to="/newsletter" className="inline-link-final">newsletter</Link> to understand role expectations.
           </p>
         </section>
         

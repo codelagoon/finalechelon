@@ -82,3 +82,46 @@ export async function fetchPublishedIssues(limit = 100) {
     };
   }
 }
+
+export async function fetchIssueById(issueId) {
+  try {
+    const response = await fetch(`${API_URL}/api/newsletter/issues/${issueId}`, {
+      method: "GET",
+      headers: {
+        Accept: "application/json",
+      },
+    });
+
+    if (!response.ok) {
+      return {
+        success: false,
+        issue: null,
+        error: "Failed to load newsletter issue",
+      };
+    }
+
+    const result = await response.json();
+
+    if (!result) {
+      return {
+        success: false,
+        issue: null,
+        error: "Invalid newsletter issue response",
+      };
+    }
+
+    const normalized = normalizeIssue(result);
+
+    return {
+      success: true,
+      issue: normalized,
+      error: null,
+    };
+  } catch {
+    return {
+      success: false,
+      issue: null,
+      error: "Network error while loading newsletter issue",
+    };
+  }
+}

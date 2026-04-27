@@ -31,7 +31,7 @@ const Hero = () => {
               size="lg" 
               variant="outline" 
               className="cta-secondary-final"
-              onClick={() => navigate('/portfolio')}
+              onClick={() => navigate('/newsletter')}
             >
               {heroData.ctaSecondary}
             </Button>
@@ -45,7 +45,7 @@ const Hero = () => {
             width="1400"
             height="1100"
             loading="eager"
-            fetchPriority="high"
+            fetchpriority="high"
             decoding="async"
             sizes="(max-width: 968px) 100vw, 50vw"
           />

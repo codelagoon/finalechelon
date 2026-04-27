@@ -18,7 +18,7 @@ const overviewCards = [
     title: "What analysts produce",
     description:
       "Research analysts build three-statement models, DCFs, LBOs, market views, and investment memos grounded in filings, valuation discipline, and current context.",
-    link: { to: "/portfolio", label: "Review investment research coverage" },
+    link: { to: "/newsletter", label: "Review investment research coverage" },
   },
   {
     title: "Institutional standards",

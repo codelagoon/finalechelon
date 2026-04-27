@@ -26,6 +26,14 @@ class IssueHighlight(BaseModel):
     text: str
 
 
+class FileAttachment(BaseModel):
+    name: str
+    type: str  # pdf, docx, xlsx, csv
+    size: int  # bytes
+    url: str
+    upload_date: str
+
+
 class IssueCreateRequest(BaseModel):
     volume: str  # e.g., "Vol. 08"
     date: str  # e.g., "April 2026"
@@ -34,6 +42,7 @@ class IssueCreateRequest(BaseModel):
     highlights: List[IssueHighlight]
     body: Optional[BodyField] = None
     status: Optional[str] = "draft"  # "draft" or "published"
+    file_attachment: Optional[FileAttachment] = None
 
 
 class IssueResponse(BaseModel):
@@ -45,6 +54,7 @@ class IssueResponse(BaseModel):
     highlights: List[IssueHighlight]
     body: Optional[str] = None
     status: str
+    file_attachment: Optional[FileAttachment] = None
     created_at: str
     updated_at: str
 
@@ -70,6 +80,9 @@ def build_issue_document(payload: IssueCreateRequest) -> Dict[str, Any]:
 
     if payload.body is not None:
         issue["body"] = payload.body
+
+    if payload.file_attachment is not None:
+        issue["file_attachment"] = payload.file_attachment.model_dump()
 
     return issue
 
@@ -157,7 +170,7 @@ async def update_issue(
             raise HTTPException(status_code=404, detail="Issue not found")
 
         # Only allow updating certain fields
-        allowed_fields = {"title", "summary", "body", "status", "highlights"}
+        allowed_fields = {"title", "summary", "body", "status", "highlights", "file_attachment"}
         update_data = {k: v for k, v in payload.items() if k in allowed_fields}
         update_data["updated_at"] = datetime.now(timezone.utc).isoformat()
 

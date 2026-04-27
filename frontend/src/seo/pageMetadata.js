@@ -2,17 +2,47 @@ import { absoluteUrl, siteAssets, siteConfig } from "./siteConfig";
 
 const routeMetadata = {
   "/": {
-    title: "Echelon Equity | Student-Led Investment Research Platform",
+    title: "Echelon Equity | Student Investment Network",
     description:
-      "Echelon Equity is a student-led investment research platform where analysts develop financial models, publish equity research, and train to institutional standards.",
-    ogTitle: "Echelon Equity | Student-Led Equity Research Platform",
+      "Echelon Equity is a student-led equity research network helping ambitious students build real investing experience through structured equity research programs.",
+    ogTitle: "Echelon Equity | Student Investment Network",
     ogDescription:
-      "Explore a student-led equity research platform built around valuation rigor, clear communication, and repeatable analyst process.",
-    twitterTitle: "Echelon Equity | Student-Led Equity Research",
+      "A student-led equity research network helping ambitious students build real investing experience through valuation models, investment memos, and peer review.",
+    twitterTitle: "Echelon Equity | Student Investment Network",
     twitterDescription:
-      "Student analysts build models, write memos, and publish disciplined investment research.",
-    pageTitle: "Echelon Equity Student-Led Investment Research",
+      "Student analysts build real investing experience through institutional-grade equity research programs.",
+    pageTitle: "Echelon Equity Student Investment Network",
     canonical: absoluteUrl("/"),
+    ogType: "website",
+    schemaType: "WebPage",
+  },
+  "/about": {
+    title: "About Echelon Equity | Student Investment Network Mission",
+    description:
+      "Learn about Echelon Equity's mission to help ambitious students build real investing experience through structured equity research programs and institutional standards.",
+    ogTitle: "About Echelon Equity | Student-Led Research Network",
+    ogDescription:
+      "Discover Echelon Equity's mission, who it's for, and how the student investment network helps students build real investing experience.",
+    twitterTitle: "About Echelon Equity",
+    twitterDescription:
+      "A student-led equity research network helping ambitious students build real investing experience.",
+    pageTitle: "About Echelon Equity",
+    canonical: absoluteUrl("/about"),
+    ogType: "website",
+    schemaType: "AboutPage",
+  },
+  "/analysts": {
+    title: "Analyst Program | Echelon Equity Student Investment Network",
+    description:
+      "Join Echelon Equity's analyst program to build real investing experience through financial modeling, valuation analysis, and investment memos with peer review.",
+    ogTitle: "Analyst Program | Echelon Equity",
+    ogDescription:
+      "Become an equity research analyst and build institutional-grade experience through structured research workflows and professional feedback.",
+    twitterTitle: "Echelon Equity Analyst Program",
+    twitterDescription:
+      "Student analysts build real investing experience through financial modeling, valuation, and investment memos.",
+    pageTitle: "Echelon Equity Analyst Program",
+    canonical: absoluteUrl("/analysts"),
     ogType: "website",
     schemaType: "WebPage",
   },
@@ -30,21 +60,6 @@ const routeMetadata = {
     canonical: absoluteUrl("/apply"),
     ogType: "website",
     schemaType: "WebPage",
-  },
-  "/portfolio": {
-    title: "Research Portfolio | Echelon Equity Coverage",
-    description:
-      "Review Echelon Equity research coverage across public equities, including analyst theses, valuation work, and sector-level investment analysis.",
-    ogTitle: "Echelon Equity Portfolio | Published Research Coverage",
-    ogDescription:
-      "Browse student-led equity research, sector coverage, and valuation-driven analyst work.",
-    twitterTitle: "Echelon Equity Research Portfolio",
-    twitterDescription:
-      "A coverage hub for student-led equity research and investment memos.",
-    pageTitle: "Echelon Equity Research Portfolio",
-    canonical: absoluteUrl("/portfolio"),
-    ogType: "website",
-    schemaType: "CollectionPage",
   },
   "/program": {
     title: "Investment Research Program | Echelon Equity",

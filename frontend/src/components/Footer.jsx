@@ -46,7 +46,7 @@ const Footer = () => {
           <div className="footer-section">
             <h4 className="footer-heading">Resources</h4>
             <ul className="footer-links">
-              <li><Link to="/portfolio">Investment Research Coverage</Link></li>
+              <li><Link to="/newsletter">Newsletter</Link></li>
               <li><Link to="/program">Analyst Tracks and Standards</Link></li>
               <li><Link to="/team">Meet Echelon Equity</Link></li>
               <li><a href="https://portal.echelonequity.co" target="_blank" rel="noopener noreferrer">Member Portal</a></li>

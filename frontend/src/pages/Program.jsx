@@ -16,7 +16,7 @@ const Program = () => {
         supportingText="Applications are open across research and selected operating roles, but every role is tied to accountable output and professional expectations."
         links={[
           { to: "/apply", label: "Apply to the analyst program" },
-          { to: "/portfolio", label: "Review published research coverage" },
+          { to: "/newsletter", label: "Review published research coverage" },
         ]}
       />
       <section className="content-section-final">
@@ -55,7 +55,7 @@ const Program = () => {
             Program outcomes are visible in the research portfolio. As analysts progress, they are expected to communicate a clearer thesis, tighter risk framing, and stronger valuation support.
           </p>
           <p className="positioning-paragraph-final" style={{ maxWidth: '860px', margin: '0 auto' }}>
-            Before applying, review the <Link to="/portfolio" className="inline-link-final">equity research portfolio</Link> and the <Link to="/team" className="inline-link-final">analyst team profiles</Link> to understand the expected standard.
+            Before applying, review the <Link to="/newsletter" className="inline-link-final">newsletter</Link> and the <Link to="/team" className="inline-link-final">analyst team profiles</Link> to understand the expected standard.
           </p>
         </div>
       </section>

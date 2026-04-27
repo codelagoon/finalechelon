@@ -50,7 +50,7 @@ const Home = () => {
               <p className="content-card-copy-final">
                 See current coverage areas, valuation-first research work, and examples of published analyst thinking across sectors.
               </p>
-              <Link to="/portfolio" className="inline-link-final">Browse the research portfolio</Link>
+              <Link to="/newsletter" className="inline-link-final">Browse the research portfolio</Link>
             </article>
             <article className="content-card-final">
               <h3 className="content-card-title-final">Analyst team credibility</h3>
