@@ -116,82 +116,177 @@ const NewsletterIssueDetail = () => {
         schema={seoSchema}
       />
       <div className="page-shell-final page-shell-padded-final">
-      <section className="page-intro-section-final">
-        <div className="content-container-final">
-          <Link to="/newsletter/archive" className="page-intro-link-final" data-testid="back-to-archive">
+        {/* NYT-Style Header */}
+        <header style={{ 
+          maxWidth: "600px", 
+          margin: "0 auto 3rem", 
+          padding: "2rem 0 1.5rem",
+          borderBottom: "1px solid #e5e7eb"
+        }}>
+          <Link 
+            to="/newsletter/archive" 
+            style={{ 
+              display: "inline-block",
+              fontSize: "0.875rem",
+              color: "#6b7280",
+              textDecoration: "none",
+              marginBottom: "2rem",
+              fontFamily: "Inter, sans-serif"
+            }}
+            data-testid="back-to-archive"
+          >
             ← Back to Archive
           </Link>
-          <p className="page-intro-eyebrow-final" style={{ marginTop: "1rem" }} data-testid="issue-volume">
-            {issue.volume}
-          </p>
-          <h1 className="page-intro-title-final" data-testid="issue-title">{issue.title}</h1>
-          <p className="page-intro-lead-final" data-testid="issue-date">{issue.date}</p>
-        </div>
-      </section>
+          
+          {/* Publication metadata */}
+          <div style={{ 
+            display: "flex", 
+            alignItems: "center", 
+            gap: "0.75rem",
+            fontSize: "0.8125rem",
+            fontFamily: "Inter, sans-serif",
+            textTransform: "uppercase",
+            letterSpacing: "0.1em",
+            color: "#6b7280",
+            marginBottom: "1.5rem"
+          }}>
+            <span data-testid="issue-volume">{issue.volume}</span>
+            <span style={{ color: "#d1d5db" }}>|</span>
+            <span data-testid="issue-date">{issue.date}</span>
+          </div>
 
-      <section className="content-container-final" style={{ display: "grid", gap: "2rem" }}>
-        <article className="newsletter-benefit-card-final" style={{ maxWidth: "800px", margin: "0 auto" }}>
+          {/* Headline - NYT Style */}
+          <h1 
+            data-testid="issue-title"
+            style={{ 
+              fontFamily: "Georgia, 'Times New Roman', Times, serif",
+              fontSize: "2.5rem",
+              fontWeight: "700",
+              lineHeight: "1.1",
+              color: "#121212",
+              margin: "0 0 1.5rem 0",
+              letterSpacing: "-0.02em"
+            }}
+          >
+            {issue.title}
+          </h1>
+        </header>
+
+        {/* Article Body - NYT Style */}
+        <article style={{ 
+          maxWidth: "600px", 
+          margin: "0 auto",
+          fontFamily: "Georgia, 'Times New Roman', Times, serif"
+        }}>
+          {/* Download Section */}
           {issue.file_attachment && (
-            <div style={{ marginBottom: "2rem", padding: "1.5rem", border: "1px solid #e5e7eb", borderRadius: "0.5rem", backgroundColor: "#f9fafb" }} data-testid="download-section">
-              <h3 style={{ fontSize: "1.125rem", fontWeight: "600", marginBottom: "0.5rem" }}>Research Report</h3>
-              <p style={{ marginBottom: "1rem", fontSize: "0.875rem", color: "#6b7280" }}>
-                {issue.file_attachment.name} · {issue.file_attachment.type.toUpperCase()}
-              </p>
-              <a 
-                href={issue.file_attachment.url} 
-                target="_blank" 
-                rel="noopener noreferrer"
-                style={{ 
-                  display: "inline-block",
-                  padding: "0.5rem 1rem",
-                  backgroundColor: "#000",
-                  color: "#fff",
-                  textDecoration: "none",
-                  borderRadius: "0.25rem",
-                  fontSize: "0.875rem",
-                  fontWeight: "500"
-                }}
-                data-testid="download-button"
-              >
-                Download Full Research Report
-              </a>
+            <div style={{ 
+              marginBottom: "2.5rem", 
+              padding: "1.25rem 1.5rem", 
+              border: "1px solid #e5e7eb", 
+              borderRadius: "0.375rem", 
+              backgroundColor: "#fafafa",
+              fontFamily: "Inter, sans-serif"
+            }} data-testid="download-section">
+              <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
+                <div>
+                  <h3 style={{ fontSize: "0.875rem", fontWeight: "600", margin: "0 0 0.25rem 0", color: "#374151" }}>Research Report</h3>
+                  <p style={{ margin: 0, fontSize: "0.8125rem", color: "#6b7280" }}>
+                    {issue.file_attachment.name} · {issue.file_attachment.type.toUpperCase()}
+                  </p>
+                </div>
+                <a 
+                  href={issue.file_attachment.url} 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  style={{ 
+                    display: "inline-flex",
+                    alignItems: "center",
+                    padding: "0.5rem 1rem",
+                    backgroundColor: "#000",
+                    color: "#fff",
+                    textDecoration: "none",
+                    borderRadius: "0.25rem",
+                    fontSize: "0.8125rem",
+                    fontWeight: "500",
+                    fontFamily: "Inter, sans-serif"
+                  }}
+                  data-testid="download-button"
+                >
+                  Download
+                </a>
+              </div>
             </div>
           )}
 
-          <div style={{ 
+          {/* Summary - NYT Deck/Lead Style */}
+          <p style={{ 
+            fontFamily: "Georgia, 'Times New Roman', Times, serif",
             fontSize: "1.25rem", 
-            lineHeight: "1.8", 
+            lineHeight: "1.6", 
             color: "#374151",
-            marginBottom: "2rem",
+            margin: "0 0 2.5rem 0",
             fontWeight: "400"
           }}>
             {issue.summary}
-          </div>
+          </p>
 
+          {/* Key Highlights - Styled as pull quotes */}
           {issue.highlights && issue.highlights.length > 0 && (
-            <div style={{ marginTop: "3rem", marginBottom: "3rem", padding: "2rem", backgroundColor: "#f8fafc", borderRadius: "0.5rem", borderLeft: "4px solid #000" }}>
-              <h3 className="section-title-final" style={{ fontSize: "1.125rem", marginBottom: "1.5rem", fontWeight: "600", textTransform: "uppercase", letterSpacing: "0.05em", color: "#6b7280" }}>
-                Key Highlights
+            <aside style={{ 
+              margin: "2.5rem 0", 
+              padding: "1.5rem 0",
+              borderTop: "1px solid #000",
+              borderBottom: "1px solid #e5e7eb",
+              fontFamily: "Inter, sans-serif"
+            }}>
+              <h3 style={{ 
+                fontSize: "0.6875rem", 
+                margin: "0 0 1rem 0", 
+                fontWeight: "700", 
+                textTransform: "uppercase", 
+                letterSpacing: "0.15em", 
+                color: "#000"
+              }}>
+                Key Points
               </h3>
-              <ul style={{ paddingLeft: "1.5rem", margin: 0 }}>
+              <ul style={{ 
+                padding: 0, 
+                margin: 0,
+                listStyle: "none"
+              }}>
                 {issue.highlights.map((highlight, idx) => (
-                  <li key={idx} style={{ marginBottom: "1rem", lineHeight: "1.7", color: "#1f2937" }}>
+                  <li key={idx} style={{ 
+                    marginBottom: "0.875rem", 
+                    lineHeight: "1.5", 
+                    color: "#121212",
+                    fontSize: "0.9375rem",
+                    paddingLeft: "1.25rem",
+                    position: "relative"
+                  }}>
+                    <span style={{ 
+                      position: "absolute",
+                      left: 0,
+                      color: "#000",
+                      fontWeight: "700"
+                    }}>•</span>
                     {highlight.text || highlight}
                   </li>
                 ))}
               </ul>
-            </div>
+            </aside>
           )}
 
+          {/* Article Body - First Half */}
           {firstHalfParagraphs.length > 0 && (
-            <div style={{ marginTop: "3rem" }}>
+            <div style={{ marginTop: "2rem" }}>
               {firstHalfParagraphs.map((paragraph, idx) => (
                 <p key={`first-${idx}`} style={{ 
-                  fontSize: "1.125rem", 
+                  fontFamily: "Georgia, 'Times New Roman', Times, serif",
+                  fontSize: "1.0625rem", 
                   lineHeight: "1.8", 
-                  marginBottom: "1.5rem",
-                  color: "#1f2937",
-                  textAlign: "justify"
+                  marginBottom: "1.25rem",
+                  color: "#121212"
                 }}>
                   {paragraph}
                 </p>
@@ -199,22 +294,35 @@ const NewsletterIssueDetail = () => {
             </div>
           )}
 
+          {/* Signup Gate - NYT Style */}
           {!hasSignedUp && shouldShowGate && secondHalfParagraphs.length > 0 && (
             <div 
               data-testid="signup-gate"
               style={{ 
-                marginTop: "4rem", 
-                padding: "3rem 2rem", 
-                border: "2px solid #e5e7eb", 
-                borderRadius: "1rem",
-                backgroundColor: "#f9fafb",
-                textAlign: "center"
+                margin: "3rem 0",
+                padding: "2.5rem 2rem",
+                borderTop: "4px solid #000",
+                borderBottom: "1px solid #e5e7eb",
+                backgroundColor: "#fafafa",
+                textAlign: "center",
+                fontFamily: "Inter, sans-serif"
               }}
             >
-              <h2 className="section-title-final" style={{ fontSize: "1.75rem", marginBottom: "1rem", fontWeight: "700" }}>
+              <h2 style={{ 
+                fontFamily: "Georgia, 'Times New Roman', Times, serif",
+                fontSize: "1.5rem", 
+                margin: "0 0 0.75rem 0", 
+                fontWeight: "700",
+                color: "#121212"
+              }}>
                 Continue Reading
               </h2>
-              <p className="newsletter-card-copy-final" style={{ marginBottom: "2rem", fontSize: "1.125rem", lineHeight: "1.6", color: "#4b5563" }}>
+              <p style={{ 
+                margin: "0 0 1.5rem 0", 
+                fontSize: "1rem", 
+                lineHeight: "1.5", 
+                color: "#4b5563"
+              }}>
                 Join our newsletter to read the full analysis and get future issues delivered to your inbox.
               </p>
               <NewsletterSignupForm 
@@ -222,21 +330,26 @@ const NewsletterIssueDetail = () => {
                 buttonLabel="Subscribe to Continue"
                 helperText=""
               />
-              <p className="form-helper-text" style={{ marginTop: "1rem", fontSize: "0.875rem", color: "#6b7280" }}>
+              <p style={{ 
+                marginTop: "1rem", 
+                fontSize: "0.75rem", 
+                color: "#9ca3af"
+              }}>
                 Free subscription. Unsubscribe anytime.
               </p>
             </div>
           )}
 
+          {/* Article Body - Second Half */}
           {(hasSignedUp || !secondHalfParagraphs.length) && secondHalfParagraphs.length > 0 && (
-            <div style={{ marginTop: "3rem" }} data-testid="issue-second-half">
+            <div style={{ marginTop: "2rem" }} data-testid="issue-second-half">
               {secondHalfParagraphs.map((paragraph, idx) => (
                 <p key={`second-${idx}`} style={{ 
-                  fontSize: "1.125rem", 
+                  fontFamily: "Georgia, 'Times New Roman', Times, serif",
+                  fontSize: "1.0625rem", 
                   lineHeight: "1.8", 
-                  marginBottom: "1.5rem",
-                  color: "#1f2937",
-                  textAlign: "justify"
+                  marginBottom: "1.25rem",
+                  color: "#121212"
                 }}>
                   {paragraph}
                 </p>
@@ -244,8 +357,7 @@ const NewsletterIssueDetail = () => {
             </div>
           )}
         </article>
-      </section>
-    </div>
+      </div>
     </>
   );
 };
