@@ -199,7 +199,7 @@ function IssueEditorCard({ issue, adminToken, onSaved, onDeleted }) {
     } finally {
       setIsSaving(false);
     }
-  }, [adminToken, form, onSaved]);
+  }, [adminToken, form, onSaved, issue.id]);
 
   // Keyboard shortcuts
   useEffect(() => {
