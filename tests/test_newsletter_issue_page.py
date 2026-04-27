@@ -27,7 +27,7 @@ def create_test_issue(page: Page, admin_token: str):
         "title": f"Test Issue {timestamp}",
         "summary": "This is a test issue for Playwright testing. It has enough content to trigger the signup gate.",
         "highlights": [{"text": "Test highlight 1"}, {"text": "Test highlight 2"}],
-        "body": "Line 1\nLine 2\nLine 3\nLine 4\nLine 5\nLine 6\nLine 7\nLine 8\nLine 9\nLine 10\nLine 11\nLine 12\nLine 13\nLine 14\nLine 15\nLine 16\nLine 17\nLine 18\nLine 19\nLine 20",
+        "body": "Paragraph one of the market analysis. The Federal Reserve kept rates steady this quarter, signaling a cautious approach to monetary policy in an uncertain economic environment.\n\nParagraph two discusses IPO activity. Global IPOs raised significant capital, though volume remained selective with larger issuers dominating the market.\n\nParagraph three covers technology spending. Major platforms continue committing enormous resources to AI infrastructure, with capital expenditures reaching record levels.\n\nParagraph four analyzes market implications. The result is a cleaner research environment where scale, monetization, and bottlenecks matter more than narrative alone.\n\nParagraph five examines sector dynamics. Investors are rewarding businesses with observable operating leverage and direct exposure to infrastructure buildout.\n\nParagraph six looks at future outlook. The April FOMC meeting will provide additional clarity on monetary policy direction.\n\nParagraph seven offers conclusions. In this tape, reality is screening the universe for you.\n\nParagraph eight provides recommendations. Spend more time on companies with customer urgency and pricing power.",
         "status": "published"
     }
     
