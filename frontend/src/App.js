@@ -15,7 +15,6 @@ const Newsletter = lazy(() => import("./pages/Newsletter"));
 const NewsletterArchive = lazy(() => import("./pages/NewsletterArchive"));
 const NewsletterIssueDetail = lazy(() => import("./pages/NewsletterIssueDetail"));
 const NewsletterAdmin = lazy(() => import("./pages/NewsletterAdmin"));
-const Standards = lazy(() => import("./pages/Standards"));
 const Toolkit = lazy(() => import("./pages/Toolkit"));
 const WhyStudentFinanceIsWeak = lazy(() => import("./pages/WhyStudentFinanceIsWeak"));
 const DCFBuilder = lazy(() => import("./pages/DCFBuilder"));
@@ -49,7 +48,6 @@ function App() {
               <Route path="/newsletter/archive" element={<NewsletterArchive />} />
               <Route path="/newsletter/:issueId" element={<NewsletterIssueDetail />} />
               <Route path="/newsletter/admin" element={<NewsletterAdmin />} />
-              <Route path="/standards" element={<Standards />} />
               <Route path="/toolkit" element={<Toolkit />} />
               <Route path="/why-student-finance-work-is-weak" element={<WhyStudentFinanceIsWeak />} />
               <Route path="/toolkit/dcf-builder" element={<DCFBuilder />} />

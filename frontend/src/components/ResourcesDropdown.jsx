@@ -9,7 +9,6 @@ const ResourcesDropdown = ({ isMobile = false }) => {
   const location = useLocation();
 
   const resources = [
-    { to: '/standards', label: 'Standards & Scorecard' },
     { to: '/toolkit', label: 'Investor Toolkit' },
     { to: '/why-student-finance-work-is-weak', label: 'Why Research Discipline Matters' },
     { to: '/toolkit/dcf-builder', label: 'Build a DCF' },

@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Tracks from '../components/Tracks';
-import Standards from '../components/Standards';
 import Selection from '../components/Selection';
 import AnalystWork from '../components/AnalystWork';
 import PageIntro from '../components/PageIntro';
@@ -45,7 +44,6 @@ const Program = () => {
         </div>
       </section>
       <Tracks />
-      <Standards />
       <Selection />
       <AnalystWork />
       <section className="content-section-final">

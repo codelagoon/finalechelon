@@ -192,7 +192,6 @@ const DCFBuilder = () => {
         supportingText="A complete DCF model includes more nuance (unlevering/relevering debt, working capital cycles, margin changes). This tool focuses on core logic: revenue growth → free cash flow → present value."
         links={[
           { to: "/toolkit", label: "Return to toolkit" },
-          { to: "/standards", label: "See publication standards" },
         ]}
       />
 

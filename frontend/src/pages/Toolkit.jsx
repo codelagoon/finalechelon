@@ -91,7 +91,6 @@ const Toolkit = () => {
         supportingText="These resources are designed to align with Echelon Equity standards and support analysts from first pitch through published research."
         links={[
           { to: "/toolkit/dcf-builder", label: "Build a DCF interactively" },
-          { to: "/standards", label: "Review publication standards" },
         ]}
       />
 

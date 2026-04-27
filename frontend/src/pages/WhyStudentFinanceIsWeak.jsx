@@ -11,7 +11,6 @@ const WhyStudentFinanceIsWeak = () => {
         lead="A sharp critique of what makes student-authored financial analysis fall short—and how Echelon Equity is fundamentally different."
         supportingText="The gap between student research and publishable work is not talent. It's process."
         links={[
-          { to: "/standards", label: "See our standards" },
           { to: "/program", label: "Learn about our program" },
         ]}
       />
@@ -195,9 +194,6 @@ const WhyStudentFinanceIsWeak = () => {
               Compare our standards, research coverage, and team profiles to understand what institutional-quality student research looks like.
             </p>
             <div className="cta-links" style={{ display: 'flex', gap: '1.5rem', flexWrap: 'wrap' }}>
-              <Link to="/standards" className="comparison-link">
-                Review Publication Standards →
-              </Link>
               <Link to="/newsletter" className="comparison-link">
                 Browse Research Portfolio →
               </Link>
