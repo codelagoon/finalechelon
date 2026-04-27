@@ -71,13 +71,13 @@ const NewsletterIssueDetail = () => {
 
   // Split body content for the gate - show first 50% then gate
   const bodyContent = issue.body || "";
-  const bodyLines = bodyContent.split("\n");
-  const gatePosition = Math.floor(bodyLines.length * 0.5);
-  const firstHalf = bodyLines.slice(0, gatePosition).join("\n");
-  const secondHalf = bodyLines.slice(gatePosition).join("\n");
+  const bodyParagraphs = bodyContent.split(/\n\n+/).filter(p => p.trim());
+  const gatePosition = Math.floor(bodyParagraphs.length * 0.5);
+  const firstHalfParagraphs = bodyParagraphs.slice(0, gatePosition);
+  const secondHalfParagraphs = bodyParagraphs.slice(gatePosition);
   
-  // Only show gate if content is long enough (more than 10 lines)
-  const shouldShowGate = bodyLines.length > 10 && secondHalf.length > 0;
+  // Only show gate if content is long enough (more than 5 paragraphs)
+  const shouldShowGate = bodyParagraphs.length > 5 && secondHalfParagraphs.length > 0;
 
   // SEO metadata
   const seoTitle = `${issue.title} | ${issue.volume} | Echelon Equity`;
@@ -130,7 +130,7 @@ const NewsletterIssueDetail = () => {
       </section>
 
       <section className="content-container-final" style={{ display: "grid", gap: "2rem" }}>
-        <article className="newsletter-benefit-card-final">
+        <article className="newsletter-benefit-card-final" style={{ maxWidth: "800px", margin: "0 auto" }}>
           {issue.file_attachment && (
             <div style={{ marginBottom: "2rem", padding: "1.5rem", border: "1px solid #e5e7eb", borderRadius: "0.5rem", backgroundColor: "#f9fafb" }} data-testid="download-section">
               <h3 style={{ fontSize: "1.125rem", fontWeight: "600", marginBottom: "0.5rem" }}>Research Report</h3>
@@ -158,49 +158,63 @@ const NewsletterIssueDetail = () => {
             </div>
           )}
 
-          <p className="newsletter-card-copy-final" style={{ fontSize: "1.125rem", lineHeight: "1.75" }}>
+          <div style={{ 
+            fontSize: "1.25rem", 
+            lineHeight: "1.8", 
+            color: "#374151",
+            marginBottom: "2rem",
+            fontWeight: "400"
+          }}>
             {issue.summary}
-          </p>
+          </div>
 
           {issue.highlights && issue.highlights.length > 0 && (
-            <div style={{ marginTop: "2rem" }}>
-              <h3 className="section-title-final" style={{ fontSize: "1.25rem", marginBottom: "1rem" }}>
+            <div style={{ marginTop: "3rem", marginBottom: "3rem", padding: "2rem", backgroundColor: "#f8fafc", borderRadius: "0.5rem", borderLeft: "4px solid #000" }}>
+              <h3 className="section-title-final" style={{ fontSize: "1.125rem", marginBottom: "1.5rem", fontWeight: "600", textTransform: "uppercase", letterSpacing: "0.05em", color: "#6b7280" }}>
                 Key Highlights
               </h3>
-              <ul style={{ paddingLeft: "1.5rem" }}>
+              <ul style={{ paddingLeft: "1.5rem", margin: 0 }}>
                 {issue.highlights.map((highlight, idx) => (
-                  <li key={idx} style={{ marginBottom: "0.5rem" }}>
-                    {highlight}
+                  <li key={idx} style={{ marginBottom: "1rem", lineHeight: "1.7", color: "#1f2937" }}>
+                    {highlight.text || highlight}
                   </li>
                 ))}
               </ul>
             </div>
           )}
 
-          {firstHalf && (
-            <div style={{ marginTop: "2rem" }}>
-              <div style={{ whiteSpace: "pre-wrap", lineHeight: "1.75" }}>
-                {firstHalf}
-              </div>
+          {firstHalfParagraphs.length > 0 && (
+            <div style={{ marginTop: "3rem" }}>
+              {firstHalfParagraphs.map((paragraph, idx) => (
+                <p key={`first-${idx}`} style={{ 
+                  fontSize: "1.125rem", 
+                  lineHeight: "1.8", 
+                  marginBottom: "1.5rem",
+                  color: "#1f2937",
+                  textAlign: "justify"
+                }}>
+                  {paragraph}
+                </p>
+              ))}
             </div>
           )}
 
-          {!hasSignedUp && shouldShowGate && secondHalf && (
+          {!hasSignedUp && shouldShowGate && secondHalfParagraphs.length > 0 && (
             <div 
               data-testid="signup-gate"
               style={{ 
-                marginTop: "3rem", 
-                padding: "2rem", 
+                marginTop: "4rem", 
+                padding: "3rem 2rem", 
                 border: "2px solid #e5e7eb", 
-                borderRadius: "0.75rem",
+                borderRadius: "1rem",
                 backgroundColor: "#f9fafb",
                 textAlign: "center"
               }}
             >
-              <h2 className="section-title-final" style={{ fontSize: "1.5rem", marginBottom: "1rem" }}>
+              <h2 className="section-title-final" style={{ fontSize: "1.75rem", marginBottom: "1rem", fontWeight: "700" }}>
                 Continue Reading
               </h2>
-              <p className="newsletter-card-copy-final" style={{ marginBottom: "1.5rem" }}>
+              <p className="newsletter-card-copy-final" style={{ marginBottom: "2rem", fontSize: "1.125rem", lineHeight: "1.6", color: "#4b5563" }}>
                 Join our newsletter to read the full analysis and get future issues delivered to your inbox.
               </p>
               <NewsletterSignupForm 
@@ -208,17 +222,25 @@ const NewsletterIssueDetail = () => {
                 buttonLabel="Subscribe to Continue"
                 helperText=""
               />
-              <p className="form-helper-text" style={{ marginTop: "1rem", fontSize: "0.875rem" }}>
+              <p className="form-helper-text" style={{ marginTop: "1rem", fontSize: "0.875rem", color: "#6b7280" }}>
                 Free subscription. Unsubscribe anytime.
               </p>
             </div>
           )}
 
-          {(hasSignedUp || !secondHalf) && secondHalf && (
-            <div style={{ marginTop: "2rem" }} data-testid="issue-second-half">
-              <div style={{ whiteSpace: "pre-wrap", lineHeight: "1.75" }}>
-                {secondHalf}
-              </div>
+          {(hasSignedUp || !secondHalfParagraphs.length) && secondHalfParagraphs.length > 0 && (
+            <div style={{ marginTop: "3rem" }} data-testid="issue-second-half">
+              {secondHalfParagraphs.map((paragraph, idx) => (
+                <p key={`second-${idx}`} style={{ 
+                  fontSize: "1.125rem", 
+                  lineHeight: "1.8", 
+                  marginBottom: "1.5rem",
+                  color: "#1f2937",
+                  textAlign: "justify"
+                }}>
+                  {paragraph}
+                </p>
+              ))}
             </div>
           )}
         </article>
