@@ -3,7 +3,7 @@ import { useParams, Link } from "react-router-dom";
 import NewsletterSignupForm from "../components/newsletter/NewsletterSignupForm";
 import SEO from "../components/SEO";
 import { fetchIssueById } from "../services/newsletterIssueService";
-import { hasSignedUp, markAsSignedUp } from "../utils/newsletterPersistence";
+import { hasSignedUp as checkSignedUp, markAsSignedUp } from "../utils/newsletterPersistence";
 
 const NewsletterIssueDetail = () => {
   const { issueId } = useParams();
@@ -31,7 +31,7 @@ const NewsletterIssueDetail = () => {
     };
 
     // Check signup state from localStorage
-    setHasSignedUp(hasSignedUp());
+    setHasSignedUp(checkSignedUp());
 
     if (issueId) {
       loadIssue();

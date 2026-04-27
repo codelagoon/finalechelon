@@ -167,24 +167,7 @@ function IssueEditorCard({ issue, adminToken, onSaved, onDeleted }) {
     };
   }, [autoSaveStatus, isSaving, autoSave]);
 
-  // Keyboard shortcuts
-  useEffect(() => {
-    const handleKeyDown = (event) => {
-      if ((event.ctrlKey || event.metaKey) && event.key === "s") {
-        event.preventDefault();
-        handleSave(event);
-      }
-      if ((event.ctrlKey || event.metaKey) && event.key === "p") {
-        event.preventDefault();
-        setShowPreview((prev) => !prev);
-      }
-    };
-
-    window.addEventListener("keydown", handleKeyDown);
-    return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [form]);
-
-  const handleSave = async (event) => {
+  const handleSave = useCallback(async (event) => {
     event.preventDefault();
 
     if (!adminToken) {
@@ -212,11 +195,28 @@ function IssueEditorCard({ issue, adminToken, onSaved, onDeleted }) {
       onSaved(result.data);
     } catch (error) {
       console.error("Update issue failed", error);
-      toast.error("Network error while updating issue.");
+      toast.error("Failed to update issue.");
     } finally {
       setIsSaving(false);
     }
-  };
+  }, [adminToken, form, onSaved]);
+
+  // Keyboard shortcuts
+  useEffect(() => {
+    const handleKeyDown = (event) => {
+      if ((event.ctrlKey || event.metaKey) && event.key === "s") {
+        event.preventDefault();
+        handleSave(event);
+      }
+      if ((event.ctrlKey || event.metaKey) && event.key === "p") {
+        event.preventDefault();
+        setShowPreview((prev) => !prev);
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [form, handleSave]);
 
   const handleDelete = async () => {
     if (!adminToken) {
