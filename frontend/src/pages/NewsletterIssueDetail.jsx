@@ -164,12 +164,22 @@ const NewsletterIssueDetail = () => {
               fontWeight: "700",
               lineHeight: "1.1",
               color: "#121212",
-              margin: "0 0 1.5rem 0",
+              margin: "0 0 1rem 0",
               letterSpacing: "-0.02em"
             }}
           >
             {issue.title}
           </h1>
+
+          {/* Author Attribution */}
+          <div style={{ 
+            fontFamily: "Inter, sans-serif",
+            fontSize: "0.875rem",
+            color: "#6b7280",
+            marginBottom: "0.5rem"
+          }}>
+            By <span style={{ color: "#121212", fontWeight: "500" }}>Vihaan Kakani</span>
+          </div>
         </header>
 
         {/* Article Body - NYT Style */}
