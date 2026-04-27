@@ -1,4 +1,5 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
+import { Link } from "react-router-dom";
 import NewsletterArticlePrompt from "./NewsletterArticlePrompt";
 import NewsletterSignupForm from "./NewsletterSignupForm";
 import { Button } from "../ui/button";
@@ -110,7 +111,14 @@ const NewsletterLatestIssueCard = ({ issue = null }) => {
             <span>{issue.date}</span>
           </div>
           <h2 className="newsletter-issue-title-final">Latest Issue Preview</h2>
-          <h3 className="newsletter-card-title-final newsletter-card-title-issue-final">{issue.title}</h3>
+          <div style={{ display: "flex", alignItems: "center", gap: "1rem", justifyContent: "space-between" }}>
+            <h3 className="newsletter-card-title-final newsletter-card-title-issue-final" style={{ margin: 0 }}>{issue.title}</h3>
+            <Link to={`/newsletter/${issue.id}`} className="newsletter-read-full-page-btn-final">
+              <Button type="button" variant="outline" size="sm">
+                Read Full Issue →
+              </Button>
+            </Link>
+          </div>
           <p className="newsletter-card-copy-final newsletter-issue-summary-final">{issue.summary}</p>
           <NewsletterArticlePrompt type="mid" />
           {highlights.length ? (
