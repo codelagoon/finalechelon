@@ -16,13 +16,25 @@ const Newsletter = () => {
       const result = await fetchPublishedIssues();
       if (!isMounted) return;
       
-      // Prioritize "the bar is higher" article if it exists
       const issues = result.issues || [];
-      const barIsHigherIssue = issues.find(issue => 
-        issue.title?.toLowerCase().includes("bar is higher")
-      );
+      if (issues.length === 0) {
+        setLatestIssue(null);
+        return;
+      }
       
-      setLatestIssue(barIsHigherIssue || issues[0] || null);
+      // Priority 1: Highest volume number
+      const extractVolumeNumber = (volume) => {
+        const match = volume?.match(/(\d+)/);
+        return match ? parseInt(match[1], 10) : 0;
+      };
+      
+      const sortedByVolume = [...issues].sort((a, b) => {
+        const numA = extractVolumeNumber(a.volume);
+        const numB = extractVolumeNumber(b.volume);
+        return numB - numA; // Highest first
+      });
+      
+      setLatestIssue(sortedByVolume[0]);
     };
 
     loadIssues();
