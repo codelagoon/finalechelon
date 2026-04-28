@@ -24,7 +24,7 @@ const NewsletterBenefits = ({ benefits = defaultBenefits }) => {
       <div className="content-container-final">
         <div className="newsletter-section-heading-final">
           <p className="page-intro-eyebrow-final">What Subscribers Get</p>
-          <h2 className="newsletter-section-title-final">the bar is higher</h2>
+          <h2 className="newsletter-section-title-final">Signal built for disciplined readers</h2>
         </div>
         <div className="newsletter-benefits-grid-final">
           {benefits.map((benefit) => (
