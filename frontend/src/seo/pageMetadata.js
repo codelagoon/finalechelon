@@ -2,16 +2,16 @@ import { absoluteUrl, siteAssets, siteConfig } from "./siteConfig";
 
 const routeMetadata = {
   "/": {
-    title: "Echelon Equity | Student Investment Network",
+    title: "Echelon Equity | Investment Research Platform",
     description:
-      "Echelon Equity is a student-led equity research network helping ambitious students build real investing experience through structured equity research programs.",
-    ogTitle: "Echelon Equity | Student Investment Network",
+      "Echelon Equity is an investment research network helping ambitious students build real investing experience through structured equity research programs.",
+    ogTitle: "Echelon Equity | Investment Research Platform",
     ogDescription:
-      "A student-led equity research network helping ambitious students build real investing experience through valuation models, investment memos, and peer review.",
-    twitterTitle: "Echelon Equity | Student Investment Network",
+      "An equity research network helping ambitious students build real investing experience through valuation models, investment memos, and peer review.",
+    twitterTitle: "Echelon Equity | Investment Research Platform",
     twitterDescription:
-      "Student analysts build real investing experience through institutional-grade equity research programs.",
-    pageTitle: "Echelon Equity Student Investment Network",
+      "Analysts build real investing experience through institutional-grade equity research programs.",
+    pageTitle: "Echelon Equity Investment Research Platform",
     canonical: absoluteUrl("/"),
     ogType: "website",
     schemaType: "WebPage",
@@ -20,12 +20,12 @@ const routeMetadata = {
     title: "About Echelon Equity | Student Investment Network Mission",
     description:
       "Learn about Echelon Equity's mission to help ambitious students build real investing experience through structured equity research programs and institutional standards.",
-    ogTitle: "About Echelon Equity | Student-Led Research Network",
+    ogTitle: "About Echelon Equity | Investment Research Network",
     ogDescription:
       "Discover Echelon Equity's mission, who it's for, and how the student investment network helps students build real investing experience.",
     twitterTitle: "About Echelon Equity",
     twitterDescription:
-      "A student-led equity research network helping ambitious students build real investing experience.",
+      "An equity research network helping ambitious students build real investing experience.",
     pageTitle: "About Echelon Equity",
     canonical: absoluteUrl("/about"),
     ogType: "website",
@@ -82,7 +82,7 @@ const routeMetadata = {
       "Meet the Echelon Equity analyst team and leadership members responsible for equity research, valuation work, and editorial review standards.",
     ogTitle: "Echelon Equity Team | Analyst Profiles",
     ogDescription:
-      "View analyst and leadership profiles behind Echelon Equity's student-led research output.",
+      "View analyst and leadership profiles behind Echelon Equity's research output.",
     twitterTitle: "Echelon Equity Team",
     twitterDescription:
       "The analysts and leaders behind Echelon Equity's equity research workflow.",
@@ -94,7 +94,7 @@ const routeMetadata = {
   "/newsletter": {
     title: "Newsletter | Echelon Equity Research, Not Noise",
     description:
-      "Subscribe to the Echelon Equity newsletter for student-led equity research, market notes, and memo highlights with educational context.",
+      "Subscribe to the Echelon Equity newsletter for equity research, market notes, and memo highlights with educational context.",
     pageTitle: "Echelon Equity Newsletter",
     canonical: absoluteUrl("/newsletter"),
     ogType: "website",
@@ -103,7 +103,7 @@ const routeMetadata = {
   "/newsletter/archive": {
     title: "Newsletter Archive | Echelon Equity Past Issues",
     description:
-      "Browse past Echelon Equity newsletter issues featuring market notes and memo highlights from the student-led research team.",
+      "Browse past Echelon Equity newsletter issues featuring market notes and memo highlights from the research team.",
     pageTitle: "Echelon Equity Newsletter Archive",
     canonical: absoluteUrl("/newsletter/archive"),
     ogType: "website",
@@ -127,7 +127,7 @@ const routeMetadata = {
       "See how Echelon Equity maintains publication standards, conducts editorial review, and measures research quality.",
     twitterTitle: "Echelon Equity Standards",
     twitterDescription:
-      "Publication standards, editorial process, and operating metrics for quality student-led research.",
+      "Publication standards, editorial process, and operating metrics for quality research output.",
     pageTitle: "Echelon Equity Research Standards & Scorecard",
     canonical: absoluteUrl("/standards"),
     ogType: "website",

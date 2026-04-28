@@ -22,7 +22,7 @@ const Footer = () => {
             <h2 className="footer-brand">ECHELON EQUITY</h2>
             <p className="footer-tagline">
               {siteConfig.slogan}<br />
-              Student-led investment research platform focused on analyst development, institutional standards, and real work.
+              Investment research platform focused on analyst development, institutional standards, and real market work.
             </p>
             <div className="footer-contact-info">
               <p className="footer-email">
@@ -69,17 +69,17 @@ const Footer = () => {
 
         <div className="footer-newsletter-panel-final">
           <div className="footer-newsletter-copy-final">
-            <p className="footer-newsletter-eyebrow-final">Newsletter</p>
-            <h3 className="footer-newsletter-title-final">Read the research before you apply</h3>
+            <p className="footer-newsletter-eyebrow-final">Research Access</p>
+            <h3 className="footer-newsletter-title-final">Review Our Work</h3>
             <p className="footer-newsletter-description-final">
-              A compact weekly letter for readers tracking Echelon's work, standards, and market notes.
+              Serious applicants are expected to engage with Echelon's research before applying. Access market notes, equity analysis, and investment frameworks.
             </p>
           </div>
           <div className="footer-newsletter-form-final">
             <NewsletterSignupForm
               source="footer"
               segment="homepage-footer"
-              buttonLabel="Join"
+              buttonLabel="Get Access"
               helperText=""
               compact
             />

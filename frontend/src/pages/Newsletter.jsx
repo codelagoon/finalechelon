@@ -30,10 +30,10 @@ const Newsletter = () => {
       <section className="newsletter-hero-section-final">
         <div className="content-container-final newsletter-hero-grid-final">
           <div className="newsletter-hero-copy-final">
-            <p className="page-intro-eyebrow-final">Echelon Newsletter</p>
+            <p className="page-intro-eyebrow-final">Echelon Research</p>
             <h1 className="newsletter-hero-title-final">Research, not noise</h1>
             <p className="newsletter-hero-subheadline-final">
-              Weekly student-led equity research, market notes, and memo highlights built for readers who value process over hype.
+              Market notes, equity research, and investment analysis built to institutional standards. For readers who value analytical rigor.
             </p>
           </div>
           <aside className="newsletter-signup-panel-final" aria-label="Newsletter signup">

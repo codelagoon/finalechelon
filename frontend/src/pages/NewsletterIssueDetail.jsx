@@ -81,7 +81,7 @@ const NewsletterIssueDetail = () => {
 
   // SEO metadata
   const seoTitle = `${issue.title} | ${issue.volume} | Echelon Equity`;
-  const seoDescription = issue.summary || "Research, not noise. Weekly student-led equity research, market notes, and memo highlights.";
+  const seoDescription = issue.summary || "Echelon Equity Research. Market notes, equity research, and investment analysis built to institutional standards.";
   const seoUrl = `${window.location.origin}/newsletter/${issueId}`;
   const seoImage = "https://echelonequity.co/og-image.png"; // Default OG image
   const seoSchema = {
@@ -126,33 +126,60 @@ const NewsletterIssueDetail = () => {
           <Link 
             to="/newsletter/archive" 
             style={{ 
-              display: "inline-block",
-              fontSize: "0.875rem",
+              display: "inline-flex",
+              alignItems: "center",
+              gap: "0.5rem",
+              fontSize: "0.8125rem",
               color: "#6b7280",
               textDecoration: "none",
-              marginBottom: "2rem",
-              fontFamily: "Inter, sans-serif"
+              marginBottom: "2.5rem",
+              fontFamily: "Inter, sans-serif",
+              textTransform: "uppercase",
+              letterSpacing: "0.05em",
+              fontWeight: "500"
             }}
             data-testid="back-to-archive"
           >
-            ← Back to Archive
+            ← Research Archive
           </Link>
           
-          {/* Publication metadata */}
+          {/* Institutional Publication Header */}
           <div style={{ 
-            display: "flex", 
-            alignItems: "center", 
-            gap: "0.75rem",
-            fontSize: "0.8125rem",
             fontFamily: "Inter, sans-serif",
+            fontSize: "0.6875rem",
             textTransform: "uppercase",
-            letterSpacing: "0.1em",
-            color: "#6b7280",
-            marginBottom: "1.5rem"
+            letterSpacing: "0.15em",
+            color: "#000",
+            fontWeight: "700",
+            marginBottom: "2rem",
+            paddingBottom: "1rem",
+            borderBottom: "1px solid #e5e7eb"
           }}>
-            <span data-testid="issue-volume">{issue.volume}</span>
-            <span style={{ color: "#d1d5db" }}>|</span>
-            <span data-testid="issue-date">{issue.date}</span>
+            Echelon Equity Research
+          </div>
+
+          {/* Article Metadata Block */}
+          <div style={{ 
+            display: "flex",
+            flexDirection: "column",
+            gap: "0.5rem",
+            marginBottom: "2rem",
+            fontFamily: "Inter, sans-serif"
+          }}>
+            <div style={{ 
+              fontSize: "0.8125rem",
+              color: "#6b7280",
+              textTransform: "uppercase",
+              letterSpacing: "0.08em"
+            }} data-testid="issue-volume">
+              {issue.volume} <span style={{ color: "#d1d5db" }}>|</span> Market Note
+            </div>
+            <div style={{ 
+              fontSize: "0.875rem",
+              color: "#6b7280"
+            }} data-testid="issue-date">
+              {issue.date}
+            </div>
           </div>
 
           {/* Headline - NYT Style */}
@@ -171,14 +198,24 @@ const NewsletterIssueDetail = () => {
             {issue.title}
           </h1>
 
-          {/* Author Attribution */}
+          {/* Institutional Analyst Attribution */}
           <div style={{ 
             fontFamily: "Inter, sans-serif",
-            fontSize: "0.875rem",
-            color: "#6b7280",
-            marginBottom: "0.5rem"
+            fontSize: "0.9375rem",
+            color: "#121212",
+            fontWeight: "600",
+            marginTop: "1.5rem",
+            marginBottom: "0.25rem"
           }}>
-            By <span style={{ color: "#121212", fontWeight: "500" }}>Vihaan Kakani</span>
+            Vihaan Kakani
+          </div>
+          <div style={{ 
+            fontFamily: "Inter, sans-serif",
+            fontSize: "0.8125rem",
+            color: "#6b7280",
+            marginBottom: "2rem"
+          }}>
+            Research Analyst, Echelon Equity
           </div>
         </header>
 
@@ -188,21 +225,38 @@ const NewsletterIssueDetail = () => {
           margin: "0 auto",
           fontFamily: "Georgia, 'Times New Roman', Times, serif"
         }}>
-          {/* Download Section */}
+          {/* Institutional Download Section */}
           {issue.file_attachment && (
             <div style={{ 
-              marginBottom: "2.5rem", 
-              padding: "1.25rem 1.5rem", 
+              margin: "3rem 0", 
+              padding: "1.5rem",
               border: "1px solid #e5e7eb", 
-              borderRadius: "0.375rem", 
+              borderRadius: "0.5rem", 
               backgroundColor: "#fafafa",
               fontFamily: "Inter, sans-serif"
             }} data-testid="download-section">
-              <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between" }}>
-                <div>
-                  <h3 style={{ fontSize: "0.875rem", fontWeight: "600", margin: "0 0 0.25rem 0", color: "#374151" }}>Research Report</h3>
-                  <p style={{ margin: 0, fontSize: "0.8125rem", color: "#6b7280" }}>
-                    {issue.file_attachment.name} · {issue.file_attachment.type.toUpperCase()}
+              <div style={{ 
+                display: "flex", 
+                alignItems: "flex-start", 
+                justifyContent: "space-between",
+                gap: "1.5rem"
+              }}>
+                <div style={{ flex: 1 }}>
+                  <h3 style={{ 
+                    fontSize: "0.75rem", 
+                    fontWeight: "700", 
+                    textTransform: "uppercase",
+                    letterSpacing: "0.1em",
+                    margin: "0 0 0.5rem 0", 
+                    color: "#374151" 
+                  }}>
+                    Full Research Report
+                  </h3>
+                  <p style={{ margin: "0 0 0.25rem 0", fontSize: "0.875rem", color: "#121212", fontWeight: "500" }}>
+                    {issue.file_attachment.name}
+                  </p>
+                  <p style={{ margin: 0, fontSize: "0.75rem", color: "#9ca3af" }}>
+                    {issue.file_attachment.type.toUpperCase()} · {(issue.file_attachment.size / 1024 / 1024).toFixed(1)} MB
                   </p>
                 </div>
                 <a 
@@ -212,53 +266,61 @@ const NewsletterIssueDetail = () => {
                   style={{ 
                     display: "inline-flex",
                     alignItems: "center",
-                    padding: "0.5rem 1rem",
+                    padding: "0.625rem 1.25rem",
                     backgroundColor: "#000",
                     color: "#fff",
                     textDecoration: "none",
-                    borderRadius: "0.25rem",
+                    borderRadius: "0.375rem",
                     fontSize: "0.8125rem",
-                    fontWeight: "500",
-                    fontFamily: "Inter, sans-serif"
+                    fontWeight: "600",
+                    fontFamily: "Inter, sans-serif",
+                    whiteSpace: "nowrap"
                   }}
                   data-testid="download-button"
                 >
-                  Download
+                  Download Report
                 </a>
               </div>
             </div>
           )}
 
-          {/* Summary - NYT Deck/Lead Style */}
-          <p style={{ 
-            fontFamily: "Georgia, 'Times New Roman', Times, serif",
-            fontSize: "1.25rem", 
-            lineHeight: "1.6", 
-            color: "#374151",
-            margin: "0 0 2.5rem 0",
-            fontWeight: "400"
+          {/* Executive Summary / Deck */}
+          <div style={{
+            margin: "0 0 3rem 0",
+            padding: "2rem 0",
+            borderTop: "1px solid #e5e7eb",
+            borderBottom: "1px solid #e5e7eb"
           }}>
-            {issue.summary}
-          </p>
+            <p style={{ 
+              fontFamily: "Georgia, 'Times New Roman', Times, serif",
+              fontSize: "1.25rem", 
+              lineHeight: "1.7", 
+              color: "#374151",
+              margin: 0,
+              fontWeight: "400"
+            }}>
+              {issue.summary}
+            </p>
+          </div>
 
-          {/* Key Highlights - Styled as pull quotes */}
+          {/* Key Highlights - Institutional Style */}
           {issue.highlights && issue.highlights.length > 0 && (
             <aside style={{ 
-              margin: "2.5rem 0", 
-              padding: "1.5rem 0",
-              borderTop: "1px solid #000",
-              borderBottom: "1px solid #e5e7eb",
+              margin: "3rem 0", 
+              padding: "2rem",
+              backgroundColor: "#fafafa",
+              borderLeft: "3px solid #000",
               fontFamily: "Inter, sans-serif"
             }}>
               <h3 style={{ 
                 fontSize: "0.6875rem", 
-                margin: "0 0 1rem 0", 
+                margin: "0 0 1.5rem 0", 
                 fontWeight: "700", 
                 textTransform: "uppercase", 
                 letterSpacing: "0.15em", 
                 color: "#000"
               }}>
-                Key Points
+                Key Findings
               </h3>
               <ul style={{ 
                 padding: 0, 
@@ -304,13 +366,13 @@ const NewsletterIssueDetail = () => {
             </div>
           )}
 
-          {/* Signup Gate - NYT Style */}
+          {/* Institutional Access Gate */}
           {!hasSignedUp && shouldShowGate && secondHalfParagraphs.length > 0 && (
             <div 
               data-testid="signup-gate"
               style={{ 
-                margin: "3rem 0",
-                padding: "2.5rem 2rem",
+                margin: "4rem 0",
+                padding: "3rem 2.5rem",
                 borderTop: "4px solid #000",
                 borderBottom: "1px solid #e5e7eb",
                 backgroundColor: "#fafafa",
@@ -320,32 +382,35 @@ const NewsletterIssueDetail = () => {
             >
               <h2 style={{ 
                 fontFamily: "Georgia, 'Times New Roman', Times, serif",
-                fontSize: "1.5rem", 
-                margin: "0 0 0.75rem 0", 
+                fontSize: "1.75rem", 
+                margin: "0 0 1rem 0", 
                 fontWeight: "700",
                 color: "#121212"
               }}>
-                Continue Reading
+                Access Full Report
               </h2>
               <p style={{ 
-                margin: "0 0 1.5rem 0", 
+                margin: "0 0 2rem 0", 
                 fontSize: "1rem", 
-                lineHeight: "1.5", 
-                color: "#4b5563"
+                lineHeight: "1.6", 
+                color: "#4b5563",
+                maxWidth: "450px",
+                marginLeft: "auto",
+                marginRight: "auto"
               }}>
-                Join our newsletter to read the full analysis and get future issues delivered to your inbox.
+                Join Echelon to view complete research, source notes, and future publications.
               </p>
               <NewsletterSignupForm 
                 onSuccess={handleSignupSuccess}
-                buttonLabel="Subscribe to Continue"
+                buttonLabel="Get Access"
                 helperText=""
               />
               <p style={{ 
-                marginTop: "1rem", 
+                marginTop: "1.25rem", 
                 fontSize: "0.75rem", 
                 color: "#9ca3af"
               }}>
-                Free subscription. Unsubscribe anytime.
+                Free access. Research updates delivered periodically.
               </p>
             </div>
           )}
@@ -365,6 +430,43 @@ const NewsletterIssueDetail = () => {
                 </p>
               ))}
             </div>
+          )}
+
+          {/* Sources Section - Only shown when unlocked */}
+          {(hasSignedUp || !secondHalfParagraphs.length) && (
+            <footer style={{ 
+              marginTop: "4rem",
+              paddingTop: "2rem",
+              borderTop: "1px solid #e5e7eb",
+              fontFamily: "Inter, sans-serif"
+            }}>
+              <h4 style={{ 
+                fontSize: "0.6875rem",
+                textTransform: "uppercase",
+                letterSpacing: "0.15em",
+                color: "#6b7280",
+                marginBottom: "1rem",
+                fontWeight: "600"
+              }}>
+                Sources & Disclosures
+              </h4>
+              <ul style={{ 
+                fontSize: "0.8125rem",
+                color: "#6b7280",
+                lineHeight: "1.7",
+                padding: 0,
+                margin: 0,
+                listStyle: "none"
+              }}>
+                <li style={{ marginBottom: "0.5rem" }}>• Federal Reserve Economic Data</li>
+                <li style={{ marginBottom: "0.5rem" }}>• EY Q1 2026 IPO Review</li>
+                <li style={{ marginBottom: "0.5rem" }}>• Company filings and earnings releases</li>
+                <li style={{ marginBottom: "0.5rem" }}>• Public market data and exchange filings</li>
+                <li style={{ marginBottom: "0.5rem", color: "#9ca3af", fontStyle: "italic" }}>
+                  This research is for informational purposes only and does not constitute investment advice.
+                </li>
+              </ul>
+            </footer>
           )}
         </article>
       </div>

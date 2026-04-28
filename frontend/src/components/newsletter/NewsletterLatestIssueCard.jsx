@@ -60,8 +60,8 @@ const NewsletterLatestIssueCard = ({ issue = null }) => {
       <section className="newsletter-latest-section-final">
         <div className="content-container-final">
           <article className="newsletter-issue-card-final">
-            <h2 className="newsletter-issue-title-final">Latest Issue Preview</h2>
-            <h3 className="newsletter-card-title-final newsletter-card-title-issue-final">No published issue yet</h3>
+            <h2 className="newsletter-issue-title-final">Latest Research Note</h2>
+            <h3 className="newsletter-card-title-final newsletter-card-title-issue-final">No published research yet</h3>
             <p className="newsletter-card-copy-final newsletter-issue-summary-final">
               The next issue will appear here once it is published.
             </p>
@@ -110,12 +110,12 @@ const NewsletterLatestIssueCard = ({ issue = null }) => {
             <span aria-hidden="true">|</span>
             <span>{issue.date}</span>
           </div>
-          <h2 className="newsletter-issue-title-final">Latest Issue Preview</h2>
+          <h2 className="newsletter-issue-title-final">Latest Research Note</h2>
           <div style={{ display: "flex", alignItems: "center", gap: "1rem", justifyContent: "space-between" }}>
             <h3 className="newsletter-card-title-final newsletter-card-title-issue-final" style={{ margin: 0 }}>{issue.title}</h3>
             <Link to={`/newsletter/${issue.id}`} className="newsletter-read-full-page-btn-final">
               <Button type="button" size="sm">
-                Read Full Issue →
+                View Full Report →
               </Button>
             </Link>
           </div>
@@ -138,7 +138,7 @@ const NewsletterLatestIssueCard = ({ issue = null }) => {
                 className="newsletter-read-full-btn-final"
                 onClick={handleStartReading}
               >
-                {isReading ? "Continue Reading" : "Read Full Article"}
+                {isReading ? "Continue Analysis" : "View Full Report"}
               </Button>
             </div>
           ) : null}
@@ -155,17 +155,17 @@ const NewsletterLatestIssueCard = ({ issue = null }) => {
               </div>
 
               {showGate ? (
-                <aside className="newsletter-full-article-gate-final" aria-label="Email gate for full newsletter article">
-                  <p className="newsletter-full-article-gate-eyebrow-final">Continue Reading</p>
-                  <h5 className="newsletter-full-article-gate-title-final">Enter your email for full access</h5>
+                <aside className="newsletter-full-article-gate-final" aria-label="Research access gate">
+                  <p className="newsletter-full-article-gate-eyebrow-final">Access Full Report</p>
+                  <h5 className="newsletter-full-article-gate-title-final">Enter your email for complete analysis</h5>
                   <p className="newsletter-full-article-gate-copy-final">
-                    Join the list to unlock this issue and upcoming market letters.
+                    Join Echelon to access full research, source notes, and future publications.
                   </p>
                   <NewsletterSignupForm
                     source="newsletter-article-gate"
                     segment={issue.id || "latest"}
-                    buttonLabel="Unlock Article"
-                    helperText="One step unlock. You can unsubscribe anytime."
+                    buttonLabel="Get Access"
+                    helperText="Free access. Unsubscribe anytime."
                     compact
                     onSuccess={handleUnlockSuccess}
                   />

@@ -2,9 +2,9 @@ export const siteConfig = {
   name: "Echelon Equity",
   shortName: "Echelon",
   siteUrl: "https://echelonequity.co",
-  defaultTitle: "Echelon Equity | Student-Led Investment Research Platform",
+  defaultTitle: "Echelon Equity | Investment Research Platform",
   defaultDescription:
-    "Echelon Equity is a student-led investment research platform where analysts build models, write memos, and work to institutional standards.",
+    "Echelon Equity is an investment research platform where analysts build models, write memos, and work to institutional standards.",
   defaultOgImagePath: "/social-share.svg",
   slogan: "The Work Is the Credential.",
   emails: {

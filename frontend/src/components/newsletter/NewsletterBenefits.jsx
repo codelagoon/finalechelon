@@ -2,9 +2,9 @@ import React from "react";
 
 const defaultBenefits = [
   {
-    title: "Student-Led Equity Research",
+    title: "Equity Research",
     description:
-      "Fresh company workups built from filings, earnings calls, and repeatable valuation frameworks.",
+      "Company workups built from filings, earnings calls, and repeatable valuation frameworks.",
   },
   {
     title: "Market Notes",
