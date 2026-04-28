@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import NewsletterArticlePrompt from "../components/newsletter/NewsletterArticlePrompt";
 import { fetchPublishedIssues } from "../services/newsletterIssueService";
 
 const NewsletterArchive = () => {
@@ -23,54 +22,184 @@ const NewsletterArchive = () => {
   }, []);
 
   return (
-    <div className="page-shell-final page-shell-padded-final newsletter-archive-page-final">
-      <section className="page-intro-section-final">
-        <div className="content-container-final">
-          <p className="page-intro-eyebrow-final">Newsletter Archive</p>
-          <h1 className="page-intro-title-final">Past Issues</h1>
-          <p className="page-intro-lead-final">
-            A rolling index of previous market letters and memo highlights from the Echelon research team.
-          </p>
-          <div className="page-intro-links-final">
-            <Link to="/newsletter" className="page-intro-link-final">
-              Return to Newsletter Landing
-            </Link>
-            <Link to="/newsletter/admin" className="page-intro-link-final">
-              Open Admin Tools
-            </Link>
-          </div>
-        </div>
-      </section>
+    <div style={{ padding: "2rem 0 4rem" }}>
+      {/* Institutional Header */}
+      <header style={{ 
+        maxWidth: "800px", 
+        margin: "0 auto 3rem", 
+        padding: "0 1rem"
+      }}>
+        <Link 
+          to="/newsletter" 
+          style={{ 
+            display: "inline-flex",
+            alignItems: "center",
+            gap: "0.5rem",
+            fontSize: "0.8125rem",
+            color: "#6b7280",
+            textDecoration: "none",
+            marginBottom: "2rem",
+            fontFamily: "Inter, sans-serif",
+            textTransform: "uppercase",
+            letterSpacing: "0.05em",
+            fontWeight: "500"
+          }}
+        >
+          ← Research
+        </Link>
 
-      <section className="newsletter-archive-list-section-final">
-        <div className="content-container-final newsletter-archive-list-final">
-          {!archivedIssues.length ? (
-            <article className="newsletter-benefit-card-final">
-              <h2 className="newsletter-card-title-final">No published issues yet</h2>
-              <p className="newsletter-card-copy-final">Check back soon for new research letters.</p>
-            </article>
-          ) : null}
-          {archivedIssues.map((issue) => (
-            <article key={issue.id} className="newsletter-benefit-card-final">
-              <NewsletterArticlePrompt type="top" />
-              <p className="newsletter-issue-meta-final">
-                <span>{issue.volume || "Issue"}</span>
-                <span aria-hidden="true">|</span>
-                <span>{issue.date}</span>
-              </p>
-              <h2 className="newsletter-card-title-final">{issue.title}</h2>
-              <p className="newsletter-card-copy-final">{issue.summary}</p>
-              <NewsletterArticlePrompt type="mid" />
-              <NewsletterArticlePrompt type="social" />
-              <NewsletterArticlePrompt type="end" />
-              <div className="newsletter-archive-card-cta-row-final">
-                <Link to={`/newsletter/${issue.id}`} className="newsletter-archive-card-cta-final">
-                  Read Full Issue
-                </Link>
-              </div>
-            </article>
-          ))}
+        {/* Institutional Publication Header */}
+        <div style={{ 
+          fontFamily: "Inter, sans-serif",
+          fontSize: "0.6875rem",
+          textTransform: "uppercase",
+          letterSpacing: "0.15em",
+          color: "#000",
+          fontWeight: "700",
+          marginBottom: "1.5rem",
+          paddingBottom: "1rem",
+          borderBottom: "1px solid #e5e7eb"
+        }}>
+          Echelon Equity Research
         </div>
+
+        <h1 style={{ 
+          fontFamily: "Georgia, 'Times New Roman', Times, serif",
+          fontSize: "2.5rem",
+          fontWeight: "700",
+          lineHeight: "1.1",
+          color: "#121212",
+          margin: "0 0 1rem 0",
+          letterSpacing: "-0.02em"
+        }}>
+          Research Archive
+        </h1>
+
+        <p style={{ 
+          fontFamily: "Inter, sans-serif",
+          fontSize: "1.125rem",
+          lineHeight: "1.6",
+          color: "#6b7280",
+          margin: "0 0 1.5rem 0"
+        }}>
+          A complete index of market notes, equity research, and investment analysis from the Echelon team.
+        </p>
+
+        <Link 
+          to="/newsletter/admin" 
+          style={{ 
+            fontFamily: "Inter, sans-serif",
+            fontSize: "0.8125rem",
+            color: "#6b7280",
+            textDecoration: "none"
+          }}
+        >
+          Admin Tools →
+        </Link>
+      </header>
+
+      {/* Archive List */}
+      <section style={{ maxWidth: "800px", margin: "0 auto", padding: "0 1rem" }}>
+        {!archivedIssues.length ? (
+          <article style={{ 
+            padding: "3rem",
+            backgroundColor: "#fafafa",
+            borderRadius: "0.5rem",
+            textAlign: "center",
+            fontFamily: "Inter, sans-serif"
+          }}>
+            <h2 style={{ 
+              fontSize: "1.25rem",
+              fontWeight: "600",
+              color: "#374151",
+              marginBottom: "0.75rem"
+            }}>No published research yet</h2>
+            <p style={{ 
+              fontSize: "0.9375rem",
+              color: "#6b7280",
+              margin: 0
+            }}>Check back soon for new research notes.</p>
+          </article>
+        ) : null}
+
+        {archivedIssues.map((issue, index) => (
+          <article 
+            key={issue.id} 
+            style={{ 
+              padding: "2rem 0",
+              borderBottom: index === archivedIssues.length - 1 ? "none" : "1px solid #e5e7eb"
+            }}
+          >
+            {/* Article Metadata */}
+            <div style={{ 
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "flex-start",
+              marginBottom: "1rem",
+              fontFamily: "Inter, sans-serif"
+            }}>
+              <div style={{ display: "flex", gap: "0.5rem", alignItems: "center" }}>
+                <span style={{ 
+                  fontSize: "0.8125rem",
+                  color: "#6b7280",
+                  textTransform: "uppercase",
+                  letterSpacing: "0.08em"
+                }}>
+                  {issue.volume}
+                </span>
+                <span style={{ color: "#d1d5db" }}>|</span>
+                <span style={{ 
+                  fontSize: "0.8125rem",
+                  color: "#6b7280"
+                }}>
+                  {issue.date}
+                </span>
+              </div>
+            </div>
+
+            {/* Title */}
+            <h2 style={{ 
+              fontFamily: "Georgia, 'Times New Roman', Times, serif",
+              fontSize: "1.5rem",
+              fontWeight: "700",
+              lineHeight: "1.2",
+              color: "#121212",
+              margin: "0 0 0.75rem 0",
+              letterSpacing: "-0.01em"
+            }}>
+              {issue.title}
+            </h2>
+
+            {/* Summary */}
+            <p style={{ 
+              fontFamily: "Georgia, 'Times New Roman', Times, serif",
+              fontSize: "1rem",
+              lineHeight: "1.6",
+              color: "#4b5563",
+              margin: "0 0 1.5rem 0"
+            }}>
+              {issue.summary}
+            </p>
+
+            {/* CTA */}
+            <Link 
+              to={`/newsletter/${issue.id}`}
+              style={{ 
+                fontFamily: "Inter, sans-serif",
+                fontSize: "0.875rem",
+                fontWeight: "500",
+                color: "#000",
+                textDecoration: "none",
+                display: "inline-flex",
+                alignItems: "center",
+                gap: "0.5rem",
+                padding: "0.5rem 0"
+              }}
+            >
+              View Full Report →
+            </Link>
+          </article>
+        ))}
       </section>
     </div>
   );

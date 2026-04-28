@@ -1,6 +1,5 @@
 import React, { useEffect, useMemo, useRef, useState } from "react";
 import { Link } from "react-router-dom";
-import NewsletterArticlePrompt from "./NewsletterArticlePrompt";
 import NewsletterSignupForm from "./NewsletterSignupForm";
 import { Button } from "../ui/button";
 import { trackNewsletterEvent } from "../../services/newsletterAnalytics";
@@ -26,6 +25,12 @@ const NewsletterLatestIssueCard = ({ issue = null }) => {
       .map((paragraph) => paragraph.trim())
       .filter(Boolean);
   }, [issue?.body]);
+
+  // Split for gate - show first 50% then gate
+  const gatePosition = Math.floor(bodyParagraphs.length * 0.5);
+  const firstHalfParagraphs = bodyParagraphs.slice(0, gatePosition);
+  const secondHalfParagraphs = bodyParagraphs.slice(gatePosition);
+  const shouldShowGate = bodyParagraphs.length > 5 && secondHalfParagraphs.length > 0;
 
   useEffect(() => {
     if (!isReading || isUnlocked) {
@@ -57,13 +62,34 @@ const NewsletterLatestIssueCard = ({ issue = null }) => {
 
   if (!issue) {
     return (
-      <section className="newsletter-latest-section-final">
-        <div className="content-container-final">
-          <article className="newsletter-issue-card-final">
-            <h2 className="newsletter-issue-title-final">Latest Research Note</h2>
-            <h3 className="newsletter-card-title-final newsletter-card-title-issue-final">No published research yet</h3>
-            <p className="newsletter-card-copy-final newsletter-issue-summary-final">
-              The next issue will appear here once it is published.
+      <section style={{ padding: "4rem 0", borderBottom: "1px solid #e5e7eb" }}>
+        <div style={{ maxWidth: "600px", margin: "0 auto", padding: "0 1rem" }}>
+          <article style={{ fontFamily: "Georgia, 'Times New Roman', Times, serif" }}>
+            <h2 style={{ 
+              fontFamily: "Inter, sans-serif",
+              fontSize: "0.6875rem",
+              textTransform: "uppercase",
+              letterSpacing: "0.15em",
+              color: "#000",
+              fontWeight: "700",
+              marginBottom: "2rem",
+              paddingBottom: "1rem",
+              borderBottom: "1px solid #e5e7eb"
+            }}>Echelon Equity Research</h2>
+            <h3 style={{ 
+              fontFamily: "Georgia, 'Times New Roman', Times, serif",
+              fontSize: "1.5rem",
+              fontWeight: "700",
+              color: "#121212",
+              marginBottom: "1rem"
+            }}>No published research yet</h3>
+            <p style={{ 
+              fontFamily: "Georgia, 'Times New Roman', Times, serif",
+              fontSize: "1rem",
+              color: "#6b7280",
+              lineHeight: "1.6"
+            }}>
+              The next research note will appear here once published.
             </p>
           </article>
         </div>
@@ -101,81 +127,273 @@ const NewsletterLatestIssueCard = ({ issue = null }) => {
   };
 
   return (
-    <section className="newsletter-latest-section-final">
-      <div className="content-container-final">
-        <article className="newsletter-issue-card-final">
-          <NewsletterArticlePrompt type="top" />
-          <div className="newsletter-issue-meta-final">
-            <span>{issue.volume}</span>
-            <span aria-hidden="true">|</span>
-            <span>{issue.date}</span>
-          </div>
-          <h2 className="newsletter-issue-title-final">Latest Research Note</h2>
-          <div style={{ display: "flex", alignItems: "center", gap: "1rem", justifyContent: "space-between" }}>
-            <h3 className="newsletter-card-title-final newsletter-card-title-issue-final" style={{ margin: 0 }}>{issue.title}</h3>
-            <Link to={`/newsletter/${issue.id}`} className="newsletter-read-full-page-btn-final">
-              <Button type="button" size="sm">
-                View Full Report →
-              </Button>
-            </Link>
-          </div>
-          <p className="newsletter-card-copy-final newsletter-issue-summary-final">{issue.summary}</p>
-          <NewsletterArticlePrompt type="mid" />
-          {highlights.length ? (
-            <ul className="newsletter-highlight-list-final" aria-label="Latest issue highlights">
-              {highlights.map((highlight, index) => (
-                <li key={`${highlight}-${index}`} className="newsletter-highlight-item-final">
-                  {highlight}
-                </li>
-              ))}
-            </ul>
-          ) : null}
+    <section style={{ padding: "4rem 0", borderBottom: "1px solid #e5e7eb" }}>
+      <div style={{ maxWidth: "600px", margin: "0 auto", padding: "0 1rem" }}>
+        {/* Institutional Publication Header */}
+        <div style={{ 
+          fontFamily: "Inter, sans-serif",
+          fontSize: "0.6875rem",
+          textTransform: "uppercase",
+          letterSpacing: "0.15em",
+          color: "#000",
+          fontWeight: "700",
+          marginBottom: "2rem",
+          paddingBottom: "1rem",
+          borderBottom: "1px solid #e5e7eb"
+        }}>
+          Echelon Equity Research
+        </div>
 
-          {canReadFullArticle ? (
-            <div className="newsletter-full-article-action-final">
+        {/* Article Metadata */}
+        <div style={{ 
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "flex-start",
+          marginBottom: "2rem",
+          fontFamily: "Inter, sans-serif"
+        }}>
+          <div style={{ display: "flex", flexDirection: "column", gap: "0.5rem" }}>
+            <div style={{ 
+              fontSize: "0.8125rem",
+              color: "#6b7280",
+              textTransform: "uppercase",
+              letterSpacing: "0.08em"
+            }}>
+              {issue.volume} <span style={{ color: "#d1d5db" }}>|</span> Market Note
+            </div>
+            <div style={{ fontSize: "0.875rem", color: "#6b7280" }}>
+              {issue.date}
+            </div>
+          </div>
+          <Link to={`/newsletter/${issue.id}`} style={{ textDecoration: "none" }}>
+            <Button type="button" size="sm">
+              View Full Report →
+            </Button>
+          </Link>
+        </div>
+
+        <article style={{ fontFamily: "Georgia, 'Times New Roman', Times, serif" }}>
+          {/* Headline */}
+          <h2 style={{ 
+            fontSize: "2rem",
+            fontWeight: "700",
+            lineHeight: "1.15",
+            color: "#121212",
+            margin: "0 0 1rem 0",
+            letterSpacing: "-0.02em"
+          }}>
+            {issue.title}
+          </h2>
+
+          {/* Analyst Attribution */}
+          <div style={{ 
+            fontFamily: "Inter, sans-serif",
+            fontSize: "0.9375rem",
+            color: "#121212",
+            fontWeight: "600",
+            marginBottom: "0.25rem"
+          }}>
+            Vihaan Kakani
+          </div>
+          <div style={{ 
+            fontFamily: "Inter, sans-serif",
+            fontSize: "0.8125rem",
+            color: "#6b7280",
+            marginBottom: "2rem"
+          }}>
+            Research Analyst, Echelon Equity
+          </div>
+
+          {/* Executive Summary */}
+          <div style={{
+            margin: "0 0 2.5rem 0",
+            padding: "1.5rem 0",
+            borderTop: "1px solid #e5e7eb",
+            borderBottom: "1px solid #e5e7eb"
+          }}>
+            <p style={{ 
+              fontSize: "1.125rem", 
+              lineHeight: "1.7", 
+              color: "#374151",
+              margin: 0,
+              fontWeight: "400"
+            }}>
+              {issue.summary}
+            </p>
+          </div>
+
+          {/* Key Findings */}
+          {highlights.length > 0 && (
+            <aside style={{ 
+              margin: "2.5rem 0", 
+              padding: "1.5rem",
+              backgroundColor: "#fafafa",
+              borderLeft: "3px solid #000",
+              fontFamily: "Inter, sans-serif"
+            }}>
+              <h3 style={{ 
+                fontSize: "0.6875rem", 
+                margin: "0 0 1rem 0", 
+                fontWeight: "700", 
+                textTransform: "uppercase", 
+                letterSpacing: "0.15em", 
+                color: "#000"
+              }}>
+                Key Findings
+              </h3>
+              <ul style={{ padding: 0, margin: 0, listStyle: "none" }}>
+                {highlights.map((highlight, idx) => (
+                  <li key={idx} style={{ 
+                    marginBottom: "0.75rem", 
+                    lineHeight: "1.5", 
+                    color: "#121212",
+                    fontSize: "0.875rem",
+                    paddingLeft: "1rem",
+                    position: "relative"
+                  }}>
+                    <span style={{ position: "absolute", left: 0, color: "#000", fontWeight: "700" }}>•</span>
+                    {highlight.text || highlight}
+                  </li>
+                ))}
+              </ul>
+            </aside>
+          )}
+
+          {/* Article Body - First Half */}
+          {!isReading && firstHalfParagraphs.length > 0 && (
+            <div style={{ marginTop: "2rem" }}>
+              {firstHalfParagraphs.map((paragraph, idx) => (
+                <p key={`first-${idx}`} style={{ 
+                  fontSize: "1rem", 
+                  lineHeight: "1.8", 
+                  marginBottom: "1.25rem",
+                  color: "#121212"
+                }}>
+                  {paragraph}
+                </p>
+              ))}
+            </div>
+          )}
+
+          {/* Inline Reading Mode */}
+          {isReading && (
+            <section aria-label="Full article content">
+              {firstHalfParagraphs.map((paragraph, idx) => (
+                <p key={`read-first-${idx}`} style={{ 
+                  fontSize: "1rem", 
+                  lineHeight: "1.8", 
+                  marginBottom: "1.25rem",
+                  color: "#121212"
+                }}>
+                  {paragraph}
+                </p>
+              ))}
+
+              {/* Gate */}
+              {showGate && shouldShowGate ? (
+                <div style={{ 
+                  margin: "3rem 0",
+                  padding: "2.5rem 2rem",
+                  borderTop: "4px solid #000",
+                  borderBottom: "1px solid #e5e7eb",
+                  backgroundColor: "#fafafa",
+                  textAlign: "center",
+                  fontFamily: "Inter, sans-serif"
+                }}>
+                  <h3 style={{ 
+                    fontFamily: "Georgia, 'Times New Roman', Times, serif",
+                    fontSize: "1.5rem", 
+                    margin: "0 0 1rem 0", 
+                    fontWeight: "700",
+                    color: "#121212"
+                  }}>
+                    Access Full Report
+                  </h3>
+                  <p style={{ 
+                    margin: "0 0 1.5rem 0", 
+                    fontSize: "1rem", 
+                    lineHeight: "1.6", 
+                    color: "#4b5563"
+                  }}>
+                    Join Echelon to view complete research, source notes, and future publications.
+                  </p>
+                  <NewsletterSignupForm 
+                    onSuccess={handleUnlockSuccess}
+                    buttonLabel="Get Access"
+                    helperText=""
+                  />
+                  <p style={{ 
+                    marginTop: "1rem", 
+                    fontSize: "0.75rem", 
+                    color: "#9ca3af"
+                  }}>
+                    Free access. Research updates delivered periodically.
+                  </p>
+                </div>
+              ) : (
+                <>
+                  {secondHalfParagraphs.map((paragraph, idx) => (
+                    <p key={`second-${idx}`} style={{ 
+                      fontSize: "1rem", 
+                      lineHeight: "1.8", 
+                      marginBottom: "1.25rem",
+                      color: "#121212"
+                    }}>
+                      {paragraph}
+                    </p>
+                  ))}
+                  
+                  {/* Sources Footer */}
+                  <footer style={{ 
+                    marginTop: "3rem",
+                    paddingTop: "1.5rem",
+                    borderTop: "1px solid #e5e7eb",
+                    fontFamily: "Inter, sans-serif"
+                  }}>
+                    <h4 style={{ 
+                      fontSize: "0.6875rem",
+                      textTransform: "uppercase",
+                      letterSpacing: "0.15em",
+                      color: "#6b7280",
+                      marginBottom: "1rem",
+                      fontWeight: "600"
+                    }}>
+                      Sources & Disclosures
+                    </h4>
+                    <ul style={{ 
+                      fontSize: "0.8125rem",
+                      color: "#6b7280",
+                      lineHeight: "1.7",
+                      padding: 0,
+                      margin: 0,
+                      listStyle: "none"
+                    }}>
+                      <li style={{ marginBottom: "0.5rem" }}>• Federal Reserve Economic Data</li>
+                      <li style={{ marginBottom: "0.5rem" }}>• EY Q1 2026 IPO Review</li>
+                      <li style={{ marginBottom: "0.5rem" }}>• Company filings and earnings releases</li>
+                      <li style={{ marginBottom: "0.5rem" }}>• Public market data and exchange filings</li>
+                      <li style={{ color: "#9ca3af", fontStyle: "italic" }}>
+                        This research is for informational purposes only and does not constitute investment advice.
+                      </li>
+                    </ul>
+                  </footer>
+                </>
+              )}
+            </section>
+          )}
+
+          {/* Read Full Report Button */}
+          {!isReading && canReadFullArticle && (
+            <div style={{ marginTop: "2.5rem", textAlign: "center" }}>
               <Button
                 type="button"
-                className="newsletter-read-full-btn-final"
                 onClick={handleStartReading}
+                style={{ padding: "0.75rem 1.5rem" }}
               >
-                {isReading ? "Continue Analysis" : "View Full Report"}
+                View Full Report
               </Button>
             </div>
-          ) : null}
-
-          {isReading && canReadFullArticle ? (
-            <section className={`newsletter-full-article-shell-final ${showGate ? "newsletter-full-article-locked-final" : ""}`} aria-label="Full article content">
-              <h4 className="newsletter-full-article-title-final">Full Article</h4>
-              <div className="newsletter-full-article-content-final" aria-hidden={showGate ? "true" : "false"}>
-                {bodyParagraphs.map((paragraph, index) => (
-                  <p key={`${issue.id}-paragraph-${index}`} className="newsletter-full-article-paragraph-final">
-                    {paragraph}
-                  </p>
-                ))}
-              </div>
-
-              {showGate ? (
-                <aside className="newsletter-full-article-gate-final" aria-label="Research access gate">
-                  <p className="newsletter-full-article-gate-eyebrow-final">Access Full Report</p>
-                  <h5 className="newsletter-full-article-gate-title-final">Enter your email for complete analysis</h5>
-                  <p className="newsletter-full-article-gate-copy-final">
-                    Join Echelon to access full research, source notes, and future publications.
-                  </p>
-                  <NewsletterSignupForm
-                    source="newsletter-article-gate"
-                    segment={issue.id || "latest"}
-                    buttonLabel="Get Access"
-                    helperText="Free access. Unsubscribe anytime."
-                    compact
-                    onSuccess={handleUnlockSuccess}
-                  />
-                </aside>
-              ) : null}
-            </section>
-          ) : null}
-
-          <NewsletterArticlePrompt type="social" />
-          <NewsletterArticlePrompt type="end" />
+          )}
         </article>
       </div>
     </section>
