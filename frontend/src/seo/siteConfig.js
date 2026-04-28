@@ -6,7 +6,7 @@ export const siteConfig = {
   defaultDescription:
     "Echelon Equity is an investment research platform where analysts build models, write memos, and work to institutional standards.",
   defaultOgImagePath: "/social-share.svg",
-  slogan: "The Work Is the Credential.",
+  slogan: "the bar is higher",
   emails: {
     general: "team@echelonequity.co",
     admissions: "admissions@echelonequity.co",
