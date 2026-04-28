@@ -24,6 +24,7 @@ function normalizeIssue(issue, index) {
     body: issue?.body || "",
     highlights: normalizeHighlights(issue?.highlights),
     status: issue?.status || "published",
+    author: issue?.author || null,
   };
 }
 
