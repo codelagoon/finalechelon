@@ -193,7 +193,7 @@ const NewsletterLatestIssueCard = ({ issue = null }) => {
             fontWeight: "600",
             marginBottom: "0.25rem"
           }}>
-            Vihaan Kakani
+            {issue?.author?.name || "Vihaan Kakani"}
           </div>
           <div style={{ 
             fontFamily: "Inter, sans-serif",
@@ -201,7 +201,7 @@ const NewsletterLatestIssueCard = ({ issue = null }) => {
             color: "#6b7280",
             marginBottom: "2rem"
           }}>
-            Research Analyst, Echelon Equity
+            {issue?.author?.role || "Research Analyst"}, Echelon Equity
           </div>
 
           {/* Executive Summary */}

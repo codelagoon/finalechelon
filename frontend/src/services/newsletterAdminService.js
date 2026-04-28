@@ -41,6 +41,8 @@ export function issueToForm(issue = {}) {
     status: issue.status || "draft",
     highlightsText: normalizeHighlights(issue.highlights).join("\n"),
     fileAttachment: issue.file_attachment || null,
+    authorName: issue.author?.name || "",
+    authorRole: issue.author?.role || "",
   };
 }
 
@@ -51,6 +53,11 @@ export function formToPayload(form) {
     .filter(Boolean)
     .map((text) => ({ text }));
 
+  const author = form.authorName?.trim() ? {
+    name: String(form.authorName || "").trim(),
+    role: String(form.authorRole || "Research Analyst").trim(),
+  } : null;
+
   return {
     volume: String(form.volume || "").trim(),
     date: String(form.date || "").trim(),
@@ -60,6 +67,7 @@ export function formToPayload(form) {
     status: String(form.status || "draft").trim() || "draft",
     highlights,
     file_attachment: form.fileAttachment || null,
+    author,
   };
 }
 

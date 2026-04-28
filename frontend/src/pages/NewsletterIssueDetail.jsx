@@ -207,7 +207,7 @@ const NewsletterIssueDetail = () => {
             marginTop: "1.5rem",
             marginBottom: "0.25rem"
           }}>
-            Vihaan Kakani
+            {issue.author?.name || "Vihaan Kakani"}
           </div>
           <div style={{ 
             fontFamily: "Inter, sans-serif",
@@ -215,7 +215,7 @@ const NewsletterIssueDetail = () => {
             color: "#6b7280",
             marginBottom: "2rem"
           }}>
-            Research Analyst, Echelon Equity
+            {issue.author?.role || "Research Analyst"}, Echelon Equity
           </div>
         </header>
 

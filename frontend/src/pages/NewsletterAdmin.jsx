@@ -26,6 +26,8 @@ const initialCreateForm = {
   status: "published",
   highlightsText: "",
   fileAttachment: null,
+  authorName: "Vihaan Kakani",
+  authorRole: "Research Analyst",
 };
 
 function getStoredToken() {
@@ -330,6 +332,17 @@ function IssueEditorCard({ issue, adminToken, onSaved, onDeleted }) {
         </div>
 
         <div className="form-group">
+          <Label htmlFor={`author-name-${issue.id}`} className="form-label">Author Name</Label>
+          <Input id={`author-name-${issue.id}`} name="authorName" value={form.authorName} onChange={handleChange} className="form-input" placeholder="e.g., Vihaan Kakani" />
+        </div>
+
+        <div className="form-group">
+          <Label htmlFor={`author-role-${issue.id}`} className="form-label">Author Role</Label>
+          <Input id={`author-role-${issue.id}`} name="authorRole" value={form.authorRole} onChange={handleChange} className="form-input" placeholder="e.g., Research Analyst" />
+          <p className="form-helper-text">Defaults to "Research Analyst" if left blank.</p>
+        </div>
+
+        <div className="form-group">
           <Label htmlFor={`highlights-${issue.id}`} className="form-label">Highlights</Label>
           <Textarea
             id={`highlights-${issue.id}`}
@@ -414,6 +427,11 @@ function IssueEditorCard({ issue, adminToken, onSaved, onDeleted }) {
             <div style={{ marginBottom: "1rem" }}>
               <strong>Summary:</strong> {form.summary || "Not set"}
             </div>
+            {(form.authorName || form.authorRole) && (
+              <div style={{ marginBottom: "1rem" }}>
+                <strong>Author:</strong> {form.authorName || "Unknown"}{form.authorRole ? `, ${form.authorRole}` : ""}
+              </div>
+            )}
             {form.highlightsText && (
               <div style={{ marginBottom: "1rem" }}>
                 <strong>Highlights:</strong>
@@ -625,6 +643,17 @@ const NewsletterAdmin = () => {
             <div className="form-group">
               <Label htmlFor="create-summary" className="form-label">Summary</Label>
               <Textarea id="create-summary" name="summary" value={createForm.summary} onChange={handleCreateChange} className="form-textarea" rows={3} required />
+            </div>
+
+            <div className="form-group">
+              <Label htmlFor="create-author-name" className="form-label">Author Name</Label>
+              <Input id="create-author-name" name="authorName" value={createForm.authorName} onChange={handleCreateChange} className="form-input" placeholder="e.g., Vihaan Kakani" />
+            </div>
+
+            <div className="form-group">
+              <Label htmlFor="create-author-role" className="form-label">Author Role</Label>
+              <Input id="create-author-role" name="authorRole" value={createForm.authorRole} onChange={handleCreateChange} className="form-input" placeholder="e.g., Research Analyst" />
+              <p className="form-helper-text">Defaults to "Research Analyst" if left blank.</p>
             </div>
 
             <div className="form-group">
