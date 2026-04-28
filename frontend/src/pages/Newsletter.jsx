@@ -15,7 +15,14 @@ const Newsletter = () => {
     const loadIssues = async () => {
       const result = await fetchPublishedIssues();
       if (!isMounted) return;
-      setLatestIssue(result.issues[0] || null);
+      
+      // Prioritize "the bar is higher" article if it exists
+      const issues = result.issues || [];
+      const barIsHigherIssue = issues.find(issue => 
+        issue.title?.toLowerCase().includes("bar is higher")
+      );
+      
+      setLatestIssue(barIsHigherIssue || issues[0] || null);
     };
 
     loadIssues();
