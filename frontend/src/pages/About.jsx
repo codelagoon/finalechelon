@@ -21,9 +21,20 @@ const About = () => {
                 justifyContent: 'center',
                 fontSize: '0.75rem',
                 color: '#666',
-                textAlign: 'center'
+                textAlign: 'center',
+                overflow: 'hidden',
+                position: 'relative'
               }}>
-                george-photo.jpg
+                <img 
+                  src="https://i.ibb.co/6jL1Q3T/george.jpg" 
+                  alt="George Tetteh"
+                  style={{
+                    width: '100%',
+                    height: '100%',
+                    objectFit: 'cover',
+                    objectPosition: 'center 20% top' // Center on face
+                  }}
+                />
               </div>
               <h3 className="content-card-title-final">George — Head of Operations</h3>
               <p className="content-card-copy-final">
@@ -42,9 +53,20 @@ const About = () => {
                 justifyContent: 'center',
                 fontSize: '0.75rem',
                 color: '#666',
-                textAlign: 'center'
+                textAlign: 'center',
+                overflow: 'hidden',
+                position: 'relative'
               }}>
-                jonathan-photo.jpg
+                <img 
+                  src="https://i.ibb.co/6jL1Q3T/jonathan.jpg" 
+                  alt="Jonathan Silva"
+                  style={{
+                    width: '100%',
+                    height: '100%',
+                    objectFit: 'cover',
+                    objectPosition: 'center 20% top' // Center on face
+                  }}
+                />
               </div>
               <h3 className="content-card-title-final">Jonathan Silva — Head of Research</h3>
               <p className="content-card-copy-final">
@@ -55,31 +77,13 @@ const About = () => {
         </div>
       </section>
 
-      {/* Section 2 — Founding story */}
+      {/* Section 2 — Why we built this */}
       <section className="content-section-final">
         <div className="content-container-final page-shell-narrow-final">
           <h2 className="section-title-final">Why we built this</h2>
           <p className="positioning-paragraph-final">
-            Most student finance programs are résumé lines. You join, you sit through a few meetings, you call yourself an analyst. We wanted something different — a program where the work actually meant something, where analysts had real coverage, real accountability, and something they could genuinely point to. So we built it from scratch. Sector structure, editorial standards, Wall Street reviewers, the whole thing. Echelon is what we wished existed when we started.
+            Most student finance programs are résumé lines. You join, you sit through a few meetings, you call yourself an analyst. We wanted something different — a program where work actually meant something, where analysts had real coverage, real accountability, and something they could genuinely point to. So we built it from scratch. Sector structure, editorial standards, Wall Street reviewers, the whole thing. Echelon is what we wished existed when we started.
           </p>
-        </div>
-      </section>
-
-      {/* Section 3 — Stat strip */}
-      <section className="stats-section-final">
-        <div className="stats-container-final">
-          <div className="stat-item-final">
-            <div className="stat-value-final">32</div>
-            <div className="stat-label-final">Analysts</div>
-          </div>
-          <div className="stat-item-final">
-            <div className="stat-value-final">6</div>
-            <div className="stat-label-final">Sectors</div>
-          </div>
-          <div className="stat-item-final">
-            <div className="stat-value-final">200+</div>
-            <div className="stat-label-final">Applications</div>
-          </div>
         </div>
       </section>
     </div>

@@ -10,7 +10,6 @@ import Home from "./pages/Home";
 
 const Program = lazy(() => import("./pages/Program"));
 const Apply = lazy(() => import("./pages/Apply"));
-const Team = lazy(() => import("./pages/Team"));
 const Newsletter = lazy(() => import("./pages/Newsletter"));
 const NewsletterArchive = lazy(() => import("./pages/NewsletterArchive"));
 const NewsletterIssueDetail = lazy(() => import("./pages/NewsletterIssueDetail"));
@@ -40,7 +39,6 @@ function App() {
               <Route path="/" element={<Home />} />
               <Route path="/about" element={<About />} />
               <Route path="/program" element={<Program />} />
-              <Route path="/team" element={<Team />} />
               <Route path="/apply" element={<Apply />} />
               <Route path="/newsletter" element={<Newsletter />} />
                             <Route path="/newsletter/archive" element={<NewsletterArchive />} />

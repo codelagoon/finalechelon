@@ -23,7 +23,6 @@ const Header = () => {
     { to: '/', label: 'Home' },
     { to: '/about', label: 'About' },
     { to: '/program', label: 'Program' },
-    { to: '/team', label: 'Team' },
     { to: '/apply', label: 'Apply', isPrimary: true },
   ];
 
