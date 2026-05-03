@@ -2,29 +2,25 @@
 
 export const heroData = {
   tagline: "STUDENT INVESTMENT NETWORK",
-  headline: "Building the Next Generation of Investment Talent Through Real Market Work",
+  headline: "The firm that treats student analysts like professionals.",
   subheadline:
-    "Echelon Equity is a student-led equity research network where analysts build valuation models, publish investment memos, and train through rigorous review standards.",
-  ctaPrimary: "Apply as Analyst",
-  ctaSecondary: "Read Research"
+    "Echelon Equity is a student-run investment research program built by two high schoolers who wanted the real thing — not a simulation. 32 analysts. Six sectors. Research reviewed by Wall Street professionals.",
+  ctaPrimary: "Apply — we're selective",
+  ctaSecondary: "See how it works"
 };
 
 export const statsData = [
   {
     value: "32",
-    label: "Active Analysts"
-  },
-  {
-    value: "250+",
-    label: "Applicants Screened"
+    label: "Analysts"
   },
   {
     value: "6",
-    label: "Sectors Covered"
+    label: "Sectors"
   },
   {
-    value: "24",
-    label: "Models Completed"
+    value: "200+",
+    label: "Applications"
   }
 ];
 

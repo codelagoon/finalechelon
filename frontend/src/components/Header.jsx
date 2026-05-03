@@ -22,8 +22,8 @@ const Header = () => {
   const navItems = [
     { to: '/', label: 'Home' },
     { to: '/about', label: 'About' },
-    { to: '/analysts', label: 'Analysts' },
-    { to: '/newsletter', label: 'Newsletter' },
+    { to: '/program', label: 'Program' },
+    { to: '/team', label: 'Team' },
     { to: '/apply', label: 'Apply', isPrimary: true },
   ];
 

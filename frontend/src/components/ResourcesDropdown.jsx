@@ -9,9 +9,7 @@ const ResourcesDropdown = ({ isMobile = false }) => {
   const location = useLocation();
 
   const resources = [
-    { to: '/toolkit', label: 'Investor Toolkit' },
-    { to: '/why-student-finance-work-is-weak', label: 'Why Research Discipline Matters' },
-    { to: '/toolkit/dcf-builder', label: 'Build a DCF' },
+    { to: '/the-problem', label: 'Why Research Discipline Matters' },
   ];
 
   const isResourceActive = resources.some(r => location.pathname === r.to);

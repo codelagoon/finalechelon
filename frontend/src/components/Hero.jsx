@@ -2,7 +2,6 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from './ui/button';
 import { ArrowRight } from 'lucide-react';
-import { heroData } from '../mockData';
 
 const Hero = () => {
   const navigate = useNavigate();
@@ -11,12 +10,11 @@ const Hero = () => {
     <section className="hero-section-final">
       <div className="hero-container-final">
         <div className="hero-content-final">
-          <p className="hero-tagline-final">{heroData.tagline}</p>
           <h1 className="hero-headline-final">
-            {heroData.headline}
+            The firm that treats student analysts like professionals.
           </h1>
           <p className="hero-subheadline-final">
-            {heroData.subheadline}
+            Echelon Equity is a student-run investment research program built by two high schoolers who wanted the real thing — not a simulation. 32 analysts. Six sectors. Research reviewed by Wall Street professionals.
           </p>
           <div className="hero-cta-group-final">
             <Button 
@@ -24,16 +22,16 @@ const Hero = () => {
               className="cta-primary-final"
               onClick={() => navigate('/apply')}
             >
-              {heroData.ctaPrimary}
+              Apply — we're selective
               <ArrowRight className="ml-2 h-5 w-5" />
             </Button>
             <Button 
               size="lg" 
               variant="outline" 
               className="cta-secondary-final"
-              onClick={() => navigate('/newsletter')}
+              onClick={() => navigate('/program')}
             >
-              {heroData.ctaSecondary}
+              See how it works
             </Button>
           </div>
         </div>

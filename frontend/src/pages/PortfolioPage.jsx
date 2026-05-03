@@ -2,7 +2,6 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import PageIntro from '../components/PageIntro';
 import Portfolio from '../components/Portfolio';
-import HalDealCTA from '../components/HalDealCTA';
 import NewsletterSignupCta from '../components/newsletter/NewsletterSignupCta';
 
 const PortfolioPage = () => {
@@ -28,8 +27,6 @@ const PortfolioPage = () => {
         buttonLabel="Subscribe to Research"
         helperText="Unsubscribe anytime. Low-friction, high-signal updates."
       />
-
-      <HalDealCTA />
 
       <Portfolio />
       <section className="content-section-final">

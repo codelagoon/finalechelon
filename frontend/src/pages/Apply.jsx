@@ -177,38 +177,11 @@ const Apply = () => {
     <div className="apply-page page-shell-final page-shell-padded-final">
       <div className="content-container-final page-shell-narrow-final">
         <div className="page-heading-final">
-          <h1 className="section-title-final">Apply to Echelon Equity</h1>
+          <h1 className="section-title-final">We review applications on a rolling basis.</h1>
           <p className="section-subtitle-final">
-            Applications are open for investment research and selected operating roles. Selection is based on judgment, communication quality, and reliable execution.
+            Echelon is selective. We're looking for students who are serious about doing real research — not just listing it.
           </p>
         </div>
-
-        <section className="content-section-final" style={{ paddingTop: 0 }}>
-          <h2 className="section-title-final" style={{ fontSize: '1.55rem', marginBottom: '1rem' }}>Application Process</h2>
-          <div className="content-grid-final application-process-grid-final">
-            <article className="content-card-final">
-              <h3 className="content-card-title-final">1. Submit your materials</h3>
-              <p className="content-card-copy-final">
-                Complete the form with concise, specific responses. Resume upload is required for full review.
-              </p>
-            </article>
-            <article className="content-card-final">
-              <h3 className="content-card-title-final">2. Role-fit review</h3>
-              <p className="content-card-copy-final">
-                Applications are screened for role fit, analytical maturity, writing clarity, and commitment to standards.
-              </p>
-            </article>
-            <article className="content-card-final">
-              <h3 className="content-card-title-final">3. Team decision</h3>
-              <p className="content-card-copy-final">
-                Final decisions prioritize candidates who can produce high-signal work consistently in a feedback-driven environment.
-              </p>
-            </article>
-          </div>
-          <p className="positioning-paragraph-final" style={{ marginTop: '1rem' }}>
-            Before applying, review the <Link to="/program" className="inline-link-final">investment research program</Link> and <Link to="/newsletter" className="inline-link-final">newsletter</Link> to understand role expectations.
-          </p>
-        </section>
         
         <form onSubmit={handleSubmit} className="application-form-final">
           {/* Full Name */}

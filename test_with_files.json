@@ -1,0 +1,15 @@
+{
+  "name": "Michael Rodriguez",
+  "email": "michael.rodriguez@example.com",
+  "role": "Investment Team: Technical Analyst",
+  "institution": "MIT",
+  "academic_level": "undergraduate",
+  "graduation_year": "2025",
+  "field_of_study": "Computer Science and Finance",
+  "why_echelon": "I want to combine my technical skills with investment analysis. Echelon's focus on quantitative analysis and technology-driven research aligns perfectly with my background in machine learning and financial modeling.",
+  "relevant_experience": "Software engineering internship at Google, developed trading algorithms for the MIT Trading Club, published research on ML applications in finance.",
+  "analytical_response": "Cloud computing companies represent a compelling investment opportunity as enterprises continue their digital transformation. The shift from capex to opex models creates recurring revenue streams with high margins. Companies like AWS, Azure, and GCP have deep moats due to scale effects and switching costs.",
+  "experience": "Technical experience in software development and quantitative analysis",
+  "resume_url": "https://storage.googleapis.com/echelon-applications/resumes/michael-rodriguez-resume.pdf",
+  "work_sample_url": "https://storage.googleapis.com/echelon-applications/work-samples/michael-rodriguez-trading-algorithm.pdf"
+}

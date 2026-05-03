@@ -4,6 +4,7 @@ import { Input } from "../ui/input";
 import { toast } from "sonner";
 import { API_BASE_URL } from "../../services/apiBaseUrl";
 import { trackNewsletterEvent } from "../../services/newsletterAnalytics";
+import { useNavigate } from "react-router-dom";
 
 const API_URL = API_BASE_URL;
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -36,6 +37,7 @@ const NewsletterSignupForm = ({
   const [email, setEmail] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const hasStartedRef = useRef(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     trackNewsletterEvent({
@@ -114,6 +116,11 @@ const NewsletterSignupForm = ({
         });
         setEmail("");
         hasStartedRef.current = false;
+        
+        // Redirect to confirmation page
+        const confirmationUrl = `/newsletter/confirmation?email=${encodeURIComponent(normalizedEmail)}&source=${source}`;
+        navigate(confirmationUrl);
+        
         if (typeof onSuccess === "function") {
           onSuccess(normalizedEmail);
         }

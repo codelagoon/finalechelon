@@ -12,14 +12,14 @@ const Program = lazy(() => import("./pages/Program"));
 const Apply = lazy(() => import("./pages/Apply"));
 const Team = lazy(() => import("./pages/Team"));
 const Newsletter = lazy(() => import("./pages/Newsletter"));
+const NewsletterConfirmation = lazy(() => import("./pages/NewsletterConfirmation"));
 const NewsletterArchive = lazy(() => import("./pages/NewsletterArchive"));
 const NewsletterIssueDetail = lazy(() => import("./pages/NewsletterIssueDetail"));
 const NewsletterAdmin = lazy(() => import("./pages/NewsletterAdmin"));
 const Toolkit = lazy(() => import("./pages/Toolkit"));
-const WhyStudentFinanceIsWeak = lazy(() => import("./pages/WhyStudentFinanceIsWeak"));
+const TheProblem = lazy(() => import("./pages/TheProblem"));
 const DCFBuilder = lazy(() => import("./pages/DCFBuilder"));
 const About = lazy(() => import("./pages/About"));
-const Analysts = lazy(() => import("./pages/Analysts"));
 
 function App() {
   return (
@@ -40,16 +40,16 @@ function App() {
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/about" element={<About />} />
-              <Route path="/analysts" element={<Analysts />} />
               <Route path="/program" element={<Program />} />
               <Route path="/team" element={<Team />} />
               <Route path="/apply" element={<Apply />} />
               <Route path="/newsletter" element={<Newsletter />} />
+              <Route path="/newsletter/confirmation" element={<NewsletterConfirmation />} />
               <Route path="/newsletter/archive" element={<NewsletterArchive />} />
               <Route path="/newsletter/:issueId" element={<NewsletterIssueDetail />} />
               <Route path="/newsletter/admin" element={<NewsletterAdmin />} />
               <Route path="/toolkit" element={<Toolkit />} />
-              <Route path="/why-student-finance-work-is-weak" element={<WhyStudentFinanceIsWeak />} />
+              <Route path="/the-problem" element={<TheProblem />} />
               <Route path="/toolkit/dcf-builder" element={<DCFBuilder />} />
             </Routes>
           </Suspense>
