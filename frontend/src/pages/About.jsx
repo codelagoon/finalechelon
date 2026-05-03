@@ -4,7 +4,17 @@ import { Link } from 'react-router-dom';
 const About = () => {
   return (
     <div className="page-shell-final">
-      {/* Section 1 — Founders */}
+      {/* Section 1 — Why we built this */}
+      <section className="content-section-final">
+        <div className="content-container-final page-shell-narrow-final">
+          <h2 className="section-title-final">Why we built this</h2>
+          <p className="positioning-paragraph-final">
+            Most student finance programs are résumé lines. You join, you sit through a few meetings, you call yourself an analyst. We wanted something different — a program where work actually meant something, where analysts had real coverage, real accountability, and something they could genuinely point to. So we built it from scratch. Sector structure, editorial standards, Wall Street reviewers, the whole thing. Echelon is what we wished existed when we started.
+          </p>
+        </div>
+      </section>
+
+      {/* Section 2 — Founders */}
       <section className="content-section-final">
         <div className="content-container-final">
           <h2 className="section-title-final">Founders</h2>
@@ -26,13 +36,13 @@ const About = () => {
                 position: 'relative'
               }}>
                 <img 
-                  src="https://i.ibb.co/6jL1Q3T/george.jpg" 
+                  src="/george.png" 
                   alt="George Tetteh"
                   style={{
                     width: '100%',
                     height: '100%',
                     objectFit: 'cover',
-                    objectPosition: 'center 20% top' // Center on face
+                    objectPosition: 'center 30%' // Center on face - George's face is slightly higher
                   }}
                 />
               </div>
@@ -58,13 +68,13 @@ const About = () => {
                 position: 'relative'
               }}>
                 <img 
-                  src="https://i.ibb.co/6jL1Q3T/jonathan.jpg" 
+                  src="/jonathan.png" 
                   alt="Jonathan Silva"
                   style={{
                     width: '100%',
                     height: '100%',
                     objectFit: 'cover',
-                    objectPosition: 'center 20% top' // Center on face
+                    objectPosition: 'center 25%' // Center on face
                   }}
                 />
               </div>
@@ -74,16 +84,6 @@ const About = () => {
               </p>
             </article>
           </div>
-        </div>
-      </section>
-
-      {/* Section 2 — Why we built this */}
-      <section className="content-section-final">
-        <div className="content-container-final page-shell-narrow-final">
-          <h2 className="section-title-final">Why we built this</h2>
-          <p className="positioning-paragraph-final">
-            Most student finance programs are résumé lines. You join, you sit through a few meetings, you call yourself an analyst. We wanted something different — a program where work actually meant something, where analysts had real coverage, real accountability, and something they could genuinely point to. So we built it from scratch. Sector structure, editorial standards, Wall Street reviewers, the whole thing. Echelon is what we wished existed when we started.
-          </p>
         </div>
       </section>
     </div>
