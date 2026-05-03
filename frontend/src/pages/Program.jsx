@@ -7,7 +7,7 @@ const Program = () => {
     <div className="page-shell-final">
       <section className="content-section-final">
         <div className="content-container-final page-shell-narrow-final">
-          <h1 className="page-title-final">How Echelon Works</h1>
+          <h1 className="section-title-final">How Echelon Works</h1>
           <p className="positioning-paragraph-final">
             We built Echelon to function like a real investment research firm, not a school club. Here's exactly how it works.
           </p>

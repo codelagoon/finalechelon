@@ -56,7 +56,7 @@ const Newsletter = () => {
             </p>
           </div>
           <aside className="newsletter-signup-panel-final" aria-label="Newsletter signup">
-            <h2 className="newsletter-signup-title-final">Join the mailing list</h2>
+            <h2 className="section-title-final" style={{ fontSize: '1.75rem' }}>Join the list</h2>
             <p className="newsletter-signup-copy-final">
               Receive each issue directly with no algorithm between you and the work.
             </p>

@@ -65,17 +65,7 @@ const NewsletterLatestIssueCard = ({ issue = null }) => {
       <section style={{ padding: "4rem 0", borderBottom: "1px solid #e5e7eb" }}>
         <div style={{ maxWidth: "600px", margin: "0 auto", padding: "0 1rem" }}>
           <article style={{ fontFamily: "Georgia, 'Times New Roman', Times, serif" }}>
-            <h2 style={{ 
-              fontFamily: "Inter, sans-serif",
-              fontSize: "0.6875rem",
-              textTransform: "uppercase",
-              letterSpacing: "0.15em",
-              color: "#000",
-              fontWeight: "700",
-              marginBottom: "2rem",
-              paddingBottom: "1rem",
-              borderBottom: "1px solid #e5e7eb"
-            }}>Echelon Equity Research</h2>
+            <h2 className="section-title-final" style={{ fontSize: '1.5rem', marginBottom: '2rem', paddingBottom: '1rem', borderBottom: '1px solid #e5e7eb' }}>Latest Research</h2>
             <h3 style={{ 
               fontFamily: "Georgia, 'Times New Roman', Times, serif",
               fontSize: "1.5rem",
@@ -129,20 +119,7 @@ const NewsletterLatestIssueCard = ({ issue = null }) => {
   return (
     <section style={{ padding: "4rem 0", borderBottom: "1px solid #e5e7eb" }}>
       <div style={{ maxWidth: "600px", margin: "0 auto", padding: "0 1rem" }}>
-        {/* Institutional Publication Header */}
-        <div style={{ 
-          fontFamily: "Inter, sans-serif",
-          fontSize: "0.6875rem",
-          textTransform: "uppercase",
-          letterSpacing: "0.15em",
-          color: "#000",
-          fontWeight: "700",
-          marginBottom: "2rem",
-          paddingBottom: "1rem",
-          borderBottom: "1px solid #e5e7eb"
-        }}>
-          Echelon Equity Research
-        </div>
+        <h2 className="section-title-final" style={{ fontSize: '1.5rem', marginBottom: '2rem', paddingBottom: '1rem', borderBottom: '1px solid #e5e7eb' }}>Latest Research</h2>
 
         {/* Article Metadata */}
         <div style={{ 
