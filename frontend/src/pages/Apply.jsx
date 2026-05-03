@@ -13,7 +13,10 @@ import {
 } from '../components/ui/select';
 import { toast } from 'sonner';
 
-const API_URL = (process.env.REACT_APP_BACKEND_URL || "").replace(/\/+$/, "");
+// Supabase Edge Function URL for application submissions
+const SUPABASE_URL = process.env.REACT_APP_SUPABASE_URL || "";
+const SUPABASE_ANON_KEY = process.env.REACT_APP_SUPABASE_ANON_KEY || "";
+const EDGE_FUNCTION_URL = `${SUPABASE_URL}/functions/v1/submit-application`;
 
 const roleOptions = [
   "Investment Team: Equity Research Analyst",
@@ -95,46 +98,37 @@ const Apply = () => {
     setIsSubmitting(true);
     
     try {
-      // Create FormData for multipart upload
-      const submitData = new FormData();
+      // Prepare JSON payload for Supabase Edge Function
+      // Note: File uploads are handled separately via Supabase Storage
+      const submitData = {
+        name: formData.fullName,
+        email: formData.email,
+        role: formData.trackOfInterest,
+        institution: formData.institution,
+        academic_level: formData.academicLevel,
+        graduation_year: formData.graduationYear,
+        field_of_study: formData.fieldOfStudy,
+        why_echelon: formData.whyEchelon,
+        relevant_experience: formData.relevantExperience || null,
+        analytical_response: formData.analyticalResponse || null,
+        // File URLs would be set here if implementing file upload to Supabase Storage
+        resume_url: null,
+        work_sample_url: null,
+      };
       
-      // Add form fields (matching backend parameter names)
-      submitData.append('full_name', formData.fullName);
-      submitData.append('email', formData.email);
-      submitData.append('institution', formData.institution);
-      submitData.append('academic_level', formData.academicLevel);
-      submitData.append('graduation_year', formData.graduationYear);
-      submitData.append('field_of_study', formData.fieldOfStudy);
-      submitData.append('track_of_interest', formData.trackOfInterest);
-      submitData.append('why_echelon', formData.whyEchelon);
-      
-      // Add optional fields only if they have values
-      if (formData.relevantExperience) {
-        submitData.append('relevant_experience', formData.relevantExperience);
-      }
-      if (formData.analyticalResponse) {
-        submitData.append('analytical_response', formData.analyticalResponse);
-      }
-      
-      // Add files
-      if (formData.resume) {
-        submitData.append('resume', formData.resume);
-      }
-      if (formData.workSample) {
-        submitData.append('work_sample', formData.workSample);
-      }
-      
-      // Submit to backend
-      const response = await fetch(`${API_URL}/api/applications/submit`, {
+      // Submit to Supabase Edge Function
+      const response = await fetch(EDGE_FUNCTION_URL, {
         method: 'POST',
-        body: submitData,
-        // Don't set Content-Type - browser will set it with boundary
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+        },
+        body: JSON.stringify(submitData),
       });
 
-      const responseText = await response.text();
       let result;
       try {
-        result = JSON.parse(responseText);
+        result = await response.json();
       } catch {
         toast.error("Invalid server response. Please try again.");
         return;
@@ -167,7 +161,7 @@ const Apply = () => {
         setTimeout(() => navigate('/'), 2000);
       } else {
         toast.error(
-          formatApiErrorDetail(result.detail) || "Application submission failed. Please try again."
+          result.error || "Application submission failed. Please try again."
         );
       }
       
