@@ -1,0 +1,3 @@
+{"timestamp": "2026-05-03T20:31:47.011026", "name": "George Tetteh", "email": "georgeztetteh@gmail.com", "subject": "investment", "message": "Testing the contact form functionality to ensure it works properly with the Supabase and Resend integration."}
+{"timestamp": "2026-05-03T20:33:23.302631", "name": "George Tetteh (Browser Test)", "email": "georgeztetteh@gmail.com", "subject": "investment", "message": "Testing contact form submission from browser interface"}
+{"timestamp": "2026-05-03T20:33:30.008257", "name": "Direct Browser Test", "email": "georgeztetteh@gmail.com", "subject": "investment", "message": "Direct API test from browser"}

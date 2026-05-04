@@ -184,6 +184,17 @@ const TeamMembers = () => {
                     handleMemberClick(member);
                   }
                 }}
+                style={{
+                  transition: 'transform 0.3s ease, box-shadow 0.3s ease'
+                }}
+                onMouseEnter={(e) => {
+                  e.currentTarget.style.transform = 'translateY(-8px)';
+                  e.currentTarget.style.boxShadow = '0 20px 40px rgba(0,0,0,0.12)';
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.transform = 'translateY(0)';
+                  e.currentTarget.style.boxShadow = 'none';
+                }}
               >
                 {/* Card Header with Image */}
                 {member.headshot_url ? (

@@ -1,25 +1,110 @@
-import React from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 
 const About = () => {
+  const [visibleSections, setVisibleSections] = useState({});
+  const sectionRefs = useRef({});
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const sectionId = entry.target.dataset.section;
+            setVisibleSections((prev) => ({ ...prev, [sectionId]: true }));
+          }
+        });
+      },
+      { threshold: 0.1, rootMargin: '0px 0px -50px 0px' }
+    );
+
+    Object.values(sectionRefs.current).forEach((ref) => {
+      if (ref) observer.observe(ref);
+    });
+
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <div className="page-shell-final">
       {/* Section 1 — Why we built this */}
-      <section className="content-section-final">
+      <section 
+        ref={(el) => sectionRefs.current['why'] = el}
+        data-section="why"
+        className="content-section-final"
+        style={{
+          opacity: visibleSections['why'] ? 1 : 0,
+          transform: visibleSections['why'] ? 'translateY(0)' : 'translateY(30px)',
+          transition: 'opacity 0.8s ease, transform 0.8s ease'
+        }}
+      >
         <div className="content-container-final page-shell-narrow-final">
-          <h2 className="section-title-final">Why we built this</h2>
-          <p className="positioning-paragraph-final">
-            Most student finance programs are résumé lines. You join, you sit through a few meetings, you call yourself an analyst. We wanted something different — a program where work actually meant something, where analysts had real coverage, real accountability, and something they could genuinely point to. So we built it from scratch. Sector structure, editorial standards, Wall Street reviewers, the whole thing. Echelon is what we wished existed when we started.
-          </p>
+          <h2 
+            className="section-title-final"
+            style={{
+              opacity: visibleSections['why'] ? 1 : 0,
+              transform: visibleSections['why'] ? 'translateY(0)' : 'translateY(20px)',
+              transition: 'opacity 0.8s ease 0.2s, transform 0.8s ease 0.2s'
+            }}
+          >Why we built this</h2>
+          <div className="positioning-paragraph-final" style={{
+            opacity: visibleSections['why'] ? 1 : 0,
+            transform: visibleSections['why'] ? 'translateY(0)' : 'translateY(20px)',
+            transition: 'opacity 0.8s ease 0.3s, transform 0.8s ease 0.3s'
+          }}>
+            <p className="positioning-paragraph-final">
+              Here's what most student finance programs actually are: you join, you get a title, and six months later you have a bullet point. No one reads what you wrote. No one challenged it. It never went anywhere. You didn't cover a company — you practiced covering a company. There's a difference, and most programs are built around pretending that difference doesn't exist.
+            </p>
+            <p className="positioning-paragraph-final" style={{ marginTop: '1.5rem' }}>
+              We built Echelon because we thought that was embarrassing. If you're going to call yourself an analyst, the work should hold up. It should exist somewhere. Someone serious should have pushed back on your assumptions before it published. So that's what we built — a program where the work is real, the structure is real, and the accountability is real.
+            </p>
+            <p className="positioning-paragraph-final" style={{ marginTop: '1.5rem' }}>
+              That meant starting from scratch. Sector organization. Coverage assignments. A formal editorial process. Wall Street professionals reviewing research before it goes anywhere. A leadership hierarchy that runs the whole thing. We were sophomores in high school when we started. We built what we couldn't find.
+            </p>
+            <p className="positioning-paragraph-final" style={{ marginTop: '1.5rem' }}>
+              Echelon is not a club. It's not a simulation. It's a firm — and the research we publish reflects that. If you're serious about doing real work, that's what we're offering. If you just want the line, there are easier places to get it.
+            </p>
+          </div>
         </div>
       </section>
 
       {/* Section 2 — Founders */}
-      <section className="content-section-final">
+      <section 
+        ref={(el) => sectionRefs.current['founders'] = el}
+        data-section="founders"
+        className="content-section-final"
+        style={{
+          opacity: visibleSections['founders'] ? 1 : 0,
+          transform: visibleSections['founders'] ? 'translateY(0)' : 'translateY(30px)',
+          transition: 'opacity 0.8s ease, transform 0.8s ease'
+        }}
+      >
         <div className="content-container-final">
-          <h2 className="section-title-final">Founders</h2>
+          <h2 
+            className="section-title-final"
+            style={{
+              opacity: visibleSections['founders'] ? 1 : 0,
+              transform: visibleSections['founders'] ? 'translateY(0)' : 'translateY(20px)',
+              transition: 'opacity 0.8s ease 0.2s, transform 0.8s ease 0.2s'
+            }}
+          >Founders</h2>
           <div className="content-grid-final">
-            <article className="content-card-final">
+            <article 
+              className="content-card-final"
+              style={{
+                opacity: visibleSections['founders'] ? 1 : 0,
+                transform: visibleSections['founders'] ? 'translateY(0)' : 'translateY(20px)',
+                transition: 'opacity 0.8s ease 0.4s, transform 0.8s ease 0.4s, transform 0.3s ease, box-shadow 0.3s ease'
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.transform = 'translateY(-8px)';
+                e.currentTarget.style.boxShadow = '0 20px 40px rgba(0,0,0,0.1)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.transform = 'translateY(0)';
+                e.currentTarget.style.boxShadow = 'none';
+              }}
+            >
               <div style={{ 
                 width: '120px', 
                 height: '120px', 
@@ -33,7 +118,8 @@ const About = () => {
                 color: '#666',
                 textAlign: 'center',
                 overflow: 'hidden',
-                position: 'relative'
+                position: 'relative',
+                transition: 'transform 0.3s ease'
               }}>
                 <img 
                   src="/george.png" 
@@ -48,10 +134,25 @@ const About = () => {
               </div>
               <h3 className="content-card-title-final">George — Head of Operations</h3>
               <p className="content-card-copy-final">
-                George is a sophomore in New York who oversees operations across all 32 analysts at Echelon. He also founded Avarent, an AI governance platform for lending, and leads a Financial Literacy club at his school. He built Echelon because he wanted a program that held students to real standards — not simulated ones.
+                George is a sophomore in New York who built the Echelon website from scratch and manages day-to-day operations across all 32 analysts. He oversees applications, marketing, fundraising, and the research department. He also founded Avarent, an AI governance platform for lending, and leads a Financial Literacy club at his school. He built Echelon because he wanted a program that held students to real standards — not simulated ones.
               </p>
             </article>
-            <article className="content-card-final">
+            <article 
+              className="content-card-final"
+              style={{
+                opacity: visibleSections['founders'] ? 1 : 0,
+                transform: visibleSections['founders'] ? 'translateY(0)' : 'translateY(20px)',
+                transition: 'opacity 0.8s ease 0.5s, transform 0.8s ease 0.5s, transform 0.3s ease, box-shadow 0.3s ease'
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.transform = 'translateY(-8px)';
+                e.currentTarget.style.boxShadow = '0 20px 40px rgba(0,0,0,0.1)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.transform = 'translateY(0)';
+                e.currentTarget.style.boxShadow = 'none';
+              }}
+            >
               <div style={{ 
                 width: '120px', 
                 height: '120px', 
@@ -65,7 +166,8 @@ const About = () => {
                 color: '#666',
                 textAlign: 'center',
                 overflow: 'hidden',
-                position: 'relative'
+                position: 'relative',
+                transition: 'transform 0.3s ease'
               }}>
                 <img 
                   src="/jonathan.png" 

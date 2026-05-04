@@ -13,10 +13,10 @@ import {
 } from '../components/ui/select';
 import { toast } from 'sonner';
 
-// Supabase Edge Function URL for application submissions
-const SUPABASE_URL = process.env.REACT_APP_SUPABASE_URL || "";
-const SUPABASE_ANON_KEY = process.env.REACT_APP_SUPABASE_ANON_KEY || "";
-const EDGE_FUNCTION_URL = `${SUPABASE_URL}/functions/v1/submit-application`;
+// Test backend URL for application submissions
+import { API_BASE_URL } from '../services/apiBaseUrl';
+const EDGE_FUNCTION_URL = `${API_BASE_URL}/functions/v1/submit-application`;
+const SUPABASE_ANON_KEY = "test-key"; // Not used in test mode
 
 const roleOptions = [
   "Investment Team: Equity Research Analyst",
@@ -196,6 +196,19 @@ const Apply = () => {
               onChange={handleChange}
               required
               className="form-input"
+              style={{
+                transition: 'border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease'
+              }}
+              onFocus={(e) => {
+                e.currentTarget.style.borderColor = '#000';
+                e.currentTarget.style.boxShadow = '0 0 0 3px rgba(0,0,0,0.1)';
+                e.currentTarget.style.transform = 'translateY(-1px)';
+              }}
+              onBlur={(e) => {
+                e.currentTarget.style.borderColor = '';
+                e.currentTarget.style.boxShadow = '';
+                e.currentTarget.style.transform = 'translateY(0)';
+              }}
             />
           </div>
 
@@ -211,6 +224,19 @@ const Apply = () => {
               onChange={handleChange}
               required
               className="form-input"
+              style={{
+                transition: 'border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease'
+              }}
+              onFocus={(e) => {
+                e.currentTarget.style.borderColor = '#000';
+                e.currentTarget.style.boxShadow = '0 0 0 3px rgba(0,0,0,0.1)';
+                e.currentTarget.style.transform = 'translateY(-1px)';
+              }}
+              onBlur={(e) => {
+                e.currentTarget.style.borderColor = '';
+                e.currentTarget.style.boxShadow = '';
+                e.currentTarget.style.transform = 'translateY(0)';
+              }}
             />
           </div>
 
@@ -226,6 +252,19 @@ const Apply = () => {
               onChange={handleChange}
               required
               className="form-input"
+              style={{
+                transition: 'border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease'
+              }}
+              onFocus={(e) => {
+                e.currentTarget.style.borderColor = '#000';
+                e.currentTarget.style.boxShadow = '0 0 0 3px rgba(0,0,0,0.1)';
+                e.currentTarget.style.transform = 'translateY(-1px)';
+              }}
+              onBlur={(e) => {
+                e.currentTarget.style.borderColor = '';
+                e.currentTarget.style.boxShadow = '';
+                e.currentTarget.style.transform = 'translateY(0)';
+              }}
             />
           </div>
 
@@ -311,6 +350,19 @@ const Apply = () => {
               required
               className="form-textarea"
               rows={5}
+              style={{
+                transition: 'border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease'
+              }}
+              onFocus={(e) => {
+                e.currentTarget.style.borderColor = '#000';
+                e.currentTarget.style.boxShadow = '0 0 0 3px rgba(0,0,0,0.1)';
+                e.currentTarget.style.transform = 'translateY(-1px)';
+              }}
+              onBlur={(e) => {
+                e.currentTarget.style.borderColor = '';
+                e.currentTarget.style.boxShadow = '';
+                e.currentTarget.style.transform = 'translateY(0)';
+              }}
             />
           </div>
 

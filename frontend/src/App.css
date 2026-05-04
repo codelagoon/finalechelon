@@ -9,6 +9,7 @@
   --color-gray-text: #5a5a5a;
   --color-gray-border: #EAEAEA;
   --color-gray-hover: #F5F5F5;
+  --color-cream: #f8f7f4;
   
   --max-width: 1100px;
   --section-padding: 140px;
@@ -100,13 +101,31 @@ body {
   font-size: 0.9375rem;
   font-weight: 500;
   color: var(--color-gray-text);
+  text-decoration: none;
   cursor: pointer;
+  padding: 0;
   transition: color 0.2s ease;
   font-family: var(--font-sans);
+  position: relative;
+}
+
+.nav-link-final::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 1.5px;
+  background-color: var(--color-black);
+  transition: width 0.3s ease;
 }
 
 .nav-link-final:hover {
   color: var(--color-black);
+}
+
+.nav-link-final:hover::after {
+  width: 100%;
 }
 
 .header-contact-btn-final {
@@ -1684,21 +1703,35 @@ div[style*="emergent"] {
   text-decoration: none;
   font-size: 1rem;
   font-weight: 600;
-  transition: opacity 0.2s ease, background-color 0.2s ease, color 0.2s ease;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  border: 2px solid transparent;
 }
 
 .page-cta-button-final:hover {
-  opacity: 0.92;
+  transform: scale(1.02);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
 }
 
 .page-cta-button-light-final {
   background-color: var(--color-white);
   color: var(--color-black);
+  border-color: var(--color-black);
+}
+
+.page-cta-button-light-final:hover {
+  background-color: var(--color-black);
+  color: var(--color-white);
 }
 
 .page-cta-button-dark-final {
   background-color: var(--color-black);
   color: var(--color-white);
+  border-color: var(--color-black);
+}
+
+.page-cta-button-dark-final:hover {
+  background-color: var(--color-white);
+  color: var(--color-black);
 }
 
 .page-intro-section-final {
@@ -1781,6 +1814,14 @@ div[style*="emergent"] {
   background-color: var(--color-white);
   padding: 2rem;
   border-radius: var(--border-radius);
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.overview-card-final:hover,
+.content-card-final:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.08);
+  border-color: var(--color-black);
 }
 
 .overview-card-title-final,
@@ -4564,6 +4605,470 @@ html {
   .table-row > div {
     grid-column: 1;
   }
+
+/* Animations and UX Interactions */
+
+/* Fade in animation for page load */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
+}
+
+/* Apply animations to sections */
+.content-section-final {
+  animation: fadeInUp 0.6s ease-out;
+}
+
+/* Stagger animation delays for cards */
+.content-card-final:nth-child(1) { animation-delay: 0.1s; }
+.content-card-final:nth-child(2) { animation-delay: 0.2s; }
+.content-card-final:nth-child(3) { animation-delay: 0.3s; }
+.content-card-final:nth-child(4) { animation-delay: 0.4s; }
+
+/* Link hover effects */
+.inline-link-final {
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.inline-link-final::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 100%;
+  height: 1px;
+  background-color: currentColor;
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.3s ease;
+}
+
+.inline-link-final:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+.inline-link-final:hover {
+  letter-spacing: 0.02em;
+}
+
+/* Image hover zoom effect */
+.hero-image-final,
+img {
+  transition: transform 0.5s ease;
+}
+
+.hero-image-container-final:hover .hero-image-final {
+  transform: scale(1.03);
+}
+
+/* Focus states for accessibility */
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline: 2px solid var(--color-black);
+  outline-offset: 2px;
+}
+
+/* Smooth scroll behavior */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Loading shimmer effect */
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.loading-shimmer {
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+/* Button press effect */
+button:active,
+.page-cta-button-final:active,
+.partner-trust-link-final:active {
+  transform: scale(0.98);
+}
+
+/* Hover lift effect for all interactive elements */
+a:hover,
+button:hover {
+  cursor: pointer;
+}
+
+/* Section title underline animation */
+.section-title-final {
+  position: relative;
+  display: inline-block;
+}
+
+.section-title-final::after {
+  content: '';
+  position: absolute;
+  bottom: -8px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: var(--color-black);
+  transition: width 0.4s ease;
+}
+
+.content-section-final:hover .section-title-final::after {
+  width: 60px;
+}
+
+/* Card number badge animation */
+.timeline-number {
+  animation: pulse 2s ease-in-out infinite;
+}
+
+.timeline-step:hover .timeline-number {
+  animation: none;
+  transform: scale(1.1);
+}
+
+/* Program Page Styles */
+
+/* Pipeline Tracker */
+.pipeline-container {
+  position: relative;
+  margin: 3rem 0;
+  overflow-x: auto;
+  padding: 2rem 0;
+}
+
+.pipeline-line {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background-color: var(--color-gray-border);
+  transform: translateY(-50%);
+  z-index: 1;
+}
+
+.pipeline-stages {
+  display: flex;
+  flex-direction: row;
+  gap: 2rem;
+  min-width: 1200px;
+  position: relative;
+  z-index: 2;
+}
+
+.pipeline-stage {
+  flex: 1;
+  text-align: center;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.6s ease;
+}
+
+.pipeline-stage.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.pipeline-node {
+  width: 60px;
+  height: 60px;
+  border: 3px solid var(--color-black);
+  border-radius: 50%;
+  background-color: var(--color-white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1.5rem;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.pipeline-stage.visible .pipeline-node {
+  background-color: var(--color-black);
+  color: var(--color-white);
+}
+
+.pipeline-number {
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: inherit;
+}
+
+.pipeline-title {
+  font-size: 1.125rem;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+  font-family: var(--font-serif);
+}
+
+.pipeline-description {
+  font-size: 0.875rem;
+  color: var(--color-gray-text);
+  line-height: 1.6;
+  white-space: pre-line;
+}
+
+/* Editorial Callout */
+.editorial-callout {
+  background-color: var(--color-black);
+  color: var(--color-white);
+  padding: 3rem;
+  border-radius: var(--border-radius);
+  margin: 3rem 0;
+  text-align: center;
+}
+
+.editorial-quote {
+  font-size: 1.5rem;
+  line-height: 1.4;
+  font-family: var(--font-serif);
+  font-weight: 400;
+  margin: 0;
+}
+
+/* Principles Grid */
+.principles-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+  margin-top: 3rem;
+}
+
+.principle-card {
+  border: 1px solid var(--color-gray-border);
+  background-color: var(--color-white);
+  padding: 2rem;
+  border-radius: var(--border-radius);
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.principle-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.08);
+  border-color: var(--color-black);
+}
+
+.principle-title {
+  font-size: 1.125rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  font-family: var(--font-serif);
+}
+
+.principle-description {
+  font-size: 0.95rem;
+  line-height: 1.7;
+  color: var(--color-gray-text);
+  white-space: pre-line;
+}
+
+/* Role Cards */
+.roles-list {
+  margin-top: 2rem;
+}
+
+.role-card {
+  border: 1px solid var(--color-gray-border);
+  background-color: var(--color-white);
+  border-radius: var(--border-radius);
+  margin-bottom: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.role-card:hover {
+  border-color: var(--color-black);
+}
+
+.role-card.expanded {
+  border-color: var(--color-black);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.role-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.5rem 2rem;
+}
+
+.role-title {
+  font-size: 1.125rem;
+  font-weight: 600;
+  font-family: var(--font-serif);
+  margin: 0;
+}
+
+.role-team {
+  font-size: 0.875rem;
+  color: var(--color-gray-text);
+  background-color: var(--color-gray-hover);
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  margin-left: 1rem;
+}
+
+.role-toggle {
+  margin-left: auto;
+}
+
+.toggle-icon {
+  font-size: 1.5rem;
+  font-weight: 300;
+  color: var(--color-gray-text);
+  transition: transform 0.3s ease;
+}
+
+.role-card.expanded .toggle-icon {
+  transform: rotate(45deg);
+}
+
+.role-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+}
+
+.role-card.expanded .role-content {
+  max-height: 200px;
+}
+
+.role-description {
+  padding: 0 2rem 1.5rem;
+  font-size: 0.95rem;
+  line-height: 1.7;
+  color: var(--color-gray-text);
+  margin: 0;
+}
+
+/* Sector Grid */
+.sectors-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.sector-card {
+  border: 1px solid var(--color-gray-border);
+  background-color: var(--color-white);
+  padding: 2rem;
+  border-radius: var(--border-radius);
+  transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.sector-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.08);
+  border-color: var(--color-black);
+}
+
+.sector-name {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+  font-family: var(--font-serif);
+}
+
+.sector-description {
+  font-size: 0.95rem;
+  line-height: 1.7;
+  color: var(--color-gray-text);
+  margin: 0;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .pipeline-stages {
+    flex-direction: column;
+    min-width: auto;
+    gap: 1rem;
+  }
+  
+  .pipeline-line {
+    display: none;
+  }
+  
+  .principles-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .sectors-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .editorial-quote {
+    font-size: 1.25rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .sectors-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .role-header {
+    padding: 1rem 1.5rem;
+  }
+  
+  .role-description {
+    padding: 0 1.5rem 1.5rem;
+  }
+  
+  .principle-card {
+    padding: 1.5rem;
+  }
+  
+  .sector-card {
+    padding: 1.5rem;
+  }
+}
 
   .principle-item h3,
   .path-level,

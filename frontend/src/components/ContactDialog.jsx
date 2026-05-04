@@ -17,7 +17,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from './ui/select';
-import { handleContactSubmit } from '../mockData';
+import { submitContactForm } from '../services/contactService';
 import { toast } from 'sonner';
 
 const ContactDialog = ({ isOpen, onClose }) => {
@@ -43,19 +43,26 @@ const ContactDialog = ({ isOpen, onClose }) => {
     });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
-    
-    setTimeout(() => {
-      const result = handleContactSubmit(formData);
+
+    try {
+      const result = await submitContactForm(formData);
+
       if (result.success) {
         toast.success(result.message);
         setFormData({ name: '', email: '', subject: '', message: '' });
         onClose();
+      } else {
+        toast.error(result.message || "Failed to send message. Please try again.");
       }
+    } catch (error) {
+      console.error("Contact form error:", error);
+      toast.error("Network error. Please check your connection and try again.");
+    } finally {
       setIsSubmitting(false);
-    }, 800);
+    }
   };
 
   return (

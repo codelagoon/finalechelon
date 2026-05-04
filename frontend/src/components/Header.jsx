@@ -47,6 +47,17 @@ const Header = () => {
                   size="sm"
                   onClick={() => (window.location.href = item.to)}
                   className="header-apply-btn-final"
+                  style={{
+                    transition: 'transform 0.3s ease, box-shadow 0.3s ease'
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.transform = 'translateY(-2px)';
+                    e.currentTarget.style.boxShadow = '0 8px 20px rgba(0,0,0,0.15)';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.transform = 'translateY(0)';
+                    e.currentTarget.style.boxShadow = 'none';
+                  }}
                 >
                   {item.label}
                 </Button>
@@ -55,6 +66,16 @@ const Header = () => {
                   key={item.to}
                   to={item.to}
                   className={`nav-link-final ${isActive(item.to) ? 'nav-active' : ''}`}
+                  style={{
+                    transition: 'color 0.3s ease, transform 0.3s ease',
+                    position: 'relative'
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.transform = 'translateY(-1px)';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.transform = 'translateY(0)';
+                  }}
                 >
                   {item.label}
                 </Link>
@@ -66,6 +87,17 @@ const Header = () => {
               size="sm"
               onClick={() => setIsContactOpen(true)}
               className="header-contact-btn-final"
+              style={{
+                transition: 'transform 0.3s ease, box-shadow 0.3s ease'
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.transform = 'translateY(-2px)';
+                e.currentTarget.style.boxShadow = '0 8px 20px rgba(0,0,0,0.1)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.transform = 'translateY(0)';
+                e.currentTarget.style.boxShadow = 'none';
+              }}
             >
               Contact
             </Button>

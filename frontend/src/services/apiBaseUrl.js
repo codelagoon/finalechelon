@@ -16,4 +16,4 @@ function normalizeBackendUrl(rawUrl) {
   return `https://${value}`;
 }
 
-export const API_BASE_URL = normalizeBackendUrl(process.env.REACT_APP_BACKEND_URL);
+export const API_BASE_URL = normalizeBackendUrl(process.env.REACT_APP_BACKEND_URL || "localhost:8000");

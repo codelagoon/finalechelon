@@ -7,8 +7,6 @@ const Footer = () => {
   const currentYear = new Date().getFullYear();
   const socialLinks = [
     { label: 'LinkedIn', href: siteConfig.social.linkedin },
-    { label: 'Instagram', href: siteConfig.social.instagram },
-    { label: 'TikTok', href: siteConfig.social.tiktok },
     { label: 'Facebook', href: siteConfig.social.facebook },
     { label: 'X', href: siteConfig.social.x },
     { label: 'YouTube', href: siteConfig.social.youtube },
@@ -39,7 +37,6 @@ const Footer = () => {
             <ul className="footer-links">
               <li><Link to="/program">Investment Research Program</Link></li>
               <li><Link to="/apply">Apply to Echelon</Link></li>
-              <li><Link to="/team">Research Analyst Team</Link></li>
             </ul>
           </div>
 
@@ -47,9 +44,6 @@ const Footer = () => {
             <h4 className="footer-heading">Resources</h4>
             <ul className="footer-links">
               <li><Link to="/newsletter">Newsletter</Link></li>
-              <li><Link to="/program">Analyst Tracks and Standards</Link></li>
-              <li><Link to="/team">Meet Echelon Equity</Link></li>
-              <li><a href="https://portal.echelonequity.co" target="_blank" rel="noopener noreferrer">Member Portal</a></li>
             </ul>
           </div>
 

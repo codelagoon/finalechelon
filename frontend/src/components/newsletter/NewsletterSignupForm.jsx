@@ -190,12 +190,44 @@ const NewsletterSignupForm = ({
           className="newsletter-email-input-final form-input"
           value={email}
           onChange={(event) => setEmail(event.target.value)}
-          onBlur={(event) => setEmail(event.target.value.trim())}
-          onFocus={handleFirstInteraction}
+          onBlur={(event) => {
+            setEmail(event.target.value.trim());
+            event.currentTarget.style.borderColor = '';
+            event.currentTarget.style.boxShadow = '';
+            event.currentTarget.style.transform = 'translateY(0)';
+          }}
+          onFocus={(e) => {
+            handleFirstInteraction();
+            e.currentTarget.style.borderColor = '#000';
+            e.currentTarget.style.boxShadow = '0 0 0 3px rgba(0,0,0,0.1)';
+            e.currentTarget.style.transform = 'translateY(-1px)';
+          }}
           placeholder={placeholder}
           required
+          style={{
+            transition: 'border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease'
+          }}
         />
-        <Button type="submit" className="newsletter-submit-btn-final" disabled={isSubmitting}>
+        <Button 
+          type="submit" 
+          className="newsletter-submit-btn-final" 
+          disabled={isSubmitting}
+          style={{
+            transition: 'transform 0.3s ease, box-shadow 0.3s ease'
+          }}
+          onMouseEnter={(e) => {
+            if (!isSubmitting) {
+              e.currentTarget.style.transform = 'translateY(-2px)';
+              e.currentTarget.style.boxShadow = '0 8px 20px rgba(0,0,0,0.15)';
+            }
+          }}
+          onMouseLeave={(e) => {
+            if (!isSubmitting) {
+              e.currentTarget.style.transform = 'translateY(0)';
+              e.currentTarget.style.boxShadow = 'none';
+            }
+          }}
+        >
           {isSubmitting ? "Submitting..." : buttonLabel}
         </Button>
       </div>
