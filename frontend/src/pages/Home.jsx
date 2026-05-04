@@ -142,25 +142,27 @@ const Home = () => {
           </div>
 
           {/* Comparison Table */}
-          <div style={{ marginTop: '3rem' }}>
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr auto 1fr', gap: '0.5rem', alignItems: 'center', marginBottom: '1rem' }}>
-              <p style={{ fontSize: '0.7rem', textTransform: 'uppercase', letterSpacing: '0.1em', color: '#666', textAlign: 'center' }}>Most Student Finance Programs</p>
-              <div></div>
-              <p style={{ fontSize: '0.7rem', textTransform: 'uppercase', letterSpacing: '0.1em', color: '#666', textAlign: 'center' }}>Echelon</p>
-            </div>
-            
-            {[
-              ['Simulated portfolios with fake money', 'Real research on real companies'],
-              ['Instructor-led curriculum', 'Student-driven equity proposals'],
-              ['Individual assignments', 'Collaborative sector teams'],
-              ['No publication standards', 'Wall Street professional review'],
-            ].map((row, i) => (
-              <div key={i} style={{ display: 'grid', gridTemplateColumns: '1fr auto 1fr', gap: '0.5rem', alignItems: 'center', marginBottom: '0.75rem' }}>
-                <div style={{ backgroundColor: '#f0f0f0', padding: '0.75rem 1rem', borderRadius: '6px', textAlign: 'center', color: '#666', fontSize: '0.85rem', border: '1px solid #e0e0e0' }}>{row[0]}</div>
-                <div style={{ width: '28px', height: '28px', border: '1px solid #000', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.7rem', fontWeight: '600' }}>VS</div>
-                <div style={{ backgroundColor: '#fff', padding: '0.75rem 1rem', borderRadius: '6px', textAlign: 'center', color: '#000', fontSize: '0.85rem', border: '1px solid #000' }}>{row[1]}</div>
+          <div style={{ marginTop: '3rem', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+            <div style={{ maxWidth: '600px', width: '100%' }}>
+              <div style={{ display: 'grid', gridTemplateColumns: '1fr auto 1fr', gap: '0.5rem', alignItems: 'center', marginBottom: '1rem' }}>
+                <p style={{ fontSize: '0.7rem', textTransform: 'uppercase', letterSpacing: '0.1em', color: '#666', textAlign: 'center' }}>Most Student Finance Programs</p>
+                <div></div>
+                <p style={{ fontSize: '0.7rem', textTransform: 'uppercase', letterSpacing: '0.1em', color: '#666', textAlign: 'center' }}>Echelon</p>
               </div>
-            ))}
+              
+              {[
+                ['Simulated portfolios with fake money', 'Real research on real companies'],
+                ['Instructor-led curriculum', 'Student-driven equity proposals'],
+                ['Individual assignments', 'Collaborative sector teams'],
+                ['No publication standards', 'Wall Street professional review'],
+              ].map((row, i) => (
+                <div key={i} style={{ display: 'grid', gridTemplateColumns: '1fr auto 1fr', gap: '0.5rem', alignItems: 'center', marginBottom: '0.75rem' }}>
+                  <div style={{ backgroundColor: '#f0f0f0', padding: '0.75rem 1rem', borderRadius: '6px', textAlign: 'center', color: '#666', fontSize: '0.85rem', border: '1px solid #e0e0e0' }}>{row[0]}</div>
+                  <div style={{ width: '28px', height: '28px', border: '1px solid #000', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.7rem', fontWeight: '600' }}>VS</div>
+                  <div style={{ backgroundColor: '#fff', padding: '0.75rem 1rem', borderRadius: '6px', textAlign: 'center', color: '#000', fontSize: '0.85rem', border: '1px solid #000' }}>{row[1]}</div>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
