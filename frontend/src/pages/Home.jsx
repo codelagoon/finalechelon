@@ -117,7 +117,7 @@ const Home = () => {
           <p className="page-intro-eyebrow-final">What Makes Us Different</p>
           <h2 className="section-title-final">Why Echelon Works when Other Programs Don't</h2>
           
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '1.5rem' }}>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))', gap: '1.5rem' }}>
             <article className="content-card-final">
               <div style={{ width: '40px', height: '40px', border: '2px solid #000', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '1rem', fontSize: '1rem', fontWeight: '700' }}>01</div>
               <h3 className="content-card-title-final">Real Capital Experience</h3>
@@ -143,7 +143,7 @@ const Home = () => {
 
           {/* Comparison Table */}
           <div style={{ marginTop: '3rem' }}>
-            <div style={{ display: 'grid', gridTemplateColumns: '1fr auto 1fr', gap: '1rem', alignItems: 'center', marginBottom: '1rem' }}>
+            <div style={{ display: 'grid', gridTemplateColumns: '1fr auto 1fr', gap: '0.5rem', alignItems: 'center', marginBottom: '1rem' }}>
               <p style={{ fontSize: '0.7rem', textTransform: 'uppercase', letterSpacing: '0.1em', color: '#666', textAlign: 'center' }}>Most Student Finance Programs</p>
               <div></div>
               <p style={{ fontSize: '0.7rem', textTransform: 'uppercase', letterSpacing: '0.1em', color: '#666', textAlign: 'center' }}>Echelon</p>
@@ -155,7 +155,7 @@ const Home = () => {
               ['Individual assignments', 'Collaborative sector teams'],
               ['No publication standards', 'Wall Street professional review'],
             ].map((row, i) => (
-              <div key={i} style={{ display: 'grid', gridTemplateColumns: '1fr auto 1fr', gap: '1rem', alignItems: 'center', marginBottom: '0.75rem' }}>
+              <div key={i} style={{ display: 'grid', gridTemplateColumns: '1fr auto 1fr', gap: '0.5rem', alignItems: 'center', marginBottom: '0.75rem' }}>
                 <div style={{ backgroundColor: '#f0f0f0', padding: '0.75rem 1rem', borderRadius: '6px', textAlign: 'center', color: '#666', fontSize: '0.85rem', border: '1px solid #e0e0e0' }}>{row[0]}</div>
                 <div style={{ width: '28px', height: '28px', border: '1px solid #000', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '0.7rem', fontWeight: '600' }}>VS</div>
                 <div style={{ backgroundColor: '#fff', padding: '0.75rem 1rem', borderRadius: '6px', textAlign: 'center', color: '#000', fontSize: '0.85rem', border: '1px solid #000' }}>{row[1]}</div>
