@@ -33,6 +33,50 @@ body {
   overflow-x: hidden;
 }
 
+/* Touch target optimizations for tablet and mobile */
+@media (max-width: 768px) {
+  button, a, input, textarea, select {
+    min-height: 44px;
+    min-width: 44px;
+    padding: 8px 12px;
+  }
+  
+  .cta-primary-final,
+  .cta-secondary-final,
+  .newsletter-submit-btn-final {
+    padding: 12px 24px;
+    min-height: 48px;
+    font-size: 16px;
+    min-width: 120px;
+  }
+  
+  .inline-link-final {
+    padding: 8px 0;
+    display: inline-block;
+    min-height: 44px;
+  }
+  
+  /* Navigation links */
+  nav a, .navigation a {
+    padding: 12px 16px;
+    min-height: 44px;
+    display: inline-block;
+  }
+  
+  /* Small buttons and links */
+  button[style*="padding"], a[style*="padding"] {
+    min-height: 44px !important;
+    min-width: 44px !important;
+  }
+  
+  /* Form elements */
+  input[type="text"], input[type="email"], textarea, select {
+    font-size: 16px; /* Prevent zoom on iOS */
+    padding: 12px;
+    min-height: 44px;
+  }
+}
+
 .App {
   min-height: 100vh;
 }
@@ -2793,8 +2837,14 @@ html {
   margin-bottom: 1rem;
   flex: 1;
   display: -webkit-box;
+  display: -moz-box;
+  display: box;
   -webkit-line-clamp: 3;
+  -moz-line-clamp: 3;
+  line-clamp: 3;
   -webkit-box-orient: vertical;
+  -moz-box-orient: vertical;
+  box-orient: vertical;
   overflow: hidden;
 }
 
